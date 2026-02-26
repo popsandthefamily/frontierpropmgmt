@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Management Services", href: "/management-services" },
   { label: "Contact", href: "/contact" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const PROPERTIES = [
@@ -18,6 +20,27 @@ const PROPERTIES = [
 export function SiteFooter() {
   return (
     <footer>
+      {/* Pre-footer Booking CTA */}
+      <div className="bg-sage">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row lg:px-8">
+          <div className="text-center sm:text-left">
+            <p className="text-lg font-heading font-bold text-white">
+              Ready for your Broken Bow getaway?
+            </p>
+            <p className="text-sm text-white/80">
+              Browse our cabins and book direct — no platform fees.
+            </p>
+          </div>
+          <Button
+            asChild
+            size="lg"
+            className="bg-white text-sage hover:bg-cream font-semibold px-8 shrink-0"
+          >
+            <Link href="/search">Book a Cabin</Link>
+          </Button>
+        </div>
+      </div>
+
       {/* Upper Section */}
       <div className="bg-cream">
         <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
@@ -25,7 +48,7 @@ export function SiteFooter() {
             {/* Column 1: Logo & Tagline */}
             <div className="flex flex-col gap-4">
               <Image
-                src="/images/logos/Asset-2.svg"
+                src="/images/logos/Asset-2.png"
                 alt="Frontier Property Management"
                 width={180}
                 height={54}
@@ -121,19 +144,19 @@ export function SiteFooter() {
       </div>
 
       {/* Lower Section */}
-      <div className="bg-sage">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-white sm:flex-row lg:px-8">
+      <div className="bg-charcoal">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-white/70 sm:flex-row lg:px-8">
           <p>&copy; 2025 Frontier Property Management LLC. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy-policy"
-              className="transition-colors hover:text-peach"
+              className="transition-colors hover:text-white"
             >
               Privacy Policy
             </Link>
             <Link
               href="/rental-agreement"
-              className="transition-colors hover:text-peach"
+              className="transition-colors hover:text-white"
             >
               Rental Agreement
             </Link>

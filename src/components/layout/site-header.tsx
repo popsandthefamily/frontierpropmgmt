@@ -3,20 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
@@ -47,30 +39,29 @@ type NavItem = NavLinkItem | NavDropdownItem;
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Management Services", href: "/management-services" },
   {
-    label: "Our Cabins",
+    label: "Book a Cabin",
     children: [
       {
         label: "Sublime Retreat",
         href: "/sublime",
-        description: "A luxury cabin experience in Hochatown",
+        description: "Luxury 3BR with hot tub, 2 zip lines & arcade",
       },
       {
         label: "Old Broken Bow Highway",
         href: "/old-broken-bow-highway",
-        description: "Rustic charm meets modern comfort",
+        description: "Cozy 3BR poolside getaway near Broken Bow Lake",
       },
       {
-        label: "Search Properties",
+        label: "All Properties",
         href: "/search",
-        description: "Browse all available cabins",
+        description: "Browse all available cabins & check dates",
       },
     ],
   },
-  { label: "Discover Broken Bow", href: "/discover-broken-bow" },
-  { label: "Blogs", href: "/blogs" },
+  { label: "Management Services", href: "/management-services" },
+  { label: "About", href: "/about" },
+  { label: "Discover", href: "/discover-broken-bow" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -97,7 +88,7 @@ export function SiteHeader() {
         <Link href="/" className="relative shrink-0">
           {isScrolled ? (
             <Image
-              src="/images/logos/Asset-2.svg"
+              src="/images/logos/Asset-2.png"
               alt="Frontier Property Management"
               width={160}
               height={48}
@@ -117,75 +108,83 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList>
-            {NAV_ITEMS.map((item) => {
-              if (item.children) {
-                return (
-                  <NavigationMenuItem key={item.label}>
-                    <NavigationMenuTrigger
-                      className={cn(
-                        "bg-transparent hover:bg-sage/10 focus:bg-sage/10 data-[state=open]:bg-sage/10",
-                        isScrolled
-                          ? "text-charcoal"
-                          : "text-white hover:text-white"
-                      )}
-                    >
-                      {item.label}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <ul className="grid w-[320px] gap-1 p-2">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <NavigationMenuLink asChild>
-                              <Link
-                                href={child.href}
-                                className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-sage/10 focus:bg-sage/10"
-                              >
-                                <div className="text-sm font-medium text-charcoal">
-                                  {child.label}
-                                </div>
-                                <p className="mt-1 text-xs text-muted-foreground leading-snug">
-                                  {child.description}
-                                </p>
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        ))}
-                      </ul>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                );
-              }
-
+        <nav className="hidden lg:flex items-center gap-1">
+          {NAV_ITEMS.map((item) => {
+            if (item.children) {
               return (
-                <NavigationMenuItem key={item.label}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-sage/10 focus:bg-sage/10",
-                        isScrolled
-                          ? "text-charcoal"
-                          : "text-white hover:text-white"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              );
-            })}
-          </NavigationMenuList>
-        </NavigationMenu>
+                <div key={item.label} className="relative group">
+                  <button
+                    className={cn(
+                      "inline-flex h-9 items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      isScrolled
+                        ? "text-charcoal hover:text-sage"
+                        : "text-white/90 hover:text-white"
+                    )}
+                  >
+                    {item.label}
+                    <ChevronDown className="size-3.5 transition-transform duration-200 group-hover:rotate-180" />
+                  </button>
 
-        {/* Desktop CTA */}
-        <Button
-          asChild
-          className="hidden lg:inline-flex bg-sage text-white hover:bg-sage-dark"
-        >
-          <Link href="/contact">Get Started</Link>
-        </Button>
+                  {/* Dropdown */}
+                  <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
+                    <div className="w-72 rounded-lg border bg-white shadow-lg p-2">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block rounded-md p-3 transition-colors hover:bg-cream"
+                        >
+                          <div className="text-sm font-medium text-charcoal">
+                            {child.label}
+                          </div>
+                          <p className="mt-0.5 text-xs text-muted-foreground leading-snug">
+                            {child.description}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  "inline-flex h-9 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  isScrolled
+                    ? "text-charcoal hover:text-sage"
+                    : "text-white/90 hover:text-white"
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Desktop CTAs */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/management-services"
+            className={cn(
+              "text-xs font-medium transition-colors",
+              isScrolled
+                ? "text-muted-foreground hover:text-sage"
+                : "text-white/70 hover:text-white"
+            )}
+          >
+            Owners &rarr;
+          </Link>
+          <Button
+            asChild
+            className="bg-sage text-white hover:bg-sage-dark"
+          >
+            <Link href="/search">Book Now</Link>
+          </Button>
+        </div>
 
         {/* Mobile Menu Toggle */}
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -206,7 +205,7 @@ export function SiteHeader() {
             <SheetHeader>
               <SheetTitle>
                 <Image
-                  src="/images/logos/Asset-2.svg"
+                  src="/images/logos/Asset-2.png"
                   alt="Frontier Property Management"
                   width={140}
                   height={42}
@@ -249,13 +248,22 @@ export function SiteHeader() {
                 );
               })}
 
-              <div className="mt-4 border-t pt-4">
+              <div className="mt-4 border-t pt-4 space-y-2">
                 <SheetClose asChild>
                   <Button
                     asChild
                     className="w-full bg-sage text-white hover:bg-sage-dark"
                   >
-                    <Link href="/contact">Get Started</Link>
+                    <Link href="/search">Book a Cabin</Link>
+                  </Button>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full"
+                  >
+                    <Link href="/management-services">Management Services</Link>
                   </Button>
                 </SheetClose>
               </div>

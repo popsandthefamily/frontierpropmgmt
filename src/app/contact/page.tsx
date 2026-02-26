@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
-import { ContactForm } from "@/components/forms/contact-form";
+import { ContactFormTabbed } from "@/components/forms/contact-form-tabbed";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig } from "@/data/site";
@@ -46,8 +46,8 @@ export default function ContactPage() {
       {/* Hero */}
       <HeroSection
         backgroundImage="/images/hero/hero-bg.jpg"
-        title="Talk With a Local Hochatown STR Manager"
-        subtitle="We provide short-term rental property management for cabin owners in Hochatown and Broken Bow, Oklahoma."
+        title="Get in Touch"
+        subtitle="Looking to book a cabin or need help managing your property? We're here for both."
         size="medium"
         overlay="dark"
       />
@@ -59,13 +59,13 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <AnimateInView direction="left">
               <h2 className="mb-2 text-2xl font-bold text-charcoal md:text-3xl">
-                Have a cabin in Broken Bow or Hochatown?
+                How can we help?
               </h2>
               <p className="mb-8 text-muted-foreground">
-                Let&apos;s review how it&apos;s performing and what can be
-                improved.
+                Select your situation below and we&apos;ll show you the right
+                form.
               </p>
-              <ContactForm />
+              <ContactFormTabbed />
             </AnimateInView>
           </div>
 

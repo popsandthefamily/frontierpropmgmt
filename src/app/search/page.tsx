@@ -1,11 +1,41 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import {
+  DollarSign,
+  ShieldCheck,
+  Headphones,
+  MessageSquare,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { properties } from "@/data/properties";
+
+const bookDirectBenefits = [
+  {
+    icon: DollarSign,
+    title: "No Platform Fees",
+    description: "Save money by booking directly with us instead of third-party platforms.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Best Rate Guaranteed",
+    description: "Our direct rates match or beat any listing site price.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Direct Host Communication",
+    description: "Message your host directly — faster responses, better service.",
+  },
+  {
+    icon: Headphones,
+    title: "Local Support",
+    description: "Our team is based in Broken Bow and available when you need us.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Search Properties",
@@ -54,8 +84,39 @@ export default function SearchPage() {
         </div>
       </SectionWrapper>
 
-      {/* Hospitable Search Widget */}
+      {/* Why Book Direct? */}
       <SectionWrapper background="cream">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+            Why Book Direct?
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+            Skip the booking platforms and get a better experience.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {bookDirectBenefits.map((benefit, i) => (
+            <AnimateInView key={benefit.title} delay={i * 0.08}>
+              <Card className="h-full text-center">
+                <CardContent className="flex flex-col items-center pt-6 pb-5">
+                  <div className="mb-3 rounded-full bg-sage/10 p-3">
+                    <benefit.icon className="size-6 text-sage" />
+                  </div>
+                  <h3 className="mb-1 font-semibold text-charcoal">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {benefit.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimateInView>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Hospitable Search Widget */}
+      <SectionWrapper background="white">
         <div className="text-center">
           <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
             Search Availability

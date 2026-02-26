@@ -1,55 +1,114 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldCheck,
+  DollarSign,
+  Headphones,
+  Star,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { StatsSection } from "@/components/sections/stats-section";
 import { CTASection } from "@/components/sections/cta-section";
-import { ServiceCard } from "@/components/cards/service-card";
 import { StepCard } from "@/components/cards/step-card";
+import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
-import { servicePillars } from "@/data/services";
+import { properties } from "@/data/properties";
 
 export const metadata: Metadata = {
+  title:
+    "Broken Bow Cabin Rentals & Property Management | Frontier Property Management",
   description:
-    "Full-service cabin management in Broken Bow and Hochatown, Oklahoma. We handle pricing, guests, cleanings, and maintenance so you can enjoy stress-free rental income.",
+    "Book a cabin in Broken Bow & Hochatown or let us manage your vacation rental. Direct booking — no platform fees. Full-service STR management at 20% of gross.",
 };
+
+const bookDirectBenefits = [
+  {
+    icon: DollarSign,
+    title: "No Platform Fees",
+    description:
+      "Book directly and skip the service fees charged by major booking platforms.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Best Rate Guaranteed",
+    description:
+      "Our direct rates are always the same or lower than any listing site.",
+  },
+  {
+    icon: Headphones,
+    title: "Local Host Support",
+    description:
+      "Reach a real person in Broken Bow — not an overseas call center.",
+  },
+  {
+    icon: Star,
+    title: "Professionally Managed",
+    description:
+      "Every stay is backed by our full-service property management team.",
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero ────────────────────────────────────────────────────── */}
+      {/* ── 1. Dual-Audience Hero ──────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/hero/hero-bg.jpg"
-        title="Full-Service Cabin Management in Hochatown"
-        subtitle="Locally owned and operated — contract transitions welcome"
+        title="Broken Bow Cabin Rentals & Property Management"
+        subtitle="Book your Hochatown getaway — or let us manage your cabin"
         overlay="gradient"
         size="full"
-        cta={{ label: "Get a Free Estimate", href: "/income-calculator" }}
-        secondaryCta={{ label: "Our Services", href: "/management-services" }}
+        cta={{ label: "Browse Cabins", href: "/search" }}
+        secondaryCta={{
+          label: "Cabin Owners: Learn More",
+          href: "/management-services",
+        }}
       />
 
-      {/* ── Income Calculator Teaser ────────────────────────────────── */}
+      {/* ── 2. Featured Cabins ─────────────────────────────────────── */}
       <SectionWrapper background="cream">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="text-center">
           <AnimateInView>
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Estimate Your Monthly STR Revenue
+              Book Your Broken Bow Getaway
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Curious what your cabin could earn under professional management?
-              Use our free income calculator to see projected monthly revenue
-              based on your property details, location, and amenities.
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Professionally managed cabins with direct booking — skip the
+              platform fees.
             </p>
+          </AnimateInView>
+        </div>
+
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
+          {properties.map((property, i) => (
+            <AnimateInView key={property.slug} delay={i * 0.1}>
+              <PropertyCard
+                slug={property.slug}
+                name={property.name}
+                tagline={property.tagline}
+                bedrooms={property.bedrooms}
+                bathrooms={property.bathrooms}
+                sleeps={property.sleeps}
+                featuredImage={property.images[0].src}
+              />
+            </AnimateInView>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <AnimateInView>
             <Button
               asChild
               size="lg"
-              className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
+              className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
             >
-              <Link href="/income-calculator">
-                Try the Income Calculator
+              <Link href="/search">
+                View All Properties
                 <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
@@ -57,7 +116,77 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── How It Works ────────────────────────────────────────────── */}
+      {/* ── 3. Why Book Direct? ────────────────────────────────────── */}
+      <SectionWrapper background="white">
+        <div className="text-center">
+          <AnimateInView>
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              Why Book Direct?
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+              Better rates, better service, better experience.
+            </p>
+          </AnimateInView>
+        </div>
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {bookDirectBenefits.map((benefit, i) => (
+            <AnimateInView key={benefit.title} delay={i * 0.1}>
+              <Card className="h-full text-center">
+                <CardContent className="flex flex-col items-center pt-8 pb-6">
+                  <div className="mb-4 rounded-full bg-sage/10 p-4">
+                    <benefit.icon className="size-7 text-sage" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-charcoal">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {benefit.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </AnimateInView>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      {/* ── 4. Stats Bar ───────────────────────────────────────────── */}
+      <StatsSection
+        stats={[
+          { value: "4.95", label: "Average Guest Rating" },
+          { value: "5★", label: "Reviews Across Platforms" },
+          { value: "0%", label: "Platform Fees When You Book Direct" },
+          { value: "20%", label: "Simple Management Fee" },
+        ]}
+      />
+
+      {/* ── 5. Owner Section Divider ───────────────────────────────── */}
+      <SectionWrapper background="sage">
+        <div className="mx-auto max-w-2xl text-center">
+          <AnimateInView>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">
+              Own a Cabin in Broken Bow?
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-white/90">
+              Full-service STR management — 20% of gross bookings, no setup
+              fees. We handle pricing, guests, cleanings, and maintenance so you
+              can enjoy stress-free rental income.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="mt-8 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
+            >
+              <Link href="/management-services">
+                Management Services
+                <ArrowRight className="ml-2 size-4" />
+              </Link>
+            </Button>
+          </AnimateInView>
+        </div>
+      </SectionWrapper>
+
+      {/* ── 6. How It Works (Owners) ───────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
@@ -93,36 +222,9 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Services Overview ───────────────────────────────────────── */}
+      {/* ── 7. Team Teaser ─────────────────────────────────────────── */}
       <SectionWrapper background="cream">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            What We Do
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Comprehensive vacation rental management built for Hochatown cabin
-            owners.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {servicePillars.map((pillar, i) => (
-            <AnimateInView key={pillar.title} delay={i * 0.1}>
-              <ServiceCard
-                icon={pillar.icon}
-                title={pillar.title}
-                description={pillar.description}
-                features={pillar.features}
-              />
-            </AnimateInView>
-          ))}
-        </div>
-      </SectionWrapper>
-
-      {/* ── About / Team Teaser ─────────────────────────────────────── */}
-      <SectionWrapper background="white">
         <div className="grid items-center gap-12 md:grid-cols-2">
-          {/* Image */}
           <AnimateInView direction="left">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">
               <Image
@@ -135,7 +237,6 @@ export default function HomePage() {
             </div>
           </AnimateInView>
 
-          {/* Text */}
           <AnimateInView direction="right">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
               Your Frontier Property Management Team
@@ -149,9 +250,7 @@ export default function HomePage() {
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Our team combines deep local knowledge with modern technology and
               data-driven strategies to help cabin owners maximize revenue while
-              delivering five-star guest experiences. When you partner with
-              Frontier, you get a hands-on team that treats your property like
-              it is our own.
+              delivering five-star guest experiences.
             </p>
             <Button
               asChild
@@ -167,34 +266,25 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Stats Bar ───────────────────────────────────────────────── */}
-      <StatsSection
-        stats={[
-          { value: "4.95", label: "Average Guest Rating" },
-          { value: "+14%", label: "Shoulder-Season Nights" },
-          { value: "+$28", label: "ADR After Optimization" },
-          { value: "20%", label: "Simple Management Fee" },
-        ]}
-      />
-
-      {/* ── Pricing Teaser ──────────────────────────────────────────── */}
-      <SectionWrapper background="sage">
+      {/* ── 8. Income Calculator Teaser ────────────────────────────── */}
+      <SectionWrapper background="white">
         <div className="mx-auto max-w-2xl text-center">
           <AnimateInView>
-            <h2 className="text-3xl font-bold text-white md:text-4xl">
-              Transparent Pricing
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              Estimate Your Monthly STR Revenue
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-white/90">
-              Full-Service STR Management — 20% of Gross Bookings. No setup
-              fees. No hidden charges.
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              Curious what your cabin could earn under professional management?
+              Use our free income calculator to see projected monthly revenue
+              based on your property details, location, and amenities.
             </p>
             <Button
               asChild
               size="lg"
-              className="mt-8 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
+              className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
             >
-              <Link href="/management-services">
-                View Full Details
+              <Link href="/income-calculator">
+                Try the Income Calculator
                 <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
@@ -202,14 +292,15 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Final CTA ───────────────────────────────────────────────── */}
+      {/* ── 9. Final Dual CTA ──────────────────────────────────────── */}
       <CTASection
-        heading="Ready to Take Your Rental to the Next Level?"
-        subtext="Let's talk about how we can simplify your property management and help you earn more from your Hochatown cabin."
+        heading="Ready to Get Started?"
+        subtext="Whether you're looking for a Broken Bow cabin getaway or you want expert management for your rental property — we're here to help."
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{
-          label: "Request Management Information",
-          href: "/contact",
+        cta={{ label: "Browse Cabins", href: "/search" }}
+        secondaryCta={{
+          label: "Management Info",
+          href: "/management-services",
         }}
       />
     </>

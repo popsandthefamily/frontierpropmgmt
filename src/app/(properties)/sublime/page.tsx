@@ -21,6 +21,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimateInView } from "@/components/motion/animate-in-view";
+import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
 import { getPropertyBySlug } from "@/data/properties";
 import { siteConfig } from "@/data/site";
 
@@ -387,6 +388,9 @@ export default function SublimePage() {
         cta={{ label: "Explore All Properties", href: "/search" }}
         secondaryCta={{ label: "Contact Us", href: "/contact" }}
       />
+
+      {/* Mobile Booking Bar */}
+      <MobileBookingBar propertyName={property.name} />
     </>
   );
 }
