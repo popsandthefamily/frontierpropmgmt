@@ -48,7 +48,7 @@ export function SiteFooter() {
             {/* Column 1: Logo & Tagline */}
             <div className="flex flex-col gap-4">
               <Image
-                src="/images/logos/Asset-2.png"
+                src="/images/logos/Asset-1-2.png"
                 alt="Frontier Property Management"
                 width={180}
                 height={54}
@@ -146,7 +146,7 @@ export function SiteFooter() {
       {/* Lower Section */}
       <div className="bg-charcoal">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-white/70 sm:flex-row lg:px-8">
-          <p>&copy; 2025 Frontier Property Management LLC. All rights reserved.</p>
+          <p>&copy; 2026 Frontier Property Management LLC. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy-policy"

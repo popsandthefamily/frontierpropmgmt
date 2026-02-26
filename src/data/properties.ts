@@ -56,28 +56,8 @@ export const properties: Property[] = [
     ],
     images: [
       {
-        src: "/images/properties/old-broken-bow-highway/exterior.jpg",
-        alt: "Cabin exterior with pool",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/pool.jpg",
-        alt: "Private outdoor pool",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/living-room.jpg",
-        alt: "Living room interior",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/kitchen.jpg",
-        alt: "Fully equipped kitchen",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/bedroom.jpg",
-        alt: "Master bedroom",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/firepit.jpg",
-        alt: "Outdoor firepit area",
+        src: "/images/properties/old-broken-bow-highway/featured.jpg",
+        alt: "Cozy 3BR poolside cabin on Old Broken Bow Highway",
       },
     ],
     featured: true,

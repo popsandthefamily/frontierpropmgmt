@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import {
   ArrowRight,
   ShieldCheck,
@@ -69,6 +70,22 @@ export default function HomePage() {
           href: "/management-services",
         }}
       />
+
+      {/* ── Hospitable Search Bar ────────────────────────────────── */}
+      <SectionWrapper background="white">
+        <div className="mx-auto max-w-4xl">
+          <Script
+            src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
+            strategy="lazyOnload"
+          />
+          {/* @ts-expect-error — custom web component from Hospitable */}
+          <hospitable-direct-mps
+            identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
+            type="custom"
+            results-url="/search"
+          />
+        </div>
+      </SectionWrapper>
 
       {/* ── 2. Featured Cabins ─────────────────────────────────────── */}
       <SectionWrapper background="cream">

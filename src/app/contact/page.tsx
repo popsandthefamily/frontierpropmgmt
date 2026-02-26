@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { ContactFormTabbed } from "@/components/forms/contact-form-tabbed";
 import { AnimateInView } from "@/components/motion/animate-in-view";
-import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -13,27 +11,27 @@ export const metadata: Metadata = {
     "Get in touch with Frontier Property Management for cabin management services in Broken Bow and Hochatown, Oklahoma. Call, email, or fill out our contact form.",
 };
 
-const contactCards = [
+const contactOptions = [
   {
-    icon: Phone,
+    emoji: "\u{1F4DE}",
     label: "Phone",
     value: siteConfig.phone,
     href: `tel:${siteConfig.phone.replace(/-/g, "")}`,
   },
   {
-    icon: Mail,
+    emoji: "\u{2709}\u{FE0F}",
     label: "Email",
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
   },
   {
-    icon: MapPin,
+    emoji: "\u{1F4CD}",
     label: "Address",
     value: siteConfig.address,
     href: undefined,
   },
   {
-    icon: Clock,
+    emoji: "\u{1F552}",
     label: "Hours",
     value: siteConfig.hours,
     href: undefined,
@@ -69,34 +67,32 @@ export default function ContactPage() {
             </AnimateInView>
           </div>
 
-          {/* Right — Contact Info Cards (1/3 width) */}
-          <div className="flex flex-col gap-4">
-            {contactCards.map((card, i) => (
-              <AnimateInView key={card.label} direction="right" delay={i * 0.1}>
-                <Card>
-                  <CardContent className="flex items-start gap-4 pt-6">
-                    <div className="rounded-lg bg-sage/10 p-2.5">
-                      <card.icon className="size-5 text-sage" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                        {card.label}
+          {/* Right — Contact Info (1/3 width) */}
+          <div className="flex flex-col gap-5">
+            {contactOptions.map((option, i) => (
+              <AnimateInView key={option.label} direction="right" delay={i * 0.1}>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl leading-none" role="img" aria-label={option.label}>
+                    {option.emoji}
+                  </span>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {option.label}
+                    </p>
+                    {option.href ? (
+                      <a
+                        href={option.href}
+                        className="text-base font-medium text-charcoal hover:text-sage transition-colors"
+                      >
+                        {option.value}
+                      </a>
+                    ) : (
+                      <p className="text-base font-medium text-charcoal">
+                        {option.value}
                       </p>
-                      {card.href ? (
-                        <a
-                          href={card.href}
-                          className="text-sm font-medium text-charcoal hover:text-sage transition-colors"
-                        >
-                          {card.value}
-                        </a>
-                      ) : (
-                        <p className="text-sm font-medium text-charcoal">
-                          {card.value}
-                        </p>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+                    )}
+                  </div>
+                </div>
               </AnimateInView>
             ))}
           </div>

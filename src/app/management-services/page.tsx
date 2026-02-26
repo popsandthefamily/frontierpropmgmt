@@ -96,7 +96,7 @@ export default function ManagementServicesPage() {
               <AnimateInView key={item} delay={i * 0.05}>
                 <li className="flex items-start gap-3 rounded-lg bg-white p-4 shadow-sm">
                   <Check className="mt-0.5 size-5 shrink-0 text-sage" />
-                  <span className="text-base text-charcoal">{item}</span>
+                  <span className="text-lg text-charcoal">{item}</span>
                 </li>
               </AnimateInView>
             ))}

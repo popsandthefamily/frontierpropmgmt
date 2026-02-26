@@ -27,7 +27,7 @@ export function AddonCard({
       </CardHeader>
 
       <CardContent>
-        <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+        <p className="mb-4 text-base leading-relaxed text-muted-foreground">
           {description}
         </p>
 
@@ -35,7 +35,7 @@ export function AddonCard({
           {features.map((feature, i) => (
             <li
               key={i}
-              className="flex items-start gap-2 text-sm text-muted-foreground"
+              className="flex items-start gap-2 text-base text-muted-foreground"
             >
               <Check className="mt-0.5 size-4 shrink-0 text-sage" />
               <span>{feature}</span>

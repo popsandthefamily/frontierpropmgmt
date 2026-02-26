@@ -33,7 +33,7 @@ export function FAQSection({
             <AccordionTrigger className="text-left text-base font-medium text-charcoal hover:text-sage hover:no-underline">
               {item.question}
             </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground leading-relaxed">
+            <AccordionContent className="text-base text-muted-foreground leading-relaxed">
               {item.answer}
             </AccordionContent>
           </AccordionItem>

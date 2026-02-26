@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Script from "next/script";
 import {
   Bed,
   Bath,
@@ -17,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ImageGallery } from "@/components/property/image-gallery";
 import { AmenityGrid } from "@/components/property/amenity-grid";
 import { BookingWidget } from "@/components/property/booking-widget";
+import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
@@ -75,7 +75,7 @@ export default function SublimePage() {
       />
 
       {/* Image Gallery */}
-      <div className="mx-auto max-w-7xl px-4 pt-8">
+      <div className="mx-auto max-w-7xl px-4 pt-24">
         <ImageGallery
           images={property.images}
           propertyName={property.name}
@@ -174,16 +174,17 @@ export default function SublimePage() {
                         "An indoor/outdoor fireplace that connects the living room to the covered deck.",
                     },
                   ].map((highlight) => (
-                    <Card key={highlight.title} className="border-l-4 border-l-sage">
-                      <CardContent className="pt-4 pb-4">
-                        <h3 className="mb-1 font-semibold text-charcoal">
+                    <div key={highlight.title} className="flex items-start gap-3 py-2">
+                      <Sparkles className="size-5 shrink-0 text-sage mt-0.5" />
+                      <div>
+                        <h3 className="font-semibold text-charcoal">
                           {highlight.title}
                         </h3>
                         <p className="text-sm text-muted-foreground">
                           {highlight.description}
                         </p>
-                      </CardContent>
-                    </Card>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -204,24 +205,22 @@ export default function SublimePage() {
               property.sleepingArrangements.length > 0 && (
                 <AnimateInView>
                   <div>
-                    <h2 className="mb-6 text-2xl font-bold text-charcoal">
+                    <h2 className="mb-4 text-2xl font-bold text-charcoal">
                       Sleeping Arrangements
                     </h2>
-                    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                    <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2 md:grid-cols-3">
                       {property.sleepingArrangements.map((arrangement) => (
-                        <Card key={arrangement.room}>
-                          <CardContent className="pt-6">
-                            <div className="mb-2 flex items-center gap-2">
-                              <Bed className="size-5 text-sage" />
-                              <h3 className="font-semibold text-charcoal">
-                                {arrangement.room}
-                              </h3>
-                            </div>
+                        <div key={arrangement.room} className="flex items-center gap-3 py-1">
+                          <Bed className="size-5 shrink-0 text-sage" />
+                          <div>
+                            <h3 className="font-semibold text-charcoal">
+                              {arrangement.room}
+                            </h3>
                             <p className="text-sm text-muted-foreground">
                               {arrangement.details}
                             </p>
-                          </CardContent>
-                        </Card>
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -353,32 +352,7 @@ export default function SublimePage() {
           </p>
         </div>
 
-        {/*
-          Hospitable property-specific booking widget for Sublime Retreat.
-          TODO: Set the data-property-id attribute to this property's Hospitable widget ID.
-          The Hospitable embed script will mount the booking calendar into this container.
-        */}
-        <div
-          id="hospitable-booking"
-          data-property-id="sublime"
-          className="mx-auto min-h-[400px] max-w-4xl rounded-lg border bg-white p-8 shadow-sm"
-        >
-          <div className="flex items-center justify-center py-20 text-muted-foreground">
-            <p className="text-center text-sm">
-              Booking calendar loading...
-            </p>
-          </div>
-        </div>
-
-        {/*
-          TODO: Replace the script src below with the actual Hospitable booking widget CDN URL
-          for the Sublime Retreat property.
-          Example: https://app.hospitable.com/widgets/booking/YOUR_PROPERTY_WIDGET_ID.js
-        */}
-        <Script
-          src="https://app.hospitable.com/widgets/booking.js"
-          strategy="lazyOnload"
-        />
+        <HospitableBooking propertyId="2120170" />
       </SectionWrapper>
 
       {/* CTA */}

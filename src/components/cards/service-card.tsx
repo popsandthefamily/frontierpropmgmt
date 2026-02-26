@@ -40,7 +40,7 @@ export function ServiceCard({
 
         <h3 className="mb-2 text-lg font-semibold text-charcoal">{title}</h3>
 
-        <p className="text-sm leading-relaxed text-muted-foreground">
+        <p className="text-base leading-relaxed text-muted-foreground">
           {description}
         </p>
 
@@ -49,7 +49,7 @@ export function ServiceCard({
             {features.map((feature, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 text-sm text-muted-foreground"
+                className="flex items-start gap-2 text-base text-muted-foreground"
               >
                 <LucideIcons.Check className="mt-0.5 size-4 shrink-0 text-sage" />
                 <span>{feature}</span>

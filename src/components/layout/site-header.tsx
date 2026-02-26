@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -38,9 +39,8 @@ interface NavDropdownItem {
 type NavItem = NavLinkItem | NavDropdownItem;
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
   {
-    label: "Book a Cabin",
+    label: "Cabins",
     children: [
       {
         label: "Sublime Retreat",
@@ -59,16 +59,34 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  { label: "Management Services", href: "/management-services" },
-  { label: "About", href: "/about" },
-  { label: "Discover", href: "/discover-broken-bow" },
+  {
+    label: "Explore",
+    children: [
+      {
+        label: "About Us",
+        href: "/about",
+        description: "Meet the team behind Frontier",
+      },
+      {
+        label: "Discover Broken Bow",
+        href: "/discover-broken-bow",
+        description: "Things to do, eat & see nearby",
+      },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
+/* Paths that do NOT have a hero section — force solid header */
+const SOLID_HEADER_PATHS = ["/sublime", "/old-broken-bow-highway"];
+
 export function SiteHeader() {
   const scrollY = useScrollPosition();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isScrolled = scrollY > 50;
+
+  const forceSolid = SOLID_HEADER_PATHS.includes(pathname);
+  const isScrolled = forceSolid || scrollY > 50;
 
   return (
     <motion.header
@@ -88,7 +106,7 @@ export function SiteHeader() {
         <Link href="/" className="relative shrink-0">
           {isScrolled ? (
             <Image
-              src="/images/logos/Asset-2.png"
+              src="/images/logos/Asset-1-2.png"
               alt="Frontier Property Management"
               width={160}
               height={48}
@@ -165,25 +183,27 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop CTAs */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/management-services"
-            className={cn(
-              "text-xs font-medium transition-colors",
-              isScrolled
-                ? "text-muted-foreground hover:text-sage"
-                : "text-white/70 hover:text-white"
-            )}
-          >
-            Owners &rarr;
-          </Link>
-          <Button
-            asChild
-            className="bg-sage text-white hover:bg-sage-dark"
-          >
-            <Link href="/search">Book Now</Link>
-          </Button>
+        {/* Desktop CTAs — Split Pill */}
+        <div className="hidden lg:flex items-center">
+          <div className="inline-flex items-center rounded-full border overflow-hidden">
+            <Link
+              href="/management-services"
+              className={cn(
+                "px-4 py-2 text-sm font-medium transition-colors border-r",
+                isScrolled
+                  ? "text-charcoal hover:bg-sage/10 border-border"
+                  : "text-white border-white/30 hover:bg-white/10"
+              )}
+            >
+              Owners
+            </Link>
+            <Link
+              href="/search"
+              className="px-5 py-2 text-sm font-semibold bg-sage text-white hover:bg-sage-dark transition-colors"
+            >
+              Book Now
+            </Link>
+          </div>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -205,7 +225,7 @@ export function SiteHeader() {
             <SheetHeader>
               <SheetTitle>
                 <Image
-                  src="/images/logos/Asset-2.png"
+                  src="/images/logos/Asset-1-2.png"
                   alt="Frontier Property Management"
                   width={140}
                   height={42}
@@ -263,7 +283,7 @@ export function SiteHeader() {
                     variant="outline"
                     className="w-full"
                   >
-                    <Link href="/management-services">Management Services</Link>
+                    <Link href="/management-services">Property Owners</Link>
                   </Button>
                 </SheetClose>
               </div>

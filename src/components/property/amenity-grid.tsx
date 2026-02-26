@@ -15,7 +15,7 @@ export function AmenityGrid({ amenities, className }: AmenityGridProps) {
   return (
     <div
       className={cn(
-        "grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4",
+        "grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3",
         className
       )}
     >
@@ -30,7 +30,7 @@ export function AmenityGrid({ amenities, className }: AmenityGridProps) {
         return (
           <div
             key={amenity.label}
-            className="flex items-center gap-3 rounded-lg border p-3 text-sm"
+            className="flex items-center gap-3 py-1 text-base"
           >
             {IconComponent ? (
               <IconComponent className="size-5 shrink-0 text-sage" />

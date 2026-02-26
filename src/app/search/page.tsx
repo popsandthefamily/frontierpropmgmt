@@ -127,27 +127,18 @@ export default function SearchPage() {
           </p>
         </div>
 
-        {/* Hospitable search widget container */}
-        <div
-          id="hospitable-search"
-          className="mx-auto min-h-[300px] max-w-4xl rounded-lg border bg-white p-8 shadow-sm"
-        >
-          <div className="flex items-center justify-center py-16 text-muted-foreground">
-            <p className="text-center text-sm">
-              Search widget loading...
-            </p>
-          </div>
+        {/* Hospitable direct property search widget */}
+        <div className="mx-auto max-w-4xl">
+          <Script
+            src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
+            strategy="lazyOnload"
+          />
+          {/* @ts-expect-error — custom web component from Hospitable */}
+          <hospitable-direct-mps
+            identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
+            type="custom"
+          />
         </div>
-
-        {/*
-          TODO: Replace the script src below with the actual Hospitable search widget CDN URL.
-          Example: https://app.hospitable.com/widgets/search/YOUR_WIDGET_ID.js
-          The widget will mount into the #hospitable-search div above.
-        */}
-        <Script
-          src="https://app.hospitable.com/widgets/search.js"
-          strategy="lazyOnload"
-        />
       </SectionWrapper>
 
       {/* CTA */}
