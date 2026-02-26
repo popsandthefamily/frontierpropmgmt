@@ -1,0 +1,48 @@
+import type { MetadataRoute } from "next";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://rentwithfrontier.com";
+
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/management-services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/search`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/income-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/discover-broken-bow`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/hochatown-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/broken-bow-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/rental-agreement`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/blogs`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
+  ];
+
+  const propertyPages: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/sublime`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/old-broken-bow-highway`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+  ];
+
+  const blogPosts: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
+      lastModified: new Date("2026-01-21"),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
+      lastModified: new Date("2025-10-13"),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/blogs/nights-number-taxes-hochatown`,
+      lastModified: new Date("2025-10-09"),
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+  ];
+
+  return [...staticPages, ...propertyPages, ...blogPosts];
+}
