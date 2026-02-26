@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "fluid": false,
-  "functions": {
-    "src/**/*.ts": {
-      "memory": 128,
-      "maxDuration": 10
-    }
-  },
   "regions": ["iad1"]
 }
