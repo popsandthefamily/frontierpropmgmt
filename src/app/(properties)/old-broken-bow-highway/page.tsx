@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Bed, Bath, Users, Phone, Star, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ImageGallery } from "@/components/property/image-gallery";
 import { AmenityGrid } from "@/components/property/amenity-grid";
-import { BookingWidget } from "@/components/property/booking-widget";
 import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
-import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
@@ -193,49 +189,30 @@ export default function OldBrokenBowHighwayPage() {
           {/* Right Column — Sticky Booking Sidebar (1/3) */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              {/* Book Direct & Save Card */}
-              <Card className="border-2 border-sage bg-sage/5 shadow-lg">
-                <CardContent className="pt-6">
-                  <div className="mb-4 flex items-center gap-2">
-                    <ShieldCheck className="size-6 text-sage" />
-                    <h3 className="text-xl font-bold text-charcoal">
-                      Book Direct &amp; Save
-                    </h3>
-                  </div>
-                  <p className="mb-4 text-sm text-muted-foreground">
-                    Skip the platform fees. Book directly with Frontier Property
-                    Management for the best rate guaranteed on your Broken Bow
-                    cabin getaway.
+              {/* Hospitable Booking Calendar */}
+              <div className="rounded-lg border-2 border-sage bg-sage/5 p-1 shadow-lg">
+                <HospitableBooking propertyId="1874670" />
+              </div>
+
+              {/* Phone + Book Direct */}
+              <Card>
+                <CardContent className="pt-5 pb-5">
+                  <p className="mb-3 text-center text-sm font-medium text-charcoal">
+                    Prefer to book by phone?
                   </p>
-                  <div className="mb-4 flex items-center gap-2 rounded-md bg-sage/10 p-3">
-                    <Phone className="size-5 shrink-0 text-sage" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">
-                        Call or text to book
-                      </p>
-                      <a
-                        href={`tel:${siteConfig.phone}`}
-                        className="text-lg font-bold text-charcoal hover:text-sage"
-                      >
-                        {siteConfig.phone}
-                      </a>
-                    </div>
-                  </div>
-                  <Button
-                    asChild
-                    size="lg"
-                    className="w-full bg-sage text-lg font-semibold text-white hover:bg-sage-dark"
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    className="flex items-center justify-center gap-2 rounded-md bg-sage/10 p-3 text-lg font-bold text-charcoal transition-colors hover:bg-sage/20"
                   >
-                    <Link href="/contact">Check Availability</Link>
-                  </Button>
+                    <Phone className="size-5 text-sage" />
+                    {siteConfig.phone}
+                  </a>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
+                    <ShieldCheck className="mb-0.5 inline size-3.5" /> Best
+                    rate guaranteed when you book direct
+                  </p>
                 </CardContent>
               </Card>
-
-              {/* Booking Widget */}
-              <BookingWidget
-                propertyName={property.name}
-                bookingUrl={property.bookingUrl}
-              />
 
               {/* Trust Signals */}
               <div className="rounded-lg border p-4 text-center">
@@ -258,21 +235,6 @@ export default function OldBrokenBowHighwayPage() {
           </div>
         </div>
       </div>
-
-      {/* Hospitable Booking Embed — Full Width */}
-      <SectionWrapper background="cream">
-        <div className="text-center">
-          <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
-            Check Availability &amp; Book Your Stay
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
-            Select your dates below to see real-time pricing and availability
-            for this property.
-          </p>
-        </div>
-
-        <HospitableBooking propertyId="1874670" />
-      </SectionWrapper>
 
       {/* CTA */}
       <CTASection

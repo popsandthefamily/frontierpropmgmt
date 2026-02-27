@@ -53,7 +53,7 @@ export function SiteFooter() {
                 alt="Frontier Property Management"
                 width={234}
                 height={133}
-                className="h-16 w-auto"
+                className="h-12 w-auto"
               />
               <p className="text-sm leading-relaxed text-charcoal/80">
                 Full-service cabin management in Hochatown &amp; Broken Bow

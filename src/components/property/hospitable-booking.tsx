@@ -38,11 +38,12 @@ export function HospitableBooking({ propertyId }: HospitableBookingProps) {
   }, []);
 
   return (
-    <div className="mx-auto max-w-4xl">
+    <div>
       <iframe
         id="booking-iframe"
         sandbox="allow-top-navigation allow-scripts allow-same-origin"
-        style={{ width: "100%", height: "600px" }}
+        className="w-full rounded-md"
+        style={{ height: "520px" }}
         frameBorder="0"
         src={`https://booking.hospitable.com/widget/9f3d8a61-1242-4f44-bcfe-eb8989fc9fcd/${propertyId}`}
         title="Book your stay"
