@@ -104,6 +104,9 @@ export function ContactForm({ className }: { className?: string }) {
       className={cn("space-y-6", className)}
       noValidate
     >
+      {/* Honeypot — hidden from real users, catches bots */}
+      <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+
       {/* Full Name */}
       <div className="space-y-2">
         <Label htmlFor="contact-name">
