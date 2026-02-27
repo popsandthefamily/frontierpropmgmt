@@ -271,9 +271,7 @@ export default function SublimePage() {
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Hospitable Booking Calendar */}
-              <div className="rounded-lg border-2 border-sage bg-gradient-to-br from-sage/10 to-sage/5 p-1 shadow-xl">
-                <HospitableBooking propertyId="2120170" />
-              </div>
+              <HospitableBooking propertyId="2120170" />
 
               {/* Phone + Book Direct */}
               <Card>
@@ -296,7 +294,7 @@ export default function SublimePage() {
               </Card>
 
               {/* Trust Signals */}
-              <div className="rounded-lg border p-4 text-center">
+              <div className="p-4 text-center">
                 <div className="mb-2 flex items-center justify-center gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star

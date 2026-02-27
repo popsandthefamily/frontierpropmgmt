@@ -194,9 +194,7 @@ export default function OldBrokenBowHighwayPage() {
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Hospitable Booking Calendar */}
-              <div className="rounded-lg border-2 border-sage bg-sage/5 p-1 shadow-lg">
-                <HospitableBooking propertyId="1874670" />
-              </div>
+              <HospitableBooking propertyId="1874670" />
 
               {/* Phone + Book Direct */}
               <Card>
@@ -219,7 +217,7 @@ export default function OldBrokenBowHighwayPage() {
               </Card>
 
               {/* Trust Signals */}
-              <div className="rounded-lg border p-4 text-center">
+              <div className="p-4 text-center">
                 <div className="mb-2 flex items-center justify-center gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
