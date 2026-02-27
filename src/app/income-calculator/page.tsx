@@ -7,9 +7,13 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Income Calculator",
+  title:
+    "STR Income Calculator — Estimate Your Broken Bow Cabin Revenue",
   description:
-    "Estimate your monthly short-term rental revenue with our free income calculator. Get real insights for your Broken Bow or Hochatown cabin.",
+    "Free income calculator for Broken Bow & Hochatown cabin owners. Estimate monthly short-term rental revenue based on bedrooms, amenities, and location. See what professional management could earn you.",
+  alternates: {
+    canonical: "https://rentwithfrontier.com/income-calculator",
+  },
 };
 
 export default function IncomeCalculatorPage() {

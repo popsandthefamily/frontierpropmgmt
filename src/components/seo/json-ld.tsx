@@ -6,7 +6,11 @@ interface JsonLdProps {
     | "FAQPage"
     | "BreadcrumbList"
     | "Organization"
-    | "WebSite";
+    | "WebSite"
+    | "Service"
+    | "ItemList"
+    | "RealEstateAgent"
+    | "CollectionPage";
   data: Record<string, unknown>;
 }
 

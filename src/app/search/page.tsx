@@ -12,7 +12,9 @@ import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
+import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
+import { siteConfig } from "@/data/site";
 
 const bookDirectBenefits = [
   {
@@ -38,14 +40,41 @@ const bookDirectBenefits = [
 ];
 
 export const metadata: Metadata = {
-  title: "Search Properties",
+  title:
+    "Broken Bow Cabins for Rent — Book Direct, No Platform Fees",
   description:
-    "Explore our collection of vacation rental cabins in Broken Bow and Hochatown, Oklahoma. Find your perfect getaway with private pools, hot tubs, and luxury amenities.",
+    "Browse luxury cabins in Broken Bow & Hochatown available for direct booking. Private pools, hot tubs, zip lines, game rooms & more. Skip Airbnb fees — best rate guaranteed when you book with Frontier Property Management.",
+  openGraph: {
+    title: "Broken Bow Cabins for Rent — Book Direct & Save",
+    description:
+      "Luxury Hochatown & Broken Bow cabins. Book direct, skip the platform fees, get the best rate guaranteed.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/search",
+  },
 };
 
 export default function SearchPage() {
   return (
     <>
+      {/* JSON-LD — ItemList of VacationRentals */}
+      <JsonLd
+        type="ItemList"
+        data={{
+          name: "Broken Bow & Hochatown Cabins for Rent",
+          description:
+            "Professionally managed vacation rental cabins available for direct booking in Broken Bow and Hochatown, Oklahoma.",
+          numberOfItems: properties.length,
+          itemListElement: properties.map((property, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${siteConfig.url}/${property.slug}`,
+            name: property.name,
+            image: `${siteConfig.url}${property.images[0].src}`,
+          })),
+        }}
+      />
+
       {/* Hero */}
       <HeroSection
         backgroundImage="/images/hero/hero-bg.jpg"

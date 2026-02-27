@@ -24,15 +24,48 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rentwithfrontier.com"),
   title: {
     default:
-      "Frontier Property Management | Cabin Management in Hochatown & Broken Bow",
-    template: "%s | Frontier Property Management",
+      "Frontier Property Management | Cabin Rentals & STR Management in Hochatown & Broken Bow, OK",
+    template: "%s | Frontier Property Management — Broken Bow & Hochatown",
   },
   description:
-    "Full-service vacation rental management in Broken Bow and Hochatown, Oklahoma. We handle pricing, guests, cleanings, and maintenance — so you can enjoy stress-free rental income.",
+    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management — pricing, guests, cleanings & maintenance — 20% of gross, no setup fees.",
+  keywords: [
+    "Broken Bow cabin rentals",
+    "Hochatown cabin rentals",
+    "cabin management Broken Bow",
+    "STR management Hochatown",
+    "vacation rental management Oklahoma",
+    "short-term rental management Broken Bow",
+    "Broken Bow property management",
+    "Hochatown property manager",
+    "book direct Broken Bow cabin",
+    "luxury cabin Hochatown",
+    "McCurtain County cabin rentals",
+    "Beavers Bend cabin",
+    "Frontier Property Management",
+  ],
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "Frontier Property Management",
+    images: [
+      {
+        url: "/images/properties/sublime/sublime-2.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Luxury cabin in Hochatown managed by Frontier Property Management",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Frontier Property Management | Cabin Rentals & STR Management in Broken Bow",
+    description:
+      "Book a cabin direct or let us manage your Broken Bow vacation rental. No platform fees. 20% management fee.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com",
   },
 };
 
@@ -46,13 +79,15 @@ export default function RootLayout({
       <body className="antialiased font-body text-foreground bg-background">
         {/* Structured Data — LocalBusiness */}
         <JsonLd
-          type="LocalBusiness"
+          type="RealEstateAgent"
           data={{
             name: siteConfig.name,
-            description: siteConfig.description,
+            description:
+              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance — 20% of gross bookings, no setup fees.",
             url: siteConfig.url,
             telephone: siteConfig.phone,
             email: siteConfig.email,
+            image: `${siteConfig.url}/images/logos/Asset-1-2.png`,
             address: {
               "@type": "PostalAddress",
               streetAddress: "3156 Old Broken Bow Hwy",
@@ -61,12 +96,52 @@ export default function RootLayout({
               postalCode: "74728",
               addressCountry: "US",
             },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 34.1515,
+              longitude: -94.7685,
+            },
+            areaServed: [
+              { "@type": "Place", name: "Broken Bow, Oklahoma" },
+              { "@type": "Place", name: "Hochatown, Oklahoma" },
+              { "@type": "Place", name: "McCurtain County, Oklahoma" },
+            ],
             openingHours: "Mo-Fr 09:00-17:00",
             sameAs: [
               siteConfig.social.instagram,
               siteConfig.social.facebook,
             ],
             priceRange: "$$",
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "4.95",
+              bestRating: "5",
+              ratingCount: "47",
+            },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Cabin Management Services",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Full-Service STR Management",
+                    description:
+                      "Complete vacation rental management including dynamic pricing, guest communication, cleaning, and maintenance",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "Direct Cabin Bookings",
+                    description:
+                      "Book luxury cabins directly with no platform fees — best rate guaranteed",
+                  },
+                },
+              ],
+            },
           }}
         />
         {/* Structured Data — WebSite with SearchAction */}

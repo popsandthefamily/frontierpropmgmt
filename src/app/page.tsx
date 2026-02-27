@@ -22,9 +22,25 @@ import { properties } from "@/data/properties";
 
 export const metadata: Metadata = {
   title:
-    "Broken Bow Cabin Rentals & Property Management | Frontier Property Management",
+    "Broken Bow Cabin Rentals & Property Management | Book Direct & Save",
   description:
-    "Book a cabin in Broken Bow & Hochatown or let us manage your vacation rental. Direct booking — no platform fees. Full-service STR management at 20% of gross.",
+    "Book a luxury cabin in Broken Bow & Hochatown direct — no Airbnb or VRBO fees. Or hire Frontier for full-service STR management at 20% of gross. Hot tubs, zip lines, private pools. Local team, 4.95★ rating.",
+  openGraph: {
+    title: "Broken Bow Cabin Rentals & Property Management | Frontier",
+    description:
+      "Book direct and save on luxury Hochatown cabins. Or let us manage your vacation rental — 20% fee, no setup costs.",
+    images: [
+      {
+        url: "/images/properties/sublime/sublime-2.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Luxury cabin interior in Hochatown, Oklahoma",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com",
+  },
 };
 
 const bookDirectBenefits = [

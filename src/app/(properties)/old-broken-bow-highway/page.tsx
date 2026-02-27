@@ -16,16 +16,20 @@ import { siteConfig } from "@/data/site";
 const property = getPropertyBySlug("old-broken-bow-highway");
 
 export const metadata: Metadata = {
-  title: property?.name ?? "Cabin Details",
+  title:
+    "3BR Poolside Cabin in Broken Bow — Private Pool, Firepit, Pet-Friendly",
   description:
-    property?.description?.slice(0, 160) ??
-    "Book your stay at this beautiful Broken Bow cabin.",
+    "Book this cozy 3-bedroom, 3-bath cabin on Old Broken Bow Highway. Private outdoor pool, firepit & grill, pet-friendly, near Beavers Bend State Park. Sleeps 6. Book direct with Frontier — no platform fees, best rate guaranteed.",
   openGraph: {
-    title: property?.name,
-    description: property?.tagline,
+    title: "3BR Poolside Cabin in Broken Bow — Book Direct & Save",
+    description:
+      "Private pool, firepit, pet-friendly. 3BR/3BA near Beavers Bend. Book direct — no Airbnb fees.",
     images: property?.images?.[0]?.src
       ? [{ url: property.images[0].src }]
       : [],
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/old-broken-bow-highway",
   },
 };
 

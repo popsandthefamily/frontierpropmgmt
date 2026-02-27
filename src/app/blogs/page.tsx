@@ -6,9 +6,13 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { getBlogPosts } from "@/data/blog-posts";
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title:
+    "Broken Bow & Hochatown Cabin Blog — STR Tips, Travel Guides & News",
   description:
-    "Insights, updates, and tips for cabin owners and guests in Broken Bow and Hochatown, Oklahoma. From industry news to travel tips, stay informed with Frontier Property Management.",
+    "Tips for Broken Bow cabin owners and guests — STR management insights, Hochatown travel guides, local events, and vacation rental industry news from Frontier Property Management.",
+  alternates: {
+    canonical: "https://rentwithfrontier.com/blogs",
+  },
 };
 
 export default function BlogsPage() {

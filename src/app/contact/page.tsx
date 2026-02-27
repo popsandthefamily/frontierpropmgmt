@@ -6,9 +6,13 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title:
+    "Contact Us — Book a Cabin or Get a Free Management Estimate",
   description:
-    "Get in touch with Frontier Property Management for cabin management services in Broken Bow and Hochatown, Oklahoma. Call, email, or fill out our contact form.",
+    "Contact Frontier Property Management to book a Broken Bow cabin direct or get a free STR management estimate. Call 580-207-7154, email info@rentwithfrontier.com, or fill out our form. Based in Broken Bow, serving Hochatown & McCurtain County.",
+  alternates: {
+    canonical: "https://rentwithfrontier.com/contact",
+  },
 };
 
 const contactOptions = [

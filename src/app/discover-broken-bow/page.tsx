@@ -23,13 +23,17 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
-  title: "Discover Broken Bow and Hochatown",
+  title:
+    "Discover Broken Bow & Hochatown — Things to Do, Where to Stay, Local Tips",
   description:
-    "Your complete guide to Broken Bow and Hochatown, Oklahoma. Best neighborhoods, money-saving tips, things to do, and everything you need to plan the perfect cabin getaway.",
+    "Your ultimate guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants, money-saving tips, and everything you need to plan the perfect cabin getaway in McCurtain County.",
   openGraph: {
-    title: "Discover Broken Bow & Hochatown | Frontier Property Management",
+    title: "Discover Broken Bow & Hochatown — Complete Visitor Guide",
     description:
-      "Your complete guide to Broken Bow and Hochatown. Best spots, tips, activities, and more.",
+      "Best spots, things to do, where to stay in Broken Bow & Hochatown. Plan your Oklahoma cabin getaway.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/discover-broken-bow",
   },
 };
 

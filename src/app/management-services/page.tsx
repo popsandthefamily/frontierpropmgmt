@@ -18,6 +18,8 @@ import { AddonCard } from "@/components/cards/addon-card";
 import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { ContactForm } from "@/components/forms/contact-form";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/data/site";
 import {
   onboardingSteps,
   addOns,
@@ -26,9 +28,18 @@ import {
 } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Management Services",
+  title:
+    "Cabin Management Services — Full-Service STR Management in Broken Bow & Hochatown",
   description:
-    "Full-service short-term rental management in Hochatown and Broken Bow, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and transparent reporting — all for 20% of gross bookings.",
+    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO listing optimization, 24/7 guest communication, professional cleaning, maintenance & transparent reporting — 20% of gross bookings, no setup fees. Contract transitions welcome.",
+  openGraph: {
+    title: "Full-Service Cabin Management in Broken Bow & Hochatown",
+    description:
+      "20% of gross bookings, no setup fees. Dynamic pricing, guest communication, cleaning, maintenance — we handle everything.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/management-services",
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -65,6 +76,33 @@ const notIncludedItems = [
 export default function ManagementServicesPage() {
   return (
     <>
+      {/* JSON-LD — Service */}
+      <JsonLd
+        type="Service"
+        data={{
+          name: "Full-Service Vacation Rental Management",
+          description:
+            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting — 20% of gross bookings.",
+          provider: {
+            "@type": "RealEstateAgent",
+            name: siteConfig.name,
+            url: siteConfig.url,
+            telephone: siteConfig.phone,
+          },
+          areaServed: [
+            { "@type": "Place", name: "Broken Bow, Oklahoma" },
+            { "@type": "Place", name: "Hochatown, Oklahoma" },
+            { "@type": "Place", name: "McCurtain County, Oklahoma" },
+          ],
+          serviceType: "Vacation Rental Property Management",
+          offers: {
+            "@type": "Offer",
+            description: "20% of gross bookings, no setup fees",
+            priceCurrency: "USD",
+          },
+        }}
+      />
+
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"

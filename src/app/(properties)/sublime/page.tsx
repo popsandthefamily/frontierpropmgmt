@@ -24,16 +24,20 @@ import { siteConfig } from "@/data/site";
 const property = getPropertyBySlug("sublime");
 
 export const metadata: Metadata = {
-  title: "Sublime Retreat: Hot Tub, 2 Zip Lines, 2 Kings in Hochatown",
+  title:
+    "Sublime Retreat — Luxury Hochatown Cabin | Hot Tub, 2 Zip Lines, Arcade",
   description:
-    "Book Sublime Retreat — a brand-new boho-modern luxury cabin in Hochatown with 2 private zip lines, hot tub with Bluetooth speakers, arcade, Calcutta quartz kitchen, and bamboo floors. Sleeps 8.",
+    "Book Sublime Retreat direct & save — brand-new boho-modern luxury cabin in Hochatown with 2 private zip lines, hot tub with Bluetooth, full-size arcade, Calcutta quartz kitchen, bamboo floors. 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
   openGraph: {
-    title: "Sublime Retreat: Hot Tub, 2 Zip Lines, 2 Kings in Hochatown",
+    title: "Sublime Retreat — Luxury Hochatown Cabin | Book Direct & Save",
     description:
-      "New boho-modern luxury cabin in Hochatown. 2 zip lines, hot tub, arcade, Calcutta quartz kitchen, bamboo floors. Sleeps 8.",
+      "2 zip lines, hot tub, arcade, Calcutta quartz kitchen. 3BR luxury cabin in Hochatown. Book direct — no platform fees.",
     images: property?.images?.[0]?.src
       ? [{ url: property.images[0].src }]
       : [],
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/sublime",
   },
 };
 

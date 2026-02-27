@@ -9,11 +9,22 @@ import { StepCard } from "@/components/cards/step-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title:
+    "About Frontier Property Management — Local Hochatown & Broken Bow STR Experts",
   description:
-    "Learn about Frontier Property Management — family-owned, locally operated cabin management in Broken Bow and Hochatown, Oklahoma.",
+    "Meet the family-owned, locally operated team behind Frontier Property Management. We live in Broken Bow, manage cabins in Hochatown & McCurtain County, and deliver 4.95★ guest ratings with data-driven STR strategies.",
+  openGraph: {
+    title: "About Frontier Property Management",
+    description:
+      "Family-owned Broken Bow cabin management. Local team, 4.95★ guest ratings, data-driven STR strategies.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/about",
+  },
 };
 
 const whyChooseItems = [
@@ -47,6 +58,31 @@ const whatYouGetItems = [
 export default function AboutPage() {
   return (
     <>
+      {/* JSON-LD — Organization */}
+      <JsonLd
+        type="Organization"
+        data={{
+          name: siteConfig.name,
+          url: siteConfig.url,
+          logo: `${siteConfig.url}/images/logos/Asset-1-2.png`,
+          description:
+            "Family-owned, locally operated vacation rental management company in Broken Bow and Hochatown, Oklahoma.",
+          founder: {
+            "@type": "Person",
+            name: "Hunter Collins",
+            jobTitle: "Owner",
+          },
+          areaServed: [
+            { "@type": "Place", name: "Broken Bow, Oklahoma" },
+            { "@type": "Place", name: "Hochatown, Oklahoma" },
+          ],
+          sameAs: [
+            siteConfig.social.instagram,
+            siteConfig.social.facebook,
+          ],
+        }}
+      />
+
       {/* 1. Hero */}
       <HeroSection
         backgroundImage="/images/hero/forest-aerial.jpg"
