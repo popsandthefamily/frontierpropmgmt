@@ -195,22 +195,38 @@ export default function ManagementServicesPage() {
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               <div className="rounded-lg border p-6 text-center">
-                <p className="text-3xl font-bold text-charcoal">Airbnb</p>
-                <p className="mt-1 text-sm font-semibold text-sage">Top Rated Host</p>
+                <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-[#FF5A5F]/10">
+                  <svg viewBox="0 0 24 24" className="size-6" fill="#FF5A5F">
+                    <path d="M12 0C5.4 0 0 5.4 0 12c0 3.1 1.2 6 3.2 8.2.3.3.7.3 1 0l.3-.4c.2-.3.2-.7-.1-1C2.5 17 1.5 14.6 1.5 12 1.5 6.2 6.2 1.5 12 1.5S22.5 6.2 22.5 12c0 2.6-1 5-2.9 6.8-.3.3-.3.7-.1 1l.3.4c.3.3.7.3 1 0C22.8 18 24 15.1 24 12c0-6.6-5.4-12-12-12zm0 7c-2.8 0-5 2.2-5 5 0 1.7.8 3.1 2.1 4.1.2.1.4.1.5-.1l.2-.3c.1-.2.1-.4-.1-.6C8.7 14.3 8 13.2 8 12c0-2.2 1.8-4 4-4s4 1.8 4 4c0 1.2-.7 2.3-1.7 3.1-.2.2-.2.4-.1.6l.2.3c.1.2.3.2.5.1C16.2 15.1 17 13.7 17 12c0-2.8-2.2-5-5-5zm0 3.5c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5z" />
+                  </svg>
+                </div>
+                <p className="text-2xl font-bold text-charcoal">Airbnb</p>
+                <p className="mt-1 text-sm font-semibold text-[#FF5A5F]">Top Rated Host</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   &ldquo;Most Loved&rdquo; designation
                 </p>
               </div>
               <div className="rounded-lg border p-6 text-center">
-                <p className="text-3xl font-bold text-charcoal">VRBO</p>
-                <p className="mt-1 text-sm font-semibold text-sage">5-Star Rated</p>
+                <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-[#0E4DA4]/10">
+                  <svg viewBox="0 0 24 24" className="size-6" fill="#0E4DA4">
+                    <path d="M3 12l9-8 9 8v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z" />
+                    <path d="M9 22V12h6v10" fill="white" />
+                  </svg>
+                </div>
+                <p className="text-2xl font-bold text-charcoal">VRBO</p>
+                <p className="mt-1 text-sm font-semibold text-[#0E4DA4]">5-Star Rated</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   Premier host status
                 </p>
               </div>
               <div className="rounded-lg border p-6 text-center">
-                <p className="text-3xl font-bold text-charcoal">Booking.com</p>
-                <p className="mt-1 text-sm font-semibold text-sage">Top Rated</p>
+                <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-[#003580]/10">
+                  <svg viewBox="0 0 24 24" className="size-6" fill="none">
+                    <text x="4" y="18" fontFamily="Arial,sans-serif" fontWeight="bold" fontSize="18" fill="#003580">B.</text>
+                  </svg>
+                </div>
+                <p className="text-2xl font-bold text-charcoal">Booking.com</p>
+                <p className="mt-1 text-sm font-semibold text-[#003580]">Top Rated</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   Exceptional guest scores
                 </p>
