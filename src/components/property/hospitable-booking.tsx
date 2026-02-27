@@ -42,7 +42,7 @@ export function HospitableBooking({ propertyId }: HospitableBookingProps) {
       <iframe
         id="booking-iframe"
         sandbox="allow-top-navigation allow-scripts allow-same-origin"
-        style={{ width: "100%", height: "900px" }}
+        style={{ width: "100%", height: "600px" }}
         frameBorder="0"
         src={`https://booking.hospitable.com/widget/9f3d8a61-1242-4f44-bcfe-eb8989fc9fcd/${propertyId}`}
         title="Book your stay"

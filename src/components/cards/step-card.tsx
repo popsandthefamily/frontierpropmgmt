@@ -18,8 +18,8 @@ export function StepCard({
       <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-sage text-xl font-bold text-white md:size-16 md:text-2xl">
         {number}
       </div>
-      <h3 className="mb-2 text-lg font-semibold text-charcoal">{title}</h3>
-      <p className="text-base leading-relaxed text-muted-foreground">
+      <h3 className="mb-2 text-xl font-semibold text-charcoal">{title}</h3>
+      <p className="text-lg leading-relaxed text-muted-foreground">
         {description}
       </p>
     </div>

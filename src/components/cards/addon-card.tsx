@@ -27,7 +27,7 @@ export function AddonCard({
       </CardHeader>
 
       <CardContent>
-        <p className="mb-4 text-base leading-relaxed text-muted-foreground">
+        <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
           {description}
         </p>
 

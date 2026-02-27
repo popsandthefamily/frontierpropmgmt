@@ -164,7 +164,7 @@ export default function ManagementServicesPage() {
           <AnimateInView>
             <Card className="mt-10 border-2 border-sage">
               <CardHeader className="text-center">
-                <p className="text-sm font-medium uppercase tracking-wider text-sage">
+                <p className="text-base font-medium uppercase tracking-wider text-sage">
                   Full-Service STR Management Plan
                 </p>
                 <CardTitle className="mt-2 text-4xl font-bold text-charcoal md:text-5xl">
@@ -173,7 +173,7 @@ export default function ManagementServicesPage() {
                     of Gross Bookings
                   </span>
                 </CardTitle>
-                <p className="mt-2 text-muted-foreground">
+                <p className="mt-2 text-base text-muted-foreground">
                   Pro marketing, pricing, and guest comms
                 </p>
               </CardHeader>
@@ -183,7 +183,7 @@ export default function ManagementServicesPage() {
                   {pricingFeatures.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-start gap-3 text-base text-charcoal"
+                      className="flex items-start gap-3 text-lg text-charcoal"
                     >
                       <Check className="mt-0.5 size-5 shrink-0 text-sage" />
                       <span>{feature}</span>
@@ -219,7 +219,7 @@ export default function ManagementServicesPage() {
           {notIncludedItems.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-3 text-base text-charcoal"
+              className="flex items-start gap-3 text-lg text-charcoal"
             >
               <X className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
               <span>{item}</span>

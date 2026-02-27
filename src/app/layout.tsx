@@ -4,6 +4,8 @@ import Script from "next/script";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
+import { JsonLd } from "@/components/seo/json-ld";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 const yanone = Yanone_Kaffeesatz({
@@ -42,6 +44,44 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${yanone.variable} ${workSans.variable}`}>
       <body className="antialiased font-body text-foreground bg-background">
+        {/* Structured Data — LocalBusiness */}
+        <JsonLd
+          type="LocalBusiness"
+          data={{
+            name: siteConfig.name,
+            description: siteConfig.description,
+            url: siteConfig.url,
+            telephone: siteConfig.phone,
+            email: siteConfig.email,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "3156 Old Broken Bow Hwy",
+              addressLocality: "Broken Bow",
+              addressRegion: "OK",
+              postalCode: "74728",
+              addressCountry: "US",
+            },
+            openingHours: "Mo-Fr 09:00-17:00",
+            sameAs: [
+              siteConfig.social.instagram,
+              siteConfig.social.facebook,
+            ],
+            priceRange: "$$",
+          }}
+        />
+        {/* Structured Data — WebSite with SearchAction */}
+        <JsonLd
+          type="WebSite"
+          data={{
+            name: siteConfig.name,
+            url: siteConfig.url,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${siteConfig.url}/search?q={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          }}
+        />
         <SiteHeader />
         <main className="min-h-screen">{children}</main>
         <SiteFooter />

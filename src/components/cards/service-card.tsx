@@ -38,9 +38,9 @@ export function ServiceCard({
           </div>
         )}
 
-        <h3 className="mb-2 text-lg font-semibold text-charcoal">{title}</h3>
+        <h3 className="mb-2 text-xl font-semibold text-charcoal">{title}</h3>
 
-        <p className="text-base leading-relaxed text-muted-foreground">
+        <p className="text-lg leading-relaxed text-muted-foreground">
           {description}
         </p>
 

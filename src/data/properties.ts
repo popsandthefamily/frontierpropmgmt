@@ -30,6 +30,7 @@ export interface Property {
   featured: boolean;
   sleepingArrangements?: SleepingArrangement[];
   bookingUrl?: string;
+  startingPrice?: number;
 }
 
 /* ------------------------------------------------------------------ */
@@ -56,8 +57,24 @@ export const properties: Property[] = [
     ],
     images: [
       {
-        src: "/images/properties/old-broken-bow-highway/featured.jpg",
-        alt: "Cozy 3BR poolside cabin on Old Broken Bow Highway",
+        src: "/images/properties/old-broken-bow-highway/obb-2.jpg",
+        alt: "Exterior view of the Cozy 3BR cabin on Old Broken Bow Highway",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-1.jpg",
+        alt: "Cozy bedroom with queen bed and hardwood floors",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-3.jpg",
+        alt: "Comfortable living space inside the cabin",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-4.png",
+        alt: "Cabin interior with modern amenities",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-5.jpg",
+        alt: "Outdoor pool area at Old Broken Bow Highway cabin",
       },
     ],
     featured: true,
@@ -66,6 +83,7 @@ export const properties: Property[] = [
       { room: "Bedroom 2", details: "Queen bed" },
       { room: "Bedroom 3", details: "Two twin beds" },
     ],
+    startingPrice: 150,
   },
   {
     slug: "sublime",
@@ -135,6 +153,7 @@ export const properties: Property[] = [
         details: "Full-over-full bunk bed, half bath access",
       },
     ],
+    startingPrice: 275,
   },
 ];
 

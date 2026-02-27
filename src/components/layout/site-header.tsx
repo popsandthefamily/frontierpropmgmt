@@ -74,11 +74,17 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
+  { label: "Management", href: "/management-services" },
   { label: "Contact", href: "/contact" },
 ];
 
 /* Paths that do NOT have a hero section — force solid header */
-const SOLID_HEADER_PATHS = ["/sublime", "/old-broken-bow-highway"];
+const SOLID_HEADER_PATHS = [
+  "/sublime",
+  "/old-broken-bow-highway",
+  "/privacy-policy",
+  "/rental-agreement",
+];
 
 export function SiteHeader() {
   const scrollY = useScrollPosition();
@@ -136,7 +142,7 @@ export function SiteHeader() {
                       "inline-flex h-9 items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
                       isScrolled
                         ? "text-charcoal hover:text-sage"
-                        : "text-white/90 hover:text-white"
+                        : "text-white hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]"
                     )}
                   >
                     {item.label}
@@ -174,7 +180,7 @@ export function SiteHeader() {
                   "inline-flex h-9 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   isScrolled
                     ? "text-charcoal hover:text-sage"
-                    : "text-white/90 hover:text-white"
+                    : "text-white hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]"
                 )}
               >
                 {item.label}
@@ -185,7 +191,10 @@ export function SiteHeader() {
 
         {/* Desktop CTAs — Split Pill */}
         <div className="hidden lg:flex items-center">
-          <div className="inline-flex items-center rounded-full border overflow-hidden">
+          <div className={cn(
+            "inline-flex items-center rounded-full border overflow-hidden",
+            isScrolled ? "border-border" : "border-white/40"
+          )}>
             <Link
               href="/management-services"
               className={cn(

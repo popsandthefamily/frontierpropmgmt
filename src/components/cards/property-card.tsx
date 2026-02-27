@@ -13,6 +13,7 @@ interface PropertyCardProps {
   bathrooms: number;
   sleeps: number;
   featuredImage: string;
+  startingPrice?: number;
   className?: string;
 }
 
@@ -24,6 +25,7 @@ export function PropertyCard({
   bathrooms,
   sleeps,
   featuredImage,
+  startingPrice,
   className,
 }: PropertyCardProps) {
   return (
@@ -43,6 +45,11 @@ export function PropertyCard({
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
+          {startingPrice && (
+            <div className="absolute bottom-3 left-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
+              From ${startingPrice}/night
+            </div>
+          )}
         </div>
       </Link>
 

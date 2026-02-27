@@ -59,7 +59,7 @@ export default function HomePage() {
     <>
       {/* ── 1. Dual-Audience Hero ──────────────────────────────────── */}
       <HeroSection
-        backgroundImage="/images/hero/hero-bg.jpg"
+        backgroundImage="/images/properties/sublime/sublime-2.jpg"
         title="Broken Bow Cabin Rentals & Property Management"
         subtitle="Book your Hochatown getaway — or let us manage your cabin"
         overlay="gradient"
@@ -112,6 +112,7 @@ export default function HomePage() {
                 bathrooms={property.bathrooms}
                 sleeps={property.sleeps}
                 featuredImage={property.images[0].src}
+                startingPrice={property.startingPrice}
               />
             </AnimateInView>
           ))}
@@ -157,7 +158,7 @@ export default function HomePage() {
                   <h3 className="mb-2 text-lg font-semibold text-charcoal">
                     {benefit.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-base text-muted-foreground">
                     {benefit.description}
                   </p>
                 </CardContent>

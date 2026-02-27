@@ -11,6 +11,10 @@ export const siteConfig = {
   owner: "Hunter Collins",
   managementFee: "20% of Gross Bookings",
   formspreeEndpoint: "https://formspree.io/f/mwpgdawq",
+  social: {
+    instagram: "https://www.instagram.com/rentwithfrontier",
+    facebook: "https://www.facebook.com/rentwithfrontier",
+  },
   analytics: {
     ga: "GT-K4TS7SM2",
     ads: "AW-17777139722",

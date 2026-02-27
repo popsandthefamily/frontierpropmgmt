@@ -4,7 +4,9 @@ interface JsonLdProps {
     | "VacationRental"
     | "Article"
     | "FAQPage"
-    | "BreadcrumbList";
+    | "BreadcrumbList"
+    | "Organization"
+    | "WebSite";
   data: Record<string, unknown>;
 }
 

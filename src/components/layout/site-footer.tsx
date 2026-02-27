@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/data/site";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
@@ -21,20 +22,20 @@ export function SiteFooter() {
   return (
     <footer>
       {/* Pre-footer Booking CTA */}
-      <div className="bg-sage">
+      <div className="bg-charcoal">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row lg:px-8">
           <div className="text-center sm:text-left">
             <p className="text-lg font-heading font-bold text-white">
               Ready for your Broken Bow getaway?
             </p>
-            <p className="text-sm text-white/80">
+            <p className="text-sm text-white/70">
               Browse our cabins and book direct — no platform fees.
             </p>
           </div>
           <Button
             asChild
             size="lg"
-            className="bg-white text-sage hover:bg-cream font-semibold px-8 shrink-0"
+            className="bg-sage text-white hover:bg-sage-dark font-semibold px-8 shrink-0"
           >
             <Link href="/search">Book a Cabin</Link>
           </Button>
@@ -50,13 +51,33 @@ export function SiteFooter() {
               <Image
                 src="/images/logos/Asset-1-2.png"
                 alt="Frontier Property Management"
-                width={180}
-                height={54}
-                className="h-14 w-auto"
+                width={234}
+                height={133}
+                className="h-16 w-auto"
               />
               <p className="text-sm leading-relaxed text-charcoal/80">
                 Full-service cabin management in Hochatown &amp; Broken Bow
               </p>
+              <div className="flex items-center gap-3">
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-charcoal/10 p-2 text-charcoal/70 transition-colors hover:bg-sage hover:text-white"
+                  aria-label="Follow us on Instagram"
+                >
+                  <Instagram className="size-4" />
+                </a>
+                <a
+                  href={siteConfig.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-charcoal/10 p-2 text-charcoal/70 transition-colors hover:bg-sage hover:text-white"
+                  aria-label="Follow us on Facebook"
+                >
+                  <Facebook className="size-4" />
+                </a>
+              </div>
             </div>
 
             {/* Column 2: Quick Links */}
