@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, Instagram, Facebook } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
 
@@ -76,6 +76,15 @@ export function SiteFooter() {
                   aria-label="Follow us on Facebook"
                 >
                   <Facebook className="size-4" />
+                </a>
+                <a
+                  href={siteConfig.social.google}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-charcoal/10 p-2 text-charcoal/70 transition-colors hover:bg-sage hover:text-white"
+                  aria-label="View us on Google"
+                >
+                  <Star className="size-4" />
                 </a>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, X } from "lucide-react";
+import { Check, X, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -182,12 +182,50 @@ export default function ManagementServicesPage() {
         </div>
       </SectionWrapper>
 
+      {/* ── Platform Trust Badges ─────────────────────────────────── */}
+      <SectionWrapper background="white">
+        <AnimateInView>
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              Top-Rated Across Every Platform
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+              We don&apos;t just manage cabins — we earn 5-star reviews on every
+              booking platform.
+            </p>
+            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+              <div className="rounded-lg border p-6 text-center">
+                <p className="text-3xl font-bold text-charcoal">Airbnb</p>
+                <p className="mt-1 text-sm font-semibold text-sage">Top Rated Host</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  &ldquo;Most Loved&rdquo; designation
+                </p>
+              </div>
+              <div className="rounded-lg border p-6 text-center">
+                <p className="text-3xl font-bold text-charcoal">VRBO</p>
+                <p className="mt-1 text-sm font-semibold text-sage">5-Star Rated</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Premier host status
+                </p>
+              </div>
+              <div className="rounded-lg border p-6 text-center">
+                <p className="text-3xl font-bold text-charcoal">Booking.com</p>
+                <p className="mt-1 text-sm font-semibold text-sage">Top Rated</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Exceptional guest scores
+                </p>
+              </div>
+            </div>
+          </div>
+        </AnimateInView>
+      </SectionWrapper>
+
       {/* ── Results Stats ───────────────────────────────────────────── */}
       <StatsSection
         stats={[
           { value: "+14%", label: "Shoulder-Season Nights in 60 Days" },
           { value: "+$28", label: "ADR After Photo/Pricing Update" },
-          { value: "4.95", label: "Average Guest Rating" },
+          { value: "4.95★", label: "Avg Rating Across Platforms" },
           { value: "< 15min", label: "Average Response Time" },
         ]}
       />
@@ -266,6 +304,68 @@ export default function ManagementServicesPage() {
         </ul>
       </SectionWrapper>
 
+      {/* ── Self-Manage vs. Frontier Comparison ─────────────────────── */}
+      <SectionWrapper background="white">
+        <AnimateInView>
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-center text-3xl font-bold text-charcoal md:text-4xl">
+              Self-Manage vs. Hire Frontier
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-center text-lg text-muted-foreground">
+              Most owners who self-manage underestimate the time, revenue leakage,
+              and stress. Here&apos;s a honest comparison.
+            </p>
+
+            <div className="mt-10 overflow-hidden rounded-lg border">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="bg-cream">
+                    <th className="px-4 py-3 text-sm font-semibold text-charcoal sm:px-6" />
+                    <th className="px-4 py-3 text-center text-sm font-semibold text-muted-foreground sm:px-6">
+                      Self-Manage
+                    </th>
+                    <th className="px-4 py-3 text-center text-sm font-semibold text-sage sm:px-6">
+                      Frontier
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    { category: "Time investment", self: "15-25 hrs/mo", frontier: "0 hrs/mo" },
+                    { category: "Dynamic pricing", self: "Manual guesswork", frontier: "Daily algorithm adjustments" },
+                    { category: "Guest communication", self: "You, 24/7", frontier: "Our team, 7am-10pm" },
+                    { category: "Cleaning coordination", self: "You manage vendors", frontier: "Photo-verified QC turnover" },
+                    { category: "Listing optimization", self: "DIY copy & photos", frontier: "Pro copy, SEO, photography" },
+                    { category: "Maintenance issues", self: "Midnight calls to you", frontier: "We dispatch & oversee" },
+                    { category: "Revenue optimization", self: "Leave money on table", frontier: "+14% occupancy typical" },
+                    { category: "Tax & permit compliance", self: "Research it yourself", frontier: "We set it up for you" },
+                    { category: "Net revenue after fee", self: "Often less (gaps & underpricing)", frontier: "More — even after 20%" },
+                  ].map((row) => (
+                    <tr key={row.category} className="hover:bg-cream/50">
+                      <td className="px-4 py-3 text-sm font-medium text-charcoal sm:px-6">
+                        {row.category}
+                      </td>
+                      <td className="px-4 py-3 text-center text-sm text-muted-foreground sm:px-6">
+                        {row.self}
+                      </td>
+                      <td className="px-4 py-3 text-center text-sm font-medium text-sage sm:px-6">
+                        {row.frontier}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-6 text-center text-sm text-muted-foreground">
+              Most owners net <span className="font-semibold text-charcoal">more income with Frontier</span> —
+              even after the 20% fee — because professional pricing, listing optimization,
+              and gap-filling recapture revenue that self-managers leave on the table.
+            </p>
+          </div>
+        </AnimateInView>
+      </SectionWrapper>
+
       {/* ── Add-Ons ─────────────────────────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="text-center">
@@ -290,24 +390,82 @@ export default function ManagementServicesPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Contract Transition ──────────────────────────────────────── */}
+      {/* ── Contract Transition — Detailed Timeline ─────────────────── */}
       <SectionWrapper background="sage">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <AnimateInView>
             <h2 className="text-3xl font-bold text-white md:text-4xl">
-              Contracts Ending?
+              Switching Property Managers?
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-white/90">
-              Switching property managers does not have to be stressful. We
-              handle the entire transition — transferring listings, preserving
-              your reviews, onboarding vendors, and coordinating the handoff
-              timeline with your current company. Most transitions are complete
-              in under two weeks.
+              We handle the entire transition. Zero booking downtime. Your
+              reviews stay intact. Here&apos;s exactly what happens:
+            </p>
+          </AnimateInView>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-2xl space-y-0">
+          {[
+            {
+              days: "Days 1–2",
+              title: "Kickoff & Audit",
+              description:
+                "We review your current listings, calendar, pricing, and vendor setup. You sign our simple agreement — no long-term lock-in.",
+            },
+            {
+              days: "Days 3–5",
+              title: "Listing Transfer",
+              description:
+                "We coordinate with your current PM to transfer listing ownership on Airbnb, VRBO, and Booking.com. All existing reviews and ratings transfer with the listing.",
+            },
+            {
+              days: "Days 5–7",
+              title: "Optimization & Vendor Onboarding",
+              description:
+                "We rewrite your listing copy, update photos if needed, configure dynamic pricing, and onboard our local cleaning and maintenance teams for your property.",
+            },
+            {
+              days: "Days 7–10",
+              title: "Calendar Sync & Go Live",
+              description:
+                "We sync all platform calendars, set up your owner portal, test the full guest communication workflow, and go live. Bookings start flowing.",
+            },
+            {
+              days: "Days 10–14",
+              title: "Fine-Tuning",
+              description:
+                "We monitor performance, adjust pricing for the season, and handle any first-booking details. You get your first weekly update.",
+            },
+          ].map((step, i) => (
+            <AnimateInView key={step.days} delay={i * 0.08}>
+              <div className="flex gap-4 border-l-2 border-white/30 py-4 pl-6">
+                <div className="shrink-0">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white">
+                    <Clock className="size-3" />
+                    {step.days}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">{step.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/80">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            </AnimateInView>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-8 max-w-2xl text-center">
+          <AnimateInView>
+            <p className="text-sm text-white/70">
+              30-day cancellation policy — if you&apos;re not happy, you can leave.
+              No penalties.
             </p>
             <Button
               asChild
               size="lg"
-              className="mt-8 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
+              className="mt-6 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
             >
               <Link href="/contact">Talk to Us About Switching</Link>
             </Button>

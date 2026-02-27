@@ -12,8 +12,9 @@ export const siteConfig = {
   managementFee: "20% of Gross Bookings",
   formspreeEndpoint: "https://formspree.io/f/mwpgdawq",
   social: {
-    instagram: "https://www.instagram.com/rentwithfrontier",
-    facebook: "https://www.facebook.com/rentwithfrontier",
+    instagram: "https://www.instagram.com/rentwithfrontier/",
+    facebook: "https://www.facebook.com/rentwithfrontier/",
+    google: "https://share.google/eUdBwccDQJoLWdX3f",
   },
   analytics: {
     ga: "GT-K4TS7SM2",

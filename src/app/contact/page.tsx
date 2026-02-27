@@ -40,6 +40,12 @@ const contactOptions = [
     value: siteConfig.hours,
     href: undefined,
   },
+  {
+    emoji: "\u{2B50}",
+    label: "Reviews",
+    value: "See us on Google",
+    href: siteConfig.social.google,
+  },
 ];
 
 export default function ContactPage() {

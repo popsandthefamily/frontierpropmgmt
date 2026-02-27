@@ -187,8 +187,8 @@ export default function HomePage() {
       {/* ── 4. Stats Bar ───────────────────────────────────────────── */}
       <StatsSection
         stats={[
-          { value: "4.95", label: "Average Guest Rating" },
-          { value: "5★", label: "Reviews Across Platforms" },
+          { value: "4.95★", label: "Avg Rating — Airbnb, VRBO, Booking.com" },
+          { value: "Top Rated", label: "Airbnb Host & Most Loved" },
           { value: "0%", label: "Platform Fees When You Book Direct" },
           { value: "20%", label: "Simple Management Fee" },
         ]}
@@ -202,9 +202,9 @@ export default function HomePage() {
               Own a Cabin in Broken Bow?
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-white/90">
-              Full-service STR management — 20% of gross bookings, no setup
-              fees. We handle pricing, guests, cleanings, and maintenance so you
-              can enjoy stress-free rental income.
+              We intentionally keep a curated portfolio so every property gets
+              hands-on attention — not assembly-line management. 20% of gross
+              bookings, no setup fees, Airbnb Top Rated Host across every cabin.
             </p>
             <Button
               asChild
