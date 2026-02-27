@@ -107,9 +107,9 @@ export function SiteHeader() {
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 lg:px-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center px-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="relative shrink-0">
+        <Link href="/" className="relative shrink-0 flex-1 lg:flex-none lg:w-48">
           {isScrolled ? (
             <Image
               src="/images/logos/Asset-1-2.png"
@@ -132,7 +132,7 @@ export function SiteHeader() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
           {NAV_ITEMS.map((item) => {
             if (item.children) {
               return (
@@ -190,7 +190,7 @@ export function SiteHeader() {
         </nav>
 
         {/* Desktop CTAs — Split Pill */}
-        <div className="hidden lg:flex items-center">
+        <div className="hidden lg:flex lg:w-48 items-center justify-end ml-auto">
           <div className={cn(
             "inline-flex items-center rounded-full border overflow-hidden",
             isScrolled ? "border-border" : "border-white/40"
