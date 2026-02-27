@@ -190,9 +190,9 @@ export function SiteHeader() {
         </nav>
 
         {/* Desktop CTAs — Split Pill */}
-        <div className="hidden lg:flex lg:w-48 items-center justify-end ml-auto">
+        <div className="hidden lg:flex shrink-0 items-center justify-end">
           <div className={cn(
-            "inline-flex items-center rounded-full border overflow-hidden",
+            "inline-flex items-center whitespace-nowrap rounded-full border overflow-hidden",
             isScrolled ? "border-border" : "border-white/40"
           )}>
             <Link
