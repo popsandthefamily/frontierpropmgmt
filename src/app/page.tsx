@@ -106,80 +106,71 @@ export default function HomePage() {
       {/* ── 2. Featured Cabins ─────────────────────────────────────── */}
       <SectionWrapper background="cream">
         <div className="text-center">
-          <AnimateInView>
-            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Book Your Broken Bow Getaway
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              Professionally managed cabins with direct booking — skip the
-              platform fees.
-            </p>
-          </AnimateInView>
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Book Your Broken Bow Getaway
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+            Professionally managed cabins with direct booking — skip the
+            platform fees.
+          </p>
         </div>
 
         <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {properties.map((property, i) => (
-            <AnimateInView key={property.slug} delay={i * 0.1}>
-              <PropertyCard
-                slug={property.slug}
-                name={property.name}
-                tagline={property.tagline}
-                bedrooms={property.bedrooms}
-                bathrooms={property.bathrooms}
-                sleeps={property.sleeps}
-                featuredImage={property.images[0].src}
-                startingPrice={property.startingPrice}
-              />
-            </AnimateInView>
+          {properties.map((property) => (
+            <PropertyCard
+              key={property.slug}
+              slug={property.slug}
+              name={property.name}
+              tagline={property.tagline}
+              bedrooms={property.bedrooms}
+              bathrooms={property.bathrooms}
+              sleeps={property.sleeps}
+              featuredImage={property.images[0].src}
+              startingPrice={property.startingPrice}
+            />
           ))}
         </div>
 
         <div className="mt-10 text-center">
-          <AnimateInView>
-            <Button
-              asChild
-              size="lg"
-              className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
-            >
-              <Link href="/search">
-                View All Properties
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-          </AnimateInView>
+          <Button
+            asChild
+            size="lg"
+            className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
+          >
+            <Link href="/search">
+              View All Properties
+              <ArrowRight className="ml-2 size-4" />
+            </Link>
+          </Button>
         </div>
       </SectionWrapper>
 
       {/* ── 3. Why Book Direct? ────────────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="text-center">
-          <AnimateInView>
-            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Why Book Direct?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-              Better rates, better service, better experience.
-            </p>
-          </AnimateInView>
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Why Book Direct?
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+            Better rates, better service, better experience.
+          </p>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {bookDirectBenefits.map((benefit, i) => (
-            <AnimateInView key={benefit.title} delay={i * 0.1}>
-              <Card className="h-full text-center">
-                <CardContent className="flex flex-col items-center pt-8 pb-6">
-                  <div className="mb-4 rounded-full bg-sage/10 p-4">
-                    <benefit.icon className="size-7 text-sage" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-charcoal">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-base text-muted-foreground">
-                    {benefit.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimateInView>
+          {bookDirectBenefits.map((benefit) => (
+            <Card key={benefit.title} className="h-full text-center">
+              <CardContent className="flex flex-col items-center pt-8 pb-6">
+                <div className="mb-4 rounded-full bg-sage/10 p-4">
+                  <benefit.icon className="size-7 text-sage" />
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-charcoal">
+                  {benefit.title}
+                </h3>
+                <p className="text-base text-muted-foreground">
+                  {benefit.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </SectionWrapper>
@@ -232,27 +223,21 @@ export default function HomePage() {
         </div>
 
         <div className="mt-12 grid gap-8 md:grid-cols-3">
-          <AnimateInView delay={0}>
-            <StepCard
-              number={1}
-              title="Discovery Call"
-              description="Schedule a free 30-minute call so we can learn about your property, your goals, and what you need from a management partner."
-            />
-          </AnimateInView>
-          <AnimateInView delay={0.15}>
-            <StepCard
-              number={2}
-              title="Custom Plan"
-              description="We build a personalized management plan tailored to your cabin — covering pricing strategy, listing optimization, and operations."
-            />
-          </AnimateInView>
-          <AnimateInView delay={0.3}>
-            <StepCard
-              number={3}
-              title="We Handle It All"
-              description="From professional photography to guest check-out, we manage every detail end-to-end so you can sit back and collect revenue."
-            />
-          </AnimateInView>
+          <StepCard
+            number={1}
+            title="Discovery Call"
+            description="Schedule a free 30-minute call so we can learn about your property, your goals, and what you need from a management partner."
+          />
+          <StepCard
+            number={2}
+            title="Custom Plan"
+            description="We build a personalized management plan tailored to your cabin — covering pricing strategy, listing optimization, and operations."
+          />
+          <StepCard
+            number={3}
+            title="We Handle It All"
+            description="From professional photography to guest check-out, we manage every detail end-to-end so you can sit back and collect revenue."
+          />
         </div>
       </SectionWrapper>
 
@@ -303,26 +288,24 @@ export default function HomePage() {
       {/* ── 8. Income Calculator Teaser ────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="mx-auto max-w-2xl text-center">
-          <AnimateInView>
-            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Estimate Your Monthly STR Revenue
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Curious what your cabin could earn under professional management?
-              Use our free income calculator to see projected monthly revenue
-              based on your property details, location, and amenities.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
-            >
-              <Link href="/income-calculator">
-                Try the Income Calculator
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-          </AnimateInView>
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Estimate Your Monthly STR Revenue
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            Curious what your cabin could earn under professional management?
+            Use our free income calculator to see projected monthly revenue
+            based on your property details, location, and amenities.
+          </p>
+          <Button
+            asChild
+            size="lg"
+            className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
+          >
+            <Link href="/income-calculator">
+              Try the Income Calculator
+              <ArrowRight className="ml-2 size-4" />
+            </Link>
+          </Button>
         </div>
       </SectionWrapper>
 

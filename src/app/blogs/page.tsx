@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { BlogCard } from "@/components/cards/blog-card";
-import { AnimateInView } from "@/components/motion/animate-in-view";
 import { getBlogPosts } from "@/data/blog-posts";
 
 export const metadata: Metadata = {
@@ -32,17 +31,16 @@ export default function BlogsPage() {
       {/* Blog Grid */}
       <SectionWrapper background="white">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, i) => (
-            <AnimateInView key={post.slug} delay={i * 0.1}>
-              <BlogCard
-                slug={post.slug}
-                title={post.title}
-                date={post.date}
-                excerpt={post.excerpt}
-                featuredImage={post.featuredImage}
-                category={post.category}
-              />
-            </AnimateInView>
+          {posts.map((post) => (
+            <BlogCard
+              key={post.slug}
+              slug={post.slug}
+              title={post.title}
+              date={post.date}
+              excerpt={post.excerpt}
+              featuredImage={post.featuredImage}
+              category={post.category}
+            />
           ))}
         </div>
       </SectionWrapper>

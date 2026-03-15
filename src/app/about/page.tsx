@@ -122,147 +122,125 @@ export default function AboutPage() {
 
       {/* 3. Why Choose Frontier */}
       <SectionWrapper background="cream">
-        <AnimateInView>
-          <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
-            Why Choose Frontier?
-          </h2>
-        </AnimateInView>
+        <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
+          Why Choose Frontier?
+        </h2>
 
         <div className="grid gap-8 md:grid-cols-3">
-          {whyChooseItems.map((item, i) => (
-            <AnimateInView key={item.title} delay={i * 0.15}>
-              <Card className="h-full text-center">
-                <CardContent className="pt-6">
-                  <div className="mx-auto mb-4 inline-flex rounded-lg bg-sage/10 p-3">
-                    <item.icon className="size-6 text-sage" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-charcoal">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimateInView>
+          {whyChooseItems.map((item) => (
+            <Card key={item.title} className="h-full text-center">
+              <CardContent className="pt-6">
+                <div className="mx-auto mb-4 inline-flex rounded-lg bg-sage/10 p-3">
+                  <item.icon className="size-6 text-sage" />
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-charcoal">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </SectionWrapper>
 
       {/* 4. Why Broken Bow */}
       <SectionWrapper background="white">
-        <AnimateInView>
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-center text-3xl font-bold text-charcoal md:text-4xl">
-              Why Broken Bow Matters To Me
-            </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                Broken Bow has something most vacation towns don&apos;t — vintage
-                small-town character. Old storefronts with stories behind them.
-                Neighbors who still wave. A pace of life that hasn&apos;t been
-                fully rewritten by tourism yet.
-              </p>
-              <p>
-                Meanwhile, cabin tourism is growing nearby at a serious clip. The
-                surrounding woods provide real seasons — vibrant fall color, quiet
-                winter snow, spring thunderstorms, and long summer evenings on the
-                deck. Guests come here to unplug from the noise and reconnect with
-                nature.
-              </p>
-              <p>
-                That contrast — small-town heart, booming outdoor tourism — is
-                exactly what makes this area special and worth protecting with
-                quality management.
-              </p>
-            </div>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="mb-6 text-center text-3xl font-bold text-charcoal md:text-4xl">
+            Why Broken Bow Matters To Me
+          </h2>
+          <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <p>
+              Broken Bow has something most vacation towns don&apos;t — vintage
+              small-town character. Old storefronts with stories behind them.
+              Neighbors who still wave. A pace of life that hasn&apos;t been
+              fully rewritten by tourism yet.
+            </p>
+            <p>
+              Meanwhile, cabin tourism is growing nearby at a serious clip. The
+              surrounding woods provide real seasons — vibrant fall color, quiet
+              winter snow, spring thunderstorms, and long summer evenings on the
+              deck. Guests come here to unplug from the noise and reconnect with
+              nature.
+            </p>
+            <p>
+              That contrast — small-town heart, booming outdoor tourism — is
+              exactly what makes this area special and worth protecting with
+              quality management.
+            </p>
           </div>
-        </AnimateInView>
+        </div>
       </SectionWrapper>
 
       {/* 5. Vision & Mission */}
       <SectionWrapper background="cream">
         <div className="grid gap-8 md:grid-cols-2">
-          <AnimateInView direction="left">
-            <Card className="h-full">
-              <CardContent className="pt-6">
-                <h3 className="mb-3 text-xl font-bold text-sage">
-                  Our Vision
-                </h3>
-                <p className="leading-relaxed text-muted-foreground">
-                  To redefine property management through exceptional service and
-                  maximizing rental potential while building owner trust.
-                </p>
-              </CardContent>
-            </Card>
-          </AnimateInView>
+          <Card className="h-full">
+            <CardContent className="pt-6">
+              <h3 className="mb-3 text-xl font-bold text-sage">
+                Our Vision
+              </h3>
+              <p className="leading-relaxed text-muted-foreground">
+                To redefine property management through exceptional service and
+                maximizing rental potential while building owner trust.
+              </p>
+            </CardContent>
+          </Card>
 
-          <AnimateInView direction="right" delay={0.15}>
-            <Card className="h-full">
-              <CardContent className="pt-6">
-                <h3 className="mb-3 text-xl font-bold text-sage">
-                  Our Mission
-                </h3>
-                <p className="leading-relaxed text-muted-foreground">
-                  Handle rental management with integrity, precision, and care —
-                  from listing through checkout — for consistent income with
-                  minimal stress.
-                </p>
-              </CardContent>
-            </Card>
-          </AnimateInView>
+          <Card className="h-full">
+            <CardContent className="pt-6">
+              <h3 className="mb-3 text-xl font-bold text-sage">
+                Our Mission
+              </h3>
+              <p className="leading-relaxed text-muted-foreground">
+                Handle rental management with integrity, precision, and care —
+                from listing through checkout — for consistent income with
+                minimal stress.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </SectionWrapper>
 
       {/* 6. How It Works */}
       <SectionWrapper background="white">
-        <AnimateInView>
-          <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
-            How It Works
-          </h2>
-        </AnimateInView>
+        <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
+          How It Works
+        </h2>
 
         <div className="grid gap-8 md:grid-cols-3">
-          <AnimateInView delay={0}>
-            <StepCard
-              number={1}
-              title="Discovery Call"
-              description="We learn about your property, goals, and expectations. You get a custom management proposal within 48 hours."
-            />
-          </AnimateInView>
-          <AnimateInView delay={0.15}>
-            <StepCard
-              number={2}
-              title="Custom Plan"
-              description="We build a tailored management plan including pricing strategy, listing optimization, and vendor coordination."
-            />
-          </AnimateInView>
-          <AnimateInView delay={0.3}>
-            <StepCard
-              number={3}
-              title="We Handle It All"
-              description="From professional photography to guest checkout, we manage every detail so you can enjoy stress-free income."
-            />
-          </AnimateInView>
+          <StepCard
+            number={1}
+            title="Discovery Call"
+            description="We learn about your property, goals, and expectations. You get a custom management proposal within 48 hours."
+          />
+          <StepCard
+            number={2}
+            title="Custom Plan"
+            description="We build a tailored management plan including pricing strategy, listing optimization, and vendor coordination."
+          />
+          <StepCard
+            number={3}
+            title="We Handle It All"
+            description="From professional photography to guest checkout, we manage every detail so you can enjoy stress-free income."
+          />
         </div>
       </SectionWrapper>
 
       {/* 7. What You Get */}
       <SectionWrapper background="cream">
-        <AnimateInView>
-          <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
-            What You Get With Frontier
-          </h2>
-        </AnimateInView>
+        <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
+          What You Get With Frontier
+        </h2>
 
         <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
           {whatYouGetItems.map((item, i) => (
-            <AnimateInView key={i} delay={i * 0.1}>
-              <div className="flex items-start gap-3">
-                <Check className="mt-1 size-5 shrink-0 text-sage" />
-                <p className="text-muted-foreground leading-relaxed">{item}</p>
-              </div>
-            </AnimateInView>
+            <div key={i} className="flex items-start gap-3">
+              <Check className="mt-1 size-5 shrink-0 text-sage" />
+              <p className="text-muted-foreground leading-relaxed">{item}</p>
+            </div>
           ))}
         </div>
       </SectionWrapper>

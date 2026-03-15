@@ -120,24 +120,20 @@ export default function ManagementServicesPage() {
       {/* ── What We Do ──────────────────────────────────────────────── */}
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl">
-          <AnimateInView>
-            <h2 className="text-center text-3xl font-bold text-charcoal md:text-4xl">
-              What We Do
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-center text-lg text-muted-foreground">
-              Everything you need to run a profitable short-term rental — handled
-              by our local team.
-            </p>
-          </AnimateInView>
+          <h2 className="text-center text-3xl font-bold text-charcoal md:text-4xl">
+            What We Do
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-center text-lg text-muted-foreground">
+            Everything you need to run a profitable short-term rental — handled
+            by our local team.
+          </p>
 
           <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-            {whatWeDoItems.map((item, i) => (
-              <AnimateInView key={item} delay={i * 0.05}>
-                <li className="flex items-start gap-3 rounded-lg bg-white p-4 shadow-sm">
-                  <Check className="mt-0.5 size-5 shrink-0 text-sage" />
-                  <span className="text-lg text-charcoal">{item}</span>
-                </li>
-              </AnimateInView>
+            {whatWeDoItems.map((item) => (
+              <li key={item} className="flex items-start gap-3 rounded-lg bg-white p-4 shadow-sm">
+                <Check className="mt-0.5 size-5 shrink-0 text-sage" />
+                <span className="text-lg text-charcoal">{item}</span>
+              </li>
             ))}
           </ul>
         </div>
@@ -155,14 +151,13 @@ export default function ManagementServicesPage() {
         </div>
 
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {onboardingSteps.map((step, i) => (
-            <AnimateInView key={step.number} delay={i * 0.08}>
-              <StepCard
-                number={step.number}
-                title={step.title}
-                description={step.description}
-              />
-            </AnimateInView>
+          {onboardingSteps.map((step) => (
+            <StepCard
+              key={step.number}
+              number={step.number}
+              title={step.title}
+              description={step.description}
+            />
           ))}
         </div>
       </SectionWrapper>
@@ -403,14 +398,13 @@ export default function ManagementServicesPage() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {addOns.map((addon, i) => (
-            <AnimateInView key={addon.name} delay={i * 0.1}>
-              <AddonCard
-                name={addon.name}
-                description={addon.description}
-                features={addon.features}
-              />
-            </AnimateInView>
+          {addOns.map((addon) => (
+            <AddonCard
+              key={addon.name}
+              name={addon.name}
+              description={addon.description}
+              features={addon.features}
+            />
           ))}
         </div>
       </SectionWrapper>
@@ -461,40 +455,36 @@ export default function ManagementServicesPage() {
               description:
                 "We monitor performance, adjust pricing for the season, and handle any first-booking details. You get your first weekly update.",
             },
-          ].map((step, i) => (
-            <AnimateInView key={step.days} delay={i * 0.08}>
-              <div className="flex gap-4 border-l-2 border-white/30 py-4 pl-6">
-                <div className="shrink-0">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white">
-                    <Clock className="size-3" />
-                    {step.days}
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white">{step.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-white/80">
-                    {step.description}
-                  </p>
-                </div>
+          ].map((step) => (
+            <div key={step.days} className="flex gap-4 border-l-2 border-white/30 py-4 pl-6">
+              <div className="shrink-0">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white">
+                  <Clock className="size-3" />
+                  {step.days}
+                </span>
               </div>
-            </AnimateInView>
+              <div>
+                <h3 className="font-semibold text-white">{step.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-white/80">
+                  {step.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
 
         <div className="mx-auto mt-8 max-w-2xl text-center">
-          <AnimateInView>
-            <p className="text-sm text-white/70">
-              30-day cancellation policy — if you&apos;re not happy, you can leave.
-              No penalties.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-6 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
-            >
-              <Link href="/contact">Talk to Us About Switching</Link>
-            </Button>
-          </AnimateInView>
+          <p className="text-sm text-white/70">
+            30-day cancellation policy — if you&apos;re not happy, you can leave.
+            No penalties.
+          </p>
+          <Button
+            asChild
+            size="lg"
+            className="mt-6 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
+          >
+            <Link href="/contact">Talk to Us About Switching</Link>
+          </Button>
         </div>
       </SectionWrapper>
 
@@ -510,16 +500,15 @@ export default function ManagementServicesPage() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {detailedServices.map((service, i) => (
-            <AnimateInView key={service.title} delay={i * 0.08}>
-              <ServiceCard
-                icon={service.icon}
-                title={service.title}
-                description={service.description}
-                features={service.features}
-                className="h-full"
-              />
-            </AnimateInView>
+          {detailedServices.map((service) => (
+            <ServiceCard
+              key={service.title}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+              features={service.features}
+              className="h-full"
+            />
           ))}
         </div>
       </SectionWrapper>

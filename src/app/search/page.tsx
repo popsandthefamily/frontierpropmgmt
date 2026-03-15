@@ -11,7 +11,6 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { PropertyCard } from "@/components/cards/property-card";
-import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
 import { siteConfig } from "@/data/site";
@@ -97,18 +96,17 @@ export default function SearchPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {properties.map((property, i) => (
-            <AnimateInView key={property.slug} delay={i * 0.1}>
-              <PropertyCard
-                slug={property.slug}
-                name={property.name}
-                tagline={property.tagline}
-                bedrooms={property.bedrooms}
-                bathrooms={property.bathrooms}
-                sleeps={property.sleeps}
-                featuredImage={property.images[0].src}
-              />
-            </AnimateInView>
+          {properties.map((property) => (
+            <PropertyCard
+              key={property.slug}
+              slug={property.slug}
+              name={property.name}
+              tagline={property.tagline}
+              bedrooms={property.bedrooms}
+              bathrooms={property.bathrooms}
+              sleeps={property.sleeps}
+              featuredImage={property.images[0].src}
+            />
           ))}
         </div>
       </SectionWrapper>
@@ -124,22 +122,20 @@ export default function SearchPage() {
           </p>
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {bookDirectBenefits.map((benefit, i) => (
-            <AnimateInView key={benefit.title} delay={i * 0.08}>
-              <Card className="h-full text-center">
-                <CardContent className="flex flex-col items-center pt-6 pb-5">
-                  <div className="mb-3 rounded-full bg-sage/10 p-3">
-                    <benefit.icon className="size-6 text-sage" />
-                  </div>
-                  <h3 className="mb-1 font-semibold text-charcoal">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {benefit.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimateInView>
+          {bookDirectBenefits.map((benefit) => (
+            <Card key={benefit.title} className="h-full text-center">
+              <CardContent className="flex flex-col items-center pt-6 pb-5">
+                <div className="mb-3 rounded-full bg-sage/10 p-3">
+                  <benefit.icon className="size-6 text-sage" />
+                </div>
+                <h3 className="mb-1 font-semibold text-charcoal">
+                  {benefit.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {benefit.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </SectionWrapper>

@@ -16,7 +16,6 @@ import { AmenityGrid } from "@/components/property/amenity-grid";
 import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
 import { CTASection } from "@/components/sections/cta-section";
-import { AnimateInView } from "@/components/motion/animate-in-view";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
 import { getPropertyBySlug } from "@/data/properties";
 import { siteConfig } from "@/data/site";
@@ -84,7 +83,7 @@ export default function SublimePage() {
 
       {/* Property Header */}
       <div className="mx-auto max-w-7xl px-4 py-8">
-        <AnimateInView>
+        <div>
           <div className="mb-3 flex items-center gap-2">
             <Badge className="gap-1.5 bg-sage px-3 py-1 text-sm text-white">
               <Sparkles className="size-3.5" />
@@ -115,7 +114,7 @@ export default function SublimePage() {
               Sleeps {property.sleeps}
             </Badge>
           </div>
-        </AnimateInView>
+        </div>
       </div>
 
       {/* Two-Column Layout */}
@@ -124,24 +123,21 @@ export default function SublimePage() {
           {/* Left Column — Content (2/3) */}
           <div className="lg:col-span-2 space-y-12">
             {/* Description */}
-            <AnimateInView>
-              <div>
-                <h2 className="mb-4 text-2xl font-bold text-charcoal">
-                  About Sublime Retreat
-                </h2>
-                <div className="prose prose-lg max-w-none text-muted-foreground">
-                  <p>{property.description}</p>
-                </div>
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-charcoal">
+                About Sublime Retreat
+              </h2>
+              <div className="prose prose-lg max-w-none text-muted-foreground">
+                <p>{property.description}</p>
               </div>
-            </AnimateInView>
+            </div>
 
             {/* Luxury Highlights */}
-            <AnimateInView>
-              <div>
-                <h2 className="mb-6 text-2xl font-bold text-charcoal">
-                  Luxury Highlights
-                </h2>
-                <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <h2 className="mb-6 text-2xl font-bold text-charcoal">
+                Luxury Highlights
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
                   {[
                     {
                       title: "2 Private Zip Lines",
@@ -187,84 +183,77 @@ export default function SublimePage() {
                     </div>
                   ))}
                 </div>
-              </div>
-            </AnimateInView>
+            </div>
 
             {/* Amenities */}
-            <AnimateInView>
-              <div>
-                <h2 className="mb-6 text-2xl font-bold text-charcoal">
-                  All Amenities
-                </h2>
-                <AmenityGrid amenities={property.amenities} />
-              </div>
-            </AnimateInView>
+            <div>
+              <h2 className="mb-6 text-2xl font-bold text-charcoal">
+                All Amenities
+              </h2>
+              <AmenityGrid amenities={property.amenities} />
+            </div>
 
             {/* Sleeping Arrangements */}
             {property.sleepingArrangements &&
               property.sleepingArrangements.length > 0 && (
-                <AnimateInView>
-                  <div>
-                    <h2 className="mb-4 text-2xl font-bold text-charcoal">
-                      Sleeping Arrangements
-                    </h2>
-                    <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2 md:grid-cols-3">
-                      {property.sleepingArrangements.map((arrangement) => (
-                        <div key={arrangement.room} className="flex items-center gap-3 py-1">
-                          <Bed className="size-5 shrink-0 text-sage" />
-                          <div>
-                            <h3 className="font-semibold text-charcoal">
-                              {arrangement.room}
-                            </h3>
-                            <p className="text-sm text-muted-foreground">
-                              {arrangement.details}
-                            </p>
-                          </div>
+                <div>
+                  <h2 className="mb-4 text-2xl font-bold text-charcoal">
+                    Sleeping Arrangements
+                  </h2>
+                  <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2 md:grid-cols-3">
+                    {property.sleepingArrangements.map((arrangement) => (
+                      <div key={arrangement.room} className="flex items-center gap-3 py-1">
+                        <Bed className="size-5 shrink-0 text-sage" />
+                        <div>
+                          <h3 className="font-semibold text-charcoal">
+                            {arrangement.room}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {arrangement.details}
+                          </p>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
-                </AnimateInView>
+                </div>
               )}
 
             {/* House Rules */}
-            <AnimateInView>
-              <div>
-                <h2 className="mb-4 text-2xl font-bold text-charcoal">
-                  House Rules
-                </h2>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    Check-in: 4:00 PM / Check-out: 10:00 AM
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    No smoking inside the cabin
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    Pets welcome (pet fee may apply)
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    No parties or events
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    Quiet hours: 10:00 PM - 8:00 AM
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    Maximum occupancy: {property.sleeps} guests
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
-                    Zip lines: Adult supervision required for minors
-                  </li>
-                </ul>
-              </div>
-            </AnimateInView>
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-charcoal">
+                House Rules
+              </h2>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  Check-in: 4:00 PM / Check-out: 10:00 AM
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  No smoking inside the cabin
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  Pets welcome (pet fee may apply)
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  No parties or events
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  Quiet hours: 10:00 PM - 8:00 AM
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  Maximum occupancy: {property.sleeps} guests
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sage" />
+                  Zip lines: Adult supervision required for minors
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Right Column — Sticky Booking Sidebar (1/3) */}

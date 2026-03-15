@@ -180,25 +180,23 @@ export default function DiscoverBrokenBowPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-3">
-          {neighborhoods.map((area, i) => (
-            <AnimateInView key={area.name} delay={i * 0.1}>
-              <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <CardContent className="pt-6">
-                  <div className="mb-4 inline-flex rounded-lg bg-sage/10 p-3">
-                    <area.icon className="size-6 text-sage" />
-                  </div>
-                  <h3 className="mb-1 text-lg font-semibold text-charcoal">
-                    {area.name}
-                  </h3>
-                  <p className="mb-3 text-sm font-medium text-sage">
-                    {area.subtitle}
-                  </p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {area.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimateInView>
+          {neighborhoods.map((area) => (
+            <Card key={area.name} className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <CardContent className="pt-6">
+                <div className="mb-4 inline-flex rounded-lg bg-sage/10 p-3">
+                  <area.icon className="size-6 text-sage" />
+                </div>
+                <h3 className="mb-1 text-lg font-semibold text-charcoal">
+                  {area.name}
+                </h3>
+                <p className="mb-3 text-sm font-medium text-sage">
+                  {area.subtitle}
+                </p>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {area.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </SectionWrapper>
@@ -218,14 +216,12 @@ export default function DiscoverBrokenBowPage() {
 
           <div className="space-y-4">
             {moneyTips.map((item, i) => (
-              <AnimateInView key={i} delay={i * 0.05}>
-                <div className="flex items-start gap-4 rounded-lg border bg-white p-4 shadow-sm">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-sage/10">
-                    <item.icon className="size-5 text-sage" />
-                  </div>
-                  <p className="text-charcoal">{item.tip}</p>
+              <div key={i} className="flex items-start gap-4 rounded-lg border bg-white p-4 shadow-sm">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-sage/10">
+                  <item.icon className="size-5 text-sage" />
                 </div>
-              </AnimateInView>
+                <p className="text-charcoal">{item.tip}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -244,22 +240,20 @@ export default function DiscoverBrokenBowPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {activities.map((activity, i) => (
-            <AnimateInView key={activity.name} delay={i * 0.08}>
-              <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                <CardContent className="pt-6">
-                  <div className="mb-4 inline-flex rounded-lg bg-sage/10 p-3">
-                    <activity.icon className="size-6 text-sage" />
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-charcoal">
-                    {activity.name}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {activity.description}
-                  </p>
-                </CardContent>
-              </Card>
-            </AnimateInView>
+          {activities.map((activity) => (
+            <Card key={activity.name} className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <CardContent className="pt-6">
+                <div className="mb-4 inline-flex rounded-lg bg-sage/10 p-3">
+                  <activity.icon className="size-6 text-sage" />
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-charcoal">
+                  {activity.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {activity.description}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </SectionWrapper>

@@ -8,7 +8,6 @@ import { ReadingProgressBar } from "@/components/layout/reading-progress-bar";
 import { BlogCard } from "@/components/cards/blog-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
-import { AnimateInView } from "@/components/motion/animate-in-view";
 import { getBlogPostBySlug, getBlogPosts } from "@/data/blog-posts";
 import { siteConfig } from "@/data/site";
 
@@ -117,37 +116,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Link>
 
         {/* Post Meta */}
-        <AnimateInView>
-          <div className="mb-8">
-            <div className="mb-4 flex flex-wrap items-center gap-3">
-              <time
-                dateTime={post.date}
-                className="text-sm text-muted-foreground"
-              >
-                {formatDate(post.date)}
-              </time>
-              <span className="text-muted-foreground/40">|</span>
-              <span className="text-sm text-muted-foreground">
-                {post.author}
-              </span>
-              {post.category && (
-                <>
-                  <span className="text-muted-foreground/40">|</span>
-                  <Badge
-                    variant="secondary"
-                    className="bg-sage/10 text-sage text-xs"
-                  >
-                    {post.category}
-                  </Badge>
-                </>
-              )}
-            </div>
-            <h1 className="text-3xl font-bold leading-tight text-charcoal md:text-4xl lg:text-5xl">
-              {post.title}
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
+        <div className="mb-8">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <time
+              dateTime={post.date}
+              className="text-sm text-muted-foreground"
+            >
+              {formatDate(post.date)}
+            </time>
+            <span className="text-muted-foreground/40">|</span>
+            <span className="text-sm text-muted-foreground">
+              {post.author}
+            </span>
+            {post.category && (
+              <>
+                <span className="text-muted-foreground/40">|</span>
+                <Badge
+                  variant="secondary"
+                  className="bg-sage/10 text-sage text-xs"
+                >
+                  {post.category}
+                </Badge>
+              </>
+            )}
           </div>
-        </AnimateInView>
+          <h1 className="text-3xl font-bold leading-tight text-charcoal md:text-4xl lg:text-5xl">
+            {post.title}
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
+        </div>
 
         {/* Divider */}
         <hr className="mb-10 border-border" />
@@ -172,17 +169,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
-            {otherPosts.map((otherPost, i) => (
-              <AnimateInView key={otherPost.slug} delay={i * 0.1}>
-                <BlogCard
-                  slug={otherPost.slug}
-                  title={otherPost.title}
-                  date={otherPost.date}
-                  excerpt={otherPost.excerpt}
-                  featuredImage={otherPost.featuredImage}
-                  category={otherPost.category}
-                />
-              </AnimateInView>
+            {otherPosts.map((otherPost) => (
+              <BlogCard
+                key={otherPost.slug}
+                slug={otherPost.slug}
+                title={otherPost.title}
+                date={otherPost.date}
+                excerpt={otherPost.excerpt}
+                featuredImage={otherPost.featuredImage}
+                category={otherPost.category}
+              />
             ))}
           </div>
         </SectionWrapper>

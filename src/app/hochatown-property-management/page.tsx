@@ -112,14 +112,13 @@ export default function HochatownPropertyManagementPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          {valueProps.map((prop, i) => (
-            <AnimateInView key={prop.title} delay={i * 0.1}>
-              <ServiceCard
-                icon={prop.icon}
-                title={prop.title}
-                description={prop.description}
-              />
-            </AnimateInView>
+          {valueProps.map((prop) => (
+            <ServiceCard
+              key={prop.title}
+              icon={prop.icon}
+              title={prop.title}
+              description={prop.description}
+            />
           ))}
         </div>
       </SectionWrapper>
@@ -127,20 +126,17 @@ export default function HochatownPropertyManagementPage() {
       {/* Our Services */}
       <SectionWrapper background="white">
         <div className="mx-auto max-w-3xl">
-          <AnimateInView>
-            <div className="text-center">
-              <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
-                Full-Service Hochatown Cabin Management
-              </h2>
-              <p className="mb-10 text-lg text-muted-foreground">
-                From listing setup to turnover inspections, Frontier handles
-                every detail of your Hochatown cabin rental.
-              </p>
-            </div>
-          </AnimateInView>
+          <div className="text-center">
+            <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
+              Full-Service Hochatown Cabin Management
+            </h2>
+            <p className="mb-10 text-lg text-muted-foreground">
+              From listing setup to turnover inspections, Frontier handles
+              every detail of your Hochatown cabin rental.
+            </p>
+          </div>
 
-          <AnimateInView>
-            <div className="rounded-lg border bg-cream/50 p-8">
+          <div className="rounded-lg border bg-cream/50 p-8">
               <ul className="space-y-4">
                 {servicesList.map((service) => (
                   <li
@@ -174,7 +170,6 @@ export default function HochatownPropertyManagementPage() {
                 </Link>
               </div>
             </div>
-          </AnimateInView>
         </div>
       </SectionWrapper>
 
