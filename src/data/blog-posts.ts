@@ -19,6 +19,213 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "managing-broken-bow-cabin-from-dallas",
+    title: "Managing Your Broken Bow Cabin from Dallas: What Every DFW Owner Should Know",
+    date: "2026-04-07",
+    author: "Frontier Property Management",
+    category: "Owner Tips",
+    excerpt:
+      "Bought a Broken Bow cabin as an investment from Dallas? Here is what remote ownership actually looks like — and how to make it profitable without driving 3 hours every weekend.",
+    featuredImage: "/images/hero/forest-aerial.jpg",
+    content: `
+<h2>The Dallas-to-Broken-Bow Pipeline Is Real</h2>
+<p>Over the past few years, Broken Bow and Hochatown have become one of the most popular vacation rental investment markets for Dallas-Fort Worth buyers. The math makes sense — affordable land, strong nightly rates, and a steady stream of guests from Texas, Arkansas, and Oklahoma. But once the closing papers are signed, a lot of new Dallas owners hit the same wall: how do you actually manage a cabin that is three hours away?</p>
+
+<h3>The Reality of Remote Management</h3>
+<p>Self-managing a short-term rental from DFW sounds doable in theory. In practice, it means fielding guest messages at all hours, coordinating cleaners remotely, handling maintenance emergencies you cannot see, and trying to optimize pricing for a market you are not physically in. Most Dallas owners we talk to tried self-managing for 6-12 months before realizing it was eating into their time, their margins, or both.</p>
+
+<h3>What Breaks First</h3>
+<p>The most common failure points we see from remote owners:</p>
+<ul>
+  <li><strong>Slow guest response times.</strong> When you are in a meeting in Dallas and a guest at your cabin needs help, response time suffers. Slow responses lead to bad reviews, which lead to fewer bookings.</li>
+  <li><strong>Cleaning coordination.</strong> One bad turnover and you get a 1-star review. From Dallas, you cannot inspect the clean yourself — and most remote owners do not have a reliable backup plan when their cleaner cancels last minute.</li>
+  <li><strong>Pricing stagnation.</strong> Setting a flat nightly rate and forgetting about it is the single biggest revenue mistake we see. The Broken Bow market has significant seasonal swings, event-driven demand, and competitive pricing shifts that require daily adjustments.</li>
+  <li><strong>Maintenance surprises.</strong> A leaking hot tub, a broken HVAC unit, or a clogged septic system does not wait for the weekend when you can drive down. These need same-day resolution or your next guest has a ruined stay.</li>
+</ul>
+
+<h3>What Professional Management Changes</h3>
+<p>A local management company gives you three things you cannot replicate from Dallas: proximity, relationships, and market intelligence.</p>
+<ul>
+  <li><strong>Proximity</strong> means a 15-minute response time to your cabin, not a 3-hour drive. When something goes wrong, we are already there.</li>
+  <li><strong>Relationships</strong> with trusted cleaners, plumbers, electricians, and HVAC techs who prioritize our calls because we send them steady work year-round.</li>
+  <li><strong>Market intelligence</strong> means we know when Mountain Fork Music Festival is driving demand, when a cold snap will spike hot-tub cabin bookings, and when to lower minimum stays to fill mid-week gaps.</li>
+</ul>
+
+<h3>What to Look for in a Manager</h3>
+<p>If you are a Dallas owner shopping for management, here is what matters:</p>
+<ul>
+  <li><strong>Local presence.</strong> Your manager should be based in Broken Bow, not managing remotely from another city.</li>
+  <li><strong>Transparent reporting.</strong> Monthly owner statements that clearly show revenue, expenses, platform fees, and net payouts.</li>
+  <li><strong>Multi-platform distribution.</strong> Your cabin should be listed on Airbnb, Vrbo, Booking.com, and a direct booking website — not just one platform.</li>
+  <li><strong>No long-term contracts.</strong> If a company requires a 12-month lock-in, ask yourself why they need a contract to keep you.</li>
+  <li><strong>Dynamic pricing.</strong> Flat-rate pricing leaves money on the table. Demand-based pricing is table stakes in this market.</li>
+</ul>
+
+<h3>The Bottom Line</h3>
+<p>Owning a Broken Bow cabin from Dallas can be a great investment — but only if it is managed well. The owners who do best are the ones who treat their cabin like a business and hire a local team to run it. If you are a DFW owner looking for management, <a href="/contact">reach out to us</a> for a free revenue estimate. We will give you an honest assessment of what your property could earn.</p>
+`,
+  },
+  {
+    slug: "best-time-to-visit-broken-bow",
+    title: "The Best Time to Visit Broken Bow & Hochatown: A Season-by-Season Guide",
+    date: "2026-04-02",
+    author: "Frontier Property Management",
+    category: "Travel Guide",
+    excerpt:
+      "Planning a Broken Bow cabin trip? Here is what to expect each season — weather, crowds, pricing, and the best activities from spring wildflowers to winter hot tub soaks.",
+    featuredImage: "/images/discover/broken-bow-area.png",
+    content: `
+<h2>When Should You Visit Broken Bow?</h2>
+<p>The honest answer: there is no bad time. Broken Bow and Hochatown offer something different every season, and each one has its own appeal depending on what you are looking for. Here is what to expect month by month so you can plan the perfect trip.</p>
+
+<h3>Spring (March - May)</h3>
+<p>Spring is one of the best-kept secrets in Broken Bow. The crowds are thinner than summer and fall, cabin rates are more affordable, and the landscape comes alive with dogwood blooms, redbuds, and wildflowers along the forest trails.</p>
+<ul>
+  <li><strong>Weather:</strong> Highs in the 60s-80s. Mornings can be cool — perfect for coffee on the deck. Afternoon rain showers are common but usually brief.</li>
+  <li><strong>Activities:</strong> Kayaking on the Lower Mountain Fork River, hiking Beavers Bend trails, fly fishing (spring trout stocking is excellent), and exploring the Hochatown shops without the summer crowds.</li>
+  <li><strong>Pricing:</strong> Mid-range. You will find better rates than peak season, especially mid-week. Book 2-3 weeks ahead for weekends.</li>
+  <li><strong>Best for:</strong> Couples, anglers, hikers, and anyone who wants a quiet, uncrowded cabin experience.</li>
+</ul>
+
+<h3>Summer (June - August)</h3>
+<p>Peak season. Families flood in once school lets out, and the lake and river activities are in full swing. If you want a lively, active vacation, this is your window.</p>
+<ul>
+  <li><strong>Weather:</strong> Hot and humid. Highs in the 90s. The river and lake are the main relief, along with air-conditioned cabins and shaded decks.</li>
+  <li><strong>Activities:</strong> Broken Bow Lake swimming and boating, tubing on the Mountain Fork River, Beavers Bend State Park, zip lines, ATV rentals, and the Hochatown restaurant and brewery scene.</li>
+  <li><strong>Pricing:</strong> Highest rates of the year, especially July and holiday weekends. Book 4-6 weeks ahead or more for premium cabins.</li>
+  <li><strong>Best for:</strong> Families with kids, groups, and anyone who wants the full range of outdoor activities.</li>
+</ul>
+
+<h3>Fall (September - November)</h3>
+<p>The most popular season — and for good reason. The Ouachita National Forest turns gold, orange, and red, and the weather is ideal for outdoor everything. Fall weekends in Broken Bow book up fast.</p>
+<ul>
+  <li><strong>Weather:</strong> Highs in the 60s-80s early fall, cooling to the 50s-60s by November. Crisp mornings, warm afternoons, and cool evenings by the firepit.</li>
+  <li><strong>Activities:</strong> Fall foliage drives, Beavers Bend State Park color tours, trout fishing (fall stocking begins in November), Hochatown festivals, and bonfires.</li>
+  <li><strong>Pricing:</strong> Peak rates on weekends, especially October. Mid-week still offers good value. Book 4-8 weeks ahead for October weekends.</li>
+  <li><strong>Best for:</strong> Couples, leaf-peepers, photographers, and anyone who loves cool-weather cabin vibes.</li>
+</ul>
+
+<h3>Winter (December - February)</h3>
+<p>Winter is the hidden gem season. Rates drop, crowds disappear, and you get the full cozy cabin experience — hot tubs in the snow, fireplaces, and quiet mountain mornings. The occasional ice storm only adds to the atmosphere (see our <a href="/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown">winter storm guide</a>).</p>
+<ul>
+  <li><strong>Weather:</strong> Highs in the 40s-50s, lows in the 20s-30s. Snow and ice storms are possible but not constant. Pack layers.</li>
+  <li><strong>Activities:</strong> Hot tub soaking, fireplace evenings, winter trout fishing (some of the best of the year), Hochatown shopping, and simply unplugging.</li>
+  <li><strong>Pricing:</strong> Lowest rates of the year outside of holiday weeks. Christmas and New Year book up early, but January and February are wide open.</li>
+  <li><strong>Best for:</strong> Couples on a budget, remote workers looking for a change of scenery, and anyone craving a quiet winter retreat.</li>
+</ul>
+
+<h3>Our Recommendation</h3>
+<p>If this is your first visit, we recommend early fall (late September through mid-October) for the best combination of weather, foliage, activities, and atmosphere. But honestly, every season has something special. The key is booking a well-managed, well-equipped cabin — that makes any season great. <a href="/search">Browse our cabins</a> and book direct to save on platform fees.</p>
+`,
+  },
+  {
+    slug: "broken-bow-cabin-hot-tub-private-pool",
+    title: "Broken Bow Cabins with Hot Tubs & Private Pools: What to Know Before You Book",
+    date: "2026-03-25",
+    author: "Frontier Property Management",
+    category: "Travel Tips",
+    excerpt:
+      "Looking for a Broken Bow cabin with a hot tub or private pool? Here is how to pick the right one, what to expect, and why booking direct saves you money.",
+    featuredImage: "/images/properties/sublime/sublime-5.jpg",
+    content: `
+<h2>Hot Tubs and Pools Are the Top-Requested Amenity in Broken Bow</h2>
+<p>When guests search for a Broken Bow or Hochatown cabin, the first filter they reach for is almost always "hot tub" or "pool." And it makes sense — there is nothing quite like soaking in a hot tub surrounded by pine trees after a day on the lake, or cooling off in a private pool during a July afternoon.</p>
+<p>But not all hot tub and pool cabins are created equal. Here is what to look for — and what to watch out for — when booking.</p>
+
+<h3>Hot Tub Cabins: What to Expect</h3>
+<p>Most cabins in the Broken Bow area come with a hot tub on the deck. It is practically standard at this point. But the quality varies wildly:</p>
+<ul>
+  <li><strong>Maintenance matters.</strong> A hot tub that is properly maintained — clean water, balanced chemicals, functioning jets — is a five-star experience. A neglected one with cloudy water and broken jets will ruin your trip. Always check recent reviews for hot tub complaints.</li>
+  <li><strong>Size and style.</strong> Some cabins have small 2-person tubs, while others have full-size 6-8 person spas. If you are traveling with a group, verify the tub size before booking.</li>
+  <li><strong>Location on the property.</strong> The best hot tub setups are on covered decks with forest views and privacy. Some are tucked under the cabin or in less scenic spots — photos tell the story.</li>
+  <li><strong>Winter use.</strong> Hot tubs in winter are magical, but only if the cabin owner maintains them through the cold months. Some owners drain and close their tubs from November to March. If you are planning a winter trip, confirm the hot tub is operational.</li>
+</ul>
+
+<h3>Private Pool Cabins: A Step Up</h3>
+<p>Private pools are less common in Broken Bow than hot tubs, which makes them a premium amenity. Here is what to know:</p>
+<ul>
+  <li><strong>Seasonal availability.</strong> Most private pools in Broken Bow are outdoor and unheated, meaning they are only available from roughly May through September. A few cabins have heated pools that extend the season.</li>
+  <li><strong>Pool vs. plunge pool.</strong> Some listings advertise a "pool" that is really a small plunge pool or stock tank pool. Check the photos and dimensions if a full-size swimming pool matters to you.</li>
+  <li><strong>Safety.</strong> If you are traveling with young children, check whether the pool is fenced and whether the cabin provides any safety features.</li>
+</ul>
+
+<h3>Why Professionally Managed Cabins Win on Amenities</h3>
+<p>The biggest difference between a professionally managed cabin and a self-managed one shows up in amenity maintenance. At Frontier, our cabins have:</p>
+<ul>
+  <li>Weekly hot tub chemical testing and cleaning</li>
+  <li>Filter replacement on schedule</li>
+  <li>Pool water quality checks before every guest arrival</li>
+  <li>Immediate repair response if anything is not working</li>
+</ul>
+<p>We have seen too many guest reviews at other properties that say "hot tub was dirty" or "pool was green." That does not happen with a professionally maintained property.</p>
+
+<h3>Book Direct and Save</h3>
+<p>When you book through Airbnb or Vrbo, you pay a service fee on top of the nightly rate — typically 10-15% of the total. When you <a href="/search">book direct through our website</a>, you skip that fee entirely and get the same (or lower) rate. For a weekend trip, that can save you $50-$150.</p>
+
+<h3>Our Top Picks</h3>
+<p>Looking for a hot tub or pool cabin managed by Frontier? Check out:</p>
+<ul>
+  <li><a href="/sublime"><strong>Sublime Retreat</strong></a> — Luxury Hochatown cabin with a hot tub, 2 zip lines, arcade, and forest views. Sleeps 8.</li>
+  <li><a href="/old-broken-bow-highway"><strong>Old Broken Bow Highway</strong></a> — 3BR cabin with a private pool, hot tub, firepit, and pet-friendly policy. Sleeps 6.</li>
+</ul>
+<p>Both are professionally maintained with weekly hot tub service and pre-arrival quality checks. <a href="/search">Browse all our properties</a> to find the right fit for your trip.</p>
+`,
+  },
+  {
+    slug: "why-dallas-investors-buying-broken-bow-cabins",
+    title: "Why Dallas Investors Are Buying Broken Bow Cabins in 2026",
+    date: "2026-03-18",
+    author: "Frontier Property Management",
+    category: "Owner Tips",
+    excerpt:
+      "Broken Bow has become one of the top cabin investment markets for Dallas buyers. Here is why DFW investors are choosing southeast Oklahoma — and what the numbers actually look like.",
+    featuredImage: "/images/discover/hochatown-area-2.png",
+    content: `
+<h2>The Broken Bow Cabin Boom Is Not Slowing Down</h2>
+<p>If you live in the Dallas-Fort Worth area and have looked into vacation rental investments, Broken Bow and Hochatown have probably come up in every conversation. The southeast Oklahoma cabin market has been one of the strongest-performing STR markets in the region for years — and DFW buyers are a huge part of that story.</p>
+
+<h3>Why Broken Bow?</h3>
+<p>The numbers tell the story, but the fundamentals are what really matter:</p>
+<ul>
+  <li><strong>Proximity to DFW.</strong> Broken Bow is roughly 3 hours from Dallas — close enough for owners to visit their property, and close enough to be a drive-to destination for millions of potential guests across Texas, Arkansas, and Oklahoma.</li>
+  <li><strong>Lower entry cost.</strong> Compared to cabin markets like Gatlinburg, Big Bear, or the Smokies, Broken Bow offers significantly lower land and construction costs. You can acquire a quality 3-bedroom cabin for a fraction of what similar properties cost in other resort markets.</li>
+  <li><strong>Strong nightly rates.</strong> Well-managed Broken Bow cabins consistently command $200-$500+ per night depending on size, amenities, and season. Premium properties with pools, hot tubs, and game rooms can exceed that.</li>
+  <li><strong>Year-round demand.</strong> Unlike beach or ski destinations that rely on one season, Broken Bow draws guests year-round — fall foliage, summer lake trips, winter hot tub getaways, and spring fishing. This diversification smooths out revenue across the calendar.</li>
+  <li><strong>Tourism infrastructure.</strong> Hochatown has rapidly developed with restaurants, breweries, shops, and attractions that give guests reasons to visit beyond the cabin itself. This growing infrastructure supports higher occupancy rates.</li>
+</ul>
+
+<h3>What the Numbers Look Like</h3>
+<p>Every property is different, but here are realistic ranges for well-managed Broken Bow cabins:</p>
+<ul>
+  <li><strong>2-bedroom cabin:</strong> $40,000-$65,000 gross annual revenue</li>
+  <li><strong>3-bedroom cabin:</strong> $55,000-$90,000 gross annual revenue</li>
+  <li><strong>4+ bedroom luxury cabin:</strong> $80,000-$130,000+ gross annual revenue</li>
+</ul>
+<p>These numbers assume professional management, dynamic pricing, multi-platform distribution, and proper amenities. Self-managed properties or those with flat pricing typically earn 15-30% less.</p>
+
+<h3>What Dallas Buyers Get Wrong</h3>
+<p>The most common mistakes we see from DFW investors:</p>
+<ul>
+  <li><strong>Buying on emotion, not data.</strong> A beautiful cabin is not automatically a profitable one. Location within the Broken Bow area, bedroom count, amenity mix, and road access all affect booking performance.</li>
+  <li><strong>Underestimating operating costs.</strong> Cleaning, maintenance, hot tub chemicals, linens, supplies, utilities, insurance, and property taxes add up. Build a realistic pro forma before you buy.</li>
+  <li><strong>Planning to self-manage from Dallas.</strong> It works for a few months, but most Dallas owners burn out. Budgeting for professional management from day one leads to better outcomes (see our <a href="/blogs/managing-broken-bow-cabin-from-dallas">guide to remote management</a>).</li>
+  <li><strong>Ignoring compliance.</strong> McCurtain County has STR permit requirements, occupancy tax obligations, and evolving regulations. Non-compliance can result in fines and listing suspensions.</li>
+</ul>
+
+<h3>Should You Buy in 2026?</h3>
+<p>The market has matured since the post-COVID boom, which is actually good news for smart buyers. Land prices have stabilized, builder capacity has increased, and there is less speculative buying. The investors who do well in this market are the ones who buy properties with the right amenity mix, price them correctly, and hire local management from day one.</p>
+
+<h3>How Frontier Helps Dallas Investors</h3>
+<p>We are not real estate agents, but we work with Dallas investors at every stage:</p>
+<ul>
+  <li><strong>Pre-purchase:</strong> Free revenue projections for properties you are considering. We will tell you honestly whether a cabin will perform.</li>
+  <li><strong>Setup:</strong> Professional photography, listing optimization, pricing strategy, and vendor onboarding.</li>
+  <li><strong>Ongoing management:</strong> Full-service operations at 20% of gross — no setup fees, no long-term contracts.</li>
+</ul>
+<p>If you are a Dallas investor considering a Broken Bow cabin purchase, <a href="/contact">reach out for a free consultation</a>. We will give you the local perspective that real estate listings do not.</p>
+`,
+  },
+  {
     slug: "what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown",
     title:
       "What You Need to Know Before This Weekend's Winter Storm Hits Hochatown",

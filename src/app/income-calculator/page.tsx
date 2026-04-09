@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title:
     "STR Income Calculator — Estimate Your Broken Bow Cabin Revenue",
   description:
-    "Free income calculator for Broken Bow & Hochatown cabin owners. Estimate monthly short-term rental revenue based on bedrooms, amenities, and location. See what professional management could earn you.",
+    "Free income calculator for Broken Bow & Hochatown cabin owners. Estimate monthly STR revenue based on bedrooms, amenities, and location.",
   alternates: {
     canonical: "https://rentwithfrontier.com/income-calculator",
   },

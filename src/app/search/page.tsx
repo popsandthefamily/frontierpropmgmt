@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   title:
     "Broken Bow Cabins for Rent — Book Direct, No Platform Fees",
   description:
-    "Browse luxury cabins in Broken Bow & Hochatown available for direct booking. Private pools, hot tubs, zip lines, game rooms & more. Skip Airbnb fees — best rate guaranteed when you book with Frontier Property Management.",
+    "Browse luxury cabins in Broken Bow & Hochatown for direct booking. Hot tubs, pools, game rooms & more. Skip Airbnb fees — best rate guaranteed.",
   openGraph: {
     title: "Broken Bow Cabins for Rent — Book Direct & Save",
     description:

@@ -8,13 +8,14 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { managementFAQ } from "@/data/services";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Hochatown Cabin Property Management",
   description:
-    "Full-service Hochatown cabin property management by Frontier. Professional marketing, 24/7 guest support, cleaning, maintenance, and revenue optimization for short-term rental owners.",
+    "Full-service Hochatown cabin management by Frontier. Marketing, 24/7 guest support, cleaning, maintenance & revenue optimization for STR owners.",
   openGraph: {
     title: "Hochatown Cabin Property Management | Frontier Property Management",
     description:
@@ -61,7 +62,22 @@ const servicesList = [
 export default function HochatownPropertyManagementPage() {
   return (
     <>
-      {/* JSON-LD */}
+      {/* JSON-LD — FAQPage */}
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: managementFAQ.slice(0, 6).map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }}
+      />
+
+      {/* JSON-LD — LocalBusiness */}
       <JsonLd
         type="LocalBusiness"
         data={{
@@ -97,6 +113,13 @@ export default function HochatownPropertyManagementPage() {
           label: "Schedule a Free Consultation",
           href: "/contact",
         }}
+      />
+
+      <Breadcrumbs
+        items={[
+          { label: "Management Services", href: "/management-services" },
+          { label: "Hochatown" },
+        ]}
       />
 
       {/* Why Choose Frontier */}

@@ -8,8 +8,9 @@ const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Management Services", href: "/management-services" },
+  { label: "Dallas Cabin Owners", href: "/dallas-cabin-owners" },
   { label: "Contact", href: "/contact" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blogs" },
 ];
 
 const PROPERTIES = [

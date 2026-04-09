@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title:
     "Discover Broken Bow & Hochatown — Things to Do, Where to Stay, Local Tips",
   description:
-    "Your ultimate guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants, money-saving tips, and everything you need to plan the perfect cabin getaway in McCurtain County.",
+    "Your guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants & tips for the perfect cabin trip.",
   openGraph: {
     title: "Discover Broken Bow & Hochatown — Complete Visitor Guide",
     description:

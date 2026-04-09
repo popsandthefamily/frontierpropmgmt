@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title:
     "About Frontier Property Management — Local Hochatown & Broken Bow STR Experts",
   description:
-    "Meet the family-owned, locally operated team behind Frontier Property Management. We live in Broken Bow, manage cabins in Hochatown & McCurtain County, and deliver 4.95★ guest ratings with data-driven STR strategies.",
+    "Meet the family-owned team behind Frontier Property Management. Based in Broken Bow, managing Hochatown cabins with 4.95-star ratings and data-driven strategies.",
   openGraph: {
     title: "About Frontier Property Management",
     description:

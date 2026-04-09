@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title:
     "Contact Us — Book a Cabin or Get a Free Management Estimate",
   description:
-    "Contact Frontier Property Management to book a Broken Bow cabin direct or get a free STR management estimate. Call 580-207-7154, email info@rentwithfrontier.com, or fill out our form. Based in Broken Bow, serving Hochatown & McCurtain County.",
+    "Contact Frontier Property Management to book a Broken Bow cabin or get a free management estimate. Call 580-207-7154 or fill out our form.",
   alternates: {
     canonical: "https://rentwithfrontier.com/contact",
   },

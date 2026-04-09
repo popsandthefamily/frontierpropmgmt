@@ -20,6 +20,7 @@ import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { ContactForm } from "@/components/forms/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { siteConfig } from "@/data/site";
 import {
   onboardingSteps,
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
   title:
     "Cabin Management Services — Full-Service STR Management in Broken Bow & Hochatown",
   description:
-    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO listing optimization, 24/7 guest communication, professional cleaning, maintenance & transparent reporting — 20% of gross bookings, no setup fees. Contract transitions welcome.",
+    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance — 20% of gross, no setup fees.",
   openGraph: {
     title: "Full-Service Cabin Management in Broken Bow & Hochatown",
     description:
@@ -77,6 +78,21 @@ const notIncludedItems = [
 export default function ManagementServicesPage() {
   return (
     <>
+      {/* JSON-LD — FAQPage */}
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: managementFAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }}
+      />
+
       {/* JSON-LD — Service */}
       <JsonLd
         type="Service"
@@ -115,6 +131,10 @@ export default function ManagementServicesPage() {
           label: "Request Management Information",
           href: "/contact",
         }}
+      />
+
+      <Breadcrumbs
+        items={[{ label: "Management Services" }]}
       />
 
       {/* ── What We Do ──────────────────────────────────────────────── */}

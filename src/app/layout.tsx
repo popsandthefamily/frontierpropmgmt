@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     "McCurtain County cabin rentals",
     "Beavers Bend cabin",
     "Frontier Property Management",
+    "Dallas cabin owner management",
+    "DFW Broken Bow cabin management",
+    "remote cabin management Dallas Texas",
+    "Dallas vacation rental investment Broken Bow",
   ],
   openGraph: {
     type: "website",
@@ -105,6 +109,7 @@ export default function RootLayout({
               { "@type": "Place", name: "Broken Bow, Oklahoma" },
               { "@type": "Place", name: "Hochatown, Oklahoma" },
               { "@type": "Place", name: "McCurtain County, Oklahoma" },
+              { "@type": "Place", name: "Dallas-Fort Worth, Texas" },
             ],
             openingHours: "Mo-Fr 09:00-17:00",
             sameAs: [

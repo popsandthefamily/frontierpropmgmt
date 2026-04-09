@@ -8,6 +8,7 @@ import { ReadingProgressBar } from "@/components/layout/reading-progress-bar";
 import { BlogCard } from "@/components/cards/blog-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { getBlogPostBySlug, getBlogPosts } from "@/data/blog-posts";
 import { siteConfig } from "@/data/site";
 
@@ -104,16 +105,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
 
+      <Breadcrumbs
+        items={[
+          { label: "Blog", href: "/blogs" },
+          { label: post.title },
+        ]}
+      />
+
       {/* Post Content */}
       <div className="mx-auto max-w-3xl px-4 py-12">
-        {/* Back Link */}
-        <Link
-          href="/blogs"
-          className="mb-8 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-sage"
-        >
-          <ArrowLeft className="size-4" />
-          Back to Blog
-        </Link>
 
         {/* Post Meta */}
         <div className="mb-8">

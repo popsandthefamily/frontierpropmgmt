@@ -8,6 +8,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { managementFAQ } from "@/data/services";
 import { siteConfig } from "@/data/site";
 
@@ -61,7 +62,22 @@ const servicesList = [
 export default function BrokenBowPropertyManagementPage() {
   return (
     <>
-      {/* JSON-LD */}
+      {/* JSON-LD — FAQPage */}
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: managementFAQ.slice(0, 6).map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }}
+      />
+
+      {/* JSON-LD — LocalBusiness */}
       <JsonLd
         type="LocalBusiness"
         data={{
@@ -97,6 +113,13 @@ export default function BrokenBowPropertyManagementPage() {
           label: "Schedule a Free Consultation",
           href: "/contact",
         }}
+      />
+
+      <Breadcrumbs
+        items={[
+          { label: "Management Services", href: "/management-services" },
+          { label: "Broken Bow" },
+        ]}
       />
 
       {/* Why Choose Frontier */}

@@ -7,6 +7,7 @@ import { ImageGallery } from "@/components/property/image-gallery";
 import { AmenityGrid } from "@/components/property/amenity-grid";
 import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { CTASection } from "@/components/sections/cta-section";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
 import { getPropertyBySlug } from "@/data/properties";
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   title:
     "3BR Poolside Cabin in Broken Bow — Private Pool, Firepit, Pet-Friendly",
   description:
-    "Book this cozy 3-bedroom, 3-bath cabin on Old Broken Bow Highway. Private outdoor pool, firepit & grill, pet-friendly, near Beavers Bend State Park. Sleeps 6. Book direct with Frontier — no platform fees, best rate guaranteed.",
+    "Cozy 3BR/3BA cabin with private pool, firepit & grill near Beavers Bend. Pet-friendly, sleeps 6. Book direct — no platform fees.",
   openGraph: {
     title: "3BR Poolside Cabin in Broken Bow — Book Direct & Save",
     description:
@@ -67,6 +68,12 @@ export default function OldBrokenBowHighwayPage() {
 
       {/* Image Gallery */}
       <div className="mx-auto max-w-7xl px-4 pt-24">
+        <Breadcrumbs
+          items={[
+            { label: "Properties", href: "/search" },
+            { label: "Old Broken Bow Highway" },
+          ]}
+        />
         <ImageGallery
           images={property.images}
           propertyName={property.name}

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title:
     "Broken Bow Cabin Rentals & Property Management | Book Direct & Save",
   description:
-    "Book a luxury cabin in Broken Bow & Hochatown direct — no Airbnb or VRBO fees. Or hire Frontier for full-service STR management at 20% of gross. Hot tubs, zip lines, private pools. Local team, 4.95★ rating.",
+    "Book a luxury Broken Bow cabin direct — no Airbnb fees. Or hire Frontier for full-service STR management at 20% of gross. Local team, 4.95-star rating.",
   openGraph: {
     title: "Broken Bow Cabin Rentals & Property Management | Frontier",
     description:

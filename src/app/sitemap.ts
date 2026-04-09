@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/discover-broken-bow`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/hochatown-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/broken-bow-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/dallas-cabin-owners`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/rental-agreement`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/blogs`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
@@ -24,6 +25,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const blogPosts: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blogs/managing-broken-bow-cabin-from-dallas`,
+      lastModified: new Date("2026-04-07"),
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blogs/best-time-to-visit-broken-bow`,
+      lastModified: new Date("2026-04-02"),
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blogs/broken-bow-cabin-hot-tub-private-pool`,
+      lastModified: new Date("2026-03-25"),
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blogs/why-dallas-investors-buying-broken-bow-cabins`,
+      lastModified: new Date("2026-03-18"),
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
     {
       url: `${baseUrl}/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
       lastModified: new Date("2026-01-21"),

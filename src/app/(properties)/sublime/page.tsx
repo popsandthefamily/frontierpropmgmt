@@ -15,6 +15,7 @@ import { ImageGallery } from "@/components/property/image-gallery";
 import { AmenityGrid } from "@/components/property/amenity-grid";
 import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { CTASection } from "@/components/sections/cta-section";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
 import { getPropertyBySlug } from "@/data/properties";
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   title:
     "Sublime Retreat — Luxury Hochatown Cabin | Hot Tub, 2 Zip Lines, Arcade",
   description:
-    "Book Sublime Retreat direct & save — brand-new boho-modern luxury cabin in Hochatown with 2 private zip lines, hot tub with Bluetooth, full-size arcade, Calcutta quartz kitchen, bamboo floors. 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
+    "Book Sublime Retreat direct & save — luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
   openGraph: {
     title: "Sublime Retreat — Luxury Hochatown Cabin | Book Direct & Save",
     description:
@@ -75,6 +76,12 @@ export default function SublimePage() {
 
       {/* Image Gallery */}
       <div className="mx-auto max-w-7xl px-4 pt-24">
+        <Breadcrumbs
+          items={[
+            { label: "Properties", href: "/search" },
+            { label: "Sublime Retreat" },
+          ]}
+        />
         <ImageGallery
           images={property.images}
           propertyName={property.name}
