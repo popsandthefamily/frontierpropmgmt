@@ -21,7 +21,7 @@ export default function BlogsPage() {
     <>
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/hero/hero-bg.jpg"
+        backgroundImage="/images/hero/forest-aerial.jpg"
         title="From the Frontier"
         subtitle="Insights, updates, and tips for cabin owners and guests"
         size="medium"

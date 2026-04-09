@@ -52,7 +52,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/hero/hero-bg.jpg"
+        backgroundImage="/images/discover/hochatown-drive.png"
         title="Get in Touch"
         subtitle="Looking to book a cabin or need help managing your property? We're here for both."
         size="medium"

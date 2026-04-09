@@ -20,7 +20,7 @@ export default function IncomeCalculatorPage() {
     <>
       {/* 1. Hero */}
       <HeroSection
-        backgroundImage="/images/hero/hero-bg.jpg"
+        backgroundImage="/images/hero/foggy-mountain.jpg"
         title="Estimate Your Monthly STR Revenue"
         subtitle="No guesswork — just real income insights"
         size="medium"
