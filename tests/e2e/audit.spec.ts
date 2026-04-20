@@ -41,9 +41,14 @@ test.describe("audit page smoke", () => {
     page,
   }) => {
     await page.goto("/audit");
-    await page.getByRole("button", { name: /compare a different market/i }).click();
+    // /audit renders the snapshot card twice (hero + full variants), so use
+    // .first() to pick the topmost "Compare a different market" toggle.
+    await page
+      .getByRole("button", { name: /compare a different market/i })
+      .first()
+      .click();
 
-    const cityInput = page.locator('input[name="city"]');
+    const cityInput = page.locator('input[name="city"]').first();
     await expect(cityInput).toBeVisible();
     await cityInput.fill("Galveston, TX");
     // Don't actually submit — Turnstile + live AirROI. Just verify the form wires up.
@@ -62,6 +67,8 @@ test.describe("homepage smoke", () => {
   test("comparison table is present", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText(/compared to the alternatives/i)).toBeVisible();
-    await expect(page.getByText(/20% flat/i)).toBeVisible();
+    // Check for a row specific to the table (not the trust strip stat).
+    await expect(page.getByText(/management fee/i).first()).toBeVisible();
+    await expect(page.getByText(/25.35% of gross/i)).toBeVisible();
   });
 });
