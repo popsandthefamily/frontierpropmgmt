@@ -12,6 +12,8 @@ import {
   Fish,
   Ticket,
 } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -166,6 +168,58 @@ export default function DiscoverBrokenBowPage() {
         size="medium"
         overlay="dark"
       />
+
+      {/* Hocha.Town partner highlight */}
+      <section className="bg-charcoal">
+        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+          <div className="grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-12">
+            <a
+              href="https://hocha.town"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block shrink-0 transition-opacity hover:opacity-80"
+              aria-label="Visit Hocha.Town"
+            >
+              <Image
+                src="/images/partners/hocha-town-logo.webp"
+                alt="Hocha.Town logo"
+                width={240}
+                height={240}
+                className="mx-auto h-40 w-auto md:h-48"
+                priority
+              />
+            </a>
+            <div className="text-center md:text-left">
+              <p className="text-xs font-semibold uppercase tracking-widest text-peach">
+                Trusted local resource
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">
+                Planning a trip? Check Hocha.Town first.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-white/80 md:text-lg">
+                Hocha.Town is the most complete local guide to Hochatown and
+                Broken Bow, curated by people who live here. Restaurants,
+                activities, event calendars, and honest recommendations for
+                every kind of trip. We send every guest there.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="mt-6 bg-peach text-charcoal hover:bg-peach/90 px-6 text-base font-semibold"
+              >
+                <a
+                  href="https://hocha.town"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit Hocha.Town
+                  <ArrowRight className="ml-2 size-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Best Spots */}
       <SectionWrapper background="white">
