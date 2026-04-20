@@ -8,6 +8,8 @@ const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Management Services", href: "/management-services" },
+  { label: "Hochatown Management", href: "/hochatown-property-management" },
+  { label: "Broken Bow Management", href: "/broken-bow-property-management" },
   { label: "Dallas Cabin Owners", href: "/dallas-cabin-owners" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blogs" },

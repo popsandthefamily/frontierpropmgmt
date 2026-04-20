@@ -90,7 +90,20 @@ export default function HomePage() {
             {/* Left: pitch */}
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-sage">
-                Broken Bow & Hochatown Property Management
+                <Link
+                  href="/hochatown-property-management"
+                  className="hover:text-sage-dark hover:underline"
+                >
+                  Hochatown
+                </Link>
+                {" & "}
+                <Link
+                  href="/broken-bow-property-management"
+                  className="hover:text-sage-dark hover:underline"
+                >
+                  Broken Bow
+                </Link>
+                {" "}Property Management
               </p>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-charcoal md:text-5xl lg:text-6xl">
                 Cabin management that actually answers the phone.

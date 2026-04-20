@@ -10,16 +10,40 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { managementFAQ } from "@/data/services";
+import { hochatownFAQ } from "@/data/hochatown-faq";
+import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Hochatown Cabin Property Management",
+  title: "Hochatown Cabin Property Management | Local, Full-Service, 20% Flat",
   description:
-    "Full-service Hochatown cabin management by Frontier. Marketing, 24/7 guest support, cleaning, maintenance & revenue optimization for STR owners.",
+    "Hochatown, OK cabin management by a locally based team. 20% flat fee, no setup costs, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+  keywords: [
+    "Hochatown property management",
+    "Hochatown cabin management",
+    "Hochatown vacation rental management",
+    "Hochatown Airbnb management",
+    "cabin management Hochatown Oklahoma",
+    "short-term rental management Hochatown",
+    "Hochatown STR management",
+    "Beavers Bend cabin management",
+    "Broken Bow / Hochatown property manager",
+  ],
   openGraph: {
-    title: "Hochatown Cabin Property Management | Frontier Property Management",
+    title: "Hochatown Cabin Property Management | Frontier",
     description:
-      "Maximize your Hochatown cabin rental income. Frontier handles pricing, guests, cleaning, and maintenance so you can relax.",
+      "Local Hochatown cabin management. 20% flat fee, no setup costs, Airbnb Top Rated Host across every cabin.",
+    images: [
+      {
+        url: "/images/discover/hochatown-pm-featured.png",
+        width: 1200,
+        height: 630,
+        alt: "Hochatown cabin managed by Frontier Property Management",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/hochatown-property-management",
   },
 };
 
@@ -46,7 +70,7 @@ const valueProps = [
     icon: "TrendingUp",
     title: "Revenue Optimization",
     description:
-      "Data-driven dynamic pricing adjusted daily based on demand, seasonality, local events, and competitor analysis. Our owners typically see 15-30% revenue increases.",
+      "Dynamic pricing adjusted daily based on Hochatown demand, seasonality, local events (Beavers Bend marathon, Choctaw rodeo), and comp activity. Runs our free audit to see the specific gap on your listing.",
   },
 ];
 
@@ -62,11 +86,14 @@ const servicesList = [
 export default function HochatownPropertyManagementPage() {
   return (
     <>
-      {/* JSON-LD, FAQPage */}
+      {/* JSON-LD, FAQPage (Hochatown-specific questions first, then general) */}
       <JsonLd
         type="FAQPage"
         data={{
-          mainEntity: managementFAQ.slice(0, 6).map((item) => ({
+          mainEntity: [
+            ...hochatownFAQ,
+            ...managementFAQ.slice(0, 3),
+          ].map((item) => ({
             "@type": "Question",
             name: item.question,
             acceptedAnswer: {
@@ -90,15 +117,24 @@ export default function HochatownPropertyManagementPage() {
           address: {
             "@type": "PostalAddress",
             streetAddress: "3156 Old Broken Bow Hwy",
-            addressLocality: "Broken Bow",
+            addressLocality: "Hochatown",
             addressRegion: "OK",
             postalCode: "74728",
             addressCountry: "US",
           },
-          areaServed: {
-            "@type": "Place",
-            name: "Hochatown, Oklahoma",
+          // Approximate Hochatown coordinates (town center)
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 34.1606,
+            longitude: -94.7447,
           },
+          areaServed: [
+            { "@type": "Place", name: "Hochatown, Oklahoma" },
+            { "@type": "Place", name: "Broken Bow, Oklahoma" },
+            { "@type": "Place", name: "Beavers Bend State Park" },
+            { "@type": "Place", name: "McCurtain County, Oklahoma" },
+          ],
+          priceRange: "$$",
         }}
       />
 
@@ -196,32 +232,83 @@ export default function HochatownPropertyManagementPage() {
         </div>
       </SectionWrapper>
 
-      {/* Testimonial */}
-      <SectionWrapper background="sage">
-        <div className="mx-auto max-w-3xl text-center">
-          <AnimateInView>
-            <div className="mb-4 flex items-center justify-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="size-6 fill-amber-400 text-amber-400"
-                />
-              ))}
-            </div>
-            <blockquote className="text-xl font-medium leading-relaxed text-white md:text-2xl">
-              &ldquo;Very nice home clean and all new furniture is very nice
-              decor casual elegance pool great quiet neighborhood.&rdquo;
-            </blockquote>
-            <p className="mt-4 text-white/80">
-             , Dirk, Waurika, OK
-            </p>
-          </AnimateInView>
+      {/* Live Hochatown market snapshot */}
+      <SectionWrapper background="white" id="market">
+        <div className="mx-auto mb-8 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            The Hochatown short-term rental market, right now
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            Live AirROI data on comparable cabins in the Hochatown market.
+            Paste your listing URL for a full gap analysis.
+          </p>
+        </div>
+        <div className="mx-auto max-w-3xl">
+          <AuditCalculator variant="hero" />
         </div>
       </SectionWrapper>
 
-      {/* FAQ */}
+      {/* About the Hochatown market */}
+      <SectionWrapper background="cream">
+        <div className="mx-auto max-w-3xl prose prose-lg prose-charcoal">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Why Hochatown is one of Oklahoma&apos;s strongest STR markets
+          </h2>
+          <p>
+            Hochatown sits directly at the gateway to{" "}
+            <a
+              href="https://www.travelok.com/listings/view.profile/id.6919"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Beavers Bend State Park
+            </a>
+            , which is Oklahoma&apos;s most visited park and the primary demand
+            driver for cabin rentals in the region. The town is a 2.5-hour
+            drive from Dallas-Fort Worth, which is why a large share of
+            Hochatown cabins are owned by DFW investors and booked by Texas
+            families. Oklahoma City and Tulsa owners and guests round out the
+            core drive-market pool.
+          </p>
+          <p>
+            Hochatown became Oklahoma&apos;s newest incorporated town in 2024,
+            meaning STR regulations are actively evolving. Owners here need a
+            management partner who follows these changes closely, handles
+            permit and occupancy-tax compliance, and adjusts pricing around
+            local peak events (Beavers Bend Marathon, fall foliage, spring
+            break, winter holidays) rather than applying a generic national
+            model.
+          </p>
+          <p>
+            Frontier is based at 3156 Old Broken Bow Hwy, in the Hochatown and
+            Broken Bow corridor. Our full team lives here, our cleaners and
+            maintenance vendors are local, and our response times are measured
+            in minutes rather than hours. If you own a cabin anywhere from
+            downtown Hochatown down to Broken Bow Lake, we can reach your
+            property faster than any national PMS.
+          </p>
+          <p>
+            <Link href="/discover-broken-bow" className="underline hover:text-sage-dark">
+              See our complete visitor guide to the Broken Bow and Hochatown area →
+            </Link>
+          </p>
+        </div>
+      </SectionWrapper>
+
+      {/* Hochatown-specific FAQ */}
       <SectionWrapper background="white">
-        <FAQSection questions={managementFAQ.slice(0, 6)} />
+        <FAQSection
+          title="Hochatown owner questions"
+          questions={hochatownFAQ}
+        />
+      </SectionWrapper>
+
+      {/* General management FAQ */}
+      <SectionWrapper background="cream">
+        <FAQSection
+          title="General management questions"
+          questions={managementFAQ.slice(0, 6)}
+        />
       </SectionWrapper>
 
       {/* CTA */}

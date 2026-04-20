@@ -71,6 +71,15 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://rentwithfrontier.com",
   },
+  verification: {
+    // Google: handled by the static file public/google39354f42bb809440.html
+    // Bing: add your Bing Webmaster Tools meta tag here once the site is
+    // registered at https://www.bing.com/webmasters. Leave the value empty
+    // to skip the tag; Next.js omits empty values.
+    other: {
+      "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION ?? "",
+    },
+  },
 };
 
 export default function RootLayout({

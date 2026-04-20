@@ -13,13 +13,24 @@ import { managementFAQ } from "@/data/services";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Broken Bow Cabin Property Management",
+  title: "Broken Bow Cabin Property Management | Local Team, 20% Flat Fee",
   description:
-    "Professional short-term rental management for Broken Bow cabin owners. Frontier Property Management handles marketing, guests, cleaning, and maintenance so you earn more.",
+    "Broken Bow, OK cabin management by a locally based team. 20% flat fee, no setup costs, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+  keywords: [
+    "Broken Bow property management",
+    "Broken Bow cabin management",
+    "Broken Bow vacation rental management",
+    "Broken Bow Airbnb management",
+    "cabin manager Broken Bow",
+    "short-term rental management Broken Bow OK",
+  ],
   openGraph: {
-    title: "Broken Bow Cabin Property Management | Frontier Property Management",
+    title: "Broken Bow Cabin Property Management | Frontier",
     description:
-      "Professional short-term rental management for Broken Bow cabin owners. Maximize revenue with Frontier.",
+      "Local Broken Bow cabin management. 20% flat fee, no setup costs, Airbnb Top Rated Host across every cabin.",
+  },
+  alternates: {
+    canonical: "https://rentwithfrontier.com/broken-bow-property-management",
   },
 };
 
@@ -46,7 +57,7 @@ const valueProps = [
     icon: "TrendingUp",
     title: "Revenue Optimization",
     description:
-      "Dynamic pricing adjusted daily based on Broken Bow market demand, seasonality, local events, and competitor rates. Our owners typically see 15-30% revenue increases.",
+      "Dynamic pricing adjusted daily based on Broken Bow market demand, seasonality, local events, and comp activity. Runs our free audit to see the specific gap on your listing.",
   },
 ];
 

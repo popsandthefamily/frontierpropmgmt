@@ -41,6 +41,9 @@ export async function generateMetadata({
       authors: [post.author],
       images: post.featuredImage ? [{ url: post.featuredImage }] : [],
     },
+    alternates: {
+      canonical: `https://rentwithfrontier.com/blogs/${slug}`,
+    },
   };
 }
 

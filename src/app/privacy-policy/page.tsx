@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Privacy policy for Frontier Property Management. Learn how we collect, use, and protect your personal information.",
+  alternates: { canonical: "https://rentwithfrontier.com/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {
