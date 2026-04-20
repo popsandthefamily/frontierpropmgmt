@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TurnstileWidget } from "./turnstile-widget";
 import type { MarketSnapshot } from "@/lib/audit/types";
+import { track } from "@/lib/analytics";
 
 const BEDROOM_OPTIONS = ["Studio", "1", "2", "3", "4", "5+"] as const;
 const TYPE_OPTIONS = [
@@ -51,6 +52,11 @@ export function Tier1Form() {
       if (!res.ok) throw new Error(data.error || "Something went wrong.");
       setSnapshot(data.snapshot as MarketSnapshot);
       setStatus("success");
+      track("audit_tier1_submitted", {
+        city: String(fd.get("city") || ""),
+        bedrooms,
+        property_type: String(fd.get("propertyType") || ""),
+      });
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong.");

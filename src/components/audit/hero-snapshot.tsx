@@ -6,6 +6,7 @@ import { ArrowRight, TrendingUp, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { DefaultMarketSnapshot } from "@/lib/audit/default-snapshot";
 import { Tier1Form } from "./tier1-form";
+import { track } from "@/lib/analytics";
 
 interface Props {
   snapshot: DefaultMarketSnapshot | null;
@@ -74,6 +75,7 @@ export function HeroSnapshot({ snapshot, auditHref = "#full-audit" }: Props) {
             asChild
             size="lg"
             className="bg-sage text-white hover:bg-sage-dark"
+            onClick={() => track("audit_tier2_started", { from: "hero_snapshot" })}
           >
             {auditHref.startsWith("#") ? (
               <a href={auditHref}>

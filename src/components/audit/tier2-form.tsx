@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { TurnstileWidget } from "./turnstile-widget";
 import { VerifyCode } from "./verify-code";
 import { LoadingAudit } from "./loading-audit";
+import { track } from "@/lib/analytics";
 
 type Stage = "form" | "verify" | "running" | "done";
 type Status = "idle" | "submitting" | "error";
@@ -90,6 +91,7 @@ export function Tier2Form() {
       }
       setStage("verify");
       setStatus("idle");
+      track("audit_email_submitted");
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -102,6 +104,7 @@ export function Tier2Form() {
         email={email}
         onVerified={(reportId) => {
           setStage("running");
+          track("audit_completed", { report_id: reportId });
           // Give the loader a moment, then push to the report.
           setTimeout(() => {
             router.push(`/audit/result/${reportId}`);

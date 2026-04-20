@@ -60,7 +60,7 @@ export default function ContactPage() {
       />
 
       {/* Two-Column Layout */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="white" id="discovery">
         <div className="grid gap-12 lg:grid-cols-3">
           {/* Left, Contact Form (2/3 width) */}
           <div className="lg:col-span-2">

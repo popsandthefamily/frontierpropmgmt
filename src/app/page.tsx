@@ -17,6 +17,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { ComparisonTable } from "@/components/sections/comparison-table";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
@@ -194,7 +195,21 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── 4. How it works ──────────────────────────────────────────── */}
+      {/* ── 4. Compared to the alternatives ──────────────────────────── */}
+      <SectionWrapper background="white">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Compared to the alternatives
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            If you&apos;re weighing self-management or a national PMS, here&apos;s
+            how the numbers line up.
+          </p>
+        </div>
+        <ComparisonTable />
+      </SectionWrapper>
+
+      {/* ── 5. How it works ──────────────────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">

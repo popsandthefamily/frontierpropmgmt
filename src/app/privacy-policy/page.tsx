@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Last updated: December 3, 2025
+            Last updated: April 20, 2026
           </p>
         </div>
 
@@ -88,6 +88,67 @@ export default function PrivacyPolicyPage() {
               Send occasional marketing communications (with your consent)
             </li>
             <li>Comply with legal obligations and protect our rights</li>
+          </ul>
+
+          {/* Audit tool data */}
+          <h3>Data submitted through the free audit tool</h3>
+          <p>
+            When you use the free revenue estimate or full listing audit at{" "}
+            <Link href="/audit">/audit</Link>, we collect:
+          </p>
+          <ul>
+            <li>The Airbnb listing URL you submit</li>
+            <li>The email address you use to verify and receive the report</li>
+            <li>
+              A cryptographically hashed version of your IP address (used only
+              for rate-limiting, not stored in plain text)
+            </li>
+            <li>
+              The report itself, including pricing, occupancy, and amenity
+              gap analysis generated from publicly available AirROI market data
+            </li>
+          </ul>
+          <p>
+            Audit data is retained for 90 days in our session store (Upstash
+            Redis), after which it is automatically deleted. Individual report
+            pages (e.g.{" "}
+            <code>/audit/result/[id]</code>) are accessible via direct link
+            during that retention window but are excluded from search engine
+            indexing.
+          </p>
+
+          {/* Sub-processors */}
+          <h3>Sub-processors used by the audit tool</h3>
+          <p>
+            The audit tool relies on the following vendors, each of which
+            receives only the minimum data required to perform its function:
+          </p>
+          <ul>
+            <li>
+              <strong>AirROI</strong> (airroi.com), for short-term rental
+              market data. Receives: anonymized market coordinates, bedroom /
+              bathroom / guest counts, and the listing ID you submit.
+            </li>
+            <li>
+              <strong>Groq</strong> (groq.com), for the written summary in
+              your report. Receives: pre-calculated gap numbers only. No
+              personal information is sent.
+            </li>
+            <li>
+              <strong>Resend</strong> (resend.com), for the verification
+              email and report delivery. Receives: your email address and the
+              email contents.
+            </li>
+            <li>
+              <strong>Cloudflare Turnstile</strong>
+              (cloudflare.com/products/turnstile), to block automated abuse.
+              Receives: a one-time challenge token, not personal information.
+            </li>
+            <li>
+              <strong>Upstash Redis</strong> (upstash.com), for rate-limiting
+              and report storage. Receives: hashed IP, email, and report
+              contents for the retention window.
+            </li>
           </ul>
 
           {/* 3. Mobile / SMS Data */}

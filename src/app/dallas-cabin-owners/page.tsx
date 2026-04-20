@@ -12,6 +12,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -79,7 +80,7 @@ const dallasFAQ = [
   {
     question: "What kind of revenue can I expect?",
     answer:
-      "Results vary by property, but our owners typically see a 15-30% increase in revenue within the first 6 months through optimized pricing, professional listings, and higher occupancy rates. We are happy to run a free revenue estimate for your specific property.",
+      "Results vary by property, market timing, and starting condition. Most owners see meaningful revenue lift in the first six months through pricing optimization, listing rewrites, and higher occupancy, but we won't quote a number without first running your specific listing against current AirROI market data. The free audit does exactly that.",
   },
   {
     question: "Do you help with purchasing a cabin investment?",
@@ -105,7 +106,7 @@ const painPoints = [
     icon: TrendingUp,
     title: "Leaving Revenue on the Table",
     description:
-      "Without daily dynamic pricing, multi-platform distribution, and professional photography, most self-managed cabins earn 15-30% less than their potential.",
+      "Without daily dynamic pricing, multi-platform distribution, and professional photography, self-managed cabins routinely underprice peak weekends and miss event surcharges. The free audit shows the exact gap on your listing.",
   },
   {
     icon: ShieldCheck,
@@ -176,11 +177,11 @@ export default function DallasCabinOwnersPage() {
         overlay="gradient"
         cta={{
           label: "Get a Free Revenue Estimate",
-          href: "/contact",
+          href: "/audit",
         }}
         secondaryCta={{
-          label: "Try the Income Calculator",
-          href: "/income-calculator",
+          label: "Schedule a Discovery Call",
+          href: "/contact#discovery",
         }}
       />
 
@@ -224,17 +225,33 @@ export default function DallasCabinOwnersPage() {
         </div>
       </SectionWrapper>
 
+      {/* Free live market snapshot */}
+      <SectionWrapper background="white" id="calculator">
+        <div className="mx-auto mb-8 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            What cabins earn in Broken Bow right now
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            Live AirROI data for the local market. Paste your Airbnb URL for
+            specifics on your cabin.
+          </p>
+        </div>
+        <div className="mx-auto max-w-3xl">
+          <AuditCalculator variant="hero" />
+        </div>
+      </SectionWrapper>
+
       {/* Why Dallas Owners Choose Frontier */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div>
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
               Why Dallas Owners Choose Frontier
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Over half of our managed cabins are owned by investors in the
-              Dallas-Fort Worth area. We built our entire operation around
-              making remote ownership simple and profitable.
+              Many of our managed cabins are owned by investors in the
+              Dallas-Fort Worth area. We built our operation around making
+              remote ownership simple and profitable.
             </p>
             <ul className="mt-8 space-y-4">
               {[
