@@ -19,8 +19,11 @@ export function DiscoveryCallEmbed({ calLink = "rentwithfrontier" }: Props) {
       cal("ui", {
         theme: "light",
         cssVarsPerTheme: {
-          light: { "cal-brand": "#4a6e5d" },
-          dark: { "cal-brand": "#6f9f86" },
+          // AAA-compliant (7:1) versions of the sage brand so Cal.com's
+          // button contrast check passes. Light theme uses sage-dark on
+          // white; dark theme uses a brighter sage on Cal's dark surface.
+          light: { "cal-brand": "#3a5a4a" },
+          dark: { "cal-brand": "#8ebfa0" },
         },
         hideEventTypeDetails: false,
         layout: "month_view",
