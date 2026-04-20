@@ -1,12 +1,11 @@
 import type {
+  AirROIListing,
   LeakAnalysis,
-  ListingData,
-  MarketSummary,
   Recommendation,
   RevenueEstimate,
 } from "./types";
 
-export function median(values: number[]): number {
+function median(values: number[]): number {
   const filtered = values.filter((v) => Number.isFinite(v));
   if (filtered.length === 0) return 0;
   const sorted = [...filtered].sort((a, b) => a - b);
@@ -16,16 +15,20 @@ export function median(values: number[]): number {
     : sorted[mid];
 }
 
+function capitalize(s: string): string {
+  return s.replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export function findMissingAmenities(
-  target: ListingData,
-  comps: ListingData[],
+  target: AirROIListing,
+  comps: AirROIListing[],
 ): string[] {
   if (comps.length === 0) return [];
-  const targetSet = new Set((target.amenities || []).map((a) => a.toLowerCase()));
+  const targetSet = new Set((target.property_details.amenities ?? []).map((a) => a.toLowerCase()));
   const amenityCounts = new Map<string, number>();
   for (const comp of comps) {
     const seen = new Set<string>();
-    for (const raw of comp.amenities || []) {
+    for (const raw of comp.property_details.amenities ?? []) {
       const key = raw.toLowerCase();
       if (seen.has(key)) continue;
       seen.add(key);
@@ -45,16 +48,15 @@ export function findMissingAmenities(
     "pool table",
     "washer",
     "dryer",
-    "workspace",
+    "dedicated workspace",
     "high chair",
     "crib",
-    "pet friendly",
+    "pets allowed",
   ]);
   return Array.from(amenityCounts.entries())
     .filter(([amenity, count]) => {
       if (count < threshold) return false;
       if (targetSet.has(amenity)) return false;
-      // Favor high-signal amenities first
       return highValueSignals.has(amenity) || count / comps.length > 0.7;
     })
     .sort((a, b) => b[1] - a[1])
@@ -62,103 +64,105 @@ export function findMissingAmenities(
     .map(([amenity]) => capitalize(amenity));
 }
 
-function capitalize(s: string): string {
-  return s.replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-export function buildRecommendations(
-  target: ListingData,
-  _estimate: RevenueEstimate,
-  comps: ListingData[],
-  _market: MarketSummary,
-  leaks: Omit<LeakAnalysis, "recommendations">,
+function buildRecommendations(
+  target: AirROIListing,
+  comps: AirROIListing[],
+  partial: Omit<LeakAnalysis, "recommendations">,
 ): Recommendation[] {
   const recs: Recommendation[] = [];
+  const targetADR = target.performance_metrics?.ttm_avg_rate ?? 0;
+  const targetOcc = target.performance_metrics?.ttm_occupancy ?? 0;
+  const targetPhotos = target.listing_info.photos_count ?? 0;
 
-  // Pricing gap — if we're >10% below comp median ADR
-  if (leaks.priceGap > 0 && target.adr > 0 && leaks.priceGap / target.adr > 0.1) {
-    const nightsBooked = Math.round(target.occupancy_rate * 365);
-    const dollarImpact = Math.round(leaks.priceGap * nightsBooked);
+  if (partial.priceGap > 0 && targetADR > 0 && partial.priceGap / targetADR > 0.1) {
+    const nightsBooked = Math.max(1, Math.round(targetOcc * 365));
+    const dollarImpact = Math.round(partial.priceGap * nightsBooked);
     recs.push({
       priority: 1,
       category: "pricing",
-      description: `Your nightly rate is $${Math.round(leaks.priceGap)} below comparable listings. Align pricing with comps to capture ~$${dollarImpact.toLocaleString()}/yr.`,
+      description: `Your nightly rate is $${Math.round(partial.priceGap)} below comparable listings. Aligning pricing with comps recovers roughly $${dollarImpact.toLocaleString()}/yr.`,
       dollar_impact: dollarImpact,
     });
   }
 
-  // Occupancy gap — >8 points below comps
-  if (leaks.occupancyGap > 0.08) {
-    const extraNights = Math.round(leaks.occupancyGap * 365);
-    const dollarImpact = Math.round(extraNights * target.adr);
+  if (partial.occupancyGap > 0.08 && targetADR > 0) {
+    const extraNights = Math.round(partial.occupancyGap * 365);
+    const dollarImpact = Math.round(extraNights * targetADR);
     recs.push({
       priority: 2,
       category: "occupancy",
-      description: `You're booked ${(leaks.occupancyGap * 100).toFixed(0)} points fewer nights than similar properties — roughly ${extraNights} unbooked nights worth ~$${dollarImpact.toLocaleString()}/yr.`,
+      description: `You're booked ${(partial.occupancyGap * 100).toFixed(0)} points fewer nights than similar properties — roughly ${extraNights} unbooked nights worth about $${dollarImpact.toLocaleString()}/yr.`,
       dollar_impact: dollarImpact,
     });
   }
 
-  // Amenity gaps
-  if (leaks.amenityGaps.length > 0) {
+  if (partial.amenityGaps.length > 0) {
     recs.push({
       priority: 3,
       category: "amenities",
-      description: `Top-performing comps offer ${leaks.amenityGaps.slice(0, 3).join(", ")}. Adding these aligns you with what books.`,
-      dollar_impact: Math.round(leaks.amenityGaps.length * 1000),
+      description: `Top comps offer ${partial.amenityGaps.slice(0, 3).join(", ")}. Adding these aligns you with what books.`,
+      dollar_impact: Math.round(partial.amenityGaps.length * 1000),
     });
   }
 
-  // Photo count
-  if (leaks.photoGap > 5) {
+  if (partial.photoGap > 5) {
+    const compMedian = Math.round(partial.photoGap + targetPhotos);
     recs.push({
       priority: 4,
       category: "photos",
-      description: `Comp listings use a median of ${Math.round(leaks.photoGap + target.photos_count)} photos. You have ${target.photos_count}. Add professional shots to lift click-through.`,
+      description: `Comparable listings show a median of ${compMedian} photos. You have ${targetPhotos}. More professional shots lift click-through and book rate.`,
       dollar_impact: 1500,
     });
   }
 
-  // Rating
-  if (leaks.ratingGap > 0.3) {
+  if (partial.ratingGap > 0.3) {
     recs.push({
       priority: 5,
       category: "rating",
-      description: `Your rating trails comps by ${leaks.ratingGap.toFixed(2)} points. Tighter cleaning protocols and pre-arrival messaging typically close this within 10–15 stays.`,
+      description: `Your rating trails comps by ${partial.ratingGap.toFixed(2)} points. Tighter cleaning protocols and pre-arrival messaging typically close this within 10–15 stays.`,
       dollar_impact: 2000,
     });
   }
 
-  // Normalize priorities
+  void comps;
   return recs
     .sort((a, b) => b.dollar_impact - a.dollar_impact)
     .map((r, i) => ({ ...r, priority: i + 1 }));
 }
 
 export function calculateLeaks(
-  target: ListingData,
+  target: AirROIListing,
   estimate: RevenueEstimate,
-  comps: ListingData[],
-  market: MarketSummary,
+  comps: AirROIListing[],
 ): LeakAnalysis {
-  const targetRevenue = estimate.annual_revenue_projection ?? 0;
-  const medianRevenue = market.revenue_p50 ?? 0;
-  const topQuartileRevenue = market.revenue_p75 ?? 0;
+  const pm = target.performance_metrics ?? {};
+  const targetRevenue = pm.ttm_revenue ?? 0;
+  const targetADR = pm.ttm_avg_rate ?? 0;
+  const targetOcc = pm.ttm_occupancy ?? 0;
+  const targetPhotos = target.listing_info.photos_count ?? 0;
+  const targetRating = target.ratings?.rating_overall ?? 0;
 
-  const validComps = comps.filter((c) => c && Number.isFinite(c.adr));
-  const compADRMedian = median(validComps.map((c) => c.adr));
-  const compOccMedian = median(validComps.map((c) => c.occupancy_rate));
-  const compPhotosMedian = median(validComps.map((c) => c.photos_count ?? 0));
-  const compRatingMedian = median(validComps.map((c) => c.rating ?? 0));
+  const medianRevenue = estimate.percentiles?.revenue?.p50 ?? estimate.revenue ?? 0;
+  const topQuartileRevenue = estimate.percentiles?.revenue?.p75 ?? 0;
+  const marketADRMedian = estimate.percentiles?.average_daily_rate?.p50 ?? estimate.average_daily_rate ?? 0;
+  const marketOccMedian = estimate.percentiles?.occupancy?.p50 ?? estimate.occupancy ?? 0;
 
-  const priceGap = Math.max(0, compADRMedian - target.adr);
-  const occupancyGap = Math.max(0, compOccMedian - target.occupancy_rate);
+  // Prefer comp-based comparisons when we have enough comps (more listing-relevant than market-wide)
+  const validComps = comps.filter((c) => Number.isFinite(c.performance_metrics?.ttm_avg_rate));
+  const compADRMedian = validComps.length >= 3
+    ? median(validComps.map((c) => c.performance_metrics?.ttm_avg_rate ?? 0))
+    : marketADRMedian;
+  const compOccMedian = validComps.length >= 3
+    ? median(validComps.map((c) => c.performance_metrics?.ttm_occupancy ?? 0))
+    : marketOccMedian;
+  const compPhotosMedian = median(validComps.map((c) => c.listing_info.photos_count ?? 0));
+  const compRatingMedian = median(validComps.map((c) => c.ratings?.rating_overall ?? 0));
+
+  const priceGap = Math.max(0, compADRMedian - targetADR);
+  const occupancyGap = Math.max(0, compOccMedian - targetOcc);
 
   const rawLeak = Math.max(0, medianRevenue - targetRevenue);
   const displayLeak = Math.min(rawLeak, 75000);
-
-  const photoGap = Math.max(0, compPhotosMedian - (target.photos_count ?? 0));
-  const ratingGap = Math.max(0, compRatingMedian - (target.rating ?? 0));
 
   const partial = {
     targetAnnualRevenue: Math.round(targetRevenue),
@@ -168,11 +172,11 @@ export function calculateLeaks(
     priceGap,
     occupancyGap,
     amenityGaps: findMissingAmenities(target, validComps),
-    photoGap,
-    ratingGap,
+    photoGap: Math.max(0, compPhotosMedian - targetPhotos),
+    ratingGap: Math.max(0, compRatingMedian - targetRating),
   };
 
-  const recommendations = buildRecommendations(target, estimate, validComps, market, partial);
+  const recommendations = buildRecommendations(target, validComps, partial);
 
   return { ...partial, recommendations };
 }

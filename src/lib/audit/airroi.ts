@@ -1,10 +1,6 @@
-import type {
-  ListingData,
-  MarketSummary,
-  RevenueEstimate,
-} from "./types";
+import type { AirROIListing, RevenueEstimate } from "./types";
 
-const BASE = process.env.AIRROI_BASE_URL || "https://api.airroi.com/v1";
+const BASE = (process.env.AIRROI_BASE_URL || "https://api.airroi.com").replace(/\/$/, "");
 const KEY = process.env.AIRROI_API_KEY;
 
 export class AirROIError extends Error {
@@ -16,89 +12,81 @@ export class AirROIError extends Error {
   }
 }
 
-async function airroiRequest<T = unknown>(
-  path: string,
-  options: RequestInit = {},
-): Promise<T> {
+async function airroi<T>(path: string, init: RequestInit = {}): Promise<T> {
   if (!KEY) throw new AirROIError("AIRROI_API_KEY not configured", 500);
   const res = await fetch(`${BASE}${path}`, {
-    ...options,
+    ...init,
     headers: {
-      Authorization: `Bearer ${KEY}`,
+      "X-API-KEY": KEY,
       "Content-Type": "application/json",
       Accept: "application/json",
-      ...options.headers,
+      ...init.headers,
     },
-    // No caching — pricing/occupancy data must be fresh
     cache: "no-store",
   });
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new AirROIError(`AirROI ${path} ${res.status}: ${body.slice(0, 300)}`, res.status);
+    throw new AirROIError(
+      `AirROI ${path} ${res.status}: ${body.slice(0, 300)}`,
+      res.status,
+    );
   }
   return (await res.json()) as T;
 }
 
-// ----- Endpoint wrappers ------------------------------------------------
+// ----- Endpoints --------------------------------------------------------
 
 export async function lookupMarket(lat: number, lng: number) {
-  return airroiRequest<{ market_id: string; name?: string }>(
-    `/markets/lookup?lat=${lat}&lng=${lng}`,
-  );
+  return airroi<{
+    full_name: string;
+    country: string;
+    region: string;
+    locality: string;
+    district: string | null;
+  }>(`/markets/lookup?lat=${lat}&lng=${lng}`);
 }
 
-export async function searchMarkets(query: string) {
-  return airroiRequest<{ results: Array<{ market_id: string; name: string; city?: string; region?: string }> }>(
-    `/markets/search?q=${encodeURIComponent(query)}`,
-  );
+export async function getListing(listingId: string): Promise<AirROIListing> {
+  return airroi<AirROIListing>(`/listings?id=${encodeURIComponent(listingId)}&currency=usd`);
 }
 
-export async function getMarketSummary(marketId: string): Promise<MarketSummary> {
-  return airroiRequest<MarketSummary>("/markets/summary", {
-    method: "POST",
-    body: JSON.stringify({ market_id: marketId }),
-  });
-}
-
-export async function getMarketOccupancy(marketId: string) {
-  return airroiRequest<{ occupancy_p50: number; occupancy_p75: number }>(
-    `/markets/metrics/occupancy?market_id=${encodeURIComponent(marketId)}`,
-  );
-}
-
-export async function getListing(listingId: string): Promise<ListingData> {
-  return airroiRequest<ListingData>(`/listings?id=${encodeURIComponent(listingId)}`);
-}
-
-export async function getRevenueEstimate(params: {
-  lat: number;
-  lng: number;
+export interface CalculatorParams {
+  address?: string;
+  lat?: number;
+  lng?: number;
   bedrooms: number;
-  bathrooms: number;
-  accommodates: number;
-  propertyType: string;
-}): Promise<RevenueEstimate> {
+  baths: number;
+  guests: number;
+}
+
+export async function getRevenueEstimate(p: CalculatorParams): Promise<RevenueEstimate> {
+  const qs = new URLSearchParams();
+  if (p.address) qs.set("address", p.address);
+  if (p.lat != null) qs.set("lat", String(p.lat));
+  if (p.lng != null) qs.set("lng", String(p.lng));
+  qs.set("bedrooms", String(Math.max(1, p.bedrooms))); // studio → 1
+  qs.set("baths", String(p.baths));
+  qs.set("guests", String(p.guests));
+  qs.set("currency", "usd");
+  return airroi<RevenueEstimate>(`/calculator/estimate?${qs.toString()}`);
+}
+
+export async function getComparables(params: {
+  latitude: number;
+  longitude: number;
+  bedrooms: number;
+  baths: number;
+  guests: number;
+}): Promise<{ listings: AirROIListing[] }> {
   const qs = new URLSearchParams({
-    lat: String(params.lat),
-    lng: String(params.lng),
-    bedrooms: String(params.bedrooms),
-    bathrooms: String(params.bathrooms),
-    accommodates: String(params.accommodates),
-    property_type: params.propertyType,
+    latitude: String(params.latitude),
+    longitude: String(params.longitude),
+    bedrooms: String(Math.max(1, params.bedrooms)),
+    baths: String(params.baths),
+    guests: String(params.guests),
+    currency: "usd",
   }).toString();
-  return airroiRequest<RevenueEstimate>(`/calculator/estimate?${qs}`);
-}
-
-export async function getComparables(listingId: string): Promise<{ comparables: ListingData[] }> {
-  return airroiRequest<{ comparables: ListingData[] }>(
-    `/listings/comparables?id=${encodeURIComponent(listingId)}`,
-  );
-}
-
-export async function getFutureRates(listingId: string) {
-  return airroiRequest<{ avg_future_rate: number; bookings_on_books: number }>(
-    `/listings/future/rates?id=${encodeURIComponent(listingId)}`,
-  );
+  return airroi<{ listings: AirROIListing[] }>(`/listings/comparables?${qs}`);
 }
 
 // ----- URL parsing ------------------------------------------------------
@@ -117,4 +105,16 @@ export function extractListingId(url: string): string | null {
 
 export function isLikelyAirbnbUrl(url: string): boolean {
   return /airbnb\.com\/(rooms|h)\//i.test(url) || /abnb\.me\//i.test(url);
+}
+
+// ----- Helpers ----------------------------------------------------------
+
+export function guestsFromBedrooms(bedrooms: number): number {
+  return bedrooms === 0 ? 2 : bedrooms * 2 + 2;
+}
+
+export function bathsFromBedrooms(bedrooms: number): number {
+  if (bedrooms <= 1) return 1;
+  if (bedrooms === 2) return 1.5;
+  return 2;
 }

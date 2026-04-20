@@ -1,24 +1,14 @@
 import {
+  bathsFromBedrooms,
   getComparables,
-  getFutureRates,
   getListing,
-  getMarketSummary,
   getRevenueEstimate,
-  lookupMarket,
+  guestsFromBedrooms,
 } from "./airroi";
 import { calculateLeaks } from "./pricing-math";
 import { summarizeAudit } from "./groq";
 import { newId, saveReport } from "./report-store";
-import type {
-  AuditReport,
-  ListingData,
-  MarketSummary,
-  RevenueEstimate,
-} from "./types";
-
-function unwrap<T>(r: PromiseSettledResult<T>): T | null {
-  return r.status === "fulfilled" ? r.value : null;
-}
+import type { AuditReport } from "./types";
 
 export async function runFullAudit(params: {
   listingId: string;
@@ -26,53 +16,43 @@ export async function runFullAudit(params: {
   email: string;
 }): Promise<AuditReport> {
   const listing = await getListing(params.listingId);
+  const { latitude, longitude } = listing.location_info;
+  const { bedrooms, baths, guests } = {
+    bedrooms: listing.property_details.bedrooms,
+    baths: listing.property_details.baths || bathsFromBedrooms(listing.property_details.bedrooms),
+    guests: listing.property_details.guests || guestsFromBedrooms(listing.property_details.bedrooms),
+  };
 
-  const marketLookup = listing.market_id
-    ? Promise.resolve({ market_id: listing.market_id, name: undefined })
-    : lookupMarket(listing.lat, listing.lng);
-
-  const results = await Promise.allSettled([
-    Promise.resolve(listing),
-    getRevenueEstimate({
-      lat: listing.lat,
-      lng: listing.lng,
-      bedrooms: listing.bedrooms,
-      bathrooms: listing.bathrooms,
-      accommodates: listing.accommodates,
-      propertyType: listing.property_type,
-    }),
-    getComparables(params.listingId),
-    getFutureRates(params.listingId).catch(() => null),
-    marketLookup.then((m) => getMarketSummary(m.market_id)),
+  const [estimateRes, compsRes] = await Promise.allSettled([
+    getRevenueEstimate({ lat: latitude, lng: longitude, bedrooms, baths, guests }),
+    getComparables({ latitude, longitude, bedrooms, baths, guests }),
   ]);
 
-  const listingOK = unwrap(results[0]) as ListingData | null;
-  const estimate = unwrap(results[1]) as RevenueEstimate | null;
-  const compsData = unwrap(results[2]) as { comparables: ListingData[] } | null;
-  const market = unwrap(results[4]) as MarketSummary | null;
+  const estimate =
+    estimateRes.status === "fulfilled" ? estimateRes.value : null;
+  const comps =
+    compsRes.status === "fulfilled" ? compsRes.value.listings : [];
 
-  const successCount = [listingOK, estimate, compsData, market].filter(Boolean).length;
-  if (successCount < 3 || !listingOK || !estimate || !market) {
-    throw new Error("Insufficient data from provider");
+  if (!estimate) {
+    throw new Error("Market estimate unavailable from AirROI");
   }
 
-  const comps = compsData?.comparables ?? [];
-  const leaks = calculateLeaks(listingOK, estimate, comps, market);
+  const leaks = calculateLeaks(listing, estimate, comps);
   const summary = await summarizeAudit(leaks);
 
   const report: AuditReport = {
     id: newId(),
     createdAt: Date.now(),
     email: params.email,
-    listingId: params.listingId,
+    listingId: String(params.listingId),
     listingUrl: params.listingUrl,
     listing: {
-      title: listingOK.title,
-      city: listingOK.city,
-      region: listingOK.region,
-      bedrooms: listingOK.bedrooms,
-      bathrooms: listingOK.bathrooms,
-      propertyType: listingOK.property_type,
+      title: listing.listing_info.listing_name,
+      city: listing.location_info.locality,
+      region: listing.location_info.region,
+      bedrooms: listing.property_details.bedrooms,
+      bathrooms: listing.property_details.baths,
+      propertyType: listing.listing_info.listing_type || listing.listing_info.room_type || "home",
     },
     leaks,
     summary,

@@ -78,12 +78,14 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/* Paths that do NOT have a hero section — force solid header */
+/* Paths (and their subtrees) that do NOT have a hero section — force solid header */
 const SOLID_HEADER_PATHS = [
   "/sublime",
   "/old-broken-bow-highway",
   "/privacy-policy",
   "/rental-agreement",
+  "/audit",
+  "/admin",
 ];
 
 export function SiteHeader() {
@@ -91,7 +93,9 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const forceSolid = SOLID_HEADER_PATHS.includes(pathname);
+  const forceSolid = SOLID_HEADER_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + "/"),
+  );
   const isScrolled = forceSolid || scrollY > 50;
 
   return (
