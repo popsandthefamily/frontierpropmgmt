@@ -39,8 +39,9 @@ interface NavDropdownItem {
 type NavItem = NavLinkItem | NavDropdownItem;
 
 const NAV_ITEMS: NavItem[] = [
+  { label: "For Owners", href: "/management-services" },
   {
-    label: "Cabins",
+    label: "Properties",
     children: [
       {
         label: "Sublime Retreat",
@@ -59,22 +60,8 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-  {
-    label: "Explore",
-    children: [
-      {
-        label: "About Us",
-        href: "/about",
-        description: "Meet the team behind Frontier",
-      },
-      {
-        label: "Discover Broken Bow",
-        href: "/discover-broken-bow",
-        description: "Things to do, eat & see nearby",
-      },
-    ],
-  },
-  { label: "Management", href: "/management-services" },
+  { label: "About", href: "/about" },
+  { label: "Broken Bow Guide", href: "/discover-broken-bow" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -193,30 +180,25 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop CTAs — Split Pill */}
-        <div className="hidden lg:flex shrink-0 items-center justify-end">
-          <div className={cn(
-            "inline-flex items-center whitespace-nowrap rounded-full border overflow-hidden",
-            isScrolled ? "border-border" : "border-white/40"
-          )}>
-            <Link
-              href="/management-services"
-              className={cn(
-                "px-4 py-2 text-sm font-medium transition-colors border-r",
-                isScrolled
-                  ? "text-charcoal hover:bg-sage/10 border-border"
-                  : "text-white border-white/30 hover:bg-white/10"
-              )}
-            >
-              Owners
-            </Link>
-            <Link
-              href="/search"
-              className="px-5 py-2 text-sm font-semibold bg-sage text-white hover:bg-sage-dark transition-colors"
-            >
-              Book Now
-            </Link>
-          </div>
+        {/* Desktop CTAs — primary Estimate + ghost Book link */}
+        <div className="hidden lg:flex shrink-0 items-center justify-end gap-4">
+          <Link
+            href="/search"
+            className={cn(
+              "text-xs font-medium whitespace-nowrap transition-colors",
+              isScrolled
+                ? "text-muted-foreground hover:text-sage"
+                : "text-white/80 hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]",
+            )}
+          >
+            Book a Cabin →
+          </Link>
+          <Link
+            href="/#calculator"
+            className="inline-flex items-center whitespace-nowrap rounded-full bg-sage px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-sage-dark"
+          >
+            Get Estimate
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -287,16 +269,12 @@ export function SiteHeader() {
                     asChild
                     className="w-full bg-sage text-white hover:bg-sage-dark"
                   >
-                    <Link href="/search">Book a Cabin</Link>
+                    <Link href="/#calculator">Get a Revenue Estimate</Link>
                   </Button>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full"
-                  >
-                    <Link href="/management-services">Property Owners</Link>
+                  <Button asChild variant="outline" className="w-full">
+                    <Link href="/search">Book a Cabin</Link>
                   </Button>
                 </SheetClose>
               </div>

@@ -13,12 +13,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
+import { FAQSection } from "@/components/sections/faq-section";
 import { StepCard } from "@/components/cards/step-card";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
 import { siteConfig } from "@/data/site";
+import { homepageOwnerFAQ } from "@/data/homepage-faq";
 
 export const metadata: Metadata = {
   title:
@@ -69,6 +72,18 @@ const TRUST_STATS = [
 export default function HomePage() {
   return (
     <>
+      {/* FAQPage structured data — owner questions answered here */}
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: homepageOwnerFAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }}
+      />
+
       {/* ── 1. Owner-primary hero ───────────────────────────────────── */}
       <section className="relative bg-gradient-to-br from-cream via-white to-sage/5">
         {/* Tiny guest link — demoted but still present */}
@@ -264,7 +279,15 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── 6. Guest-facing strip (demoted) ──────────────────────────── */}
+      {/* ── 6. Owner FAQ ─────────────────────────────────────────────── */}
+      <SectionWrapper background="white">
+        <FAQSection
+          title="Owner questions, answered"
+          questions={homepageOwnerFAQ}
+        />
+      </SectionWrapper>
+
+      {/* ── 7. Guest-facing strip (demoted) ──────────────────────────── */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
           <div className="mx-auto max-w-2xl text-center">
