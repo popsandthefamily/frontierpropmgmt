@@ -62,9 +62,23 @@ export function ReportView({ report, siteUrl }: { report: AuditReport; siteUrl: 
         />
         <GapCard
           label="Amenities"
-          metric={`${report.leaks.amenityGaps.length} missing`}
-          tag={report.leaks.amenityGaps.slice(0, 2).join(", ") || "from top performers"}
-          impact={amenityRec ? fmt(amenityRec.dollar_impact) : undefined}
+          metric={
+            report.leaks.amenityGaps.length > 0
+              ? `${report.leaks.amenityGaps.length} missing`
+              : "Fully stocked"
+          }
+          tag={
+            report.leaks.amenityGaps.length > 0
+              ? report.leaks.amenityGaps.slice(0, 2).join(", ")
+              : "vs top comps"
+          }
+          // Intentionally no $/yr here — synthetic per-amenity dollar estimates
+          // aren't defensible. The recommendation still surfaces below.
+          footer={
+            report.leaks.amenityGaps.length > 0
+              ? "Premium amenities only"
+              : undefined
+          }
         />
       </section>
 
@@ -98,9 +112,11 @@ export function ReportView({ report, siteUrl }: { report: AuditReport; siteUrl: 
                     <span className="text-xs uppercase tracking-widest text-muted-foreground">
                       {r.category}
                     </span>
-                    <span className="text-sm font-semibold text-sage">
-                      ~{fmt(r.dollar_impact)}/yr
-                    </span>
+                    {r.dollar_impact > 0 && (
+                      <span className="text-sm font-semibold text-sage">
+                        ~{fmt(r.dollar_impact)}/yr
+                      </span>
+                    )}
                   </div>
                   <p className="text-base text-charcoal">{r.description}</p>
                 </div>
@@ -178,11 +194,13 @@ function GapCard({
   metric,
   tag,
   impact,
+  footer,
 }: {
   label: string;
   metric: string;
   tag: string;
   impact?: string;
+  footer?: string;
 }) {
   return (
     <div className="rounded-2xl border bg-white p-6">
@@ -191,11 +209,15 @@ function GapCard({
       </div>
       <div className="mt-2 text-3xl font-bold text-charcoal md:text-4xl">{metric}</div>
       <div className="mt-1 text-sm text-muted-foreground">{tag}</div>
-      {impact && (
+      {impact ? (
         <div className="mt-4 border-t pt-3 text-sm font-semibold text-sage">
           = {impact}/yr
         </div>
-      )}
+      ) : footer ? (
+        <div className="mt-4 border-t pt-3 text-xs uppercase tracking-widest text-muted-foreground">
+          {footer}
+        </div>
+      ) : null}
     </div>
   );
 }

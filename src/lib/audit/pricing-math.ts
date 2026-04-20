@@ -19,50 +19,99 @@ function capitalize(s: string): string {
   return s.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+/**
+ * Premium amenity signals — things a guest actively shops for that
+ * genuinely change booking behavior. Matched by substring against the
+ * lowercased amenity label, so "Private hot tub" still matches "hot tub".
+ *
+ * Intentionally excludes baseline items (hair dryer, heating, wifi,
+ * fridge, microwave, essentials, smoke alarm, etc). Those are
+ * table-stakes — missing them on a listing doesn't actually move revenue.
+ */
+const PREMIUM_AMENITY_PATTERNS: ReadonlyArray<{ pattern: string; label: string }> = [
+  { pattern: "hot tub", label: "Hot tub" },
+  { pattern: "pool", label: "Pool" },
+  { pattern: "sauna", label: "Sauna" },
+  { pattern: "ev charger", label: "EV charger" },
+  { pattern: "fire pit", label: "Fire pit" },
+  { pattern: "outdoor kitchen", label: "Outdoor kitchen" },
+  { pattern: "outdoor shower", label: "Outdoor shower" },
+  { pattern: "game room", label: "Game room" },
+  { pattern: "arcade", label: "Arcade" },
+  { pattern: "pool table", label: "Pool table" },
+  { pattern: "ping pong", label: "Ping pong" },
+  { pattern: "foosball", label: "Foosball" },
+  { pattern: "air hockey", label: "Air hockey" },
+  { pattern: "bbq grill", label: "BBQ grill" },
+  { pattern: "grill", label: "Grill" },
+  { pattern: "fire place", label: "Fireplace" },
+  { pattern: "fireplace", label: "Fireplace" },
+  { pattern: "wood stove", label: "Wood stove" },
+  { pattern: "waterfront", label: "Waterfront" },
+  { pattern: "lake access", label: "Lake access" },
+  { pattern: "lake view", label: "Lake view" },
+  { pattern: "water view", label: "Water view" },
+  { pattern: "mountain view", label: "Mountain view" },
+  { pattern: "kayak", label: "Kayaks" },
+  { pattern: "paddleboard", label: "Paddleboards" },
+  { pattern: "gym", label: "Home gym" },
+  { pattern: "exercise equipment", label: "Exercise equipment" },
+  { pattern: "projector", label: "Projector" },
+  { pattern: "theater", label: "Theater room" },
+  { pattern: "pets allowed", label: "Pet friendly" },
+  { pattern: "pet friendly", label: "Pet friendly" },
+  { pattern: "crib", label: "Crib" },
+  { pattern: "high chair", label: "High chair" },
+  { pattern: "pack n play", label: "Pack n play" },
+  { pattern: "ski in", label: "Ski in/out" },
+  { pattern: "beach access", label: "Beach access" },
+  { pattern: "private entrance", label: "Private entrance" },
+  { pattern: "ev level 2", label: "EV charger" },
+];
+
+function matchPremium(amenity: string): { pattern: string; label: string } | null {
+  const lower = amenity.toLowerCase();
+  for (const p of PREMIUM_AMENITY_PATTERNS) {
+    if (lower.includes(p.pattern)) return p;
+  }
+  return null;
+}
+
 export function findMissingAmenities(
   target: AirROIListing,
   comps: AirROIListing[],
 ): string[] {
   if (comps.length === 0) return [];
-  const targetSet = new Set((target.property_details.amenities ?? []).map((a) => a.toLowerCase()));
-  const amenityCounts = new Map<string, number>();
+
+  const targetAmenityRaw = target.property_details.amenities ?? [];
+  const targetPremiums = new Set<string>();
+  for (const a of targetAmenityRaw) {
+    const m = matchPremium(a);
+    if (m) targetPremiums.add(m.pattern);
+  }
+
+  // Count how many comps have each premium amenity (by canonical pattern)
+  const counts = new Map<string, { count: number; label: string }>();
   for (const comp of comps) {
     const seen = new Set<string>();
-    for (const raw of comp.property_details.amenities ?? []) {
-      const key = raw.toLowerCase();
-      if (seen.has(key)) continue;
-      seen.add(key);
-      amenityCounts.set(key, (amenityCounts.get(key) ?? 0) + 1);
+    for (const a of comp.property_details.amenities ?? []) {
+      const m = matchPremium(a);
+      if (!m || seen.has(m.pattern)) continue;
+      seen.add(m.pattern);
+      const prev = counts.get(m.pattern);
+      counts.set(m.pattern, { count: (prev?.count ?? 0) + 1, label: m.label });
     }
   }
-  const threshold = comps.length * 0.5;
-  const highValueSignals = new Set([
-    "hot tub",
-    "pool",
-    "sauna",
-    "ev charger",
-    "fire pit",
-    "game room",
-    "arcade",
-    "outdoor kitchen",
-    "pool table",
-    "washer",
-    "dryer",
-    "dedicated workspace",
-    "high chair",
-    "crib",
-    "pets allowed",
-  ]);
-  return Array.from(amenityCounts.entries())
-    .filter(([amenity, count]) => {
-      if (count < threshold) return false;
-      if (targetSet.has(amenity)) return false;
-      return highValueSignals.has(amenity) || count / comps.length > 0.7;
-    })
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
-    .map(([amenity]) => capitalize(amenity));
+
+  const threshold = Math.max(2, Math.ceil(comps.length * 0.5));
+  return Array.from(counts.entries())
+    .filter(([pattern, { count }]) => count >= threshold && !targetPremiums.has(pattern))
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, 4)
+    .map(([, { label }]) => label);
 }
+// Preserved for potential future use; `capitalize` no longer needed directly.
+void capitalize;
 
 function buildRecommendations(
   target: AirROIListing,
@@ -100,8 +149,10 @@ function buildRecommendations(
     recs.push({
       priority: 3,
       category: "amenities",
-      description: `Top comps offer ${partial.amenityGaps.slice(0, 3).join(", ")}. Adding these aligns you with what books.`,
-      dollar_impact: Math.round(partial.amenityGaps.length * 1000),
+      description: `Most top-performing comps offer ${partial.amenityGaps.slice(0, 3).join(", ")}. Adding these lifts click-through and lets you charge a premium.`,
+      // No defensible synthetic $ estimate — leave impact at 0 so it sorts
+      // below pricing/occupancy and the UI can omit the bogus $/yr number.
+      dollar_impact: 0,
     });
   }
 
