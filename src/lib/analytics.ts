@@ -26,6 +26,7 @@ export type AnalyticsEvent =
   | "audit_email_submitted"
   | "audit_completed"
   | "discovery_call_cta_clicked"
+  | "discovery_call_booked"
   | "comparison_table_viewed"
   | "guest_strip_clicked"
   | "nav_get_estimate_clicked";

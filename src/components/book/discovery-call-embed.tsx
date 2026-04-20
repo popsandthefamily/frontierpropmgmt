@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
+import { track } from "@/lib/analytics";
 
 interface Props {
   /**
@@ -23,6 +24,21 @@ export function DiscoveryCallEmbed({ calLink = "rentwithfrontier" }: Props) {
         },
         hideEventTypeDetails: false,
         layout: "month_view",
+      });
+
+      // Conversion tracking: fire GA event when a booking completes inside
+      // the embed. The event payload includes the Cal.com event type so we
+      // can tell discovery-call conversions apart from any future events.
+      cal("on", {
+        action: "bookingSuccessful",
+        callback: (e) => {
+          const detail = (e as CustomEvent).detail as {
+            data?: { eventType?: { slug?: string } };
+          };
+          track("discovery_call_booked", {
+            cal_event_slug: detail?.data?.eventType?.slug,
+          });
+        },
       });
     })();
   }, []);
