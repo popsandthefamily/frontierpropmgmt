@@ -13,6 +13,15 @@ const QUICK_LINKS = [
   { label: "Blog", href: "/blogs" },
 ];
 
+const LOCAL_LINKS = [
+  { label: "Broken Bow Guide", href: "/discover-broken-bow" },
+  {
+    label: "Hocha.Town",
+    href: "https://hocha.town",
+    external: true,
+  },
+];
+
 const PROPERTIES = [
   { label: "Sublime Retreat", href: "/sublime" },
   { label: "Old Broken Bow Highway", href: "/old-broken-bow-highway" },
@@ -109,7 +118,7 @@ export function SiteFooter() {
               </ul>
             </div>
 
-            {/* Column 3: Properties */}
+            {/* Column 3: Properties + Local */}
             <div>
               <h3 className="mb-4 text-lg font-heading text-charcoal">
                 Properties
@@ -125,6 +134,35 @@ export function SiteFooter() {
                     </Link>
                   </li>
                 ))}
+              </ul>
+
+              <h3 className="mb-4 mt-8 text-lg font-heading text-charcoal">
+                Local
+              </h3>
+              <ul className="flex flex-col gap-2">
+                {LOCAL_LINKS.map((link) =>
+                  link.external ? (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-charcoal/70 transition-colors hover:text-sage"
+                      >
+                        {link.label} ↗
+                      </a>
+                    </li>
+                  ) : (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-charcoal/70 transition-colors hover:text-sage"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
 
@@ -176,8 +214,13 @@ export function SiteFooter() {
 
       {/* Lower Section */}
       <div className="bg-charcoal">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-white/70 sm:flex-row lg:px-8">
-          <p>&copy; 2026 Frontier Property Management LLC. All rights reserved.</p>
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-4 py-6 text-sm text-white/70 sm:flex-row sm:items-center lg:px-8">
+          <div className="space-y-1">
+            <p>&copy; 2026 Frontier Property Management LLC. All rights reserved.</p>
+            <p className="text-xs text-white/50">
+              Site by Frontier Consulting Group LLC.
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy-policy"

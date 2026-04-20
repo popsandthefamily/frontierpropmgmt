@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Rental Agreement",
   description:
     "Vacation rental agreement terms and conditions for properties managed by Frontier Property Management in Broken Bow and Hochatown, Oklahoma.",
+  alternates: { canonical: "https://rentwithfrontier.com/rental-agreement" },
 };
 
 export default function RentalAgreementPage() {
@@ -21,12 +22,49 @@ export default function RentalAgreementPage() {
           <p className="mt-2 text-lg text-muted-foreground">
             Frontier Property Management, LLC
           </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Last updated April 20, 2026
+          </p>
         </div>
+
+        {/* Jump links */}
+        <nav
+          aria-label="Sections"
+          className="mx-auto mb-10 max-w-3xl rounded-lg border bg-cream/40 p-5 text-sm"
+        >
+          <p className="mb-3 font-semibold text-charcoal">Jump to a section:</p>
+          <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2">
+            <li><a href="#checkin" className="text-sage hover:underline">Check-In / Check-Out</a></li>
+            <li><a href="#payment" className="text-sage hover:underline">Payment Terms</a></li>
+            <li><a href="#guest-qualifications" className="text-sage hover:underline">Guest Qualifications</a></li>
+            <li><a href="#minimum-stay" className="text-sage hover:underline">Minimum Stay</a></li>
+            <li><a href="#occupancy" className="text-sage hover:underline">Occupancy</a></li>
+            <li><a href="#cancellation" className="text-sage hover:underline">Cancellation Policy</a></li>
+            <li><a href="#damage" className="text-sage hover:underline">Damage Protection</a></li>
+            <li><a href="#pets" className="text-sage hover:underline">Pet Policy</a></li>
+            <li><a href="#smoking" className="text-sage hover:underline">Smoking Policy</a></li>
+            <li><a href="#hot-tub" className="text-sage hover:underline">Hot Tub Rules</a></li>
+            <li><a href="#quiet-hours" className="text-sage hover:underline">Quiet Hours</a></li>
+            <li><a href="#wifi" className="text-sage hover:underline">Internet / Wi-Fi</a></li>
+            <li><a href="#parking" className="text-sage hover:underline">Parking &amp; Vehicles</a></li>
+            <li><a href="#visitors" className="text-sage hover:underline">Visitors &amp; Day Guests</a></li>
+            <li><a href="#fireworks" className="text-sage hover:underline">Fireworks &amp; Open Flame</a></li>
+            <li><a href="#weather" className="text-sage hover:underline">Weather &amp; Utility Interruptions</a></li>
+            <li><a href="#wildlife" className="text-sage hover:underline">Wildlife &amp; Natural Hazards</a></li>
+            <li><a href="#provided" className="text-sage hover:underline">What&apos;s Provided / What to Bring</a></li>
+            <li><a href="#insurance" className="text-sage hover:underline">Insurance &amp; Liability</a></li>
+            <li><a href="#force-majeure" className="text-sage hover:underline">Force Majeure</a></li>
+            <li><a href="#indemnification" className="text-sage hover:underline">Indemnification</a></li>
+            <li><a href="#privacy" className="text-sage hover:underline">Privacy &amp; Monitoring</a></li>
+            <li><a href="#governing-law" className="text-sage hover:underline">Governing Law</a></li>
+            <li><a href="#acknowledgment" className="text-sage hover:underline">Acknowledgment</a></li>
+          </ul>
+        </nav>
 
         {/* Agreement Content */}
         <div className="prose prose-lg prose-charcoal max-w-4xl mx-auto">
           {/* Check-In / Check-Out */}
-          <h2>Check-In / Check-Out</h2>
+          <h2 id="checkin">Check-In / Check-Out</h2>
           <p>
             Check-in is available after <strong>3:00 PM</strong> on the
             scheduled arrival date. Check-out must be completed by{" "}
@@ -37,7 +75,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Payment Terms */}
-          <h2>Payment Terms</h2>
+          <h2 id="payment">Payment Terms</h2>
           <p>
             A deposit of <strong>50% of the total rental amount</strong> is due
             at the time of booking to secure the reservation. The remaining
@@ -49,7 +87,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Guest Qualifications */}
-          <h2>Guest Qualifications</h2>
+          <h2 id="guest-qualifications">Guest Qualifications</h2>
           <p>
             The primary guest (the individual who made the reservation) must be
             at least <strong>25 years of age</strong> and must be present at the
@@ -60,7 +98,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Minimum Stay */}
-          <h2>Minimum Stay</h2>
+          <h2 id="minimum-stay">Minimum Stay</h2>
           <p>
             A <strong>3-night minimum stay</strong> is standard for all
             properties. Two-night exceptions may be considered on a case-by-case
@@ -69,7 +107,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Occupancy */}
-          <h2>Occupancy</h2>
+          <h2 id="occupancy">Occupancy</h2>
           <p>
             Occupancy limits are strictly enforced as stated in each property
             listing. The number of guests may not exceed the posted maximum at
@@ -81,7 +119,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Cancellation Policy */}
-          <h2>Cancellation Policy</h2>
+          <h2 id="cancellation">Cancellation Policy</h2>
           <ul>
             <li>
               <strong>30+ days before check-in:</strong> 100% refund of all
@@ -105,7 +143,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Damage Protection */}
-          <h2>Damage Protection</h2>
+          <h2 id="damage">Damage Protection</h2>
           <p>
             A <strong>non-refundable damage protection fee</strong> is included
             with each reservation. This fee covers accidental damage to the
@@ -117,7 +155,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Pet Policy */}
-          <h2>Pet Policy</h2>
+          <h2 id="pets">Pet Policy</h2>
           <p>
             Pets are permitted <strong>only at designated pet-friendly
             properties</strong> and only with payment of the applicable pet fee.
@@ -134,7 +172,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Smoking */}
-          <h2>Smoking Policy</h2>
+          <h2 id="smoking">Smoking Policy</h2>
           <p>
             Smoking of any kind (including cigarettes, cigars, e-cigarettes, and
             vaporizers) is <strong>strictly prohibited</strong> inside all
@@ -144,7 +182,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Hot Tub Rules */}
-          <h2>Hot Tub Rules</h2>
+          <h2 id="hot-tub">Hot Tub Rules</h2>
           <p>
             Properties equipped with hot tubs are subject to the following
             rules:
@@ -171,7 +209,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Quiet Hours */}
-          <h2>Quiet Hours</h2>
+          <h2 id="quiet-hours">Quiet Hours</h2>
           <p>
             Quiet hours are observed from <strong>11:00 PM to 7:00 AM</strong>{" "}
             nightly. During these hours, noise must be kept to a reasonable
@@ -181,7 +219,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Internet */}
-          <h2>Internet / Wi-Fi</h2>
+          <h2 id="wifi">Internet / Wi-Fi</h2>
           <p>
             Wi-Fi internet service is provided as a <strong>courtesy
             amenity</strong> at most properties. Internet speed and
@@ -191,8 +229,172 @@ export default function RentalAgreementPage() {
             Wi-Fi-related concerns.
           </p>
 
+          {/* Parking & Vehicles */}
+          <h2 id="parking">Parking &amp; Vehicles</h2>
+          <p>
+            Guests may park only in the designated driveway or parking area at
+            each property. Vehicles must remain on paved or gravel surfaces;
+            parking on grass, gardens, or septic fields is not permitted. The
+            maximum vehicle count is posted in the house manual and may not be
+            exceeded. RVs, trailers, boats, and commercial vehicles are not
+            permitted on any property without prior written consent from
+            Frontier Property Management. Guests are responsible for any damage
+            to driveways, landscaping, or neighboring property caused by their
+            vehicles or those of their invitees.
+          </p>
+
+          {/* Visitors & Day Guests */}
+          <h2 id="visitors">Visitors &amp; Day Guests</h2>
+          <p>
+            Day visitors and non-registered guests are permitted only with prior
+            notice and only up to the property&apos;s posted maximum occupancy
+            at any given time. Guests must supervise all visitors and are fully
+            responsible for their conduct. Day visitors may not stay overnight
+            without prior written approval and payment of any additional fees.
+            Unauthorized overnight guests will be treated as an occupancy
+            violation under the <a href="#occupancy">Occupancy</a> section.
+          </p>
+
+          {/* Fireworks & Open Flame */}
+          <h2 id="fireworks">Fireworks &amp; Open Flame</h2>
+          <p>
+            Fireworks of any kind are{" "}
+            <strong>strictly prohibited</strong> at all properties, regardless
+            of local law, due to the wooded nature of the area and the elevated
+            wildfire risk in McCurtain County. Campfires are permitted only in
+            provided fire pits when local burn bans are not in effect. Guests
+            are responsible for checking current burn ban status; the county
+            posts updates at{" "}
+            <a
+              href="https://www.mccurtaincountyok.gov/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              mccurtaincountyok.gov
+            </a>
+            . Fires must be fully extinguished before going indoors or to
+            sleep. Violations may result in immediate eviction, forfeiture of
+            payments, and liability for any resulting damage or emergency
+            response costs.
+          </p>
+
+          {/* Weather & Utility Interruptions */}
+          <h2 id="weather">Weather &amp; Utility Interruptions</h2>
+          <p>
+            Broken Bow and Hochatown are rural areas where severe weather,
+            winter storms, and occasional utility outages do occur. Power,
+            water, internet, and cable outages outside of Frontier Property
+            Management&apos;s control are not grounds for a refund or credit.
+            We will make reasonable efforts to restore service or arrange
+            alternate accommodation where feasible, but cannot guarantee
+            resolution timelines.
+          </p>
+          <p>
+            In the event of a mandatory evacuation or a road closure issued by
+            local authorities that prevents arrival or forces departure, we
+            will issue a prorated refund for nights the property cannot be
+            reasonably used, subject to the{" "}
+            <a href="#force-majeure">Force Majeure</a> provisions below.
+          </p>
+
+          {/* Wildlife & Natural Hazards */}
+          <h2 id="wildlife">Wildlife &amp; Natural Hazards</h2>
+          <p>
+            Properties are located in a forested area where black bears,
+            snakes, ticks, mosquitoes, spiders, raccoons, and other wildlife
+            are common. Do not leave food, trash, or coolers outside
+            unattended, and ensure trash is sealed inside the provided
+            receptacles. Guests stay at their own risk with respect to
+            wildlife, poison ivy, and other natural hazards.
+          </p>
+          <p>
+            Properties may include ponds, creeks, pools, or lake access. Guests
+            swim and use watercraft at their own risk. Children must be
+            supervised by an adult at all times near water.
+          </p>
+
+          {/* What's Provided / What to Bring */}
+          <h2 id="provided">What&apos;s Provided / What to Bring</h2>
+          <p>
+            Each property is furnished with bed linens, bath towels, kitchen
+            towels, hand soap, dish soap, dishwasher pods, a starter supply of
+            toilet paper and paper towels, coffee filters, and basic cleaning
+            supplies. Kitchens include cookware, dishes, utensils, a coffee
+            maker, and basic small appliances.
+          </p>
+          <p>
+            We recommend guests bring: personal toiletries (shampoo,
+            conditioner, body wash beyond starter sizes), beach towels if
+            planning to use the lake or hot tub outside of property-provided
+            towels, groceries and pantry staples, and any specialty items
+            (baby gear, specific cookware, firewood during burn bans).
+          </p>
+
+          {/* Insurance & Liability */}
+          <h2 id="insurance">Insurance &amp; Liability</h2>
+          <p>
+            Guests are strongly encouraged to purchase trip insurance. Frontier
+            Property Management and the property owner shall not be liable for
+            any injury, illness, loss, theft, or property damage suffered by
+            Guest, members of the Guest&apos;s party, or any invitee during the
+            stay, except to the extent caused by our gross negligence or
+            willful misconduct.
+          </p>
+          <p>
+            Guests are responsible for securing the property (locking doors,
+            closing windows, arming alarm if provided) when leaving the
+            premises and for their own personal belongings. We do not maintain
+            insurance covering guests&apos; personal property.
+          </p>
+
+          {/* Force Majeure */}
+          <h2 id="force-majeure">Force Majeure</h2>
+          <p>
+            Neither party shall be liable for any failure or delay in
+            performance caused by events beyond reasonable control, including
+            but not limited to: acts of God, severe weather, wildfires, floods,
+            tornadoes, ice storms, earthquakes, pandemics, government orders,
+            mandatory evacuations, utility failures, or acts of war or
+            terrorism (&quot;Force Majeure Events&quot;).
+          </p>
+          <p>
+            If a Force Majeure Event prevents Guest from occupying the property
+            for all or part of the reserved dates, Frontier Property Management
+            will, in its reasonable discretion, either (a) reschedule the
+            reservation for comparable future dates at no additional cost, or
+            (b) issue a prorated refund for the affected nights. Cleaning fees
+            and non-refundable taxes or booking-platform fees may be retained
+            as applicable.
+          </p>
+
+          {/* Indemnification */}
+          <h2 id="indemnification">Indemnification</h2>
+          <p>
+            Guest agrees to indemnify, defend, and hold harmless Frontier
+            Property Management, LLC, the property owner, and their respective
+            officers, members, employees, contractors, and agents from and
+            against any claims, damages, losses, liabilities, and expenses
+            (including reasonable attorneys&apos; fees) arising out of or
+            related to Guest&apos;s use of the property, breach of this
+            Agreement, or the acts or omissions of Guest or any member of
+            Guest&apos;s party or invitees.
+          </p>
+
+          {/* Privacy & Monitoring */}
+          <h2 id="privacy">Privacy &amp; Monitoring</h2>
+          <p>
+            Exterior security cameras and noise-monitoring devices are in use
+            at most properties for the safety of guests and the protection of
+            the property. These devices monitor only exterior areas and
+            decibel levels; no interior audio or video recording occurs
+            anywhere inside any property. Tampering with, covering, or
+            disabling these devices is a breach of this Agreement and will
+            result in forfeiture of damage protection coverage and may result
+            in eviction without refund.
+          </p>
+
           {/* Governing Law */}
-          <h2>Governing Law</h2>
+          <h2 id="governing-law">Governing Law</h2>
           <p>
             This Agreement shall be governed by and construed in accordance with
             the laws of the <strong>State of Oklahoma</strong>. Any disputes
@@ -202,7 +404,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Acknowledgment */}
-          <h2>Acknowledgment</h2>
+          <h2 id="acknowledgment">Acknowledgment</h2>
           <p>
             By completing a booking with Frontier Property Management, Guest
             acknowledges that they have read, understood, and agree to all terms
@@ -212,7 +414,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Addendum A */}
-          <h2>Addendum A, Damage Protection Plan</h2>
+          <h2 id="addendum-a">Addendum A: Damage Protection Plan</h2>
           <p>
             The Damage Protection Plan covers accidental damage to the rental
             property and its contents up to <strong>$1,500</strong>, provided

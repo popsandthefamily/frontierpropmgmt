@@ -135,10 +135,11 @@ export default function HomePage() {
               {/* Owner floating card */}
               <div className="absolute -bottom-6 left-4 right-4 flex items-center gap-3 rounded-xl bg-white/95 p-3 shadow-lg backdrop-blur md:left-6 md:right-auto md:max-w-xs">
                 <Image
-                  src="/images/team/hunter-collins-thumb.jpg"
+                  src="/images/team/hunter-collins.jpg"
                   alt="Hunter Collins"
-                  width={48}
-                  height={48}
+                  width={96}
+                  height={96}
+                  quality={90}
                   className="size-12 shrink-0 rounded-full object-cover"
                 />
                 <div className="min-w-0">
@@ -174,19 +175,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 3. Calculator (the primary interactive element) ─────────── */}
+      {/* ── 3. Market snapshot (primary owner hook) ──────────────────── */}
       <SectionWrapper background="cream" id="calculator">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            How your cabin could perform with Frontier
+            What cabins earn in Broken Bow right now
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-            The numbers below come from live AirROI data on 20M+ listings. Paste
-            your Airbnb URL for specifics on your property.
+            Live AirROI market data, refreshed every 6 hours. Want the
+            specific numbers for your listing? Run the free audit.
           </p>
         </div>
         <div className="mx-auto max-w-3xl">
-          <AuditCalculator variant="full" />
+          <AuditCalculator variant="hero" />
+          <div className="mt-8 text-center">
+            <Button
+              asChild
+              size="lg"
+              className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
+            >
+              <Link href="/audit">
+                Run a free audit on my listing
+                <ArrowRight className="ml-2 size-4" />
+              </Link>
+            </Button>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Takes 90 seconds. Free. No credit card.
+            </p>
+          </div>
         </div>
       </SectionWrapper>
 
