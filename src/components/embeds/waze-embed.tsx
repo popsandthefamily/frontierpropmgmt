@@ -13,7 +13,7 @@ export function WazeEmbed({ className }: WazeEmbedProps) {
         height="450"
         allowFullScreen
         loading="lazy"
-        title="Waze live traffic map — Broken Bow, Oklahoma"
+        title="Waze live traffic map, Broken Bow, Oklahoma"
         className="border-0"
       />
     </div>

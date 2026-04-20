@@ -31,13 +31,13 @@ import {
 
 export const metadata: Metadata = {
   title:
-    "Cabin Management Services — Full-Service STR Management in Broken Bow & Hochatown",
+    "Cabin Management Services, Full-Service STR Management in Broken Bow & Hochatown",
   description:
-    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance — 20% of gross, no setup fees.",
+    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance, 20% of gross, no setup fees.",
   openGraph: {
     title: "Full-Service Cabin Management in Broken Bow & Hochatown",
     description:
-      "20% of gross bookings, no setup fees. Dynamic pricing, guest communication, cleaning, maintenance — we handle everything.",
+      "20% of gross bookings, no setup fees. Dynamic pricing, guest communication, cleaning, maintenance, we handle everything.",
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/management-services",
@@ -78,7 +78,7 @@ const notIncludedItems = [
 export default function ManagementServicesPage() {
   return (
     <>
-      {/* JSON-LD — FAQPage */}
+      {/* JSON-LD, FAQPage */}
       <JsonLd
         type="FAQPage"
         data={{
@@ -93,13 +93,13 @@ export default function ManagementServicesPage() {
         }}
       />
 
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <JsonLd
         type="Service"
         data={{
           name: "Full-Service Vacation Rental Management",
           description:
-            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting — 20% of gross bookings.",
+            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of gross bookings.",
           provider: {
             "@type": "RealEstateAgent",
             name: siteConfig.name,
@@ -124,7 +124,7 @@ export default function ManagementServicesPage() {
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"
         title="Hochatown Short-Term Rental Management"
-        subtitle="We take over pricing, guests, cleanings, and issues — so you stop babysitting your cabin."
+        subtitle="We take over pricing, guests, cleanings, and issues, so you stop babysitting your cabin."
         size="large"
         overlay="gradient"
         cta={{
@@ -144,7 +144,7 @@ export default function ManagementServicesPage() {
             What We Do
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-lg text-muted-foreground">
-            Everything you need to run a profitable short-term rental — handled
+            Everything you need to run a profitable short-term rental, handled
             by our local team.
           </p>
 
@@ -206,7 +206,7 @@ export default function ManagementServicesPage() {
               Top-Rated Across Every Platform
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-              We don&apos;t just manage cabins — we earn 5-star reviews on every
+              We don&apos;t just manage cabins, we earn 5-star reviews on every
               booking platform.
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
@@ -379,7 +379,7 @@ export default function ManagementServicesPage() {
                     { category: "Maintenance issues", self: "Midnight calls to you", frontier: "We dispatch & oversee" },
                     { category: "Revenue optimization", self: "Leave money on table", frontier: "+14% occupancy typical" },
                     { category: "Tax & permit compliance", self: "Research it yourself", frontier: "We set it up for you" },
-                    { category: "Net revenue after fee", self: "Often less (gaps & underpricing)", frontier: "More — even after 20%" },
+                    { category: "Net revenue after fee", self: "Often less (gaps & underpricing)", frontier: "More, even after 20%" },
                   ].map((row) => (
                     <tr key={row.category} className="hover:bg-cream/50">
                       <td className="px-4 py-3 text-sm font-medium text-charcoal sm:px-6">
@@ -398,8 +398,8 @@ export default function ManagementServicesPage() {
             </div>
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
-              Most owners net <span className="font-semibold text-charcoal">more income with Frontier</span> —
-              even after the 20% fee — because professional pricing, listing optimization,
+              Most owners net <span className="font-semibold text-charcoal">more income with Frontier</span>,
+              even after the 20% fee, because professional pricing, listing optimization,
               and gap-filling recapture revenue that self-managers leave on the table.
             </p>
           </div>
@@ -429,7 +429,7 @@ export default function ManagementServicesPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── Contract Transition — Detailed Timeline ─────────────────── */}
+      {/* ── Contract Transition, Detailed Timeline ─────────────────── */}
       <SectionWrapper background="sage">
         <div className="mx-auto max-w-3xl text-center">
           <AnimateInView>
@@ -449,7 +449,7 @@ export default function ManagementServicesPage() {
               days: "Days 1–2",
               title: "Kickoff & Audit",
               description:
-                "We review your current listings, calendar, pricing, and vendor setup. You sign our simple agreement — no long-term lock-in.",
+                "We review your current listings, calendar, pricing, and vendor setup. You sign our simple agreement, no long-term lock-in.",
             },
             {
               days: "Days 3–5",
@@ -495,7 +495,7 @@ export default function ManagementServicesPage() {
 
         <div className="mx-auto mt-8 max-w-2xl text-center">
           <p className="text-sm text-white/70">
-            30-day cancellation policy — if you&apos;re not happy, you can leave.
+            30-day cancellation policy, if you&apos;re not happy, you can leave.
             No penalties.
           </p>
           <Button

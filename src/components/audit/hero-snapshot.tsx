@@ -26,7 +26,7 @@ export function HeroSnapshot({ snapshot }: Props) {
         <div className="flex items-center gap-2 text-sage">
           <TrendingUp className="size-5" />
           <span className="text-xs uppercase tracking-widest font-semibold">
-            Broken Bow / Hochatown market — 3-bedroom cabin
+            Broken Bow / Hochatown market, 3-bedroom cabin
           </span>
         </div>
 

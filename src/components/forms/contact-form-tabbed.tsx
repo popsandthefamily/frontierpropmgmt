@@ -138,7 +138,7 @@ export function ContactFormTabbed({ className }: { className?: string }) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-        {/* Honeypot — hidden from real users, catches bots */}
+        {/* Honeypot, hidden from real users, catches bots */}
         <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
         {/* Full Name */}

@@ -29,7 +29,7 @@ export function MobileBookingBar({ propertyName }: MobileBookingBarProps) {
         </Button>
       </div>
       <p className="mt-1.5 text-center text-xs text-muted-foreground">
-        Popular dates fill fast — book early
+        Popular dates fill fast, book early
       </p>
     </div>
   );

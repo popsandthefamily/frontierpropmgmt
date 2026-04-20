@@ -14,7 +14,7 @@ import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title:
-    "About Frontier Property Management — Local Hochatown & Broken Bow STR Experts",
+    "About Frontier Property Management, Local Hochatown & Broken Bow STR Experts",
   description:
     "Meet the family-owned team behind Frontier Property Management. Based in Broken Bow, managing Hochatown cabins with 4.95-star ratings and data-driven strategies.",
   openGraph: {
@@ -58,7 +58,7 @@ const whatYouGetItems = [
 export default function AboutPage() {
   return (
     <>
-      {/* JSON-LD — Organization */}
+      {/* JSON-LD, Organization */}
       <JsonLd
         type="Organization"
         data={{
@@ -98,7 +98,7 @@ export default function AboutPage() {
           <AnimateInView direction="left">
             <Image
               src="/images/team/hunter-collins.jpg"
-              alt="Hunter Collins — Owner of Frontier Property Management"
+              alt="Hunter Collins, Owner of Frontier Property Management"
               width={600}
               height={400}
               className="rounded-lg shadow-lg"
@@ -111,7 +111,7 @@ export default function AboutPage() {
             </h2>
             <p className="leading-relaxed text-muted-foreground">
               I&apos;m Hunter Collins. I didn&apos;t grow up in Broken Bow, but
-              I married into it. My background is in Maine woodlands — a place
+              I married into it. My background is in Maine woodlands, a place
               with real seasons, real storms, and real quiet. I bring a triple
               perspective: cabin owner, property manager, and frequent Airbnb
               guest. That combination shapes everything we do at Frontier.
@@ -153,20 +153,20 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
-              Broken Bow has something most vacation towns don&apos;t — vintage
+              Broken Bow has something most vacation towns don&apos;t, vintage
               small-town character. Old storefronts with stories behind them.
               Neighbors who still wave. A pace of life that hasn&apos;t been
               fully rewritten by tourism yet.
             </p>
             <p>
               Meanwhile, cabin tourism is growing nearby at a serious clip. The
-              surrounding woods provide real seasons — vibrant fall color, quiet
+              surrounding woods provide real seasons, vibrant fall color, quiet
               winter snow, spring thunderstorms, and long summer evenings on the
               deck. Guests come here to unplug from the noise and reconnect with
               nature.
             </p>
             <p>
-              That contrast — small-town heart, booming outdoor tourism — is
+              That contrast, small-town heart, booming outdoor tourism, is
               exactly what makes this area special and worth protecting with
               quality management.
             </p>
@@ -195,8 +195,8 @@ export default function AboutPage() {
                 Our Mission
               </h3>
               <p className="leading-relaxed text-muted-foreground">
-                Handle rental management with integrity, precision, and care —
-                from listing through checkout — for consistent income with
+                Handle rental management with integrity, precision, and care,
+                from listing through checkout, for consistent income with
                 minimal stress.
               </p>
             </CardContent>

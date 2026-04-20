@@ -1,10 +1,10 @@
 import { managementFAQ } from "./services";
 
 /**
- * Homepage FAQ — curated subset of the full management FAQ.
+ * Homepage FAQ, curated subset of the full management FAQ.
  *
  * Order and selection follows the redesign spec §3.9 (10 owner-aimed
- * questions). Answers live in `src/data/services.ts` — edits there
+ * questions). Answers live in `src/data/services.ts`, edits there
  * propagate here and to /management-services automatically.
  */
 const QUESTION_ORDER = [

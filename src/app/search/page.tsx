@@ -29,7 +29,7 @@ const bookDirectBenefits = [
   {
     icon: MessageSquare,
     title: "Direct Host Communication",
-    description: "Message your host directly — faster responses, better service.",
+    description: "Message your host directly, faster responses, better service.",
   },
   {
     icon: Headphones,
@@ -40,11 +40,11 @@ const bookDirectBenefits = [
 
 export const metadata: Metadata = {
   title:
-    "Broken Bow Cabins for Rent — Book Direct, No Platform Fees",
+    "Broken Bow Cabins for Rent, Book Direct, No Platform Fees",
   description:
-    "Browse luxury cabins in Broken Bow & Hochatown for direct booking. Hot tubs, pools, game rooms & more. Skip Airbnb fees — best rate guaranteed.",
+    "Browse luxury cabins in Broken Bow & Hochatown for direct booking. Hot tubs, pools, game rooms & more. Skip Airbnb fees, best rate guaranteed.",
   openGraph: {
-    title: "Broken Bow Cabins for Rent — Book Direct & Save",
+    title: "Broken Bow Cabins for Rent, Book Direct & Save",
     description:
       "Luxury Hochatown & Broken Bow cabins. Book direct, skip the platform fees, get the best rate guaranteed.",
   },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 export default function SearchPage() {
   return (
     <>
-      {/* JSON-LD — ItemList of VacationRentals */}
+      {/* JSON-LD, ItemList of VacationRentals */}
       <JsonLd
         type="ItemList"
         data={{
@@ -158,7 +158,7 @@ export default function SearchPage() {
             src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
             strategy="lazyOnload"
           />
-          {/* @ts-expect-error — custom web component from Hospitable */}
+          {/* @ts-expect-error, custom web component from Hospitable */}
           <hospitable-direct-mps
             identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
             type="custom"
@@ -169,7 +169,7 @@ export default function SearchPage() {
       {/* CTA */}
       <CTASection
         heading="Own a cabin? Let us manage it for you."
-        subtext="Frontier Property Management handles everything from listings and pricing to guest communication and maintenance — so you earn more while doing less."
+        subtext="Frontier Property Management handles everything from listings and pricing to guest communication and maintenance, so you earn more while doing less."
         cta={{ label: "Learn About Management", href: "/management-services" }}
       />
     </>

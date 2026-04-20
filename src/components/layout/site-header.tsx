@@ -65,8 +65,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Contact", href: "/contact" },
 ];
 
-/* Paths (and their subtrees) that do NOT have a hero section — force solid header */
+/* Paths (and their subtrees) that do NOT have a hero section, force solid header */
 const SOLID_HEADER_PATHS = [
+  "/",
   "/sublime",
   "/old-broken-bow-highway",
   "/privacy-policy",
@@ -180,7 +181,7 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop CTAs — primary Estimate + ghost Book link */}
+        {/* Desktop CTAs, primary Estimate + ghost Book link */}
         <div className="hidden lg:flex shrink-0 items-center justify-end gap-4">
           <Link
             href="/search"

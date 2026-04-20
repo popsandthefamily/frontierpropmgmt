@@ -25,10 +25,10 @@ export const metadata: Metadata = {
   title: {
     default:
       "Frontier Property Management | Cabin Rentals & STR Management in Hochatown & Broken Bow, OK",
-    template: "%s | Frontier Property Management — Broken Bow & Hochatown",
+    template: "%s | Frontier Property Management, Broken Bow & Hochatown",
   },
   description:
-    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management — pricing, guests, cleanings & maintenance — 20% of gross, no setup fees.",
+    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management, pricing, guests, cleanings & maintenance, 20% of gross, no setup fees.",
   keywords: [
     "Broken Bow cabin rentals",
     "Hochatown cabin rentals",
@@ -81,13 +81,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${yanone.variable} ${workSans.variable}`}>
       <body className="antialiased font-body text-foreground bg-background">
-        {/* Structured Data — LocalBusiness */}
+        {/* Structured Data, LocalBusiness */}
         <JsonLd
           type="RealEstateAgent"
           data={{
             name: siteConfig.name,
             description:
-              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance — 20% of gross bookings, no setup fees.",
+              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance, 20% of gross bookings, no setup fees.",
             url: siteConfig.url,
             telephone: siteConfig.phone,
             email: siteConfig.email,
@@ -142,14 +142,14 @@ export default function RootLayout({
                     "@type": "Service",
                     name: "Direct Cabin Bookings",
                     description:
-                      "Book luxury cabins directly with no platform fees — best rate guaranteed",
+                      "Book luxury cabins directly with no platform fees, best rate guaranteed",
                   },
                 },
               ],
             },
           }}
         />
-        {/* Structured Data — WebSite with SearchAction */}
+        {/* Structured Data, WebSite with SearchAction */}
         <JsonLd
           type="WebSite"
           data={{

@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
   const ip = getClientIp(req);
 
-  // Honeypot — silently accept
+  // Honeypot, silently accept
   if (body.honeypot) return json({ ok: true, message: "Verification code sent" });
 
   // Turnstile

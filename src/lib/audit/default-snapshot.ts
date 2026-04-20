@@ -1,4 +1,4 @@
-// Server-only helper — fetches the default Hochatown / Broken Bow market snapshot
+// Server-only helper, fetches the default Hochatown / Broken Bow market snapshot
 // so /audit can render a live $ number the moment a visitor lands.
 //
 // Uses Next.js fetch cache so we only pay AirROI's $0.20 once per revalidate window
@@ -41,7 +41,7 @@ export async function getDefaultMarketSnapshot(): Promise<DefaultMarketSnapshot 
   try {
     const res = await fetch(`${base}/calculator/estimate?${qs}`, {
       headers: { "X-API-KEY": key, Accept: "application/json" },
-      // Cache for 6 hours — market percentiles don't change minute-to-minute
+      // Cache for 6 hours, market percentiles don't change minute-to-minute
       next: { revalidate: 60 * 60 * 6, tags: ["audit-default-snapshot"] },
     });
     if (!res.ok) return null;

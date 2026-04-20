@@ -22,13 +22,13 @@ export async function sendVerificationEmail(email: string, code: string): Promis
     }
     throw new Error("Resend not configured");
   }
-  const text = `Your verification code is:\n\n  ${code}\n\nIt expires in 15 minutes.\n\nDidn't request this? Ignore this email.\n\n— Frontier\n${siteUrl()}`;
+  const text = `Your verification code is:\n\n  ${code}\n\nIt expires in 15 minutes.\n\nDidn't request this? Ignore this email.\n\nFrontier\n${siteUrl()}`;
   const html = `<!doctype html><html><body style="font-family:system-ui,sans-serif;color:#414042;max-width:480px;margin:0 auto;padding:24px">
 <p>Your verification code is:</p>
 <p style="font-size:32px;letter-spacing:6px;font-weight:700;background:#f6f6f6;padding:16px;text-align:center;border-radius:8px">${code}</p>
 <p>It expires in 15 minutes.</p>
 <p style="color:#71717a;font-size:13px;margin-top:24px">Didn't request this? Ignore this email.</p>
-<p style="color:#71717a;font-size:13px">— Frontier</p>
+<p style="color:#71717a;font-size:13px">Frontier</p>
 </body></html>`;
 
   await client.emails.send({
@@ -70,7 +70,7 @@ export async function sendReportEmail(email: string, report: AuditReport): Promi
     "",
     `Want help closing this gap? ${bookLink}`,
     "",
-    "— Frontier",
+    "Frontier",
   ];
 
   const html = `<!doctype html><html><body style="font-family:system-ui,sans-serif;color:#414042;max-width:560px;margin:0 auto;padding:24px">

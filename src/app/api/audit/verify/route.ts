@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     await markCompleted(ip, email, report.id);
     await clearPendingVerification(email);
 
-    // Fire-and-forget report email — don't fail the flow if email is down
+    // Fire-and-forget report email, don't fail the flow if email is down
     sendReportEmail(email, report).catch((err) => {
       console.error("[audit/verify] report email failed", err);
     });

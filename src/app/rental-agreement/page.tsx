@@ -212,7 +212,7 @@ export default function RentalAgreementPage() {
           </p>
 
           {/* Addendum A */}
-          <h2>Addendum A — Damage Protection Plan</h2>
+          <h2>Addendum A, Damage Protection Plan</h2>
           <p>
             The Damage Protection Plan covers accidental damage to the rental
             property and its contents up to <strong>$1,500</strong>, provided

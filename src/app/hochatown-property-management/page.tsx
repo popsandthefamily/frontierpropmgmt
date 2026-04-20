@@ -62,7 +62,7 @@ const servicesList = [
 export default function HochatownPropertyManagementPage() {
   return (
     <>
-      {/* JSON-LD — FAQPage */}
+      {/* JSON-LD, FAQPage */}
       <JsonLd
         type="FAQPage"
         data={{
@@ -77,11 +77,11 @@ export default function HochatownPropertyManagementPage() {
         }}
       />
 
-      {/* JSON-LD — LocalBusiness */}
+      {/* JSON-LD, LocalBusiness */}
       <JsonLd
         type="LocalBusiness"
         data={{
-          name: "Frontier Property Management — Hochatown",
+          name: "Frontier Property Management, Hochatown",
           description:
             "Full-service Hochatown cabin property management. Marketing, guest support, cleaning, maintenance, and revenue optimization.",
           url: `${siteConfig.url}/hochatown-property-management`,
@@ -213,7 +213,7 @@ export default function HochatownPropertyManagementPage() {
               decor casual elegance pool great quiet neighborhood.&rdquo;
             </blockquote>
             <p className="mt-4 text-white/80">
-              — Dirk, Waurika, OK
+             , Dirk, Waurika, OK
             </p>
           </AnimateInView>
         </div>

@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title:
-    "STR Income Calculator — Estimate Your Broken Bow Cabin Revenue",
+    "STR Income Calculator, Estimate Your Broken Bow Cabin Revenue",
   description:
-    "Free revenue estimate for Broken Bow & Hochatown cabin owners. Live market data from 20M+ listings — plus a full audit when you paste your listing URL.",
+    "Free revenue estimate for Broken Bow & Hochatown cabin owners. Live market data from 20M+ listings, plus a full audit when you paste your listing URL.",
   alternates: {
     canonical: "https://rentwithfrontier.com/income-calculator",
   },
@@ -21,7 +21,7 @@ export default function IncomeCalculatorPage() {
       <HeroSection
         backgroundImage="/images/hero/foggy-mountain.jpg"
         title="Estimate your cabin's revenue"
-        subtitle="Live market data — not a pricing guess"
+        subtitle="Live market data, not a pricing guess"
         size="medium"
         overlay="dark"
       />

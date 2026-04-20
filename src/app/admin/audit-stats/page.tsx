@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Audit stats — Admin",
+  title: "Audit stats, Admin",
   robots: { index: false, follow: false },
 };
 

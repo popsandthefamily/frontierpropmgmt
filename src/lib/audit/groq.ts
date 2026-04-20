@@ -68,7 +68,7 @@ export function buildTemplateSummary(leaks: LeakAnalysis): string {
     `- Pricing: $${Math.round(leaks.priceGap)}/night below comps.`,
     `- Occupancy: ${(leaks.occupancyGap * 100).toFixed(1)} points below comps.`,
     "",
-    `Close the pricing and occupancy gaps first — those typically account for 70% of the lift. Frontier handles this through dynamic rate management and listing rewrites.`,
+    `Close the pricing and occupancy gaps first, those typically account for 70% of the lift. Frontier handles this through dynamic rate management and listing rewrites.`,
   ];
   return lines.join("\n");
 }

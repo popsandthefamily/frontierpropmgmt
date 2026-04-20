@@ -25,13 +25,13 @@ const property = getPropertyBySlug("sublime");
 
 export const metadata: Metadata = {
   title:
-    "Sublime Retreat — Luxury Hochatown Cabin | Hot Tub, 2 Zip Lines, Arcade",
+    "Sublime Retreat, Luxury Hochatown Cabin | Hot Tub, 2 Zip Lines, Arcade",
   description:
-    "Book Sublime Retreat direct & save — luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
+    "Book Sublime Retreat direct & save, luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
   openGraph: {
-    title: "Sublime Retreat — Luxury Hochatown Cabin | Book Direct & Save",
+    title: "Sublime Retreat, Luxury Hochatown Cabin | Book Direct & Save",
     description:
-      "2 zip lines, hot tub, arcade, Calcutta quartz kitchen. 3BR luxury cabin in Hochatown. Book direct — no platform fees.",
+      "2 zip lines, hot tub, arcade, Calcutta quartz kitchen. 3BR luxury cabin in Hochatown. Book direct, no platform fees.",
     images: property?.images?.[0]?.src
       ? [{ url: property.images[0].src }]
       : [],
@@ -127,7 +127,7 @@ export default function SublimePage() {
       {/* Two-Column Layout */}
       <div className="mx-auto max-w-7xl px-4 pb-16">
         <div className="grid gap-12 lg:grid-cols-3">
-          {/* Left Column — Content (2/3) */}
+          {/* Left Column, Content (2/3) */}
           <div className="lg:col-span-2 space-y-12">
             {/* Description */}
             <div>
@@ -263,7 +263,7 @@ export default function SublimePage() {
             </div>
           </div>
 
-          {/* Right Column — Sticky Booking Sidebar (1/3) */}
+          {/* Right Column, Sticky Booking Sidebar (1/3) */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Hospitable Booking Calendar */}

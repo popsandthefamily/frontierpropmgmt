@@ -20,13 +20,13 @@ function capitalize(s: string): string {
 }
 
 /**
- * Premium amenity signals — things a guest actively shops for that
+ * Premium amenity signals, things a guest actively shops for that
  * genuinely change booking behavior. Matched by substring against the
  * lowercased amenity label, so "Private hot tub" still matches "hot tub".
  *
  * Intentionally excludes baseline items (hair dryer, heating, wifi,
  * fridge, microwave, essentials, smoke alarm, etc). Those are
- * table-stakes — missing them on a listing doesn't actually move revenue.
+ * table-stakes, missing them on a listing doesn't actually move revenue.
  */
 const PREMIUM_AMENITY_PATTERNS: ReadonlyArray<{ pattern: string; label: string }> = [
   { pattern: "hot tub", label: "Hot tub" },
@@ -140,7 +140,7 @@ function buildRecommendations(
     recs.push({
       priority: 2,
       category: "occupancy",
-      description: `You're booked ${(partial.occupancyGap * 100).toFixed(0)} points fewer nights than similar properties — roughly ${extraNights} unbooked nights worth about $${dollarImpact.toLocaleString()}/yr.`,
+      description: `You're booked ${(partial.occupancyGap * 100).toFixed(0)} points fewer nights than similar properties, roughly ${extraNights} unbooked nights worth about $${dollarImpact.toLocaleString()}/yr.`,
       dollar_impact: dollarImpact,
     });
   }
@@ -150,7 +150,7 @@ function buildRecommendations(
       priority: 3,
       category: "amenities",
       description: `Most top-performing comps offer ${partial.amenityGaps.slice(0, 3).join(", ")}. Adding these lifts click-through and lets you charge a premium.`,
-      // No defensible synthetic $ estimate — leave impact at 0 so it sorts
+      // No defensible synthetic $ estimate, leave impact at 0 so it sorts
       // below pricing/occupancy and the UI can omit the bogus $/yr number.
       dollar_impact: 0,
     });

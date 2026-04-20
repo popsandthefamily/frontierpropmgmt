@@ -15,9 +15,9 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Dallas Cabin Owners — Broken Bow Property Management from DFW",
+  title: "Dallas Cabin Owners, Broken Bow Property Management from DFW",
   description:
-    "Own a cabin in Broken Bow? Frontier gives Dallas & DFW owners local, hands-on STR management — 20% fee, no contracts, 15-30% revenue increases.",
+    "Own a cabin in Broken Bow? Frontier gives Dallas & DFW owners local, hands-on STR management, 20% fee, no contracts, 15-30% revenue increases.",
   keywords: [
     "Dallas cabin owner property management",
     "DFW Broken Bow cabin management",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "Dallas STR management Oklahoma",
   ],
   openGraph: {
-    title: "Dallas & DFW Cabin Owners — Broken Bow Property Management",
+    title: "Dallas & DFW Cabin Owners, Broken Bow Property Management",
     description:
       "Local Broken Bow management for out-of-town owners. Frontier handles everything so you can invest from Dallas with confidence.",
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: "/images/hero/forest-aerial.jpg",
         width: 1200,
         height: 630,
-        alt: "Aerial view of Broken Bow forest cabins — managed by Frontier Property Management",
+        alt: "Aerial view of Broken Bow forest cabins, managed by Frontier Property Management",
       },
     ],
   },
@@ -49,7 +49,7 @@ const dallasFAQ = [
   {
     question: "How do you manage my cabin if I live in Dallas?",
     answer:
-      "We handle everything on-site — guest check-ins, turnovers, maintenance, inspections, and emergencies. You get real-time updates and monthly reports through our owner portal. Most of our owners are remote and never need to visit for operational reasons.",
+      "We handle everything on-site, guest check-ins, turnovers, maintenance, inspections, and emergencies. You get real-time updates and monthly reports through our owner portal. Most of our owners are remote and never need to visit for operational reasons.",
   },
   {
     question: "How often will I need to visit my cabin?",
@@ -64,7 +64,7 @@ const dallasFAQ = [
   {
     question: "Can I switch from my current management company?",
     answer:
-      "Absolutely. We handle the full transition — transferring existing listings and reviews, setting up new systems, and coordinating the handoff timeline with your current company. Most transitions are completed within 2 weeks.",
+      "Absolutely. We handle the full transition, transferring existing listings and reviews, setting up new systems, and coordinating the handoff timeline with your current company. Most transitions are completed within 2 weeks.",
   },
   {
     question: "Is there a long-term contract?",
@@ -93,13 +93,13 @@ const painPoints = [
     icon: MapPin,
     title: "3+ Hours Away",
     description:
-      "Your cabin is a 3-hour drive from Dallas. When a pipe bursts at 2 AM or a guest locks themselves out, you need someone local who can respond in minutes — not hours.",
+      "Your cabin is a 3-hour drive from Dallas. When a pipe bursts at 2 AM or a guest locks themselves out, you need someone local who can respond in minutes, not hours.",
   },
   {
     icon: Clock,
     title: "Time You Do Not Have",
     description:
-      "Managing guest messages, coordinating cleaners, adjusting pricing, handling reviews — it is a part-time job. Let us handle operations while you focus on your career and family in DFW.",
+      "Managing guest messages, coordinating cleaners, adjusting pricing, handling reviews, it is a part-time job. Let us handle operations while you focus on your career and family in DFW.",
   },
   {
     icon: TrendingUp,
@@ -111,7 +111,7 @@ const painPoints = [
     icon: ShieldCheck,
     title: "Compliance & Regulations",
     description:
-      "STR permits, Granicus registration, occupancy taxes, noise monitoring — McCurtain County regulations are changing fast. We stay on top of it so you do not get fined.",
+      "STR permits, Granicus registration, occupancy taxes, noise monitoring, McCurtain County regulations are changing fast. We stay on top of it so you do not get fined.",
   },
 ];
 
@@ -198,7 +198,7 @@ export default function DallasCabinOwnersPage() {
             Managing a Cabin from Dallas Is Hard
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            You bought your Broken Bow cabin as an investment — not a second
+            You bought your Broken Bow cabin as an investment, not a second
             job. Here is why most DFW owners eventually hire a local manager.
           </p>
         </div>
@@ -239,11 +239,11 @@ export default function DallasCabinOwnersPage() {
             <ul className="mt-8 space-y-4">
               {[
                 "Boots-on-the-ground team based in Broken Bow",
-                "Real-time owner portal — check performance anytime from Dallas",
+                "Real-time owner portal, check performance anytime from Dallas",
                 "Monthly owner statements with full financial transparency",
                 "24/7 emergency response for guest and property issues",
                 "Dynamic pricing that adapts daily to Broken Bow market demand",
-                "No long-term contracts — cancel with 30 days notice",
+                "No long-term contracts, cancel with 30 days notice",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-charcoal">
                   <Check className="mt-0.5 size-5 shrink-0 text-sage" />
@@ -281,10 +281,10 @@ export default function DallasCabinOwnersPage() {
       <SectionWrapper background="sage">
         <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { value: "3 hrs", label: "Dallas to Broken Bow — we are already here" },
+            { value: "3 hrs", label: "Dallas to Broken Bow, we are already here" },
             { value: "4.95★", label: "Avg rating across all platforms" },
             { value: "15-30%", label: "Typical revenue increase for new owners" },
-            { value: "20%", label: "Simple management fee — no setup costs" },
+            { value: "20%", label: "Simple management fee, no setup costs" },
           ].map((stat) => (
             <div key={stat.label}>
               <p className="text-4xl font-bold text-white md:text-5xl">
@@ -316,7 +316,7 @@ export default function DallasCabinOwnersPage() {
           <StepCard
             number={2}
             title="We Handle the Setup"
-            description="Professional photography, listing creation, pricing strategy, vendor onboarding, and compliance — all done without you leaving DFW."
+            description="Professional photography, listing creation, pricing strategy, vendor onboarding, and compliance, all done without you leaving DFW."
           />
           <StepCard
             number={3}
@@ -345,7 +345,7 @@ export default function DallasCabinOwnersPage() {
               communication is great, and we do not worry about a thing.&rdquo;
             </blockquote>
             <p className="mt-4 text-muted-foreground">
-              — DFW Cabin Owner, Broken Bow
+             , DFW Cabin Owner, Broken Bow
             </p>
           </AnimateInView>
         </div>
@@ -386,7 +386,7 @@ export default function DallasCabinOwnersPage() {
       {/* CTA */}
       <CTASection
         heading="Ready to stop managing from Dallas?"
-        subtext="Get a free revenue estimate for your Broken Bow cabin. No contracts, no pressure — just an honest conversation about what your property could earn under professional management."
+        subtext="Get a free revenue estimate for your Broken Bow cabin. No contracts, no pressure, just an honest conversation about what your property could earn under professional management."
         backgroundImage="/images/hero/foggy-mountain.jpg"
         cta={{ label: "Schedule a Free Call", href: "/contact" }}
         secondaryCta={{

@@ -17,13 +17,13 @@ const property = getPropertyBySlug("old-broken-bow-highway");
 
 export const metadata: Metadata = {
   title:
-    "3BR Poolside Cabin in Broken Bow — Private Pool, Firepit, Pet-Friendly",
+    "3BR Poolside Cabin in Broken Bow, Private Pool, Firepit, Pet-Friendly",
   description:
-    "Cozy 3BR/3BA cabin with private pool, firepit & grill near Beavers Bend. Pet-friendly, sleeps 6. Book direct — no platform fees.",
+    "Cozy 3BR/3BA cabin with private pool, firepit & grill near Beavers Bend. Pet-friendly, sleeps 6. Book direct, no platform fees.",
   openGraph: {
-    title: "3BR Poolside Cabin in Broken Bow — Book Direct & Save",
+    title: "3BR Poolside Cabin in Broken Bow, Book Direct & Save",
     description:
-      "Private pool, firepit, pet-friendly. 3BR/3BA near Beavers Bend. Book direct — no Airbnb fees.",
+      "Private pool, firepit, pet-friendly. 3BR/3BA near Beavers Bend. Book direct, no Airbnb fees.",
     images: property?.images?.[0]?.src
       ? [{ url: property.images[0].src }]
       : [],
@@ -107,7 +107,7 @@ export default function OldBrokenBowHighwayPage() {
       {/* Two-Column Layout */}
       <div className="mx-auto max-w-7xl px-4 pb-16">
         <div className="grid gap-12 lg:grid-cols-3">
-          {/* Left Column — Content (2/3) */}
+          {/* Left Column, Content (2/3) */}
           <div className="lg:col-span-2 space-y-12">
             {/* Description */}
             <div>
@@ -186,7 +186,7 @@ export default function OldBrokenBowHighwayPage() {
             </div>
           </div>
 
-          {/* Right Column — Sticky Booking Sidebar (1/3) */}
+          {/* Right Column, Sticky Booking Sidebar (1/3) */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
               {/* Hospitable Booking Calendar */}

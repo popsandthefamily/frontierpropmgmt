@@ -64,7 +64,7 @@ export function Tier1Form() {
         <div className="flex items-center gap-2 text-sage">
           <TrendingUp className="size-5" />
           <span className="text-xs uppercase tracking-widest font-semibold">
-            Market snapshot — {snapshot.city}
+            Market snapshot, {snapshot.city}
           </span>
         </div>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">

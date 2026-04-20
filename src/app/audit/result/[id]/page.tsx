@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const report = await getReport(id);
     if (report) {
-      leak = `$${report.leaks.revenueLeak.toLocaleString()} gap — `;
+      leak = `$${report.leaks.revenueLeak.toLocaleString()} gap, `;
     }
   } catch {
     // ignore

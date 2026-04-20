@@ -5,7 +5,7 @@ import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 
 export const metadata: Metadata = {
-  title: "Free Airbnb Audit — See What Your Cabin Is Leaving on the Table",
+  title: "Free Airbnb Audit, See What Your Cabin Is Leaving on the Table",
   description:
     "Paste your Airbnb listing. In 45 seconds, see how your pricing, occupancy, and amenities compare to similar properties earning more in your market.",
   alternates: { canonical: "https://rentwithfrontier.com/audit" },
@@ -26,7 +26,7 @@ const steps = [
   {
     icon: LineChart,
     title: "You get the gap",
-    copy: "Specific dollar figures and where they're coming from — in your inbox.",
+    copy: "Specific dollar figures and where they're coming from, in your inbox.",
   },
 ];
 
@@ -52,14 +52,14 @@ export default function AuditPage() {
             </p>
           </div>
 
-          {/* Pre-loaded Hochatown snapshot — no form interaction required */}
+          {/* Pre-loaded Hochatown snapshot, no form interaction required */}
           <div className="mx-auto mt-10 max-w-2xl">
             <AuditCalculator variant="hero" />
           </div>
         </div>
       </section>
 
-      {/* Trust band — verifiable credentials only */}
+      {/* Trust band, verifiable credentials only */}
       <section className="bg-sage text-white">
         <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
           <div className="grid gap-6 md:grid-cols-3">
@@ -76,7 +76,7 @@ export default function AuditPage() {
             <TrustStat
               icon={MapPin}
               stat="Local team"
-              label="Based in Broken Bow — not an overseas call center"
+              label="Based in Broken Bow, not an overseas call center"
             />
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function AuditPage() {
             </Faq>
             <Faq q="Do I have to become a Frontier client to get the report?">
               No. You own the report. Share it, screenshot it, use it with whichever
-              manager you like. We&apos;d obviously love to help — but there&apos;s no gate.
+              manager you like. We&apos;d obviously love to help, but there&apos;s no gate.
             </Faq>
             <Faq q="How long does the full audit take?">
               About 90 seconds end-to-end. Email verification, listing pull, comp lookup,
@@ -159,7 +159,7 @@ export default function AuditPage() {
           >
             AirROI
           </Link>
-          . Estimates, not guarantees — individual results vary.
+          . Estimates, not guarantees, individual results vary.
         </p>
       </div>
 

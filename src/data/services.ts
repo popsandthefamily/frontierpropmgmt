@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/*  Service Pillars (Homepage — 4 cards)                              */
+/*  Service Pillars (Homepage, 4 cards)                              */
 /* ------------------------------------------------------------------ */
 
 export interface ServicePillar {
@@ -61,7 +61,7 @@ export const servicePillars: ServicePillar[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Detailed Services (Management Services page — 6 items)            */
+/*  Detailed Services (Management Services page, 6 items)            */
 /* ------------------------------------------------------------------ */
 
 export interface DetailedService {
@@ -258,7 +258,7 @@ export const onboardingSteps: OnboardingStep[] = [
     number: 6,
     title: "Go Live",
     description:
-      "Your listings go live across all platforms with optimized pricing. We start accepting bookings and you start earning — it is that simple.",
+      "Your listings go live across all platforms with optimized pricing. We start accepting bookings and you start earning, it is that simple.",
   },
 ];
 
@@ -325,7 +325,7 @@ export const managementFAQ: FAQItem[] = [
   {
     question: "What makes Frontier different from other management companies?",
     answer:
-      "We are a locally-owned, owner-operated company — not a franchise or remote management firm. Our team lives and works in Broken Bow, and we treat every property like it is our own. We combine local expertise with modern technology, data-driven pricing, and genuine hospitality to deliver better results for our owners and guests.",
+      "We are a locally-owned, owner-operated company, not a franchise or remote management firm. Our team lives and works in Broken Bow, and we treat every property like it is our own. We combine local expertise with modern technology, data-driven pricing, and genuine hospitality to deliver better results for our owners and guests.",
   },
   {
     question: "Do you handle occupancy taxes and permits?",
@@ -335,16 +335,16 @@ export const managementFAQ: FAQItem[] = [
   {
     question: "What insurance do I need?",
     answer:
-      "You should carry a short-term rental policy (not just a standard homeowner policy — most exclude STR use). Carriers we see owners use include Proper Insurance, Safely, and CBIZ. Airbnb's AirCover and Vrbo's Liability Insurance add a layer on top of bookings through those platforms, but are not substitutes for a dedicated policy. We are not licensed insurance advisors — confirm coverage details with a broker.",
+      "You should carry a short-term rental policy (not just a standard homeowner policy, most exclude STR use). Carriers we see owners use include Proper Insurance, Safely, and CBIZ. Airbnb's AirCover and Vrbo's Liability Insurance add a layer on top of bookings through those platforms, but are not substitutes for a dedicated policy. We are not licensed insurance advisors, confirm coverage details with a broker.",
   },
   {
     question: "What happens to my existing bookings if I switch to Frontier?",
     answer:
-      "Existing bookings transfer with the listing. We honor the rates and house rules your guests already agreed to, then optimize everything from your go-live date forward. In most switches we have zero cancellations — guests see a smoother experience, not a disruption.",
+      "Existing bookings transfer with the listing. We honor the rates and house rules your guests already agreed to, then optimize everything from your go-live date forward. In most switches we have zero cancellations, guests see a smoother experience, not a disruption.",
   },
   {
     question: "How is your pricing strategy different?",
     answer:
-      "We use dynamic pricing software that adjusts your nightly rate daily based on real booking pace, local events, weekend demand, and comp activity in Broken Bow specifically — not a national model. We also hand-review rates for event weekends (Beavers Bend marathon, Choctaw rodeo, etc.) that automated tools miss, and adjust minimum-stay rules around high-demand dates.",
+      "We use dynamic pricing software that adjusts your nightly rate daily based on real booking pace, local events, weekend demand, and comp activity in Broken Bow specifically, not a national model. We also hand-review rates for event weekends (Beavers Bend marathon, Choctaw rodeo, etc.) that automated tools miss, and adjust minimum-stay rules around high-demand dates.",
   },
 ];

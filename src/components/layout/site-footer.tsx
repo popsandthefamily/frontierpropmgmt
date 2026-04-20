@@ -30,7 +30,7 @@ export function SiteFooter() {
               Ready for your Broken Bow getaway?
             </p>
             <p className="text-sm text-white/70">
-              Browse our cabins and book direct — no platform fees.
+              Browse our cabins and book direct, no platform fees.
             </p>
           </div>
           <Button

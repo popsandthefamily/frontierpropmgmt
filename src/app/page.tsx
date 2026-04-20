@@ -8,7 +8,6 @@ import {
   Award,
   DollarSign,
   Rocket,
-  Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
@@ -20,14 +19,13 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
-import { siteConfig } from "@/data/site";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
 
 export const metadata: Metadata = {
   title:
     "Broken Bow Property Management | 20% Flat Fee | Frontier",
   description:
-    "Full-service cabin management in Broken Bow & Hochatown. 20% flat fee, no setup costs, Airbnb Top Rated Host across every property. Based locally — not a call center.",
+    "Full-service cabin management in Broken Bow & Hochatown. 20% flat fee, no setup costs, Airbnb Top Rated Host across every property. Based locally, not a call center.",
   openGraph: {
     title: "Broken Bow Property Management | 20% Flat Fee | Frontier",
     description:
@@ -50,7 +48,7 @@ const TRUST_STATS = [
   {
     icon: Award,
     stat: "Top Rated",
-    label: "Airbnb Top Rated Host — every cabin",
+    label: "Airbnb Top Rated Host, every cabin",
   },
   {
     icon: Star,
@@ -72,7 +70,7 @@ const TRUST_STATS = [
 export default function HomePage() {
   return (
     <>
-      {/* FAQPage structured data — owner questions answered here */}
+      {/* FAQPage structured data, owner questions answered here */}
       <JsonLd
         type="FAQPage"
         data={{
@@ -86,16 +84,6 @@ export default function HomePage() {
 
       {/* ── 1. Owner-primary hero ───────────────────────────────────── */}
       <section className="relative bg-gradient-to-br from-cream via-white to-sage/5">
-        {/* Tiny guest link — demoted but still present */}
-        <div className="absolute right-4 top-24 z-10 hidden md:block">
-          <Link
-            href="/search"
-            className="text-xs font-medium text-muted-foreground hover:text-sage"
-          >
-            Looking to book a cabin? →
-          </Link>
-        </div>
-
         <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 md:pt-32 md:pb-20">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             {/* Left: pitch */}
@@ -130,16 +118,6 @@ export default function HomePage() {
                   <Link href="/contact#discovery">Schedule a Discovery Call</Link>
                 </Button>
               </div>
-              <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="size-4" />
-                Or call{" "}
-                <a
-                  href={`tel:${siteConfig.phone}`}
-                  className="font-medium text-sage hover:text-sage-dark"
-                >
-                  {siteConfig.phone}
-                </a>
-              </p>
             </div>
 
             {/* Right: photo with owner badge */}
@@ -147,7 +125,7 @@ export default function HomePage() {
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-lg lg:aspect-[5/6]">
                 <Image
                   src="/images/properties/sublime/sublime-2.jpg"
-                  alt="Sublime Retreat — a luxury cabin in Hochatown managed by Frontier"
+                  alt="Sublime Retreat, a luxury cabin in Hochatown managed by Frontier"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 45vw"
@@ -223,7 +201,7 @@ export default function HomePage() {
           <StepCard
             number={1}
             title="Discovery call"
-            description="30 minutes, free, no pressure. We look at your numbers — not just your cabin — and tell you whether we think we can help."
+            description="30 minutes, free, no pressure. We look at your numbers, not just your cabin, and tell you whether we think we can help."
           />
           <StepCard
             number={2}
@@ -245,7 +223,7 @@ export default function HomePage() {
             <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">
               <Image
                 src="/images/team/hunter-collins.jpg"
-                alt="Hunter Collins — Owner of Frontier Property Management"
+                alt="Hunter Collins, Owner of Frontier Property Management"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -259,7 +237,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
               Frontier is family-owned and based at 3156 Old Broken Bow Hwy.
-              We&apos;re the people you&apos;ll actually work with — not a
+              We&apos;re the people you&apos;ll actually work with, not a
               regional franchise or an overseas dispatch desk. That means fast
               response times, hands-on relationships with local cleaners and
               contractors, and someone who can be at your cabin in 20 minutes
@@ -326,13 +304,13 @@ export default function HomePage() {
               </Link>
             </Button>
           </div>
-          {/* Hospitable search widget — kept, but down here instead of above */}
+          {/* Hospitable search widget, kept, but down here instead of above */}
           <div className="mx-auto mt-10 max-w-4xl">
             <Script
               src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
               strategy="lazyOnload"
             />
-            {/* @ts-expect-error — custom web component from Hospitable */}
+            {/* @ts-expect-error, custom web component from Hospitable */}
             <hospitable-direct-mps
               identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
               type="custom"

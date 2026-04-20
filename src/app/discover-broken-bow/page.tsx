@@ -24,11 +24,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title:
-    "Discover Broken Bow & Hochatown — Things to Do, Where to Stay, Local Tips",
+    "Discover Broken Bow & Hochatown, Things to Do, Where to Stay, Local Tips",
   description:
     "Your guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants & tips for the perfect cabin trip.",
   openGraph: {
-    title: "Discover Broken Bow & Hochatown — Complete Visitor Guide",
+    title: "Discover Broken Bow & Hochatown, Complete Visitor Guide",
     description:
       "Best spots, things to do, where to stay in Broken Bow & Hochatown. Plan your Oklahoma cabin getaway.",
   },
@@ -68,7 +68,7 @@ const moneyTips = [
   },
   {
     icon: DollarSign,
-    tip: "Ask about additional fees upfront — cleaning fees, pet fees, and hot tub fees can add up.",
+    tip: "Ask about additional fees upfront, cleaning fees, pet fees, and hot tub fees can add up.",
   },
   {
     icon: Ticket,
@@ -76,11 +76,11 @@ const moneyTips = [
   },
   {
     icon: MapPin,
-    tip: "Check drive times to the lake and Hochatown strip before booking — some cabins are more remote.",
+    tip: "Check drive times to the lake and Hochatown strip before booking, some cabins are more remote.",
   },
   {
     icon: Compass,
-    tip: "Verify amenities before booking — confirm Wi-Fi speed, EV charging, game rooms, and pool availability.",
+    tip: "Verify amenities before booking, confirm Wi-Fi speed, EV charging, game rooms, and pool availability.",
   },
 ];
 

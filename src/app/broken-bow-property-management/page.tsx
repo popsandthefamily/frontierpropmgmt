@@ -62,7 +62,7 @@ const servicesList = [
 export default function BrokenBowPropertyManagementPage() {
   return (
     <>
-      {/* JSON-LD — FAQPage */}
+      {/* JSON-LD, FAQPage */}
       <JsonLd
         type="FAQPage"
         data={{
@@ -77,11 +77,11 @@ export default function BrokenBowPropertyManagementPage() {
         }}
       />
 
-      {/* JSON-LD — LocalBusiness */}
+      {/* JSON-LD, LocalBusiness */}
       <JsonLd
         type="LocalBusiness"
         data={{
-          name: "Frontier Property Management — Broken Bow",
+          name: "Frontier Property Management, Broken Bow",
           description:
             "Professional short-term rental management for Broken Bow cabin owners. Marketing, guest support, cleaning, maintenance, and revenue optimization.",
           url: `${siteConfig.url}/broken-bow-property-management`,
@@ -216,7 +216,7 @@ export default function BrokenBowPropertyManagementPage() {
               informed every step of the way.&rdquo;
             </blockquote>
             <p className="mt-4 text-white/80">
-              — Satisfied Cabin Owner, Broken Bow
+             , Satisfied Cabin Owner, Broken Bow
             </p>
           </AnimateInView>
         </div>

@@ -30,7 +30,7 @@ export function ReportView({ report, siteUrl }: { report: AuditReport; siteUrl: 
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 md:py-16">
-      {/* Above the fold — big number */}
+      {/* Above the fold, big number */}
       <section className="rounded-3xl bg-gradient-to-br from-sage to-sage-dark px-6 py-14 text-center text-white md:px-12 md:py-20">
         <p className="text-sm uppercase tracking-widest text-white/80 md:text-base">
           Your listing is leaving
@@ -72,7 +72,7 @@ export function ReportView({ report, siteUrl }: { report: AuditReport; siteUrl: 
               ? report.leaks.amenityGaps.slice(0, 2).join(", ")
               : "vs top comps"
           }
-          // Intentionally no $/yr here — synthetic per-amenity dollar estimates
+          // Intentionally no $/yr here, synthetic per-amenity dollar estimates
           // aren't defensible. The recommendation still surfaces below.
           footer={
             report.leaks.amenityGaps.length > 0

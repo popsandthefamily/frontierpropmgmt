@@ -6,7 +6,7 @@ import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title:
-    "Contact Us — Book a Cabin or Get a Free Management Estimate",
+    "Contact Us, Book a Cabin or Get a Free Management Estimate",
   description:
     "Contact Frontier Property Management to book a Broken Bow cabin or get a free management estimate. Call 580-207-7154 or fill out our form.",
   alternates: {
@@ -62,7 +62,7 @@ export default function ContactPage() {
       {/* Two-Column Layout */}
       <SectionWrapper background="white">
         <div className="grid gap-12 lg:grid-cols-3">
-          {/* Left — Contact Form (2/3 width) */}
+          {/* Left, Contact Form (2/3 width) */}
           <div className="lg:col-span-2">
             <h2 className="mb-2 text-2xl font-bold text-charcoal md:text-3xl">
               How can we help?
@@ -74,7 +74,7 @@ export default function ContactPage() {
             <ContactFormTabbed />
           </div>
 
-          {/* Right — Contact Info (1/3 width) */}
+          {/* Right, Contact Info (1/3 width) */}
           <div className="flex flex-col gap-5">
             {contactOptions.map((option) => (
               <div key={option.label} className="flex items-start gap-4">

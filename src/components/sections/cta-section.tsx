@@ -23,7 +23,7 @@ export function CTASection({
     <section
       className={cn("relative overflow-hidden", className)}
     >
-      {/* Background — either image or sage fallback */}
+      {/* Background, either image or sage fallback */}
       {backgroundImage ? (
         <>
           <div

@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  title: "Market Snapshot — Frontier",
+  title: "Market Snapshot, Frontier",
   robots: { index: false, follow: false },
 };
 
@@ -29,7 +29,7 @@ export default async function MarketSnapshotPage({ params }: Props) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 md:py-24">
       <p className="text-sm uppercase tracking-widest text-sage">
-        Market snapshot — {snapshot.city}
+        Market snapshot, {snapshot.city}
       </p>
       <h1 className="mt-2 text-3xl font-bold text-charcoal md:text-5xl">
         {snapshot.bedrooms === 0 ? "Studio" : `${snapshot.bedrooms}-bedroom`} {snapshot.propertyType.toLowerCase()} in {snapshot.city}
@@ -57,7 +57,7 @@ export default async function MarketSnapshotPage({ params }: Props) {
 
       <p className="mt-8 text-lg text-charcoal">
         Top performers in {snapshot.city} earn{" "}
-        <strong>{fmt(snapshot.gapToTop)}</strong> more than the median — often the
+        <strong>{fmt(snapshot.gapToTop)}</strong> more than the median, often the
         same properties with slightly tighter pricing and a few better amenities.
       </p>
 

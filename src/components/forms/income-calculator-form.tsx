@@ -102,7 +102,7 @@ export function IncomeCalculatorForm({ className }: { className?: string }) {
     >
       {/* Hidden field to identify the form */}
       <input type="hidden" name="_subject" value="Income Calculator Request" />
-      {/* Honeypot — hidden from real users, catches bots */}
+      {/* Honeypot, hidden from real users, catches bots */}
       <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
       {/* Address Line 1 */}

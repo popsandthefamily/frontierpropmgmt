@@ -6,9 +6,9 @@ import { getBlogPosts } from "@/data/blog-posts";
 
 export const metadata: Metadata = {
   title:
-    "Broken Bow & Hochatown Cabin Blog — STR Tips, Travel Guides & News",
+    "Broken Bow & Hochatown Cabin Blog, STR Tips, Travel Guides & News",
   description:
-    "Tips for Broken Bow cabin owners and guests — STR management insights, Hochatown travel guides, and vacation rental industry news.",
+    "Tips for Broken Bow cabin owners and guests, STR management insights, Hochatown travel guides, and vacation rental industry news.",
   alternates: {
     canonical: "https://rentwithfrontier.com/blogs",
   },
