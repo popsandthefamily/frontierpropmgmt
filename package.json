@@ -11,6 +11,7 @@
     "test:e2e:local": "BASE_URL=http://localhost:3000 playwright test"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@marsidev/react-turnstile": "^1.5.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",
