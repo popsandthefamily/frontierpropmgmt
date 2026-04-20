@@ -16,6 +16,9 @@
   --color-peach: #f6bc98;
   --color-cream: #f6f6f6;
   --color-charcoal: #414042;
+  /* Additive accents (redesign) — use sparingly; prefer sage/peach/cream above */
+  --color-forest: #2f4a3a;
+  --color-off-white: #fafaf7;
 
   /* Semantic tokens */
   --color-background: #ffffff;

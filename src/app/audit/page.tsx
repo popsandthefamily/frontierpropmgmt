@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BarChart3, LineChart, Search, Star, Award, MapPin } from "lucide-react";
-import { Tier2Form } from "@/components/audit/tier2-form";
-import { HeroSnapshot } from "@/components/audit/hero-snapshot";
+import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
-import { getDefaultMarketSnapshot } from "@/lib/audit/default-snapshot";
 
 export const metadata: Metadata = {
   title: "Free Airbnb Audit — See What Your Cabin Is Leaving on the Table",
@@ -32,8 +30,7 @@ const steps = [
   },
 ];
 
-export default async function AuditPage() {
-  const defaultSnapshot = await getDefaultMarketSnapshot();
+export default function AuditPage() {
   return (
     <>
       {/* Hero */}
@@ -57,7 +54,7 @@ export default async function AuditPage() {
 
           {/* Pre-loaded Hochatown snapshot — no form interaction required */}
           <div className="mx-auto mt-10 max-w-2xl">
-            <HeroSnapshot snapshot={defaultSnapshot} />
+            <AuditCalculator variant="hero" />
           </div>
         </div>
       </section>
@@ -111,18 +108,10 @@ export default async function AuditPage() {
         </div>
       </SectionWrapper>
 
-      {/* Tier 2 form */}
-      <SectionWrapper background="cream">
+      {/* Tier 2 form (same AuditCalculator, full variant) */}
+      <SectionWrapper background="cream" id="full-audit">
         <div className="mx-auto max-w-2xl">
-          <div className="mb-6 text-center">
-            <span className="inline-block rounded-full border border-sage/30 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-widest text-sage">
-              Full audit
-            </span>
-            <p className="mt-3 text-sm text-muted-foreground">
-              The real lead magnet — numbers specific to your listing.
-            </p>
-          </div>
-          <Tier2Form />
+          <AuditCalculator variant="full" />
         </div>
       </SectionWrapper>
 

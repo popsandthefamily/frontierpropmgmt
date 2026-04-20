@@ -4,31 +4,31 @@ import Link from "next/link";
 import Script from "next/script";
 import {
   ArrowRight,
-  ShieldCheck,
-  DollarSign,
-  Headphones,
   Star,
+  Award,
+  DollarSign,
+  Rocket,
+  Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
-import { StatsSection } from "@/components/sections/stats-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { StepCard } from "@/components/cards/step-card";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
+import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { properties } from "@/data/properties";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title:
-    "Broken Bow Cabin Rentals & Property Management | Book Direct & Save",
+    "Broken Bow Property Management | 20% Flat Fee | Frontier",
   description:
-    "Book a luxury Broken Bow cabin direct — no Airbnb fees. Or hire Frontier for full-service STR management at 20% of gross. Local team, 4.95-star rating.",
+    "Full-service cabin management in Broken Bow & Hochatown. 20% flat fee, no setup costs, Airbnb Top Rated Host across every property. Based locally — not a call center.",
   openGraph: {
-    title: "Broken Bow Cabin Rentals & Property Management | Frontier",
+    title: "Broken Bow Property Management | 20% Flat Fee | Frontier",
     description:
-      "Book direct and save on luxury Hochatown cabins. Or let us manage your vacation rental — 20% fee, no setup costs.",
+      "Cabin management that actually answers the phone. Free revenue estimate, no setup fee, month-to-month.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -43,205 +43,187 @@ export const metadata: Metadata = {
   },
 };
 
-const bookDirectBenefits = [
+const TRUST_STATS = [
   {
-    icon: DollarSign,
-    title: "No Platform Fees",
-    description:
-      "Book directly and skip the service fees charged by major booking platforms.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Best Rate Guaranteed",
-    description:
-      "Our direct rates are always the same or lower than any listing site.",
-  },
-  {
-    icon: Headphones,
-    title: "Local Host Support",
-    description:
-      "Reach a real person in Broken Bow — not an overseas call center.",
+    icon: Award,
+    stat: "Top Rated",
+    label: "Airbnb Top Rated Host — every cabin",
   },
   {
     icon: Star,
-    title: "Professionally Managed",
-    description:
-      "Every stay is backed by our full-service property management team.",
+    stat: "4.9★",
+    label: "Across Airbnb, VRBO & Booking.com",
+  },
+  {
+    icon: DollarSign,
+    stat: "20%",
+    label: "Flat management fee",
+  },
+  {
+    icon: Rocket,
+    stat: "$0",
+    label: "Setup or onboarding cost",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ── 1. Dual-Audience Hero ──────────────────────────────────── */}
-      <HeroSection
-        backgroundImage="/images/properties/sublime/sublime-2.jpg"
-        title="Broken Bow Cabin Rentals & Property Management"
-        subtitle="Book your Hochatown getaway — or let us manage your cabin"
-        overlay="gradient"
-        size="full"
-        cta={{ label: "Browse Cabins", href: "/search" }}
-        secondaryCta={{
-          label: "Cabin Owners: Learn More",
-          href: "/management-services",
-        }}
-      />
-
-      {/* ── Hospitable Search Bar ────────────────────────────────── */}
-      <SectionWrapper background="white">
-        <div className="mx-auto max-w-4xl">
-          <Script
-            src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
-            strategy="lazyOnload"
-          />
-          {/* @ts-expect-error — custom web component from Hospitable */}
-          <hospitable-direct-mps
-            identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
-            type="custom"
-            results-url="/search"
-          />
-        </div>
-      </SectionWrapper>
-
-      {/* ── 2. Featured Cabins ─────────────────────────────────────── */}
-      <SectionWrapper background="cream">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Book Your Broken Bow Getaway
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Professionally managed cabins with direct booking — skip the
-            platform fees.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {properties.map((property) => (
-            <PropertyCard
-              key={property.slug}
-              slug={property.slug}
-              name={property.name}
-              tagline={property.tagline}
-              bedrooms={property.bedrooms}
-              bathrooms={property.bathrooms}
-              sleeps={property.sleeps}
-              featuredImage={property.images[0].src}
-              startingPrice={property.startingPrice}
-            />
-          ))}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Button
-            asChild
-            size="lg"
-            className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
+      {/* ── 1. Owner-primary hero ───────────────────────────────────── */}
+      <section className="relative bg-gradient-to-br from-cream via-white to-sage/5">
+        {/* Tiny guest link — demoted but still present */}
+        <div className="absolute right-4 top-24 z-10 hidden md:block">
+          <Link
+            href="/search"
+            className="text-xs font-medium text-muted-foreground hover:text-sage"
           >
-            <Link href="/search">
-              View All Properties
-              <ArrowRight className="ml-2 size-4" />
-            </Link>
-          </Button>
-        </div>
-      </SectionWrapper>
-
-      {/* ── 3. Why Book Direct? ────────────────────────────────────── */}
-      <SectionWrapper background="white">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Why Book Direct?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Better rates, better service, better experience.
-          </p>
+            Looking to book a cabin? →
+          </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {bookDirectBenefits.map((benefit) => (
-            <Card key={benefit.title} className="h-full text-center">
-              <CardContent className="flex flex-col items-center pt-8 pb-6">
-                <div className="mb-4 rounded-full bg-sage/10 p-4">
-                  <benefit.icon className="size-7 text-sage" />
+        <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 md:pt-32 md:pb-20">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+            {/* Left: pitch */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+                Broken Bow & Hochatown Property Management
+              </p>
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-charcoal md:text-5xl lg:text-6xl">
+                Cabin management that actually answers the phone.
+              </h1>
+              <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+                Family-owned, locally operated. 20% flat management fee. No
+                setup costs. Airbnb Top Rated Host across every cabin we run.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
+                >
+                  <a href="#calculator">
+                    Get a Free Revenue Estimate
+                    <ArrowRight className="ml-2 size-4" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="px-8 text-base"
+                >
+                  <Link href="/contact#discovery">Schedule a Discovery Call</Link>
+                </Button>
+              </div>
+              <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                <Phone className="size-4" />
+                Or call{" "}
+                <a
+                  href={`tel:${siteConfig.phone}`}
+                  className="font-medium text-sage hover:text-sage-dark"
+                >
+                  {siteConfig.phone}
+                </a>
+              </p>
+            </div>
+
+            {/* Right: photo with owner badge */}
+            <div className="relative">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-lg lg:aspect-[5/6]">
+                <Image
+                  src="/images/properties/sublime/sublime-2.jpg"
+                  alt="Sublime Retreat — a luxury cabin in Hochatown managed by Frontier"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              {/* Owner floating card */}
+              <div className="absolute -bottom-6 left-4 right-4 flex items-center gap-3 rounded-xl bg-white/95 p-3 shadow-lg backdrop-blur md:left-6 md:right-auto md:max-w-xs">
+                <Image
+                  src="/images/team/hunter-collins-thumb.jpg"
+                  alt="Hunter Collins"
+                  width={48}
+                  height={48}
+                  className="size-12 shrink-0 rounded-full object-cover"
+                />
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-charcoal">
+                    Hunter Collins, Owner
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Based in Broken Bow, OK
+                  </div>
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-charcoal">
-                  {benefit.title}
-                </h3>
-                <p className="text-base text-muted-foreground">
-                  {benefit.description}
-                </p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. Trust strip (verifiable only) ─────────────────────────── */}
+      <section className="border-y bg-white">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:py-12">
+          {TRUST_STATS.map((s) => (
+            <div key={s.label} className="flex items-start gap-3">
+              <s.icon className="mt-1 size-5 shrink-0 text-sage" />
+              <div>
+                <div className="font-heading text-2xl font-bold text-charcoal md:text-3xl">
+                  {s.stat}
+                </div>
+                <div className="text-xs text-muted-foreground md:text-sm">
+                  {s.label}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ── 4. Stats Bar ───────────────────────────────────────────── */}
-      <StatsSection
-        stats={[
-          { value: "4.95★", label: "Avg Rating — Airbnb, VRBO, Booking.com" },
-          { value: "Top Rated", label: "Airbnb Host & Most Loved" },
-          { value: "0%", label: "Platform Fees When You Book Direct" },
-          { value: "20%", label: "Simple Management Fee" },
-        ]}
-      />
-
-      {/* ── 5. Owner Section Divider ───────────────────────────────── */}
-      <SectionWrapper background="sage">
-        <div className="mx-auto max-w-2xl text-center">
-          <AnimateInView>
-            <h2 className="text-3xl font-bold text-white md:text-4xl">
-              Own a Cabin in Broken Bow?
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-white/90">
-              We intentionally keep a curated portfolio so every property gets
-              hands-on attention — not assembly-line management. 20% of gross
-              bookings, no setup fees, Airbnb Top Rated Host across every cabin.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-8 bg-white text-sage hover:bg-cream px-8 text-base font-semibold"
-            >
-              <Link href="/management-services">
-                Management Services
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-          </AnimateInView>
+      {/* ── 3. Calculator (the primary interactive element) ─────────── */}
+      <SectionWrapper background="cream" id="calculator">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            How your cabin could perform with Frontier
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+            The numbers below come from live AirROI data on 20M+ listings. Paste
+            your Airbnb URL for specifics on your property.
+          </p>
+        </div>
+        <div className="mx-auto max-w-3xl">
+          <AuditCalculator variant="full" />
         </div>
       </SectionWrapper>
 
-      {/* ── 6. How It Works (Owners) ───────────────────────────────── */}
+      {/* ── 4. How it works ──────────────────────────────────────────── */}
       <SectionWrapper background="white">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            How It All Works
+            How it works
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Just three simple steps to start earning more with less stress.
-          </p>
         </div>
-
         <div className="mt-12 grid gap-8 md:grid-cols-3">
           <StepCard
             number={1}
-            title="Discovery Call"
-            description="Schedule a free 30-minute call so we can learn about your property, your goals, and what you need from a management partner."
+            title="Discovery call"
+            description="30 minutes, free, no pressure. We look at your numbers — not just your cabin — and tell you whether we think we can help."
           />
           <StepCard
             number={2}
-            title="Custom Plan"
-            description="We build a personalized management plan tailored to your cabin — covering pricing strategy, listing optimization, and operations."
+            title="Custom plan"
+            description="Pricing strategy, listing rewrite, photography audit, operations setup. You see the plan before you sign anything."
           />
           <StepCard
             number={3}
-            title="We Handle It All"
-            description="From professional photography to guest check-out, we manage every detail end-to-end so you can sit back and collect revenue."
+            title="We run it"
+            description="Guest communication, cleaning, maintenance, taxes, reviews. Monthly statement, direct payout. Cancel with 30 days notice."
           />
         </div>
       </SectionWrapper>
 
-      {/* ── 7. Team Teaser ─────────────────────────────────────────── */}
+      {/* ── 5. Team ──────────────────────────────────────────────────── */}
       <SectionWrapper background="cream">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <AnimateInView direction="left">
@@ -258,18 +240,15 @@ export default function HomePage() {
 
           <AnimateInView direction="right">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Your Frontier Property Management Team
+              A local team, not a call center
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Frontier Property Management is a family-owned, locally operated
-              company based right here in Broken Bow, Oklahoma. We are not a
-              franchise or a remote call center — we live and work in the
-              community we serve.
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Our team combines deep local knowledge with modern technology and
-              data-driven strategies to help cabin owners maximize revenue while
-              delivering five-star guest experiences.
+              Frontier is family-owned and based at 3156 Old Broken Bow Hwy.
+              We&apos;re the people you&apos;ll actually work with — not a
+              regional franchise or an overseas dispatch desk. That means fast
+              response times, hands-on relationships with local cleaners and
+              contractors, and someone who can be at your cabin in 20 minutes
+              when something breaks.
             </p>
             <Button
               asChild
@@ -277,7 +256,7 @@ export default function HomePage() {
               className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
             >
               <Link href="/about">
-                Meet the Team
+                Meet the team
                 <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
@@ -285,39 +264,70 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── 8. Income Calculator Teaser ────────────────────────────── */}
-      <SectionWrapper background="white">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Estimate Your Monthly STR Revenue
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Curious what your cabin could earn under professional management?
-            Use our free income calculator to see projected monthly revenue
-            based on your property details, location, and amenities.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="mt-8 bg-sage text-white hover:bg-sage-dark px-8 text-base"
-          >
-            <Link href="/income-calculator">
-              Try the Income Calculator
-              <ArrowRight className="ml-2 size-4" />
-            </Link>
-          </Button>
+      {/* ── 6. Guest-facing strip (demoted) ──────────────────────────── */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
+          <div className="mx-auto max-w-2xl text-center">
+            <h3 className="text-2xl font-bold text-charcoal md:text-3xl">
+              Looking to book a stay instead?
+            </h3>
+            <p className="mt-3 text-base text-muted-foreground">
+              We have two cabins available for direct booking. No platform fees.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-8 md:grid-cols-2">
+            {properties.map((property) => (
+              <PropertyCard
+                key={property.slug}
+                slug={property.slug}
+                name={property.name}
+                tagline={property.tagline}
+                bedrooms={property.bedrooms}
+                bathrooms={property.bathrooms}
+                sleeps={property.sleeps}
+                featuredImage={property.images[0].src}
+                startingPrice={property.startingPrice}
+              />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="px-8 text-base"
+            >
+              <Link href="/search">
+                Browse all cabins
+                <ArrowRight className="ml-2 size-4" />
+              </Link>
+            </Button>
+          </div>
+          {/* Hospitable search widget — kept, but down here instead of above */}
+          <div className="mx-auto mt-10 max-w-4xl">
+            <Script
+              src="https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js"
+              strategy="lazyOnload"
+            />
+            {/* @ts-expect-error — custom web component from Hospitable */}
+            <hospitable-direct-mps
+              identifier="1a10c870-8304-4205-a5d4-995f468ccc08"
+              type="custom"
+              results-url="/search"
+            />
+          </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ── 9. Final Dual CTA ──────────────────────────────────────── */}
+      {/* ── 7. Final owner CTA ───────────────────────────────────────── */}
       <CTASection
-        heading="Ready to Get Started?"
-        subtext="Whether you're looking for a Broken Bow cabin getaway or you want expert management for your rental property — we're here to help."
+        heading="Ready to earn more with less stress?"
+        subtext="Get a free revenue estimate on your cabin, or book a 30-minute call with Hunter."
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{ label: "Browse Cabins", href: "/search" }}
+        cta={{ label: "Get a Revenue Estimate", href: "/#calculator" }}
         secondaryCta={{
-          label: "Management Info",
-          href: "/management-services",
+          label: "Schedule a Call",
+          href: "/contact#discovery",
         }}
       />
     </>
