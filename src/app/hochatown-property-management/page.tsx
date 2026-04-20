@@ -15,7 +15,7 @@ import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Hochatown Cabin Property Management | Local, Full-Service, 20% Flat",
+  title: "Hochatown Cabin Property Management",
   description:
     "Hochatown, OK cabin management by a locally based team. 20% of nightly-rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
   keywords: [

@@ -6,10 +6,22 @@ import { DiscoveryCallEmbed } from "@/components/book/discovery-call-embed";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title:
-    "Contact Us, Book a Cabin or Get a Free Management Estimate",
+  title: "Contact Us: Book a Cabin or Get a Free Management Estimate",
   description:
-    "Contact Frontier Property Management to book a Broken Bow cabin or get a free management estimate. Call 580-207-7154 or fill out our form.",
+    "Contact Frontier Property Management to book a Broken Bow cabin or get a free management estimate. Call 580-207-7154 or schedule a discovery call.",
+  openGraph: {
+    title: "Contact Frontier Property Management",
+    description:
+      "Schedule a free discovery call or reach out for cabin booking assistance. Based in Broken Bow, OK.",
+    images: [
+      {
+        url: "/images/discover/hochatown-drive.png",
+        width: 1200,
+        height: 630,
+        alt: "Scenic road through Hochatown, Oklahoma",
+      },
+    ],
+  },
   alternates: {
     canonical: "https://rentwithfrontier.com/contact",
   },

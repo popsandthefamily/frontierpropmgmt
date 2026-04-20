@@ -25,14 +25,21 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
-  title:
-    "Discover Broken Bow & Hochatown, Things to Do, Where to Stay, Local Tips",
+  title: "Discover Broken Bow & Hochatown: Things to Do & Local Tips",
   description:
     "Your guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants & tips for the perfect cabin trip.",
   openGraph: {
-    title: "Discover Broken Bow & Hochatown, Complete Visitor Guide",
+    title: "Discover Broken Bow & Hochatown: Complete Visitor Guide",
     description:
       "Best spots, things to do, where to stay in Broken Bow & Hochatown. Plan your Oklahoma cabin getaway.",
+    images: [
+      {
+        url: "/images/discover/hochatown-area.png",
+        width: 1200,
+        height: 630,
+        alt: "Hochatown and Broken Bow area in southeast Oklahoma",
+      },
+    ],
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/discover-broken-bow",
@@ -171,21 +178,23 @@ export default function DiscoverBrokenBowPage() {
 
       {/* Hocha.Town partner highlight */}
       <section className="bg-charcoal">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-          <div className="grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-12">
+        <div className="mx-auto max-w-5xl px-4 py-12 md:py-14">
+          <div className="grid items-center gap-8 md:grid-cols-[260px_1fr] md:gap-10">
             <a
               href="https://hocha.town"
               target="_blank"
               rel="noopener noreferrer"
-              className="block shrink-0 transition-opacity hover:opacity-80"
+              className="flex items-center justify-center transition-opacity hover:opacity-80 md:justify-start"
               aria-label="Visit Hocha.Town"
             >
+              {/* Native aspect ratio of source: 899x279 (~3.22:1). Rendered at
+                  h-16 (64px) / md:h-20 (80px). Width auto-derives. */}
               <Image
                 src="/images/partners/hocha-town-logo.webp"
-                alt="Hocha.Town logo"
-                width={240}
-                height={240}
-                className="mx-auto h-40 w-auto md:h-48"
+                alt="Hocha.Town — local guide to Hochatown & Broken Bow"
+                width={899}
+                height={279}
+                className="h-16 w-auto md:h-20"
                 priority
               />
             </a>
@@ -193,19 +202,19 @@ export default function DiscoverBrokenBowPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-peach">
                 Trusted local resource
               </p>
-              <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">
+              <h2 className="mt-3 text-2xl font-bold text-white md:text-3xl">
                 Planning a trip? Check Hocha.Town first.
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-white/80 md:text-lg">
-                Hocha.Town is the most complete local guide to Hochatown and
-                Broken Bow, curated by people who live here. Restaurants,
-                activities, event calendars, and honest recommendations for
-                every kind of trip. We send every guest there.
+              <p className="mt-3 text-base leading-relaxed text-white/80">
+                The most complete local guide to Hochatown and Broken Bow,
+                curated by people who live here. Restaurants, activities, event
+                calendars, and honest recommendations. We send every guest
+                there.
               </p>
               <Button
                 asChild
                 size="lg"
-                className="mt-6 bg-peach text-charcoal hover:bg-peach/90 px-6 text-base font-semibold"
+                className="mt-5 bg-peach text-charcoal hover:bg-peach/90 px-6 text-base font-semibold"
               >
                 <a
                   href="https://hocha.town"

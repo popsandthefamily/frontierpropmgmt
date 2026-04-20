@@ -23,8 +23,9 @@ import { properties } from "@/data/properties";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
 
 export const metadata: Metadata = {
-  title:
-    "Broken Bow Property Management | 20% Flat Fee | Frontier",
+  title: {
+    absolute: "Broken Bow Property Management | 20% Flat | Frontier",
+  },
   description:
     "Full-service cabin management in Broken Bow & Hochatown. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin. Local team.",
   openGraph: {

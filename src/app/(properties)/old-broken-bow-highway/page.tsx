@@ -16,16 +16,22 @@ import { siteConfig } from "@/data/site";
 const property = getPropertyBySlug("old-broken-bow-highway");
 
 export const metadata: Metadata = {
-  title:
-    "3BR Poolside Cabin in Broken Bow, Private Pool, Firepit, Pet-Friendly",
+  title: "3BR Poolside Cabin in Broken Bow: Private Pool & Firepit",
   description:
-    "Cozy 3BR/3BA cabin with private pool, firepit & grill near Beavers Bend. Pet-friendly, sleeps 6. Book direct, no platform fees.",
+    "Cozy 3BR/3BA Broken Bow cabin with private pool, firepit, and grill near Beavers Bend. Pet-friendly, sleeps 6. Book direct, no platform fees.",
   openGraph: {
-    title: "3BR Poolside Cabin in Broken Bow, Book Direct & Save",
+    title: "3BR Poolside Cabin in Broken Bow | Book Direct & Save",
     description:
       "Private pool, firepit, pet-friendly. 3BR/3BA near Beavers Bend. Book direct, no Airbnb fees.",
     images: property?.images?.[0]?.src
-      ? [{ url: property.images[0].src }]
+      ? [
+          {
+            url: property.images[0].src,
+            width: 1200,
+            height: 630,
+            alt: "Poolside cabin in Broken Bow, Oklahoma",
+          },
+        ]
       : [],
   },
   alternates: {

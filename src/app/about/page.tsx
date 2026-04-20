@@ -13,14 +13,21 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title:
-    "About Frontier Property Management, Local Hochatown & Broken Bow STR Experts",
+  title: "About Frontier: Local Broken Bow & Hochatown STR Experts",
   description:
     "Meet the family-owned team behind Frontier Property Management. Based in Broken Bow, managing Hochatown cabins with 4.95-star ratings and data-driven strategies.",
   openGraph: {
     title: "About Frontier Property Management",
     description:
       "Family-owned Broken Bow cabin management. Local team, 4.95★ guest ratings, data-driven STR strategies.",
+    images: [
+      {
+        url: "/images/team/hunter-collins.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Hunter Collins, owner of Frontier Property Management in Broken Bow",
+      },
+    ],
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/about",

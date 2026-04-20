@@ -6,10 +6,22 @@ import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title:
-    "STR Income Calculator, Estimate Your Broken Bow Cabin Revenue",
+  title: "STR Income Calculator: Estimate Your Broken Bow Cabin Revenue",
   description:
     "Free revenue estimate for Broken Bow & Hochatown cabin owners. Live market data from 20M+ listings, plus a full audit when you paste your listing URL.",
+  openGraph: {
+    title: "Free Broken Bow STR Income Calculator",
+    description:
+      "Live AirROI market data on 20M+ listings. Estimate your cabin's revenue in under 60 seconds.",
+    images: [
+      {
+        url: "/images/hero/foggy-mountain.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Broken Bow cabin revenue calculator",
+      },
+    ],
+  },
   alternates: {
     canonical: "https://rentwithfrontier.com/income-calculator",
   },

@@ -30,14 +30,21 @@ import {
 } from "@/data/services";
 
 export const metadata: Metadata = {
-  title:
-    "Cabin Management Services, Full-Service STR Management in Broken Bow & Hochatown",
+  title: "Cabin Management Services: Broken Bow & Hochatown STR",
   description:
-    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance. 20% of nightly-rental revenue, no monthly minimum.",
+    "Full-service Broken Bow & Hochatown cabin management. Dynamic pricing, Airbnb/VRBO, guest support, cleaning. 20% of nightly-rental revenue, no monthly minimum.",
   openGraph: {
     title: "Full-Service Cabin Management in Broken Bow & Hochatown",
     description:
-      "20% of nightly-rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, we handle everything.",
+      "20% of nightly-rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance — we handle everything.",
+    images: [
+      {
+        url: "/images/services/DSC3079.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Frontier Property Management office and team in Broken Bow, Oklahoma",
+      },
+    ],
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/management-services",
@@ -98,13 +105,13 @@ const passThroughItems = [
   },
 ];
 
-/** One-time and out-of-scope items — clearly not bundled */
+/** Optional add-ons and out-of-scope items — clearly not bundled */
 const notIncludedItems = [
   {
-    label: "One-time onboarding",
+    label: "Professional photography (optional)",
     price: "$750",
     detail:
-      "Professional photography, listing build across platforms, and smart-lock install. One payment, no recurring fee.",
+      "Full HDR photo shoot, edited deliverables, and reshoots when you upgrade the cabin. Optional — bring your own photos if you prefer.",
   },
   {
     label: "Pool and hot-tub service contracts",
@@ -164,7 +171,7 @@ export default function ManagementServicesPage() {
           offers: {
             "@type": "Offer",
             description:
-              "20% of nightly-rental revenue, no monthly minimum. One-time $750 onboarding.",
+              "20% of nightly-rental revenue, no monthly minimum, no setup fee.",
             priceCurrency: "USD",
           },
         }}
@@ -366,14 +373,15 @@ export default function ManagementServicesPage() {
                   ))}
                 </ul>
 
-                <div className="mt-8 rounded-lg border border-peach/40 bg-peach/10 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-charcoal">
-                    One-time onboarding: $750
+                <div className="mt-8 rounded-lg border border-sage/20 bg-sage/5 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+                    $0 setup. $0 monthly minimum.
                   </p>
                   <p className="mt-2 text-sm text-charcoal">
-                    Professional photography, listing build across Airbnb /
-                    VRBO / Booking.com, and smart-lock install. One payment,
-                    no recurring setup fee.
+                    No onboarding fee, no platform setup charge, no lock-in.
+                    If your cabin earns $0 in a month, you owe us $0.
+                    Professional photography is an optional add-on (see below),
+                    not a required setup cost.
                   </p>
                 </div>
 

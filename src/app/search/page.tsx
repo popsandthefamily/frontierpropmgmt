@@ -39,14 +39,21 @@ const bookDirectBenefits = [
 ];
 
 export const metadata: Metadata = {
-  title:
-    "Broken Bow Cabins for Rent, Book Direct, No Platform Fees",
+  title: "Broken Bow Cabins for Rent: Book Direct, No Platform Fees",
   description:
     "Browse luxury cabins in Broken Bow & Hochatown for direct booking. Hot tubs, pools, game rooms & more. Skip Airbnb fees, best rate guaranteed.",
   openGraph: {
-    title: "Broken Bow Cabins for Rent, Book Direct & Save",
+    title: "Broken Bow Cabins for Rent: Book Direct & Save",
     description:
       "Luxury Hochatown & Broken Bow cabins. Book direct, skip the platform fees, get the best rate guaranteed.",
+    images: [
+      {
+        url: "/images/properties/sublime/sublime-2.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Luxury cabins for rent in Broken Bow and Hochatown, Oklahoma",
+      },
+    ],
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/search",

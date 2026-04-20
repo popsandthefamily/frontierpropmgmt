@@ -5,9 +5,22 @@ import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 
 export const metadata: Metadata = {
-  title: "Free Airbnb Audit, See What Your Cabin Is Leaving on the Table",
+  title: "Free Airbnb Audit: See What Your Cabin Is Leaving on the Table",
   description:
-    "Paste your Airbnb listing. In 45 seconds, see how your pricing, occupancy, and amenities compare to similar properties earning more in your market.",
+    "Paste your Airbnb URL. In 45 seconds, see how your pricing, occupancy, and amenities compare to similar cabins earning more in your market.",
+  openGraph: {
+    title: "Free Airbnb Audit for Broken Bow & Hochatown Cabins",
+    description:
+      "Live AirROI market data. See the revenue gap on your specific Airbnb listing in under 2 minutes.",
+    images: [
+      {
+        url: "/images/hero/foggy-mountain.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Free Airbnb audit for Broken Bow and Hochatown cabins",
+      },
+    ],
+  },
   alternates: { canonical: "https://rentwithfrontier.com/audit" },
   robots: { index: true, follow: true },
 };

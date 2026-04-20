@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://rentwithfrontier.com"),
   title: {
     default:
-      "Frontier Property Management | Cabin Rentals & STR Management in Hochatown & Broken Bow, OK",
-    template: "%s | Frontier Property Management, Broken Bow & Hochatown",
+      "Broken Bow & Hochatown Property Management | Frontier",
+    template: "%s | Frontier",
   },
   description:
     "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management — pricing, guests, cleanings, maintenance. 20% of nightly-rental revenue, no monthly minimum.",

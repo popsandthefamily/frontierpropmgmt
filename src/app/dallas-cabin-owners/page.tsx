@@ -16,9 +16,9 @@ import { AuditCalculator } from "@/components/audit/audit-calculator";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Dallas Cabin Owners, Broken Bow Property Management from DFW",
+  title: "Dallas Cabin Owners: Broken Bow Property Management from DFW",
   description:
-    "Own a cabin in Broken Bow? Frontier gives Dallas & DFW owners local, hands-on STR management, 20% fee, no contracts, 15-30% revenue increases.",
+    "Own a Broken Bow cabin from Dallas? Frontier gives DFW owners local, hands-on STR management. 20% of nightly-rental revenue, no monthly minimum, month-to-month.",
   keywords: [
     "Dallas cabin owner property management",
     "DFW Broken Bow cabin management",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Dallas STR management Oklahoma",
   ],
   openGraph: {
-    title: "Dallas & DFW Cabin Owners, Broken Bow Property Management",
+    title: "Dallas & DFW Cabin Owners: Broken Bow Property Management",
     description:
       "Local Broken Bow management for out-of-town owners. Frontier handles everything so you can invest from Dallas with confidence.",
     images: [

@@ -24,16 +24,22 @@ import { siteConfig } from "@/data/site";
 const property = getPropertyBySlug("sublime");
 
 export const metadata: Metadata = {
-  title:
-    "Sublime Retreat, Luxury Hochatown Cabin | Hot Tub, 2 Zip Lines, Arcade",
+  title: "Sublime Retreat: Luxury Hochatown Cabin with Hot Tub & Zip Lines",
   description:
-    "Book Sublime Retreat direct & save, luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
+    "Book Sublime Retreat direct & save. Luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
   openGraph: {
-    title: "Sublime Retreat, Luxury Hochatown Cabin | Book Direct & Save",
+    title: "Sublime Retreat: Luxury Hochatown Cabin | Book Direct",
     description:
       "2 zip lines, hot tub, arcade, Calcutta quartz kitchen. 3BR luxury cabin in Hochatown. Book direct, no platform fees.",
     images: property?.images?.[0]?.src
-      ? [{ url: property.images[0].src }]
+      ? [
+          {
+            url: property.images[0].src,
+            width: 1200,
+            height: 630,
+            alt: "Sublime Retreat luxury cabin in Hochatown, Oklahoma",
+          },
+        ]
       : [],
   },
   alternates: {
