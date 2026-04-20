@@ -15,7 +15,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "Broken Bow Cabin Property Management | Local Team, 20% Flat Fee",
   description:
-    "Broken Bow, OK cabin management by a locally based team. 20% flat fee, no setup costs, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+    "Broken Bow, OK cabin management by a locally based team. 20% of nightly-rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
   keywords: [
     "Broken Bow property management",
     "Broken Bow cabin management",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Broken Bow Cabin Property Management | Frontier",
     description:
-      "Local Broken Bow cabin management. 20% flat fee, no setup costs, Airbnb Top Rated Host across every cabin.",
+      "Local Broken Bow cabin management. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin.",
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/broken-bow-property-management",

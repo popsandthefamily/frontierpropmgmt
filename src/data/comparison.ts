@@ -46,7 +46,14 @@ export const comparisonRows: ComparisonRow[] = [
     selfManage: "—",
     vacasa: "Reported $499–$1,500",
     evolve: "$0",
-    frontier: "$0",
+    frontier: "$750 one-time",
+  },
+  {
+    label: "Monthly minimum",
+    selfManage: "—",
+    vacasa: "Varies",
+    evolve: "—",
+    frontier: "$0 (pay only when you earn)",
   },
   {
     label: "Contract length",

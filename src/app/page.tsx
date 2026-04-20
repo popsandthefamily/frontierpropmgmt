@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   title:
     "Broken Bow Property Management | 20% Flat Fee | Frontier",
   description:
-    "Full-service cabin management in Broken Bow & Hochatown. 20% flat fee, no setup costs, Airbnb Top Rated Host across every property. Based locally, not a call center.",
+    "Full-service cabin management in Broken Bow & Hochatown. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin. Local team.",
   openGraph: {
     title: "Broken Bow Property Management | 20% Flat Fee | Frontier",
     description:
-      "Cabin management that actually answers the phone. Free revenue estimate, no setup fee, month-to-month.",
+      "Cabin management that actually answers the phone. Free revenue estimate, no monthly minimum, month-to-month.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -64,7 +64,7 @@ const TRUST_STATS = [
   {
     icon: Rocket,
     stat: "$0",
-    label: "Setup or onboarding cost",
+    label: "Monthly minimum (pay only when you earn)",
   },
 ];
 
@@ -109,8 +109,9 @@ export default function HomePage() {
                 Cabin management that actually answers the phone.
               </h1>
               <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-                Family-owned, locally operated. 20% flat management fee. No
-                setup costs. Airbnb Top Rated Host across every cabin we run.
+                Family-owned, locally operated. 20% of nightly-rental revenue,
+                no monthly minimum. Airbnb Top Rated Host on every cabin we
+                manage.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button

@@ -220,7 +220,7 @@ export const blogPosts: BlogPost[] = [
 <ul>
   <li><strong>Pre-purchase:</strong> Free revenue projections for properties you are considering. We will tell you honestly whether a cabin will perform.</li>
   <li><strong>Setup:</strong> Professional photography, listing optimization, pricing strategy, and vendor onboarding.</li>
-  <li><strong>Ongoing management:</strong> Full-service operations at 20% of gross, no setup fees, no long-term contracts.</li>
+  <li><strong>Ongoing management:</strong> Full-service operations at 20% of nightly-rental revenue, no monthly minimum, no long-term contracts. One-time $750 onboarding covers photography, listing build, and smart-lock install.</li>
 </ul>
 <p>If you are a Dallas investor considering a Broken Bow cabin purchase, <a href="/contact">reach out for a free consultation</a>. We will give you the local perspective that real estate listings do not.</p>
 `,

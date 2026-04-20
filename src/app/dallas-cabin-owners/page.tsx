@@ -301,7 +301,7 @@ export default function DallasCabinOwnersPage() {
             { value: "3 hrs", label: "Dallas to Broken Bow, we are already here" },
             { value: "4.95★", label: "Avg rating across all platforms" },
             { value: "15-30%", label: "Typical revenue increase for new owners" },
-            { value: "20%", label: "Simple management fee, no setup costs" },
+            { value: "20%", label: "Management fee, no monthly minimum" },
           ].map((stat) => (
             <div key={stat.label}>
               <p className="text-4xl font-bold text-white md:text-5xl">

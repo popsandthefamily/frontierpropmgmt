@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   title:
     "Cabin Management Services, Full-Service STR Management in Broken Bow & Hochatown",
   description:
-    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance, 20% of gross, no setup fees.",
+    "Hire the top-rated Broken Bow cabin management company. Dynamic pricing, Airbnb/VRBO optimization, guest support, cleaning & maintenance. 20% of nightly-rental revenue, no monthly minimum.",
   openGraph: {
     title: "Full-Service Cabin Management in Broken Bow & Hochatown",
     description:
-      "20% of gross bookings, no setup fees. Dynamic pricing, guest communication, cleaning, maintenance, we handle everything.",
+      "20% of nightly-rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, we handle everything.",
   },
   alternates: {
     canonical: "https://rentwithfrontier.com/management-services",
@@ -59,42 +59,68 @@ const whatWeDoItems = [
   "KPI reporting",
 ];
 
-const pricingFeatures = [
-  "High-converting Airbnb/VRBO + direct listing setup",
-  "Dynamic pricing tuned to Hochatown demand",
-  "Full guest communication and issue resolution",
-  "Cleaner coordination with property-specific turnover checklists",
-  "Maintenance coordination and issue tracking",
-  "Owner portal + clear monthly statements",
+/** What the 20% management fee covers */
+const feeIncludes = [
+  "Dynamic pricing and revenue management",
+  "Guest communication (24/7 response)",
+  "Listing optimization across Airbnb, VRBO, and Booking.com",
+  "Cleaning and maintenance coordination",
+  "Owner financial reporting and tax documentation",
+  "Marketing and direct-booking infrastructure",
 ];
 
+/** Pass-through costs: billed separately, at cost, no FPM markup */
+const passThroughItems = [
+  {
+    label: "Cleaning turnovers",
+    detail: "Charged to guests, zero owner impact.",
+  },
+  {
+    label: "Maintenance and repairs",
+    detail:
+      "Itemized on your monthly statement. Anything over $300 requires your approval first.",
+  },
+  {
+    label: "Utilities, internet, streaming",
+    detail: "Stay on your existing accounts. We don't touch them.",
+  },
+  {
+    label: "Consumables (coffee, toiletries, paper goods)",
+    detail: "Billed quarterly at our vendor cost.",
+  },
+  {
+    label: "Linens and replenishment",
+    detail: "Billed as needed at our vendor cost.",
+  },
+  {
+    label: "Platform host fees (Airbnb 3%, VRBO 5%)",
+    detail: "Deducted by the platform before your payout reaches us.",
+  },
+];
+
+/** One-time and out-of-scope items — clearly not bundled */
 const notIncludedItems = [
-  "Cleaning turnover (charged to guests, Frontier coordinates)",
-  "Maintenance and repair costs (at vendor cost, no markup)",
-  "Utilities, supplies, linens, and consumables",
-  "Platform service fees (Airbnb, VRBO, Booking.com)",
-];
-
-const billedAtCostAddOns = [
   {
-    name: "Professional photography",
-    description:
-      "Full HDR shoot, edited deliverables, and reshoots when you upgrade the cabin. Quoted per project.",
+    label: "One-time onboarding",
+    price: "$750",
+    detail:
+      "Professional photography, listing build across platforms, and smart-lock install. One payment, no recurring fee.",
   },
   {
-    name: "Firewood, hot tub chemicals, deep cleans",
-    description:
-      "Everything we have to source or schedule gets passed through at the vendor&apos;s price with the receipt on your statement.",
+    label: "Pool and hot-tub service contracts",
+    price: "Billed direct",
+    detail:
+      "We coordinate the vendor, they invoice you directly. No coordination markup.",
   },
   {
-    name: "Vendor repairs and upgrades",
-    description:
-      "Plumbing, HVAC, appliance, electrical, landscaping. Billed at the contractor&apos;s invoice amount, no coordination fee.",
+    label: "Permit renewals and tax registrations",
+    price: "At agency cost",
+    detail: "Filing fees are whatever the city or state charges.",
   },
   {
-    name: "Smart-home and compliance installs",
-    description:
-      "Smart locks, noise-monitoring devices, permit filings, STR registrations. At cost.",
+    label: "Owner-stay turnover cleans",
+    price: "At cost",
+    detail: "Clean after your own visit, billed at the cleaner's direct rate.",
   },
 ];
 
@@ -137,7 +163,8 @@ export default function ManagementServicesPage() {
           serviceType: "Vacation Rental Property Management",
           offers: {
             "@type": "Offer",
-            description: "20% of gross bookings, no setup fees",
+            description:
+              "20% of nightly-rental revenue, no monthly minimum. One-time $750 onboarding.",
             priceCurrency: "USD",
           },
         }}
@@ -299,30 +326,39 @@ export default function ManagementServicesPage() {
           <h2 className="text-center text-3xl font-bold text-charcoal md:text-4xl">
             Our Pricing
           </h2>
+          <p className="mx-auto mt-4 max-w-xl text-center text-base text-muted-foreground md:text-lg">
+            One fee. No monthly minimum. If your cabin makes $0 in a month,
+            you owe us $0.
+          </p>
 
           <AnimateInView>
             <Card className="mt-10 border-2 border-sage">
               <CardHeader className="text-center">
                 <p className="text-base font-medium uppercase tracking-wider text-sage">
-                  Full-Service STR Management Plan
+                  Full-Service STR Management
                 </p>
                 <CardTitle className="mt-2 text-4xl font-bold text-charcoal md:text-5xl">
                   20%{" "}
                   <span className="text-lg font-normal text-muted-foreground md:text-xl">
-                    of Gross Rental Revenue
+                    of nightly-rental revenue
                   </span>
                 </CardTitle>
                 <p className="mt-2 text-base text-muted-foreground">
-                  That is the entire fee. No markups, no add-ons.
+                  Calculated on nightly rate (plus any extra-guest or
+                  premium-stay fees). Cleaning and pet fees pass through
+                  directly to cleaners and are not part of the 20%.
                 </p>
               </CardHeader>
 
               <CardContent>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-sage">
+                  What the 20% covers
+                </p>
                 <ul className="space-y-3">
-                  {pricingFeatures.map((feature) => (
+                  {feeIncludes.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-start gap-3 text-lg text-charcoal"
+                      className="flex items-start gap-3 text-base text-charcoal md:text-lg"
                     >
                       <Check className="mt-0.5 size-5 shrink-0 text-sage" />
                       <span>{feature}</span>
@@ -330,36 +366,15 @@ export default function ManagementServicesPage() {
                   ))}
                 </ul>
 
-                {/* How the money actually moves */}
-                <div className="mt-8 rounded-lg border border-sage/20 bg-sage/5 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-sage">
-                    How the money moves
+                <div className="mt-8 rounded-lg border border-peach/40 bg-peach/10 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-charcoal">
+                    One-time onboarding: $750
                   </p>
-                  <ul className="mt-3 space-y-2 text-sm text-charcoal">
-                    <li className="flex items-start gap-2">
-                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
-                      <span>
-                        Your guest pays: nightly rate + cleaning fee + pet fee
-                        (if any) + occupancy taxes.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
-                      <span>
-                        Frontier fronts the cost of cleaning, pet handling, and
-                        tax remittance. We&apos;re paid back directly from the
-                        matching fees your guest paid at booking, dollar for
-                        dollar. Nothing comes out of your share.
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
-                      <span>
-                        Your payout: 80% of the nightly-rental revenue. Frontier
-                        keeps 20%. That is the full math.
-                      </span>
-                    </li>
-                  </ul>
+                  <p className="mt-2 text-sm text-charcoal">
+                    Professional photography, listing build across Airbnb /
+                    VRBO / Booking.com, and smart-lock install. One payment,
+                    no recurring setup fee.
+                  </p>
                 </div>
 
                 <Button
@@ -367,7 +382,7 @@ export default function ManagementServicesPage() {
                   size="lg"
                   className="mt-8 w-full bg-sage text-white hover:bg-sage-dark text-base"
                 >
-                  <Link href="/contact">Get Started</Link>
+                  <Link href="/contact#discovery">Schedule a Discovery Call</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -375,54 +390,76 @@ export default function ManagementServicesPage() {
         </div>
       </SectionWrapper>
 
-      {/* ── What's NOT Included ──────────────────────────────────────── */}
+      {/* ── Billed separately (pass-through, at cost) ───────────────── */}
       <SectionWrapper background="cream">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            What&apos;s not in the 20%
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            The 20% fee covers management. Physical costs of running the cabin
-            pass through at cost with the receipt on your monthly statement.
-          </p>
-        </div>
-
-        <ul className="mx-auto mt-10 max-w-xl space-y-4">
-          {notIncludedItems.map((item) => (
-            <li
-              key={item}
-              className="flex items-start gap-3 text-lg text-charcoal"
-            >
-              <X className="mt-0.5 size-5 shrink-0 text-muted-foreground" />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mx-auto mt-14 max-w-3xl">
-          <h3 className="text-center text-2xl font-bold text-charcoal md:text-3xl">
-            Optional add-ons, all billed at cost
-          </h3>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-base text-muted-foreground">
-            Frontier does not mark up add-ons. When an add-on runs through us,
-            you see the vendor&apos;s invoice amount on your owner statement,
-            nothing more.
-          </p>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {billedAtCostAddOns.map((a) => (
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              Billed separately, at cost
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+              Running a cabin has real costs. Frontier doesn&apos;t mark any of
+              them up. Every pass-through item shows on your monthly owner
+              statement with the receipt.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {passThroughItems.map((item) => (
               <div
-                key={a.name}
+                key={item.label}
                 className="rounded-2xl border border-sage/20 bg-white p-5"
               >
-                <div className="text-sm font-semibold uppercase tracking-widest text-sage">
-                  At cost
+                <div className="flex items-start gap-3">
+                  <Check className="mt-1 size-5 shrink-0 text-sage" />
+                  <div>
+                    <div className="text-base font-semibold text-charcoal">
+                      {item.label}
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {item.detail}
+                    </p>
+                  </div>
                 </div>
-                <div className="mt-2 text-lg font-semibold text-charcoal">
-                  {a.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* ── What's NOT Included ──────────────────────────────────────── */}
+      <SectionWrapper background="white">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              What&apos;s not included
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+              One-time, out-of-scope, or paid directly to a specialist.
+              These are always stated up front, never surprises on a statement.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {notIncludedItems.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-2xl border bg-white p-5"
+              >
+                <div className="flex items-start gap-3">
+                  <X className="mt-1 size-5 shrink-0 text-muted-foreground" />
+                  <div className="flex-1">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="text-base font-semibold text-charcoal">
+                        {item.label}
+                      </span>
+                      <span className="text-sm font-semibold text-sage">
+                        {item.price}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {item.detail}
+                    </p>
+                  </div>
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {a.description}
-                </p>
               </div>
             ))}
           </div>

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Frontier Property Management, Broken Bow & Hochatown",
   },
   description:
-    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management, pricing, guests, cleanings & maintenance, 20% of gross, no setup fees.",
+    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management — pricing, guests, cleanings, maintenance. 20% of nightly-rental revenue, no monthly minimum.",
   keywords: [
     "Broken Bow cabin rentals",
     "Hochatown cabin rentals",
@@ -96,7 +96,7 @@ export default function RootLayout({
           data={{
             name: siteConfig.name,
             description:
-              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance, 20% of gross bookings, no setup fees.",
+              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance. 20% of nightly-rental revenue, no monthly minimum.",
             url: siteConfig.url,
             telephone: siteConfig.phone,
             email: siteConfig.email,

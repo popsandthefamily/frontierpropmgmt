@@ -275,7 +275,7 @@ export const managementFAQ: FAQItem[] = [
   {
     question: "What is your management fee? Are there any markups on top?",
     answer:
-      "20% of the gross nightly-rental revenue. That is the entire management fee, no markups on cleaning, no marketing add-ons, no admin charges. Frontier fronts the cost of guest-reimbursable items (cleaning fee, pet fee, occupancy taxes) and gets paid back directly from the matching fees your guests pay at booking. Optional services like professional photography, firewood, hot tub chemicals, deep cleans, and vendor repairs are billed at cost, no markup, with the original receipt on your monthly statement. The only way Frontier makes money is the 20%.",
+      "20% of nightly-rental revenue. That is the entire recurring management fee. The 20% is calculated on the nightly rate (plus any extra-guest or premium-stay surcharges); cleaning and pet fees pass through directly to cleaners and are not part of the calculation. There is no monthly minimum, so if your cabin makes $0 in a month you owe us $0. One-time onboarding is $750, which covers professional photography, listing build across Airbnb / VRBO / Booking.com, and smart-lock install. Everything else (utilities, consumables, linens, maintenance, pool / hot-tub service, permit renewals) is billed separately at cost with the receipt on your monthly statement. Maintenance items over $300 always require your approval first.",
   },
   {
     question: "Is there a long-term contract?",
