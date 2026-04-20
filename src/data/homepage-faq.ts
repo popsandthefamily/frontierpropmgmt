@@ -8,7 +8,7 @@ import { managementFAQ } from "./services";
  * propagate here and to /management-services automatically.
  */
 const QUESTION_ORDER = [
-  "What is your management fee?",
+  "What is your management fee? Are there any markups on top?",
   "Is there a long-term contract?",
   "What happens to my existing bookings if I switch to Frontier?",
   "Can I still use my cabin for personal stays?",

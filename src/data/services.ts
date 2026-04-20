@@ -273,9 +273,9 @@ export interface FAQItem {
 
 export const managementFAQ: FAQItem[] = [
   {
-    question: "What is your management fee?",
+    question: "What is your management fee? Are there any markups on top?",
     answer:
-      "We charge 20% of gross booking revenue. This covers all core services including listing management, guest communication, cleaning coordination, maintenance oversight, and owner reporting. There are no hidden fees.",
+      "20% of the gross nightly-rental revenue. That is the entire management fee, no markups on cleaning, no marketing add-ons, no admin charges. Frontier fronts the cost of guest-reimbursable items (cleaning fee, pet fee, occupancy taxes) and gets paid back directly from the matching fees your guests pay at booking. Optional services like professional photography, firewood, hot tub chemicals, deep cleans, and vendor repairs are billed at cost, no markup, with the original receipt on your monthly statement. The only way Frontier makes money is the 20%.",
   },
   {
     question: "Is there a long-term contract?",

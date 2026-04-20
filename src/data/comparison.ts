@@ -29,7 +29,7 @@ export const comparisonRows: ComparisonRow[] = [
     selfManage: "0% (plus your time)",
     vacasa: "25–35% of gross",
     evolve: "10% + marketing fees",
-    frontier: "20% flat",
+    frontier: "20% of gross, no markups",
     sources: [
       {
         label: "Vacasa pricing overview",

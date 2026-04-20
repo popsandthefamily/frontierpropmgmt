@@ -69,10 +69,33 @@ const pricingFeatures = [
 ];
 
 const notIncludedItems = [
-  "Cleaning fees (charged to guests)",
-  "Maintenance and repair costs",
+  "Cleaning turnover (charged to guests, Frontier coordinates)",
+  "Maintenance and repair costs (at vendor cost, no markup)",
   "Utilities, supplies, linens, and consumables",
-  "Platform service fees (Airbnb, VRBO, etc.)",
+  "Platform service fees (Airbnb, VRBO, Booking.com)",
+];
+
+const billedAtCostAddOns = [
+  {
+    name: "Professional photography",
+    description:
+      "Full HDR shoot, edited deliverables, and reshoots when you upgrade the cabin. Quoted per project.",
+  },
+  {
+    name: "Firewood, hot tub chemicals, deep cleans",
+    description:
+      "Everything we have to source or schedule gets passed through at the vendor&apos;s price with the receipt on your statement.",
+  },
+  {
+    name: "Vendor repairs and upgrades",
+    description:
+      "Plumbing, HVAC, appliance, electrical, landscaping. Billed at the contractor&apos;s invoice amount, no coordination fee.",
+  },
+  {
+    name: "Smart-home and compliance installs",
+    description:
+      "Smart locks, noise-monitoring devices, permit filings, STR registrations. At cost.",
+  },
 ];
 
 export default function ManagementServicesPage() {
@@ -286,11 +309,11 @@ export default function ManagementServicesPage() {
                 <CardTitle className="mt-2 text-4xl font-bold text-charcoal md:text-5xl">
                   20%{" "}
                   <span className="text-lg font-normal text-muted-foreground md:text-xl">
-                    of Gross Bookings
+                    of Gross Rental Revenue
                   </span>
                 </CardTitle>
                 <p className="mt-2 text-base text-muted-foreground">
-                  Pro marketing, pricing, and guest comms
+                  That is the entire fee. No markups, no add-ons.
                 </p>
               </CardHeader>
 
@@ -306,6 +329,38 @@ export default function ManagementServicesPage() {
                     </li>
                   ))}
                 </ul>
+
+                {/* How the money actually moves */}
+                <div className="mt-8 rounded-lg border border-sage/20 bg-sage/5 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+                    How the money moves
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm text-charcoal">
+                    <li className="flex items-start gap-2">
+                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
+                      <span>
+                        Your guest pays: nightly rate + cleaning fee + pet fee
+                        (if any) + occupancy taxes.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
+                      <span>
+                        Frontier fronts the cost of cleaning, pet handling, and
+                        tax remittance. We&apos;re paid back directly from the
+                        matching fees your guest paid at booking, dollar for
+                        dollar. Nothing comes out of your share.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="mt-0.5 size-4 shrink-0 text-sage" />
+                      <span>
+                        Your payout: 80% of the nightly-rental revenue. Frontier
+                        keeps 20%. That is the full math.
+                      </span>
+                    </li>
+                  </ul>
+                </div>
 
                 <Button
                   asChild
@@ -324,10 +379,11 @@ export default function ManagementServicesPage() {
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            What&apos;s Not Included
+            What&apos;s not in the 20%
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            There are no setup fees and no hidden charges.
+            The 20% fee covers management. Physical costs of running the cabin
+            pass through at cost with the receipt on your monthly statement.
           </p>
         </div>
 
@@ -342,6 +398,35 @@ export default function ManagementServicesPage() {
             </li>
           ))}
         </ul>
+
+        <div className="mx-auto mt-14 max-w-3xl">
+          <h3 className="text-center text-2xl font-bold text-charcoal md:text-3xl">
+            Optional add-ons, all billed at cost
+          </h3>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-base text-muted-foreground">
+            Frontier does not mark up add-ons. When an add-on runs through us,
+            you see the vendor&apos;s invoice amount on your owner statement,
+            nothing more.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            {billedAtCostAddOns.map((a) => (
+              <div
+                key={a.name}
+                className="rounded-2xl border border-sage/20 bg-white p-5"
+              >
+                <div className="text-sm font-semibold uppercase tracking-widest text-sage">
+                  At cost
+                </div>
+                <div className="mt-2 text-lg font-semibold text-charcoal">
+                  {a.name}
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {a.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </SectionWrapper>
 
       {/* ── Self-Manage vs. Frontier Comparison ─────────────────────── */}
