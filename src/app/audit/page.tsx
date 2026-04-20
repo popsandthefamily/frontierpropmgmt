@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BarChart3, LineChart, Search } from "lucide-react";
-import { Tier1Form } from "@/components/audit/tier1-form";
+import { ArrowRight, BarChart3, LineChart, Search, Star, Award, MapPin } from "lucide-react";
 import { Tier2Form } from "@/components/audit/tier2-form";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
+import { getDefaultMarketSnapshot } from "@/lib/audit/default-snapshot";
 
 export const metadata: Metadata = {
   title: "Free Airbnb Audit — See What Your Cabin Is Leaving on the Table",
@@ -12,21 +13,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://rentwithfrontier.com/audit" },
   robots: { index: true, follow: true },
 };
-
-const testimonials = [
-  {
-    name: "Sarah, Broken Bow, OK",
-    quote: "Added $18k/yr after fixing pricing.",
-  },
-  {
-    name: "Mike, Galveston, TX",
-    quote: "Went from 52% to 74% occupancy in 4 months.",
-  },
-  {
-    name: "Dana, Hot Springs, AR",
-    quote: "Caught a $9k/yr amenity gap I'd missed for 2 years.",
-  },
-];
 
 const steps = [
   {
@@ -46,7 +32,8 @@ const steps = [
   },
 ];
 
-export default function AuditPage() {
+export default async function AuditPage() {
+  const defaultSnapshot = await getDefaultMarketSnapshot();
   return (
     <>
       {/* Hero */}
@@ -68,31 +55,32 @@ export default function AuditPage() {
             </p>
           </div>
 
-          {/* Tier 1 form */}
+          {/* Pre-loaded Hochatown snapshot — no form interaction required */}
           <div className="mx-auto mt-10 max-w-2xl">
-            <Tier1Form />
+            <HeroSnapshot snapshot={defaultSnapshot} />
           </div>
         </div>
       </section>
 
-      {/* Social proof band */}
+      {/* Trust band — verifiable credentials only */}
       <section className="bg-sage text-white">
         <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-          <p className="mx-auto max-w-3xl text-center text-xl font-semibold leading-tight md:text-3xl">
-            Frontier hosts earn a median <span className="text-peach">23% more</span> than their market.
-          </p>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <div
-                key={t.name}
-                className="rounded-2xl bg-white/10 p-5 backdrop-blur"
-              >
-                <p className="text-base font-medium text-white md:text-lg">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <p className="mt-3 text-sm text-white/70">— {t.name}</p>
-              </div>
-            ))}
+          <div className="grid gap-6 md:grid-cols-3">
+            <TrustStat
+              icon={Star}
+              stat="4.95 ★"
+              label="Across Airbnb, VRBO, Booking.com"
+            />
+            <TrustStat
+              icon={Award}
+              stat="Top Rated Host"
+              label="Airbnb Superhost across every cabin"
+            />
+            <TrustStat
+              icon={MapPin}
+              stat="Local team"
+              label="Based in Broken Bow — not an overseas call center"
+            />
           </div>
         </div>
       </section>
@@ -213,6 +201,26 @@ function Faq({ q, children }: { q: string; children: React.ReactNode }) {
     <div className="border-b pb-5">
       <dt className="text-lg font-semibold text-charcoal">{q}</dt>
       <dd className="mt-2 text-base text-muted-foreground">{children}</dd>
+    </div>
+  );
+}
+
+function TrustStat({
+  icon: Icon,
+  stat,
+  label,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  stat: string;
+  label: string;
+}) {
+  return (
+    <div className="flex items-start gap-4 rounded-2xl bg-white/10 p-5 backdrop-blur">
+      <Icon className="mt-1 size-6 shrink-0 text-peach" />
+      <div>
+        <div className="text-2xl font-bold text-white md:text-3xl">{stat}</div>
+        <div className="mt-1 text-sm text-white/80">{label}</div>
+      </div>
     </div>
   );
 }
