@@ -188,21 +188,9 @@ export default function HomePage() {
         </div>
         <div className="mx-auto max-w-3xl">
           <AuditCalculator variant="hero" />
-          <div className="mt-8 text-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
-            >
-              <Link href="/audit">
-                Run a free audit on my listing
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Takes 90 seconds. Free. No credit card.
-            </p>
-          </div>
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            Takes 90 seconds. Free. No credit card.
+          </p>
         </div>
       </SectionWrapper>
 

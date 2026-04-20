@@ -5,8 +5,11 @@ import { Tier2Form } from "./tier2-form";
 interface Props {
   /**
    * Visual variant:
-   * - "hero": Used as a primary section (homepage, Dallas). Shows snapshot + collapsed Tier 2 teaser.
-   * - "full": Used on dedicated pages (/audit, /income-calculator). Snapshot + always-visible Tier 2 form.
+   * - "hero": Used on the homepage and Dallas page. Shows snapshot only; the
+   *   primary CTA deep-links to /audit#full-audit so visitors don't get two
+   *   stacked audit forms.
+   * - "full": Used on /audit and /income-calculator. Snapshot + always-visible
+   *   Tier 2 form; same-page anchor scroll.
    */
   variant?: "hero" | "full";
   /** Optional heading/subhead for the Tier 2 section */
@@ -20,10 +23,11 @@ export async function AuditCalculator({
   tier2Subhead = "Takes 90 seconds. Free. We send the specific numbers for your listing to your email.",
 }: Props) {
   const snapshot = await getDefaultMarketSnapshot();
+  const auditHref = variant === "full" ? "#full-audit" : "/audit#full-audit";
 
   return (
     <div className="space-y-8">
-      <HeroSnapshot snapshot={snapshot} />
+      <HeroSnapshot snapshot={snapshot} auditHref={auditHref} />
 
       {variant === "full" && (
         <div id="full-audit-wrap" className="mx-auto max-w-2xl">

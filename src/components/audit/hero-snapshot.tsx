@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ArrowRight, TrendingUp, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { DefaultMarketSnapshot } from "@/lib/audit/default-snapshot";
@@ -8,9 +9,11 @@ import { Tier1Form } from "./tier1-form";
 
 interface Props {
   snapshot: DefaultMarketSnapshot | null;
+  /** Where the primary CTA points. Same-page anchor on /audit; /audit URL elsewhere. */
+  auditHref?: string;
 }
 
-export function HeroSnapshot({ snapshot }: Props) {
+export function HeroSnapshot({ snapshot, auditHref = "#full-audit" }: Props) {
   const [showCompare, setShowCompare] = useState(false);
 
   if (!snapshot) {
@@ -72,10 +75,17 @@ export function HeroSnapshot({ snapshot }: Props) {
             size="lg"
             className="bg-sage text-white hover:bg-sage-dark"
           >
-            <a href="#full-audit">
-              Run the audit on my listing
-              <ArrowRight className="ml-2 size-4" />
-            </a>
+            {auditHref.startsWith("#") ? (
+              <a href={auditHref}>
+                Run the audit on my listing
+                <ArrowRight className="ml-2 size-4" />
+              </a>
+            ) : (
+              <Link href={auditHref}>
+                Run the audit on my listing
+                <ArrowRight className="ml-2 size-4" />
+              </Link>
+            )}
           </Button>
           <button
             type="button"
