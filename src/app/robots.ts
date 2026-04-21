@@ -5,12 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: [
-        "/api/",
-        "/admin/",
-        "/audit/result/",
-        "/audit/market-snapshot/",
-      ],
+      disallow: ["/api/", "/admin/", "/audit/result/"],
     },
     sitemap: "https://rentwithfrontier.com/sitemap.xml",
   };

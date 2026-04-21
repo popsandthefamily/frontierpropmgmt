@@ -37,21 +37,25 @@ test.describe("audit page smoke", () => {
     await expect(cta.first()).toBeVisible();
   });
 
-  test("compare-a-different-market form exists and accepts input", async ({
+  test("static market snapshot renders numbers without fetching", async ({
     page,
   }) => {
-    await page.goto("/audit");
-    // /audit renders the snapshot card twice (hero + full variants), so use
-    // .first() to pick the topmost "Compare a different market" toggle.
-    await page
-      .getByRole("button", { name: /compare a different market/i })
-      .first()
-      .click();
+    // With the snapshot gated behind static data, the card should show
+    // real dollar figures on first paint — no API call, no skeleton.
+    let snapshotApiCalled = false;
+    page.on("request", (req) => {
+      if (req.url().includes("/api/audit/snapshot")) {
+        snapshotApiCalled = true;
+      }
+    });
 
-    const cityInput = page.locator('input[name="city"]').first();
-    await expect(cityInput).toBeVisible();
-    await cityInput.fill("Galveston, TX");
-    // Don't actually submit — Turnstile + live AirROI. Just verify the form wires up.
+    await page.goto("/audit");
+    await expect(page.getByText(/market median/i).first()).toBeVisible();
+    await expect(page.getByText(/top quartile/i).first()).toBeVisible();
+
+    // Deliberate pause so any lazy fetch would have had time to fire.
+    await page.waitForTimeout(500);
+    expect(snapshotApiCalled).toBe(false);
   });
 });
 

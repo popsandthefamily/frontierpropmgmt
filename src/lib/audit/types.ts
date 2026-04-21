@@ -89,14 +89,3 @@ export interface AuditReport {
   summary: string;
 }
 
-export interface MarketSnapshot {
-  id: string;
-  createdAt: number;
-  city: string;
-  bedrooms: number;
-  propertyType: string;
-  marketMedian: number;
-  marketTopQuartile: number;
-  occupancyRate: number;
-  gapToTop: number;
-}
