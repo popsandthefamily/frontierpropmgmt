@@ -1,4 +1,3 @@
-import { getDefaultMarketSnapshot } from "@/lib/audit/default-snapshot";
 import { HeroSnapshot } from "./hero-snapshot";
 import { Tier2Form } from "./tier2-form";
 
@@ -17,17 +16,16 @@ interface Props {
   tier2Subhead?: string;
 }
 
-export async function AuditCalculator({
+export function AuditCalculator({
   variant = "full",
   tier2Heading = "Get your full listing audit",
   tier2Subhead = "Takes 90 seconds. Free. We send the specific numbers for your listing to your email.",
 }: Props) {
-  const snapshot = await getDefaultMarketSnapshot();
   const auditHref = variant === "full" ? "#full-audit" : "/audit#full-audit";
 
   return (
     <div className="space-y-8">
-      <HeroSnapshot snapshot={snapshot} auditHref={auditHref} />
+      <HeroSnapshot auditHref={auditHref} />
 
       {variant === "full" && (
         <div id="full-audit-wrap" className="mx-auto max-w-2xl">
