@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @theme inline {
   /* Font families */
@@ -83,4 +84,17 @@ html {
 ::selection {
   background-color: #4a6e5d;
   color: #ffffff;
+}
+
+/* Blog content — override the site-wide uppercase rule inside `.prose` so
+   article headings don't render as caps and feel ALL-SHOUTY. Keep the
+   Yanone heading font (branded) but normal case and letter spacing. */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-transform: none;
+  letter-spacing: normal;
 }
