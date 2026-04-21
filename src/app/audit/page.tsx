@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BarChart3, LineChart, Search, Star, Award, MapPin } from "lucide-react";
-import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
+import { Tier2Form } from "@/components/audit/tier2-form";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 
 export const metadata: Metadata = {
@@ -65,9 +66,9 @@ export default function AuditPage() {
             </p>
           </div>
 
-          {/* Pre-loaded Hochatown snapshot, no form interaction required */}
+          {/* Static Hochatown market snapshot */}
           <div className="mx-auto mt-10 max-w-2xl">
-            <AuditCalculator variant="hero" />
+            <HeroSnapshot auditHref="#full-audit" />
           </div>
         </div>
       </section>
@@ -121,10 +122,10 @@ export default function AuditPage() {
         </div>
       </SectionWrapper>
 
-      {/* Tier 2 form (same AuditCalculator, full variant) */}
-      <SectionWrapper background="cream" id="full-audit">
+      {/* Tier 2 full audit form */}
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-2xl">
-          <AuditCalculator variant="full" />
+          <Tier2Form />
         </div>
       </SectionWrapper>
 

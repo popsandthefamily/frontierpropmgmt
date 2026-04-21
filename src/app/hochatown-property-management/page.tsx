@@ -11,7 +11,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { managementFAQ } from "@/data/services";
 import { hochatownFAQ } from "@/data/hochatown-faq";
-import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -244,7 +244,7 @@ export default function HochatownPropertyManagementPage() {
           </p>
         </div>
         <div className="mx-auto max-w-3xl">
-          <AuditCalculator variant="hero" />
+          <HeroSnapshot auditHref="/audit#full-audit" />
         </div>
       </SectionWrapper>
 

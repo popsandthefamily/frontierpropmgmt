@@ -12,7 +12,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -237,7 +237,7 @@ export default function DallasCabinOwnersPage() {
           </p>
         </div>
         <div className="mx-auto max-w-3xl">
-          <AuditCalculator variant="hero" />
+          <HeroSnapshot auditHref="/audit#full-audit" />
         </div>
       </SectionWrapper>
 

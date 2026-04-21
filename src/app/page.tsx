@@ -16,7 +16,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { StepCard } from "@/components/cards/step-card";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
-import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { ComparisonTable } from "@/components/sections/comparison-table";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
@@ -203,7 +203,7 @@ export default function HomePage() {
           </p>
         </div>
         <div className="mx-auto max-w-3xl">
-          <AuditCalculator variant="hero" />
+          <HeroSnapshot auditHref="/audit#full-audit" />
           <p className="mt-4 text-center text-xs text-muted-foreground">
             Takes 90 seconds. Free. No credit card.
           </p>

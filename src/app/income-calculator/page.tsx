@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
-import { AuditCalculator } from "@/components/audit/audit-calculator";
+import { HeroSnapshot } from "@/components/audit/hero-snapshot";
+import { Tier2Form } from "@/components/audit/tier2-form";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -50,7 +51,10 @@ export default function IncomeCalculatorPage() {
               and we&apos;ll run the full audit.
             </p>
           </div>
-          <AuditCalculator variant="full" />
+          <div className="space-y-8">
+            <HeroSnapshot auditHref="#full-audit" />
+            <Tier2Form />
+          </div>
         </div>
       </SectionWrapper>
 
