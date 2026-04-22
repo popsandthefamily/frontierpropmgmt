@@ -186,7 +186,7 @@ export default function AboutPage() {
       <SectionWrapper background="white">
         <div className="mx-auto max-w-3xl">
           <h2 className="mb-6 text-center text-3xl font-bold text-charcoal md:text-4xl">
-            Why Broken Bow Matters To Me
+            Why Broken Bow Matters To Us
           </h2>
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             <p>
