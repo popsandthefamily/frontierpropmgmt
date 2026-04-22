@@ -11,15 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/data/site";
+import { team } from "@/data/team";
 
 export const metadata: Metadata = {
   title: "About Frontier: Local Broken Bow & Hochatown STR Experts",
   description:
-    "Meet the family-owned team behind Frontier Property Management. Based in Broken Bow, managing Hochatown cabins with 4.95-star ratings and data-driven strategies.",
+    "Meet Hunter and Beth Collins, the husband-and-wife team behind Frontier Property Management. Based in Broken Bow with lifelong local roots and a 4.95-star guest rating.",
   openGraph: {
     title: "About Frontier Property Management",
     description:
-      "Family-owned Broken Bow cabin management. Local team, 4.95★ guest ratings, data-driven STR strategies.",
+      "Hunter and Beth Collins, the family-owned Broken Bow cabin management team. Local, lifelong, 4.95★.",
     images: [
       {
         url: "/images/team/hunter-collins.jpg",
@@ -77,8 +78,20 @@ export default function AboutPage() {
           founder: {
             "@type": "Person",
             name: "Hunter Collins",
-            jobTitle: "Owner",
+            jobTitle: "Owner & Founder",
           },
+          member: [
+            {
+              "@type": "Person",
+              name: "Hunter Collins",
+              jobTitle: "Owner & Founder",
+            },
+            {
+              "@type": "Person",
+              name: "Beth Collins",
+              jobTitle: "Co-Owner & Director of Local Operations",
+            },
+          ],
           areaServed: [
             { "@type": "Place", name: "Broken Bow, Oklahoma" },
             { "@type": "Place", name: "Hochatown, Oklahoma" },
@@ -99,31 +112,48 @@ export default function AboutPage() {
         overlay="dark"
       />
 
-      {/* 2. Owner Bio */}
+      {/* 2. Meet the Team */}
       <SectionWrapper background="white">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <AnimateInView direction="left">
-            <Image
-              src="/images/team/hunter-collins.jpg"
-              alt="Hunter Collins, Owner of Frontier Property Management"
-              width={600}
-              height={400}
-              className="rounded-lg shadow-lg"
-            />
-          </AnimateInView>
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Meet the team
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            Frontier is a husband-and-wife business. One of us is the
+            out-of-town perspective, the other is the Broken Bow native. Every
+            decision runs through both lenses.
+          </p>
+        </div>
 
-          <AnimateInView direction="right" delay={0.2}>
-            <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
-              Meet Hunter Collins
-            </h2>
-            <p className="leading-relaxed text-muted-foreground">
-              I&apos;m Hunter Collins. I didn&apos;t grow up in Broken Bow, but
-              I married into it. My background is in Maine woodlands, a place
-              with real seasons, real storms, and real quiet. I bring a triple
-              perspective: cabin owner, property manager, and frequent Airbnb
-              guest. That combination shapes everything we do at Frontier.
-            </p>
-          </AnimateInView>
+        <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
+          {team.map((member, i) => (
+            <AnimateInView
+              key={member.name}
+              direction={i === 0 ? "left" : "right"}
+              delay={i * 0.1}
+            >
+              <div className="flex flex-col items-center text-center md:items-start md:text-left">
+                <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl shadow-lg">
+                  <Image
+                    src={member.image}
+                    alt={member.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover"
+                  />
+                </div>
+                <h3 className="mt-6 text-2xl font-bold text-charcoal">
+                  {member.name}
+                </h3>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-sage">
+                  {member.role}
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                  {member.bio}
+                </p>
+              </div>
+            </AnimateInView>
+          ))}
         </div>
       </SectionWrapper>
 
