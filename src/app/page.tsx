@@ -17,6 +17,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { PropertyCard } from "@/components/cards/property-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
+import { DiscoveryCTALink } from "@/components/analytics/discovery-cta";
 import { ComparisonTable } from "@/components/sections/comparison-table";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
@@ -131,7 +132,12 @@ export default function HomePage() {
                   size="lg"
                   className="px-8 text-base"
                 >
-                  <Link href="/contact#discovery">Schedule a Discovery Call</Link>
+                  <DiscoveryCTALink
+                    source="homepage_hero"
+                    href="/contact#discovery"
+                  >
+                    Schedule a Discovery Call
+                  </DiscoveryCTALink>
                 </Button>
               </div>
             </div>

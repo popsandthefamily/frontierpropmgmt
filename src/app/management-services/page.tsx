@@ -14,6 +14,7 @@ import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { StatsSection } from "@/components/sections/stats-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
+import { DiscoveryCTALink } from "@/components/analytics/discovery-cta";
 import { StepCard } from "@/components/cards/step-card";
 import { AddonCard } from "@/components/cards/addon-card";
 import { ServiceCard } from "@/components/cards/service-card";
@@ -390,7 +391,12 @@ export default function ManagementServicesPage() {
                   size="lg"
                   className="mt-8 w-full bg-sage text-white hover:bg-sage-dark text-base"
                 >
-                  <Link href="/contact#discovery">Schedule a Discovery Call</Link>
+                  <DiscoveryCTALink
+                    source="management_services_pricing"
+                    href="/contact#discovery"
+                  >
+                    Schedule a Discovery Call
+                  </DiscoveryCTALink>
                 </Button>
               </CardContent>
             </Card>
