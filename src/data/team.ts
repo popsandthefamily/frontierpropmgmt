@@ -17,9 +17,7 @@ export const team: TeamMember[] = [
   {
     name: "Beth Collins",
     role: "Co-Owner & Director of Local Operations",
-    // Placeholder silhouette until the real portrait is shot and uploaded.
-    // Swap to /images/team/beth-collins.jpg once the photo is available.
-    image: "/images/team/beth-collins.svg",
+    image: "/images/team/beth-collins.jpg",
     alt: "Beth Collins, co-owner and director of local operations at Frontier",
     bio: "Beth grew up in Broken Bow. The woods, the back roads, the cleaning crews who show up in a storm, and the small-town businesses that keep guests coming back — those relationships aren't something she learned for this job, they're her hometown. She leads Frontier's on-the-ground operations: vendor partnerships, local market insight, and the community knowledge that lets Frontier respond faster and smarter than out-of-town managers can.",
   },
