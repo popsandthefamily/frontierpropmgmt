@@ -65,7 +65,7 @@ const valueProps = [
     icon: "TrendingUp",
     title: "Revenue Optimization",
     description:
-      "Dynamic pricing adjusted daily based on Broken Bow market demand, seasonality, local events, and comp activity. Runs our free audit to see the specific gap on your listing.",
+      "Dynamic pricing adjusted daily based on Broken Bow market demand, seasonality, local events, and comp activity. Run our free audit to see the specific gap on your listing.",
   },
 ];
 

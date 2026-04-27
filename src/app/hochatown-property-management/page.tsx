@@ -70,7 +70,7 @@ const valueProps = [
     icon: "TrendingUp",
     title: "Revenue Optimization",
     description:
-      "Dynamic pricing adjusted daily based on Hochatown demand, seasonality, local events (Beavers Bend marathon, Choctaw rodeo), and comp activity. Runs our free audit to see the specific gap on your listing.",
+      "Dynamic pricing adjusted daily based on Hochatown demand, seasonality, local events (Beavers Bend marathon, Choctaw rodeo), and comp activity. Run our free audit to see the specific gap on your listing.",
   },
 ];
 
