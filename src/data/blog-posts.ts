@@ -19,6 +19,186 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "what-boutique-cabin-manager-does-differently",
+    title:
+      "What a Boutique Cabin Manager Actually Does Differently",
+    date: "2026-04-27",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt:
+      "Boutique vs. scale isn't about who's nicer or harder-working. It's a structural difference in how decisions get made on your cabin. Here's what actually changes.",
+    featuredImage: "/images/properties/sublime/sublime-2.jpg",
+    content: `
+<p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, the <a href="/audit#full-audit">free listing audit</a> runs your specific Airbnb or VRBO listing against current AirROI data. That's the honest first step before any conversation about management.</em></p>
+
+<h2>The Boutique-vs-Scale Question Is Mis-Framed</h2>
+<p>Most owners ask "are boutique managers better than national PMS companies?" That's the wrong question. The right question is "which structure makes better decisions on a cabin like mine?" Some owners genuinely do better with scale. Some genuinely do better boutique. The honest answer depends on the cabin, the owner, and the market.</p>
+<p>What changes between the two isn't quality of intent. National PMS teams genuinely want their owners to win — bad results lose them clients. The structural difference is who's actually making decisions on your specific cabin, how often, and with how much context.</p>
+
+<h2>What Boutique Actually Means in Practice</h2>
+<p>Frontier is intentionally small. We operate our own high-performing cabin in Hochatown and take on a limited number of owner partners. Here's what that texture looks like day to day.</p>
+
+<h3>1. The Person Pricing Your Cabin Has Walked Through It</h3>
+<p>On a small team, the operator pricing your weekend rates has been inside the cabin. They know whether the bunk room is an actual selling point or a "kids only" qualifier. They know the hot tub view is what closes Friday-night family bookings. National pricing algorithms don't.</p>
+<p>This sounds soft, but it shows up in real numbers — pricing decisions on niche amenities, premium-rate weekends around local events, and gap-fill nights. The algorithm gives you a baseline. The operator who's been in your cabin gives you the override.</p>
+
+<h3>2. Decisions Happen at the Speed of a Phone Call, Not a Ticket</h3>
+<p>When a guest calls Friday night because the hot tub is cloudy, scale operators route through a ticket system: dispatch, vendor scheduling, owner notification. On a boutique team, that's a 15-minute round trip — operator to vendor to cabin. By the time scale would have opened the ticket, boutique has it solved.</p>
+<p>The cost difference: a 5-star review vs a 3-star one. That difference compounds over a season more than fee structure does.</p>
+
+<h3>3. The Operator Owns the Result</h3>
+<p>This is the most underrated structural difference. On a national PMS, your cabin is one of thousands. Whoever is "responsible" for it has 50–200 other cabins on their list and a national algorithm doing most of the optimization work. On a boutique team, the operator's reputation literally lives on the handful of cabins they manage. That changes the math on every decision they make.</p>
+
+<h3>4. The Playbook Is Tested on a Real Cabin</h3>
+<p>The cleaning standards, guest messaging cadence, maintenance escalation, and pricing logic Frontier uses on owner cabins are the same systems we test on the cabin we operate ourselves. When something breaks, we feel it before our owners do. When we tighten a pricing rule, we run it on our cabin first.</p>
+<p>National PMS playbooks are built across thousands of properties — they're polished, but they're polished for the average. Boutique playbooks are built for the cabin in front of you.</p>
+
+<h2>Where Scale Is Genuinely Better</h2>
+<p>It would be dishonest to write this without naming where scale wins.</p>
+<ul>
+  <li><strong>Multi-state portfolios.</strong> If you own cabins in Hochatown, Gatlinburg, and Pigeon Forge, a national operator gives you one dashboard, one billing structure, and one point of accountability across markets. Boutique can't do that.</li>
+  <li><strong>Enterprise reporting.</strong> Scale operators have polished owner portals with API access, automated tax document generation, and standardized financial exports. Boutique operations are usually less polished here.</li>
+  <li><strong>Standardized service guarantees.</strong> National operators have SLAs and escalation paths. Boutique operators have a phone number. Both work — they just feel different.</li>
+</ul>
+<p>If those things matter more to you than hands-on attention from the decision-maker, scale is genuinely the right pick.</p>
+
+<h2>How to Tell Which Structure Fits Your Cabin</h2>
+<p>Three honest questions:</p>
+<ol>
+  <li><strong>Do you want to talk to the operator, or to a portal?</strong> If you'd rather text the person responsible than navigate a dashboard, boutique fits.</li>
+  <li><strong>Is your cabin distinct enough that "average" pricing leaves money on the table?</strong> If it has a feature that doesn't fit a standardized comp set — unusual layout, niche amenity, oddly-priced location — boutique extracts more value.</li>
+  <li><strong>Is "best response time" or "lowest fee" the metric you care about?</strong> Boutique generally wins on response time. Scale sometimes wins on bundled headline fee (though the comparison breaks down once you account for setup, monthly minimum, and pass-through markups — see <a href="/broken-bow-cabin-management-fees">our fee breakdown</a>).</li>
+</ol>
+
+<h2>The Real Decision</h2>
+<p>The structural difference between boutique and scale isn't about quality of work. It's about who is actually making decisions on your cabin and how close they are to the property when something needs to change.</p>
+<p>If you want to see whether boutique attention can move the numbers on your specific cabin, run the <a href="/audit#full-audit">free listing audit</a> first — it'll show you the revenue gap before we ever talk about management. And if you want the honest framework for evaluating any manager, the page on <a href="/best-hochatown-property-management-company">picking the best Hochatown property management company</a> walks through the five tests we'd ask if we were on your side of the table.</p>
+`,
+  },
+  {
+    slug: "questions-to-ask-hochatown-airbnb-manager",
+    title:
+      "Airbnb Management in Hochatown: 12 Questions to Ask Before You Sign",
+    date: "2026-04-26",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt:
+      "A boutique cabin owner's checklist for evaluating any Hochatown Airbnb manager. The 12 questions that surface real differences in fees, lock-in, response time, and listing ownership before you sign anything.",
+    featuredImage: "/images/discover/hochatown-pm-featured.png",
+    content: `
+<p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning before you start interviewing managers, run the <a href="/audit#full-audit">free listing audit</a>. The revenue gap on your specific listing is the only number that actually matters in these conversations.</em></p>
+
+<h2>Why Most Manager Interviews Go Wrong</h2>
+<p>Most owners interview Hochatown Airbnb managers the way they'd interview a contractor: vibes plus a price quote. That's how owners end up locked into 12-month contracts with managers whose pricing is set by a national algorithm and whose response times are measured in business days.</p>
+<p>Below is a checklist Frontier uses on the owner side of the table — the 12 questions that surface real structural differences before you sign anything. Print it. Take it to every manager call. The differences in answers will be obvious.</p>
+
+<h2>Operations</h2>
+
+<h3>1. Who exactly will be making pricing decisions on my cabin?</h3>
+<p><strong>Why it matters:</strong> "We use dynamic pricing software" is a non-answer. Software doesn't make decisions; people do. Ask for the name and role of the person who reviews pricing on your specific cabin and how often. If that person can't be named, scale is doing the work, not a human.</p>
+
+<h3>2. What's the worst-case response time when a guest calls at 11pm?</h3>
+<p><strong>Why it matters:</strong> "24/7 support" is meaningless. Ask for actual hours and actual response time. Boutique managers say "minutes — local team." Scale operators say "we'll have someone reach you within X hours." Both are valid; just know which you're getting.</p>
+
+<h3>3. Are your cleaners and maintenance vendors local to Hochatown / Broken Bow?</h3>
+<p><strong>Why it matters:</strong> Local vendors take your call because they value the relationship. Out-of-area vendors take your call when they have time. The difference shows up on Friday afternoons.</p>
+
+<h2>Fees and Money</h2>
+
+<h3>4. What's the all-in cost — including setup, monthly minimums, photo fees, and any markups?</h3>
+<p><strong>Why it matters:</strong> Headline percentage rates are misleading. Setup fees, monthly minimums, mandatory photo packages, and markups on cleaning or maintenance can add 5–10 percentage points to the real cost. Get every line in writing. Our full breakdown of <a href="/broken-bow-cabin-management-fees">what management fees should actually include</a> lists every layer to watch for.</p>
+
+<h3>5. Are pass-through costs at vendor cost or is there a coordination fee?</h3>
+<p><strong>Why it matters:</strong> Cleaning and maintenance are real costs. They should be billed at vendor cost, on your owner statement, with the receipt. Anything else is a hidden margin.</p>
+
+<h3>6. Is there a monthly minimum?</h3>
+<p><strong>Why it matters:</strong> If your cabin earns $0 in a slow shoulder-season month, you should owe $0. Anything else is the manager getting paid out of your pocket regardless of performance.</p>
+
+<h2>Contract and Lock-In</h2>
+
+<h3>7. What's the cancellation clause? Notice period and any termination fees?</h3>
+<p><strong>Why it matters:</strong> Month-to-month with a 30-day exit and no termination fee is owner-friendly. Anything longer protects the manager more than it earns your business each month.</p>
+
+<h3>8. Who owns the listings on Airbnb, VRBO, and Booking.com?</h3>
+<p><strong>Why it matters:</strong> This is the single biggest contract clause to get right. If the manager owns the listings, your reviews can effectively stay with them when you leave. Listings should be owned by you. Always. (More on this in <a href="/switch-property-managers-broken-bow">how to switch property managers without losing reviews</a>.)</p>
+
+<h3>9. Will reviews transfer to me or my next manager if I leave?</h3>
+<p><strong>Why it matters:</strong> Reviews live on the listing on Airbnb, VRBO, and Booking.com. If listing ownership transfers cleanly, reviews come with it. Verify in writing.</p>
+
+<h2>Performance and Proof</h2>
+
+<h3>10. Will you run my specific listing through current market data before quoting any forecast?</h3>
+<p><strong>Why it matters:</strong> Anyone quoting "we typically see 15–30% revenue lift" without seeing your cabin is selling, not forecasting. The honest version is to run your listing against current AirROI Hochatown data and show the gap.</p>
+
+<h3>11. Are you operating any cabins in this market yourselves, and what's their performance?</h3>
+<p><strong>Why it matters:</strong> Managers who operate in the same market understand the demand cycle viscerally. Frontier operates Sublime Retreat in Hochatown — the systems we use on owner cabins are the same ones we test on our own. Ask whether your prospective manager has skin in the same market.</p>
+
+<h3>12. What does your reporting look like — can I see a sample owner statement?</h3>
+<p><strong>Why it matters:</strong> Reporting reveals philosophy. Detailed line-itemed statements with vendor receipts vs. vague summary numbers tell you a lot about how transparent the operator wants to be after you sign.</p>
+
+<h2>What "Good" Answers Look Like</h2>
+<ul>
+  <li>The person responsible for your cabin is named, not abstracted into a system.</li>
+  <li>Worst-case response time is in minutes (boutique) or has a written SLA (scale).</li>
+  <li>The headline fee covers everything except clearly listed pass-through costs at vendor cost.</li>
+  <li>Contract is month-to-month with a clean exit.</li>
+  <li>Listings are owned by you. Reviews transfer.</li>
+  <li>Forecasts are based on your specific listing, not portfolio averages.</li>
+</ul>
+
+<h2>The First Step</h2>
+<p>Before you start interviewing anyone, run the <a href="/audit#full-audit">free listing audit</a>. It runs your specific Airbnb or VRBO listing against current AirROI Hochatown market data and shows the actual revenue gap. That number is the single piece of information every manager interview should be anchored to. If a prospective manager can't credibly close that gap given their fee structure and lock-in, the math doesn't work — no matter how good the interview felt.</p>
+<p>For the structural framework on which manager type fits which owner, see our take on <a href="/airbnb-management-hochatown-ok">Airbnb management in Hochatown</a>.</p>
+`,
+  },
+  {
+    slug: "lessons-from-running-our-own-hochatown-cabin",
+    title:
+      "What We Learned Operating Our Own Hochatown Cabin",
+    date: "2026-04-25",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt:
+      "Frontier operates Sublime Retreat in Hochatown. Here's what running our own high-performing cabin taught us about pricing, guests, vendors, and what's actually worth fighting for in this market.",
+    featuredImage: "/images/properties/sublime/sublime-1.jpg",
+    content: `
+<p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, run the <a href="/audit#full-audit">free listing audit</a>. The math we use on Sublime Retreat is the same math we run on owner cabins.</em></p>
+
+<h2>Why Frontier Operates a Cabin Itself</h2>
+<p>Frontier didn't start as a property management company. We started by buying and operating <a href="/sublime">Sublime Retreat</a> in Hochatown — a 3-bedroom luxury cabin that we still run as our flagship. Every system Frontier uses on owner cabins was built and tested on that one cabin first. The pricing rules, cleaning checklists, guest messaging, vendor relationships, and maintenance escalation were all stress-tested on a property we own and care about, not on a portfolio average.</p>
+<p>Below are the lessons that mattered most. They're the reason Frontier exists in the shape it does.</p>
+
+<h2>1. Pricing Is the Single Biggest Lever — and Most Owners Get It Wrong</h2>
+<p>Before we built the pricing playbook we now use, we made every classic mistake. Setting a flat rate and forgetting it. Pricing too low for fall foliage weekends. Holding firm on premium minimums when occupancy was telling us to flex. Each one cost real money on Sublime Retreat before we tightened the rules.</p>
+<p>The lesson: <strong>pricing in Hochatown isn't seasonal — it's event-driven, weather-driven, and competitor-driven, all at once.</strong> A flat seasonal rate misses Beavers Bend Marathon weekends, fall foliage peaks, spring break swings, Texas school calendar shifts, and last-minute cold-snap demand for hot-tub cabins. Daily review with overrides is table stakes; anything less leaves money on the table every week.</p>
+
+<h2>2. Guest Communication Speed Is a Pricing Mechanism</h2>
+<p>Counterintuitive but proven on our own cabin: response time isn't a customer-service nicety. It's a pricing lever. Inquiries that get answered in under 10 minutes convert at materially higher rates than ones that wait an hour. Faster bookings mean more nights filled at our preferred prices instead of last-minute discounted nights.</p>
+<p>That's why our owner-cabin response cadence is the same as the one we use on Sublime Retreat — fast, written, and consistent. Slow guest messaging looks like customer service degradation; in reality it shows up as a few percent of revenue lost every month.</p>
+
+<h2>3. Cleaning Is the Difference Between 4.7 and 4.95 Stars</h2>
+<p>This one took us a while to learn. The difference between a "great" cabin and a top-rated cabin isn't usually amenities — it's cleanliness reliability. We invested in a photo-verified post-clean QC process on Sublime Retreat after a single below-standard turnover dropped our review average. That QC process now runs on every owner cabin Frontier manages.</p>
+<p>The unintuitive part: scale operators struggle with this exact lever. Their cleaners are stretched across hundreds of properties; QC happens by complaint, not by photo. Boutique operations can afford to look at every clean. That's the structural lesson.</p>
+
+<h2>4. Direct Booking Lowers Platform Dependence — Slowly</h2>
+<p>We built a direct booking site for Sublime Retreat to lower our dependence on Airbnb's algorithm and fee structure. It does work. It also takes time. Direct bookings are a small share of total revenue in year one, a meaningful share in year two, and a real moat against platform algorithm changes by year three.</p>
+<p>We now build direct booking infrastructure into every owner cabin. Not because it's a quick win, but because compounding over multiple years is real, and we've watched it on our own property.</p>
+
+<h2>5. Local Vendor Relationships Are an Asset, Not a Service</h2>
+<p>The cleaners, plumbers, electricians, hot-tub techs, and HVAC contractors we know in the Broken Bow / Hochatown corridor will pick up our calls because we send them steady work year-round. That relationship was built on Sublime Retreat first. It now serves every owner cabin we manage.</p>
+<p>Owner-managers and out-of-market property managers can't replicate this — they don't have the volume or proximity. The lesson is structural: local relationships are an asset that takes years to build and outperforms scale on response time, vendor quality, and emergency reliability.</p>
+
+<h2>6. The Hochatown Market Is Specific</h2>
+<p>Generic short-term rental playbooks miss the specifics that drive Hochatown demand: Beavers Bend events, fall foliage timing, Texas school calendar variation, the Dallas drive-time threshold, and the fact that this is a small, seasonal market that has grown faster than the demand. Pricing rules built for a national market apply <em>generally</em>. Pricing rules built from operating in this market apply <em>specifically</em>.</p>
+<p>That specificity matters more during shoulder-season pricing decisions than during peak season. Anyone can fill a Hochatown cabin in July. The difference between a great manager and an average one shows up in late February and mid-October.</p>
+
+<h2>What This Means for Your Cabin</h2>
+<p>You don't need to operate your own cabin to get good management. But your manager should — that's the structural argument for boutique. The systems on your cabin should be ones the operator runs on their own property and trusts because they've watched them work.</p>
+<p>If you want to see what those systems can do on your specific listing, the <a href="/audit#full-audit">free listing audit</a> is the honest first step. We'll run your cabin against current AirROI market data and show the revenue gap before any conversation about management. The pricing, listing, cleaning, and guest-messaging logic we'd apply is the same we apply on Sublime Retreat.</p>
+<p>For the structural take on what changes between boutique and scale operations, see <a href="/best-hochatown-property-management-company">how to pick the best Hochatown property management company</a> for your cabin.</p>
+`,
+  },
+  {
     slug: "managing-broken-bow-cabin-from-dallas",
     title: "Managing Your Broken Bow Cabin from Dallas: What Every DFW Owner Should Know",
     date: "2026-04-07",

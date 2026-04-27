@@ -31,6 +31,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogPosts: MetadataRoute.Sitemap = [
     {
+      url: `${baseUrl}/blogs/what-boutique-cabin-manager-does-differently`,
+      lastModified: new Date("2026-04-27"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blogs/questions-to-ask-hochatown-airbnb-manager`,
+      lastModified: new Date("2026-04-26"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blogs/lessons-from-running-our-own-hochatown-cabin`,
+      lastModified: new Date("2026-04-25"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/blogs/managing-broken-bow-cabin-from-dallas`,
       lastModified: new Date("2026-04-07"),
       changeFrequency: "yearly",
