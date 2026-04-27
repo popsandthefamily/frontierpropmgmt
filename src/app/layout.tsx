@@ -124,6 +124,7 @@ export default function RootLayout({
             sameAs: [
               siteConfig.social.instagram,
               siteConfig.social.facebook,
+              siteConfig.social.google,
             ],
             priceRange: "$$",
             aggregateRating: {
