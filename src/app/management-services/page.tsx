@@ -359,7 +359,15 @@ export default function ManagementServicesPage() {
                 <p className="mt-2 text-base text-muted-foreground">
                   Calculated on nightly rate (plus any extra-guest or
                   premium-stay fees). Cleaning and pet fees pass through
-                  directly to cleaners and are not part of the 20%.
+                  directly to cleaners and are not part of the 20%. See the
+                  full{" "}
+                  <Link
+                    href="/broken-bow-cabin-management-fees"
+                    className="font-semibold text-sage underline hover:text-sage-dark"
+                  >
+                    fee breakdown
+                  </Link>{" "}
+                  for what 20% covers vs. what is billed at cost.
                 </p>
               </CardHeader>
 
@@ -579,7 +587,14 @@ export default function ManagementServicesPage() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-white/90">
               We handle the entire transition. Zero booking downtime. Your
-              reviews stay intact. Here&apos;s exactly what happens:
+              reviews stay intact. The full playbook is on{" "}
+              <Link
+                href="/switch-property-managers-broken-bow"
+                className="font-semibold text-white underline hover:text-cream"
+              >
+                how to switch property managers in Broken Bow
+              </Link>
+              ; the short version is below.
             </p>
           </AnimateInView>
         </div>

@@ -399,8 +399,76 @@ export default function DallasCabinOwnersPage() {
         </div>
       </SectionWrapper>
 
-      {/* FAQ */}
+      {/* Resources for Dallas owners */}
       <SectionWrapper background="cream">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+            More for Dallas cabin owners
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+            The honest landings on cost, switching, and how to evaluate any
+            Hochatown manager from three hours away.
+          </p>
+          <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left sm:grid-cols-2">
+            <li>
+              <Link
+                href="/airbnb-management-hochatown-ok"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Airbnb management in Hochatown
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Boutique vs scale vs self-management trade-offs.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/switch-property-managers-broken-bow"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Switching property managers
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  How to switch without losing reviews — full transition
+                  playbook.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/broken-bow-cabin-management-fees"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Management fees explained
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  What 20% should include and the hidden fees to watch for.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/best-hochatown-property-management-company"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Best Hochatown management company
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Five tests for picking the right cabin manager.
+                </p>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </SectionWrapper>
+
+      {/* FAQ */}
+      <SectionWrapper background="white">
         <FAQSection
           title="Questions from Dallas Cabin Owners"
           questions={dallasFAQ}

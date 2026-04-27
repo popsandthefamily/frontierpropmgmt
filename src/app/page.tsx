@@ -310,6 +310,73 @@ export default function HomePage() {
         />
       </SectionWrapper>
 
+      {/* ── 6.5 Owner-intent resources ──────────────────────────────── */}
+      <SectionWrapper background="cream">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+            Keep researching
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+            Honest landings on the questions every Hochatown / Broken Bow
+            cabin owner asks before signing with anyone.
+          </p>
+          <ul className="mx-auto mt-8 grid max-w-3xl gap-3 text-left sm:grid-cols-2">
+            <li>
+              <Link
+                href="/airbnb-management-hochatown-ok"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Airbnb management in Hochatown
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Boutique vs scale vs national PMS — category trade-offs.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/best-hochatown-property-management-company"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Best Hochatown management company
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  How to evaluate any manager in this market.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/broken-bow-cabin-management-fees"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Broken Bow management fees
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  What 20% should include and the hidden fees.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/switch-property-managers-broken-bow"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Switching property managers
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Without losing reviews or booking momentum.
+                </p>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </SectionWrapper>
+
       {/* ── 7. Guest-facing strip (demoted) ──────────────────────────── */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">

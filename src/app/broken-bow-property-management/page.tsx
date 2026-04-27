@@ -252,6 +252,72 @@ export default function BrokenBowPropertyManagementPage() {
         <FAQSection questions={managementFAQ.slice(0, 6)} />
       </SectionWrapper>
 
+      {/* Resources for Broken Bow owners */}
+      <SectionWrapper background="cream">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+            More for Broken Bow cabin owners
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+            The honest details: what to pay, what to ask, and how to switch
+            without losing reviews.
+          </p>
+          <ul className="mx-auto mt-8 grid max-w-2xl gap-3 text-left sm:grid-cols-2">
+            <li>
+              <Link
+                href="/broken-bow-cabin-management-fees"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Broken Bow cabin management fees
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  What 20% should include and the hidden fees to watch for.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/switch-property-managers-broken-bow"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Switching property managers
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  How to switch without losing reviews or booking momentum.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/best-hochatown-property-management-company"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">
+                  Best Hochatown management company
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  How to evaluate any cabin manager — boutique, scale, or
+                  self-manage.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dallas-cabin-owners"
+                className="block rounded-xl border bg-white p-4 transition hover:border-sage hover:text-sage"
+              >
+                <div className="text-sm font-semibold">Dallas cabin owners</div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Remote-owner specifics for DFW investors.
+                </p>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </SectionWrapper>
+
       {/* CTA */}
       <CTASection
         heading="Own a Broken Bow cabin? See the gap on your listing."
