@@ -39,7 +39,36 @@ interface NavDropdownItem {
 type NavItem = NavLinkItem | NavDropdownItem;
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "For Owners", href: "/management-services" },
+  {
+    label: "For Owners",
+    children: [
+      {
+        label: "Management Services",
+        href: "/management-services",
+        description: "Full-service STR management, pricing, and operations",
+      },
+      {
+        label: "Hochatown Management",
+        href: "/hochatown-property-management",
+        description: "Local cabin management for Hochatown owners",
+      },
+      {
+        label: "Broken Bow Management",
+        href: "/broken-bow-property-management",
+        description: "Short-term rental management in Broken Bow, OK",
+      },
+      {
+        label: "Dallas Cabin Owners",
+        href: "/dallas-cabin-owners",
+        description: "Remote-owner support for DFW cabin investors",
+      },
+      {
+        label: "Free Listing Audit",
+        href: "/audit",
+        description: "See the revenue gap in your Airbnb or Vrbo listing",
+      },
+    ],
+  },
   {
     label: "Properties",
     children: [
