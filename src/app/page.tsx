@@ -19,6 +19,7 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { DiscoveryCTALink } from "@/components/analytics/discovery-cta";
 import { ComparisonTable } from "@/components/sections/comparison-table";
+import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
@@ -28,11 +29,11 @@ export const metadata: Metadata = {
     absolute: "Broken Bow Property Management | 20% Flat | Frontier",
   },
   description:
-    "Full-service cabin management in Broken Bow & Hochatown. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin. Local team.",
+    "Boutique, owner-operated cabin management in Broken Bow & Hochatown. We run our own high-performing flagship cabin and take on a limited number of owner partners. 20% of nightly-rental revenue, no monthly minimum.",
   openGraph: {
-    title: "Broken Bow Property Management | 20% Flat Fee | Frontier",
+    title: "Broken Bow Property Management | Boutique & Owner-Operated | Frontier",
     description:
-      "Cabin management that actually answers the phone. Free revenue estimate, no monthly minimum, month-to-month.",
+      "Hands-on cabin management from the team that operates its own flagship Hochatown cabin. Free listing audit, no monthly minimum, month-to-month.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -50,13 +51,13 @@ export const metadata: Metadata = {
 const TRUST_STATS = [
   {
     icon: Award,
-    stat: "Top Rated",
-    label: "Airbnb Top Rated Host, every cabin",
+    stat: "Flagship cabin",
+    label: "Airbnb Top Rated Host on the cabin we operate ourselves",
   },
   {
     icon: Star,
-    stat: "4.9★",
-    label: "Across Airbnb, VRBO & Booking.com",
+    stat: "Boutique",
+    label: "Hands-on management for a limited number of owner partners",
   },
   {
     icon: DollarSign,
@@ -108,12 +109,13 @@ export default function HomePage() {
                 {" "}Property Management
               </p>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-charcoal md:text-5xl lg:text-6xl">
-                Cabin management that actually answers the phone.
+                Boutique cabin management for owners who want hands-on attention.
               </h1>
               <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-                Family-owned, locally operated. 20% of nightly-rental revenue,
-                no monthly minimum. Airbnb Top Rated Host on every cabin we
-                manage.
+                We operate our own high-performing cabin in the Broken Bow and
+                Hochatown market, and we take on a limited number of owner
+                partners where direct, local management can move the numbers.
+                20% of nightly-rental revenue, no monthly minimum.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button
@@ -121,10 +123,10 @@ export default function HomePage() {
                   size="lg"
                   className="bg-sage text-white hover:bg-sage-dark px-8 text-base"
                 >
-                  <a href="#calculator">
-                    Get a Free Revenue Estimate
+                  <Link href="/audit#full-audit">
+                    Run my free listing audit
                     <ArrowRight className="ml-2 size-4" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button
                   asChild
@@ -215,6 +217,9 @@ export default function HomePage() {
           </p>
         </div>
       </SectionWrapper>
+
+      {/* ── 3.5 Flagship case study ──────────────────────────────────── */}
+      <FlagshipCaseStudySection background="white" />
 
       {/* ── 4. Compared to the alternatives ──────────────────────────── */}
       <SectionWrapper background="white">
@@ -362,10 +367,10 @@ export default function HomePage() {
 
       {/* ── 7. Final owner CTA ───────────────────────────────────────── */}
       <CTASection
-        heading="Ready to earn more with less stress?"
-        subtext="Get a free revenue estimate on your cabin, or book a 30-minute call with Hunter."
+        heading="Ready to see the revenue gap on your listing?"
+        subtext="Free, takes about 90 seconds, built for Broken Bow and Hochatown cabin owners. Or book a 30-minute call with Hunter."
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{ label: "Get a Revenue Estimate", href: "/#calculator" }}
+        cta={{ label: "Run my free listing audit", href: "/audit#full-audit" }}
         secondaryCta={{
           label: "Schedule a Call",
           href: "/contact#discovery",

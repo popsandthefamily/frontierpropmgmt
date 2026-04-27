@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Star, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Broken Bow Cabin Property Management | Frontier",
     description:
-      "Local Broken Bow cabin management. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin.",
+      "Boutique, owner-operated Broken Bow cabin management from a team that runs its own flagship cabin in the same market. 20% of nightly-rental revenue, no monthly minimum.",
     images: [
       {
         url: "/images/properties/old-broken-bow-highway/featured.jpg",
@@ -124,13 +124,13 @@ export default function BrokenBowPropertyManagementPage() {
       {/* Hero */}
       <HeroSection
         backgroundImage="/images/discover/downtown-broken-bow.png"
-        title="Broken Bow Cabin Property Management"
-        subtitle="Professional short-term rental management for Broken Bow cabin owners."
+        title="Boutique Broken Bow Cabin Management"
+        subtitle="Owner-operated. We run our own flagship cabin nearby and take on a limited number of Broken Bow owner partners."
         size="large"
         overlay="gradient"
         cta={{
-          label: "Schedule a Free Consultation",
-          href: "/contact",
+          label: "Run my free listing audit",
+          href: "/audit#full-audit",
         }}
       />
 
@@ -148,9 +148,9 @@ export default function BrokenBowPropertyManagementPage() {
             Why Broken Bow Cabin Owners Choose Frontier
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            We are a locally owned company based right here in Broken Bow. Our
-            team knows the market, the vendors, and what guests expect from a
-            Broken Bow cabin experience.
+            Boutique and owner-operated, based right here in Broken Bow. We run
+            our own cabin in the same market, so the systems, vendors, and
+            playbook on your cabin are the ones we test on our own.
           </p>
         </div>
 
@@ -216,27 +216,33 @@ export default function BrokenBowPropertyManagementPage() {
         </div>
       </SectionWrapper>
 
-      {/* Testimonial */}
+      {/* What owners get from a small shop */}
       <SectionWrapper background="sage">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl">
           <AnimateInView>
-            <div className="mb-4 flex items-center justify-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="size-6 fill-amber-400 text-amber-400"
-                />
-              ))}
-            </div>
-            <blockquote className="text-xl font-medium leading-relaxed text-white md:text-2xl">
-              &ldquo;Frontier made the transition seamless. Our Broken Bow
-              cabin is earning more than ever and we do not have to worry about
-              a thing. They handle everything professionally and keep us
-              informed every step of the way.&rdquo;
-            </blockquote>
-            <p className="mt-4 text-white/80">
-             , Satisfied Cabin Owner, Broken Bow
+            <h2 className="text-center text-3xl font-bold text-white md:text-4xl">
+              What owners get from a small shop
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-white/85 md:text-lg">
+              Frontier is intentionally small. That changes the things you
+              actually feel as an owner.
             </p>
+            <ul className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+              {[
+                "Direct access to the person responsible for the result",
+                "Fewer properties competing for attention",
+                "Local vendor coordination, not remote ticket handling",
+                "Pricing and listing decisions made by someone operating in the same market",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 rounded-xl bg-white/10 p-4 text-white"
+                >
+                  <Check className="mt-0.5 size-5 shrink-0 text-white" />
+                  <span className="text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
           </AnimateInView>
         </div>
       </SectionWrapper>
@@ -248,10 +254,10 @@ export default function BrokenBowPropertyManagementPage() {
 
       {/* CTA */}
       <CTASection
-        heading="Own a Broken Bow cabin? Let Frontier maximize your revenue."
-        subtext="Professional photography, data-driven pricing, and hands-on management from a team that knows the Broken Bow market inside and out."
-        cta={{ label: "Get Started", href: "/management-services" }}
-        secondaryCta={{ label: "Contact Us", href: "/contact" }}
+        heading="Own a Broken Bow cabin? See the gap on your listing."
+        subtext="Free, takes about 90 seconds, built for Broken Bow and Hochatown cabin owners. Then decide if Frontier is a fit."
+        cta={{ label: "Run my free listing audit", href: "/audit#full-audit" }}
+        secondaryCta={{ label: "Schedule a Discovery Call", href: "/contact#discovery" }}
       />
     </>
   );

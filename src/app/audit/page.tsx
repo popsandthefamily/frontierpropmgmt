@@ -78,14 +78,14 @@ export default function AuditPage() {
         <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
           <div className="grid gap-6 md:grid-cols-3">
             <TrustStat
-              icon={Star}
-              stat="4.95 ★"
-              label="Across Airbnb, VRBO, Booking.com"
+              icon={Award}
+              stat="Flagship cabin"
+              label="Airbnb Top Rated Host on the cabin we operate ourselves"
             />
             <TrustStat
-              icon={Award}
-              stat="Top Rated Host"
-              label="Airbnb Superhost across every cabin"
+              icon={Star}
+              stat="Boutique"
+              label="Limited owner partners, hands-on attention"
             />
             <TrustStat
               icon={MapPin}

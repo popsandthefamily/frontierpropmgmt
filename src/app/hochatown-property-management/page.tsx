@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Star, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
-import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { managementFAQ } from "@/data/services";
 import { hochatownFAQ } from "@/data/hochatown-faq";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
+import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hochatown Cabin Property Management | Frontier",
     description:
-      "Local Hochatown cabin management. 20% of nightly-rental revenue, no monthly minimum, Airbnb Top Rated Host on every cabin.",
+      "Boutique, owner-operated Hochatown cabin management from a team that runs its own flagship cabin in the same market. 20% of nightly-rental revenue, no monthly minimum.",
     images: [
       {
         url: "/images/discover/hochatown-pm-featured.png",
@@ -141,13 +141,13 @@ export default function HochatownPropertyManagementPage() {
       {/* Hero */}
       <HeroSection
         backgroundImage="/images/discover/hochatown-pm-featured.png"
-        title="Hochatown Cabin Property Management"
-        subtitle="Maximize your rental income. We handle the details so you can relax."
+        title="Boutique Hochatown Cabin Management"
+        subtitle="We run our own high-performing cabin in this market and take on a limited number of owner partners where hands-on attention can move the numbers."
         size="large"
         overlay="gradient"
         cta={{
-          label: "Schedule a Free Consultation",
-          href: "/contact",
+          label: "Run my free listing audit",
+          href: "/audit#full-audit",
         }}
       />
 
@@ -165,8 +165,10 @@ export default function HochatownPropertyManagementPage() {
             Why Hochatown Cabin Owners Choose Frontier
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            We are locally owned and operated in Broken Bow. Our team lives here,
-            works here, and treats every property like our own.
+            Boutique, owner-operated, and based in Broken Bow. We run our own
+            flagship cabin in the same market and only take on a limited number
+            of owner partners — so each property gets direct attention from the
+            people responsible for the result.
           </p>
         </div>
 
@@ -182,8 +184,11 @@ export default function HochatownPropertyManagementPage() {
         </div>
       </SectionWrapper>
 
+      {/* Flagship case study */}
+      <FlagshipCaseStudySection background="white" />
+
       {/* Our Services */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
             <h2 className="mb-4 text-3xl font-bold text-charcoal md:text-4xl">
@@ -313,10 +318,10 @@ export default function HochatownPropertyManagementPage() {
 
       {/* CTA */}
       <CTASection
-        heading="Own a Hochatown cabin? Turn views into bookings."
-        subtext="Professional photography, video tours, and targeted ad campaigns that put your cabin in front of the right guests. Let Frontier handle the marketing while you enjoy the returns."
-        cta={{ label: "Get Started", href: "/management-services" }}
-        secondaryCta={{ label: "Contact Us", href: "/contact" }}
+        heading="Own a Hochatown cabin? See the gap on your listing."
+        subtext="Free, takes about 90 seconds, built for Broken Bow and Hochatown cabin owners. Then decide if Frontier is a fit."
+        cta={{ label: "Run my free listing audit", href: "/audit#full-audit" }}
+        secondaryCta={{ label: "Schedule a Discovery Call", href: "/contact#discovery" }}
       />
     </>
   );

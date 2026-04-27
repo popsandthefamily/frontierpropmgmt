@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, Check, MapPin, Clock, TrendingUp, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, MapPin, Clock, TrendingUp, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -249,9 +249,10 @@ export default function DallasCabinOwnersPage() {
               Why Dallas Owners Choose Frontier
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Many of our managed cabins are owned by investors in the
-              Dallas-Fort Worth area. We built our operation around making
-              remote ownership simple and profitable.
+              Most of our owner partners live somewhere else — Dallas-Fort
+              Worth especially. Boutique scale plus boots-on-the-ground in
+              Broken Bow is what makes remote ownership work without a
+              franchise PMS.
             </p>
             <ul className="mt-8 space-y-4">
               {[
@@ -299,8 +300,8 @@ export default function DallasCabinOwnersPage() {
         <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
           {[
             { value: "3 hrs", label: "Dallas to Broken Bow, we are already here" },
-            { value: "4.95★", label: "Avg rating across all platforms" },
-            { value: "15-30%", label: "Typical revenue increase for new owners" },
+            { value: "Boutique", label: "Limited number of owner partners" },
+            { value: "Flagship", label: "We operate our own cabin in this market" },
             { value: "20%", label: "Management fee, no monthly minimum" },
           ].map((stat) => (
             <div key={stat.label}>
@@ -343,27 +344,33 @@ export default function DallasCabinOwnersPage() {
         </div>
       </SectionWrapper>
 
-      {/* Testimonial */}
+      {/* What remote owners actually get from a small shop */}
       <SectionWrapper background="cream">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl">
           <AnimateInView>
-            <div className="mb-4 flex items-center justify-center gap-1">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="size-6 fill-amber-400 text-amber-400"
-                />
-              ))}
-            </div>
-            <blockquote className="text-xl font-medium leading-relaxed text-charcoal md:text-2xl">
-              &ldquo;We live in Dallas and were nervous about managing a cabin
-              three hours away. Frontier took over and within two months our
-              revenue was up 25%. The monthly reports are clear, the
-              communication is great, and we do not worry about a thing.&rdquo;
-            </blockquote>
-            <p className="mt-4 text-muted-foreground">
-             , DFW Cabin Owner, Broken Bow
+            <h2 className="text-center text-3xl font-bold text-charcoal md:text-4xl">
+              What remote owners get from a small shop
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-base text-muted-foreground md:text-lg">
+              Frontier is intentionally small. From three hours away, that is
+              what changes the things you actually feel as an owner.
             </p>
+            <ul className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+              {[
+                "Direct access to the person responsible for the result, not a queue",
+                "Fewer properties competing for attention on busy weekends",
+                "Local vendors we know personally — not a remote ticket queue",
+                "Pricing decisions made by an operator in the same market as your cabin",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 rounded-xl border bg-white p-4 text-charcoal"
+                >
+                  <Check className="mt-0.5 size-5 shrink-0 text-sage" />
+                  <span className="text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
           </AnimateInView>
         </div>
       </SectionWrapper>

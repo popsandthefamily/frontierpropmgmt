@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Frontier",
   },
   description:
-    "Book a cabin in Broken Bow & Hochatown or hire the top-rated local STR management company. Direct booking with no platform fees. Full-service vacation rental management — pricing, guests, cleanings, maintenance. 20% of nightly-rental revenue, no monthly minimum.",
+    "Book a cabin in Broken Bow & Hochatown, or hire the boutique, owner-operated local team that runs its own flagship cabin in the same market. Full-service STR management — pricing, guests, cleanings, maintenance. 20% of nightly-rental revenue, no monthly minimum.",
   keywords: [
     "Broken Bow cabin rentals",
     "Hochatown cabin rentals",
@@ -127,12 +127,6 @@ export default function RootLayout({
               siteConfig.social.google,
             ],
             priceRange: "$$",
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "4.95",
-              bestRating: "5",
-              ratingCount: "47",
-            },
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Cabin Management Services",

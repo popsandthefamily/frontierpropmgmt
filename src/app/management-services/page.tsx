@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Check, X, Clock, ArrowRight } from "lucide-react";
+import { Check, X, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +19,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { AddonCard } from "@/components/cards/addon-card";
 import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
+import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { ContactForm } from "@/components/forms/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
@@ -181,19 +182,22 @@ export default function ManagementServicesPage() {
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"
-        title="Hochatown Short-Term Rental Management"
-        subtitle="We take over pricing, guests, cleanings, and issues, so you stop babysitting your cabin."
+        title="Boutique Hochatown STR Management"
+        subtitle="We operate our own flagship cabin in the same market and take on a limited number of owner partners. Pricing, guests, cleanings, issues — handled."
         size="large"
         overlay="gradient"
         cta={{
-          label: "Request Management Information",
-          href: "/contact",
+          label: "Run my free listing audit",
+          href: "/audit#full-audit",
         }}
       />
 
       <Breadcrumbs
         items={[{ label: "Management Services" }]}
       />
+
+      {/* ── Flagship case study ─────────────────────────────────────── */}
+      <FlagshipCaseStudySection background="white" />
 
       {/* ── What We Do ──────────────────────────────────────────────── */}
       <SectionWrapper background="cream">
@@ -261,11 +265,12 @@ export default function ManagementServicesPage() {
         <AnimateInView>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Top-Rated Across Every Platform
+              Where our flagship cabin ranks
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-              We don&apos;t just manage cabins, we earn 5-star reviews on every
-              booking platform.
+              Frontier&apos;s management approach was built and tested on the
+              cabin we operate ourselves. These are the badges and ratings that
+              cabin holds across the major booking platforms.
             </p>
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               <div className="rounded-lg border p-6 text-center">
@@ -321,9 +326,9 @@ export default function ManagementServicesPage() {
       {/* ── Results Stats ───────────────────────────────────────────── */}
       <StatsSection
         stats={[
-          { value: "+14%", label: "Shoulder-Season Nights in 60 Days" },
-          { value: "+$28", label: "ADR After Photo/Pricing Update" },
-          { value: "4.95★", label: "Avg Rating Across Platforms" },
+          { value: "Boutique", label: "We take a limited number of owner partners" },
+          { value: "Local", label: "Based in Broken Bow, not a regional franchise" },
+          { value: "Flagship", label: "We operate our own cabin in this market" },
           { value: "< 15min", label: "Average Response Time" },
         ]}
       />
@@ -513,7 +518,7 @@ export default function ManagementServicesPage() {
                     { category: "Cleaning coordination", self: "You manage vendors", frontier: "Photo-verified QC turnover" },
                     { category: "Listing optimization", self: "DIY copy & photos", frontier: "Pro copy, SEO, photography" },
                     { category: "Maintenance issues", self: "Midnight calls to you", frontier: "We dispatch & oversee" },
-                    { category: "Revenue optimization", self: "Leave money on table", frontier: "+14% occupancy typical" },
+                    { category: "Revenue optimization", self: "Leave money on table", frontier: "Daily pricing adjusted to local demand" },
                     { category: "Tax & permit compliance", self: "Research it yourself", frontier: "We set it up for you" },
                     { category: "Net revenue after fee", self: "Often less (gaps & underpricing)", frontier: "More, even after 20%" },
                   ].map((row) => (
@@ -534,9 +539,9 @@ export default function ManagementServicesPage() {
             </div>
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
-              Most owners net <span className="font-semibold text-charcoal">more income with Frontier</span>,
-              even after the 20% fee, because professional pricing, listing optimization,
-              and gap-filling recapture revenue that self-managers leave on the table.
+              Run the <Link href="/audit#full-audit" className="font-semibold text-sage underline hover:text-sage-dark">free listing audit</Link>
+              {" "}to see whether daily pricing, listing optimization, and gap-filling can recapture revenue
+              your current setup is leaving on the table — before you compare it against the 20% fee.
             </p>
           </div>
         </AnimateInView>
@@ -679,11 +684,15 @@ export default function ManagementServicesPage() {
 
       {/* ── Final CTA ───────────────────────────────────────────────── */}
       <CTASection
-        heading="Ready to Simplify Your Rental Management?"
-        subtext="Let us handle the day-to-day so you can focus on what matters. Reach out today for a free, no-obligation consultation."
+        heading="See the revenue gap on your listing"
+        subtext="Free, takes about 90 seconds, built for Broken Bow and Hochatown cabin owners. Then decide if Frontier is a fit."
         cta={{
-          label: "Request Management Information",
-          href: "/contact",
+          label: "Run my free listing audit",
+          href: "/audit#full-audit",
+        }}
+        secondaryCta={{
+          label: "Schedule a Discovery Call",
+          href: "/contact#discovery",
         }}
       />
     </>
