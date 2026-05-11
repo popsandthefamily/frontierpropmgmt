@@ -29,7 +29,11 @@ export type AnalyticsEvent =
   | "discovery_call_booked"
   | "comparison_table_viewed"
   | "guest_strip_clicked"
-  | "nav_get_estimate_clicked";
+  | "nav_get_estimate_clicked"
+  | "cohost_page_viewed"
+  | "cohost_tier_cta_clicked"
+  | "pricing_page_viewed"
+  | "pricing_tier_cta_clicked";
 
 export function track(
   event: AnalyticsEvent,

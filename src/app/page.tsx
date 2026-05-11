@@ -20,6 +20,7 @@ import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { DiscoveryCTALink } from "@/components/analytics/discovery-cta";
 import { ComparisonTable } from "@/components/sections/comparison-table";
 import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
+import { TwoWaysToWork } from "@/components/sections/two-ways-to-work";
 import { JsonLd } from "@/components/seo/json-ld";
 import { properties } from "@/data/properties";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
@@ -261,7 +262,10 @@ export default function HomePage() {
         </div>
       </SectionWrapper>
 
-      {/* ── 5. Team ──────────────────────────────────────────────────── */}
+      {/* ── 5.5 Two ways to work with us ─────────────────────────────── */}
+      <TwoWaysToWork />
+
+      {/* ── 6. Team ──────────────────────────────────────────────────── */}
       <SectionWrapper background="cream">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <AnimateInView direction="left">
