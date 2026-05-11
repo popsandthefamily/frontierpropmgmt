@@ -6,8 +6,8 @@ const CARDS = [
   {
     name: "Co-Host",
     pitch: "Flat monthly fee. No percentages, ever.",
-    body: "Pro listing, pricing, and content support while you keep guest communication and cleaning.",
-    price: "Starting at $349/month",
+    body: "Listing optimization, pricing, social, and owner-website help — plus a free premium hocha.town listing. You keep guest communication and cleaning.",
+    price: "$349–$599/month",
     href: "/co-host",
     cta: "Learn more about Co-Host",
   },

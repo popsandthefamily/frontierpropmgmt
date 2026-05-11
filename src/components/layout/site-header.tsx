@@ -50,7 +50,7 @@ const NAV_ITEMS: NavItem[] = [
       {
         label: "Co-Host (Flat Fee)",
         href: "/co-host",
-        description: "Flat $349+/mo for listing, pricing, and content support",
+        description: "Listing, pricing, social & owner-website help from $349/mo",
       },
       {
         label: "Pricing",

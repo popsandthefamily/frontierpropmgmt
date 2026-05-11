@@ -7,7 +7,7 @@ import { track, type AnalyticsEvent } from "@/lib/analytics";
 type LinkProps = ComponentProps<typeof Link>;
 
 interface TierCTAProps extends LinkProps {
-  tier: "standard" | "premier" | "custom" | "fullService";
+  tier: string;
   source: string;
   event?: Extract<AnalyticsEvent, "cohost_tier_cta_clicked" | "pricing_tier_cta_clicked">;
 }

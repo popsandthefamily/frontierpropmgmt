@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, Star } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
@@ -12,16 +12,18 @@ import { CoHostTierCTA } from "@/components/analytics/cohost-tier-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { siteConfig } from "@/data/site";
 import {
-  CO_HOST_TIERS,
+  CO_HOST_FEATURES,
+  CO_HOST_OWNER_HANDLES,
+  CO_HOST_PRICING_BANDS,
   CO_HOST_ADDONS,
   CO_HOST_FAQ,
 } from "@/data/co-host";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Co-Host Services for STR Owners | Flat Fee, No Percentages | Frontier",
+  title: "Co-Host for STR Owners | Flat-Fee Listing & Web Help | Frontier",
   description:
-    "Flat-fee co-host services for short-term rental owners in Broken Bow & Hochatown. Pro listing, pricing, and content support starting at $349/month. No percentages, ever.",
+    "Flat-fee co-host for short-term rental owners in Broken Bow & Hochatown. Listing optimization, social, owner-website help, and a free premium hocha.town listing. From $349/month.",
   keywords: [
     "co host short term rental",
     "flat fee property manager",
@@ -31,9 +33,9 @@ export const metadata: Metadata = {
     "Airbnb listing optimization service",
   ],
   openGraph: {
-    title: "STR Co-Host Services. Flat fee. No percentages.",
+    title: "STR Co-Host. Flat fee. No percentages.",
     description:
-      "Pro listing, pricing, and content support while you keep guest communication. Starting at $349 per month.",
+      "Listing, pricing, social, and owner-website help while you keep guest communication. From $349/month.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -48,29 +50,12 @@ export const metadata: Metadata = {
   },
 };
 
-const YOU_HANDLE = [
-  "Guest communications",
-  "Cleaning logistics",
-  "Maintenance dispatch",
-  "Tax filings",
-  "Supply restocking",
-];
-
-const WE_HANDLE = [
-  "Listing optimization across Airbnb, VRBO, and one channel of your choice",
-  "Dynamic pricing setup and oversight (PriceLabs, Frontier-managed)",
-  "Social content production",
-  "Reputation monitoring",
-  "Monthly strategy and revenue review",
-  "Async support during business hours",
-];
-
 const HOW_IT_WORKS = [
-  { step: 1, title: "Discovery call", body: "30 minutes, free. We confirm tier fit and review your property." },
-  { step: 2, title: "Property intake", body: "Async form covering existing listings, pricing tool status, photos, branding." },
-  { step: 3, title: "Setup sprint", body: "Two weeks to build or rebuild your listings, configure pricing, and sync channels." },
-  { step: 4, title: "Launch review", body: "Walk through what's live and set the monthly cadence." },
-  { step: 5, title: "Monthly cycle", body: "Strategy calls, weekly pricing oversight, content production, and reporting." },
+  { step: 1, title: "Discovery call", body: "30 minutes, free. We confirm fit and look at your numbers." },
+  { step: 2, title: "Property intake", body: "Async form covering existing listings, pricing tool status, and owner site." },
+  { step: 3, title: "Setup sprint", body: "Two weeks to build or rebuild listings, configure PriceLabs, and tune your web presence." },
+  { step: 4, title: "Launch review", body: "Walk through what's live and set the cadence that fits your property." },
+  { step: 5, title: "Monthly cycle", body: "Strategy calls, pricing oversight, content production, and reporting." },
 ];
 
 export default function CoHostPage() {
@@ -103,41 +88,26 @@ export default function CoHostPage() {
             { "@type": "City", name: "Broken Bow" },
             { "@type": "Place", name: "Hochatown" },
           ],
-          offers: [
-            {
-              "@type": "Offer",
-              name: "Co-Host Standard",
-              price: "349",
+          offers: CO_HOST_PRICING_BANDS.filter((b) => b.id !== "large").map((band) => ({
+            "@type": "Offer",
+            name: `Co-Host — ${band.label}`,
+            price: band.price.replace("$", ""),
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: band.price.replace("$", ""),
               priceCurrency: "USD",
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price: "349",
-                priceCurrency: "USD",
-                billingIncrement: "1",
-                unitCode: "MON",
-              },
+              billingIncrement: "1",
+              unitCode: "MON",
             },
-            {
-              "@type": "Offer",
-              name: "Co-Host Premier",
-              price: "599",
-              priceCurrency: "USD",
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price: "599",
-                priceCurrency: "USD",
-                billingIncrement: "1",
-                unitCode: "MON",
-              },
-            },
-          ],
+          })),
         }}
       />
 
       <HeroSection
         backgroundImage="/images/properties/sublime/sublime-2.jpg"
-        title="STR Co-Host. Flat fee. No percentages."
-        subtitle="You handle the parts you want to control. We handle the parts you'd rather not. One flat monthly fee, billed monthly, cancel anytime."
+        title="One Co-Host service. Flat fee. No percentages."
+        subtitle="Listing, pricing, social, and owner-website help — while you keep guest communication and cleaning. From $349/month."
         size="large"
         overlay="gradient"
         cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
@@ -150,48 +120,39 @@ export default function CoHostPage() {
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl prose prose-lg prose-charcoal">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Owners are tired of being nickel and dimed.
+            For owners who want more out of their cabin without handing over the keys.
           </h2>
           <p>
-            You already pay state and county occupancy taxes. Sales tax. Platform service
-            fees. Cleaning passthrough. Then a property manager wants 20–30% on top.
+            You already pay state and county occupancy taxes, sales tax, platform service
+            fees, and cleaning passthrough. A 20–30% management fee on top of that is hard
+            to swallow if you&apos;re still doing some of the work yourself.
           </p>
           <p>
-            Frontier Co-Host removes one of those percentages entirely. One flat monthly
-            fee covers expert listing, pricing, and content support. No revenue clawbacks.
-            No surprises at month-end.
+            Co-Host is one flat monthly fee for the marketing, listing, and revenue work
+            that&apos;s hardest to do well as a self-manager. Same service for every
+            owner — pricing scales with your property size.
           </p>
         </div>
       </SectionWrapper>
 
-      {/* What you keep / what we handle */}
-      <SectionWrapper background="white">
+      {/* What's included */}
+      <SectionWrapper background="white" id="included">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              What you keep, what we handle
+              What&apos;s included with Co-Host
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              Co-Host is built for owners who want expert help on the marketing and revenue
-              side without giving up operational control.
+              Every Co-Host owner gets the same feature list. Pricing is based on the
+              property, not the package.
             </p>
           </div>
+
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-charcoal/10 bg-white p-6">
-              <h3 className="text-xl font-semibold text-charcoal">You handle</h3>
-              <ul className="mt-4 space-y-3">
-                {YOU_HANDLE.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-charcoal md:text-base">
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-charcoal/40" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
             <div className="rounded-2xl border border-sage/30 bg-sage/5 p-6">
               <h3 className="text-xl font-semibold text-sage-dark">We handle</h3>
               <ul className="mt-4 space-y-3">
-                {WE_HANDLE.map((item) => (
+                {CO_HOST_FEATURES.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-charcoal md:text-base">
                     <Check className="mt-0.5 size-5 shrink-0 text-sage" />
                     {item}
@@ -199,82 +160,68 @@ export default function CoHostPage() {
                 ))}
               </ul>
             </div>
+            <div className="rounded-2xl border border-charcoal/10 bg-white p-6">
+              <h3 className="text-xl font-semibold text-charcoal">You handle</h3>
+              <ul className="mt-4 space-y-3">
+                {CO_HOST_OWNER_HANDLES.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-charcoal md:text-base">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-charcoal/40" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-xs text-muted-foreground">
+                Want guest comms, cleaning, and maintenance handled too?{" "}
+                <Link href="/management-services" className="font-medium text-sage hover:text-sage-dark hover:underline">
+                  See Full Service →
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </SectionWrapper>
 
-      {/* Tier cards */}
-      <SectionWrapper background="cream" id="tiers">
+      {/* Pricing bands */}
+      <SectionWrapper background="cream" id="pricing">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Two tiers, plus custom
+            One service. Three sizes.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-            Same flat-fee model across the board. Pick the tier that matches the property.
+            Same feature list on every plan. The price scales with your property — that&apos;s it.
           </p>
         </div>
+
         <div className="mx-auto mt-10 grid max-w-6xl gap-6 lg:grid-cols-3">
-          {CO_HOST_TIERS.map((tier) => (
+          {CO_HOST_PRICING_BANDS.map((band) => (
             <div
-              key={tier.id}
+              key={band.id}
               className={cn(
-                "relative flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
-                tier.highlight ? "border-sage shadow-md ring-1 ring-sage/40" : "border-charcoal/10",
+                "flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
+                band.id === "mid" ? "border-sage shadow-md ring-1 ring-sage/40" : "border-charcoal/10",
               )}
             >
-              {tier.highlight && (
-                <div className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-sage px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-                  <Star className="size-3" /> Most popular
-                </div>
-              )}
-              <div>
-                <h3 className="text-xl font-semibold text-charcoal">{tier.name}</h3>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="font-heading text-4xl font-bold text-charcoal">
-                    {tier.priceLabel}
-                  </span>
-                  {tier.priceSuffix && (
-                    <span className="text-sm text-muted-foreground">{tier.priceSuffix}</span>
-                  )}
-                </div>
-                <p className="mt-3 text-sm font-semibold text-charcoal">{tier.bestFor}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{tier.bestForDetail}</p>
+              <div className="text-xs font-semibold uppercase tracking-widest text-sage">
+                {band.size}
               </div>
-
-              <ul className="mt-6 flex-1 space-y-2.5">
-                {tier.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2 text-sm text-charcoal">
-                    <Check className="mt-0.5 size-4 shrink-0 text-sage" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {tier.ownerHandles.length > 0 && (
-                <div className="mt-6 rounded-lg bg-cream/60 p-4">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Owner handles
-                  </div>
-                  <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-                    {tier.ownerHandles.map((item) => (
-                      <li key={item}>· {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
+              <h3 className="mt-2 text-xl font-semibold text-charcoal">{band.label}</h3>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="font-heading text-4xl font-bold text-charcoal">{band.price}</span>
+                <span className="text-sm text-muted-foreground">{band.priceSuffix}</span>
+              </div>
+              <p className="mt-3 flex-1 text-sm text-muted-foreground">{band.bestFor}</p>
               <Button
                 asChild
                 size="lg"
                 className={cn(
                   "mt-6 w-full text-base",
-                  tier.highlight
+                  band.id === "mid"
                     ? "bg-sage text-white hover:bg-sage-dark"
                     : "bg-charcoal text-white hover:bg-charcoal/90",
                 )}
               >
-                <CoHostTierCTA tier={tier.id} source="cohost_page_tier_card" href={tier.cta.href}>
-                  {tier.cta.label}
+                <CoHostTierCTA tier={band.id} source="cohost_page_pricing_band" href="/audit#full-audit">
+                  Book a discovery call
                 </CoHostTierCTA>
               </Button>
             </div>
@@ -282,7 +229,7 @@ export default function CoHostPage() {
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
-          Multi-property pricing: 10% off per additional property on the same plan, capped at 30%.
+          Multiple properties? 10% off per additional property on the same plan, capped at 30%.
         </p>
       </SectionWrapper>
 
@@ -294,7 +241,7 @@ export default function CoHostPage() {
               Need something extra? Add it on.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              À la carte services available to any tier. Non-clients pay a 25% premium.
+              À la carte add-ons available to any Co-Host client. Non-clients pay a 25% premium.
             </p>
           </div>
           <div className="mt-10 overflow-x-auto rounded-2xl border bg-white shadow-sm">
@@ -369,7 +316,7 @@ export default function CoHostPage() {
           </p>
           <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/pricing">See all three plans compared</Link>
+              <Link href="/pricing">Co-Host vs Full Service</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/management-services">Full-service management</Link>
@@ -387,8 +334,8 @@ export default function CoHostPage() {
       </SectionWrapper>
 
       <CTASection
-        heading="Stop paying percentages on your own revenue."
-        subtext={`Book a free 30-minute discovery call and we'll match you to the right tier. ${siteConfig.phone}`}
+        heading="Get more out of your cabin without handing over the keys."
+        subtext={`Book a free 30-minute discovery call. Same flat fee for everyone — pricing scales with your property. ${siteConfig.phone}`}
         backgroundImage="/images/hero/foggy-mountain.jpg"
         cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
         secondaryCta={{ label: "See pricing comparison", href: "/pricing" }}

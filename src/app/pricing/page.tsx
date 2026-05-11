@@ -10,13 +10,13 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { CoHostTierCTA } from "@/components/analytics/cohost-tier-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { siteConfig } from "@/data/site";
-import { PRICING_COLUMNS, PRICING_ROWS } from "@/data/co-host";
+import { PRICING_COLUMNS, PRICING_ROWS, CO_HOST_PRICING_BANDS } from "@/data/co-host";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Pricing | Co-Host or Full Service | Frontier Property Management",
   description:
-    "Compare Frontier's full-service property management and flat-fee Co-Host plans. Transparent pricing, no setup fees, no hidden percentages.",
+    "Compare Frontier's Co-Host (flat fee, from $349/mo) and Full Service (20% of bookings). Same operator, two ways to work together. No setup fees, no hidden percentages.",
   keywords: [
     "Frontier property management pricing",
     "STR management pricing Broken Bow",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pricing | Frontier Property Management",
     description:
-      "Compare Co-Host Standard, Co-Host Premier, and Full Service. Side-by-side. No surprises.",
+      "Co-Host or Full Service. Side-by-side. No surprises.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -41,44 +41,25 @@ export const metadata: Metadata = {
   },
 };
 
-const TIER_HEADLINES: Record<
-  "standard" | "premier" | "fullService",
+const HEADLINE_CARDS = [
   {
-    name: string;
-    price: string;
-    priceSuffix: string;
-    pitch: string;
-    cta: { label: string; href: string };
-    highlight?: boolean;
-    target: "standard" | "premier" | "fullService";
-  }
-> = {
-  standard: {
-    name: "Co-Host Standard",
-    price: "$349",
+    key: "cohost" as const,
+    name: "Co-Host",
+    price: "$349–$599",
     priceSuffix: "/month flat",
-    pitch: "Listing, pricing, and content support for self-managing owners up to 3BR.",
-    cta: { label: "Start with Standard", href: "/audit#full-audit" },
-    target: "standard",
-  },
-  premier: {
-    name: "Co-Host Premier",
-    price: "$599",
-    priceSuffix: "/month flat",
-    pitch: "Active pricing, premium content, and review handling for 4+ BR or luxury properties.",
-    cta: { label: "Start with Premier", href: "/audit#full-audit" },
+    pitch: "Listing, pricing, social, and owner-website help. You keep guest comms and cleaning. Pricing scales with property size.",
+    cta: { label: "See Co-Host details", href: "/co-host" },
     highlight: true,
-    target: "premier",
   },
-  fullService: {
+  {
+    key: "fullService" as const,
     name: "Full Service",
     price: "20%",
     priceSuffix: "of bookings",
     pitch: "Hands-off cabin management. Guest comms, cleaning, maintenance, taxes — all of it.",
-    cta: { label: "See full-service details", href: "/management-services" },
-    target: "fullService",
+    cta: { label: "See Full Service details", href: "/management-services" },
   },
-};
+];
 
 export default function PricingPage() {
   return (
@@ -101,13 +82,13 @@ export default function PricingPage() {
           offers: [
             {
               "@type": "Offer",
-              name: "Co-Host Standard",
+              name: "Co-Host (1–3 BR)",
               price: "349",
               priceCurrency: "USD",
             },
             {
               "@type": "Offer",
-              name: "Co-Host Premier",
+              name: "Co-Host (4–5 BR)",
               price: "599",
               priceCurrency: "USD",
             },
@@ -126,7 +107,7 @@ export default function PricingPage() {
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"
         title="Pricing"
-        subtitle="Three ways to work with Frontier. Pick the level of involvement that fits the property."
+        subtitle="Two ways to work with Frontier. Pick the level of involvement that fits the property."
         size="medium"
         overlay="dark"
         cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
@@ -134,64 +115,109 @@ export default function PricingPage() {
 
       <Breadcrumbs items={[{ label: "Pricing" }]} />
 
-      {/* Tier headline cards */}
+      {/* Two-card top */}
       <SectionWrapper background="cream">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
-          {(["standard", "premier", "fullService"] as const).map((key) => {
-            const tier = TIER_HEADLINES[key];
-            return (
-              <div
-                key={key}
+        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+          {HEADLINE_CARDS.map((card) => (
+            <div
+              key={card.key}
+              className={cn(
+                "flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
+                card.highlight ? "border-sage shadow-md ring-1 ring-sage/40" : "border-charcoal/10",
+              )}
+            >
+              <h3 className="text-lg font-semibold text-charcoal">{card.name}</h3>
+              <div className="mt-3 flex items-baseline gap-2">
+                <span className="font-heading text-4xl font-bold text-charcoal">{card.price}</span>
+                <span className="text-sm text-muted-foreground">{card.priceSuffix}</span>
+              </div>
+              <p className="mt-3 flex-1 text-sm text-muted-foreground">{card.pitch}</p>
+              <Button
+                asChild
+                size="lg"
                 className={cn(
-                  "flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
-                  tier.highlight ? "border-sage shadow-md ring-1 ring-sage/40" : "border-charcoal/10",
+                  "mt-6 w-full text-base",
+                  card.highlight
+                    ? "bg-sage text-white hover:bg-sage-dark"
+                    : "bg-charcoal text-white hover:bg-charcoal/90",
                 )}
               >
-                <h3 className="text-lg font-semibold text-charcoal">{tier.name}</h3>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="font-heading text-4xl font-bold text-charcoal">{tier.price}</span>
-                  <span className="text-sm text-muted-foreground">{tier.priceSuffix}</span>
-                </div>
-                <p className="mt-3 flex-1 text-sm text-muted-foreground">{tier.pitch}</p>
-                <Button
-                  asChild
-                  size="lg"
-                  className={cn(
-                    "mt-6 w-full text-base",
-                    tier.highlight
-                      ? "bg-sage text-white hover:bg-sage-dark"
-                      : "bg-charcoal text-white hover:bg-charcoal/90",
-                  )}
+                <CoHostTierCTA
+                  tier={card.key}
+                  source="pricing_page_headline_card"
+                  event="pricing_tier_cta_clicked"
+                  href={card.cta.href}
                 >
-                  <CoHostTierCTA
-                    tier={tier.target}
-                    source="pricing_page_tier_card"
-                    event="pricing_tier_cta_clicked"
-                    href={tier.cta.href}
-                  >
-                    {tier.cta.label}
-                  </CoHostTierCTA>
-                </Button>
-              </div>
-            );
-          })}
+                  {card.cta.label}
+                </CoHostTierCTA>
+              </Button>
+            </div>
+          ))}
         </div>
       </SectionWrapper>
 
-      {/* Comparison table — desktop */}
-      <SectionWrapper background="white" id="compare">
-        <div className="mx-auto max-w-6xl">
+      {/* Co-Host pricing band detail */}
+      <SectionWrapper background="white">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+              Co-Host pricing by property size
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
+              Same feature list at every size. The only thing that changes is the monthly fee.
+            </p>
+          </div>
+          <div className="mt-8 overflow-x-auto rounded-2xl border bg-white shadow-sm">
+            <table className="w-full min-w-[480px] text-sm">
+              <thead>
+                <tr className="border-b bg-cream/60">
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    Property size
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    Best for
+                  </th>
+                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                    Monthly fee
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {CO_HOST_PRICING_BANDS.map((band, i) => (
+                  <tr key={band.id} className={i % 2 === 0 ? "bg-white" : "bg-cream/20"}>
+                    <td className="px-4 py-3 align-top text-sm font-medium text-charcoal">
+                      <div>{band.label}</div>
+                      <div className="text-xs text-muted-foreground">{band.size}</div>
+                    </td>
+                    <td className="px-4 py-3 align-top text-sm text-muted-foreground">
+                      {band.bestFor}
+                    </td>
+                    <td className="px-4 py-3 text-right align-top text-sm font-semibold text-charcoal whitespace-nowrap">
+                      {band.price}
+                      <div className="text-xs font-normal text-muted-foreground">{band.priceSuffix}</div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Full comparison */}
+      <SectionWrapper background="cream" id="compare">
+        <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Compare plans side-by-side
+              Co-Host vs Full Service, side-by-side
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              Same property, three operating models. Where does the line fall on what you
+              Same operator. Two operating models. Where does the line fall on what you
               want to keep doing yourself?
             </p>
           </div>
 
-          {/* Desktop / tablet table */}
+          {/* Desktop / tablet */}
           <div className="mt-10 hidden overflow-x-auto rounded-2xl border bg-white shadow-sm md:block">
             <table className="w-full text-sm">
               <thead>
@@ -245,7 +271,7 @@ export default function PricingPage() {
             </table>
           </div>
 
-          {/* Mobile stacked cards */}
+          {/* Mobile stacked */}
           <div className="mt-10 grid gap-6 md:hidden">
             {PRICING_COLUMNS.map((col) => (
               <div
@@ -280,7 +306,7 @@ export default function PricingPage() {
       </SectionWrapper>
 
       {/* Internal links */}
-      <SectionWrapper background="cream">
+      <SectionWrapper background="white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
             Want the detail behind each plan?
@@ -303,7 +329,7 @@ export default function PricingPage() {
       </SectionWrapper>
 
       <CTASection
-        heading="Not sure which plan fits?"
+        heading="Not sure which fits?"
         subtext={`Book a free 30-minute discovery call. We'll look at your numbers and tell you the honest answer. ${siteConfig.phone}`}
         backgroundImage="/images/hero/foggy-mountain.jpg"
         cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}

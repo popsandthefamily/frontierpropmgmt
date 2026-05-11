@@ -1,92 +1,73 @@
-export type CoHostTierId = "standard" | "premier" | "custom";
+/**
+ * Co-Host is a single offering. The feature list is identical for every
+ * property; pricing scales with property size. Outliers (6+BR, portfolios)
+ * get a custom quote but the same service.
+ */
 
-export interface CoHostTier {
-  id: CoHostTierId;
-  name: string;
-  priceLabel: string;
-  priceSuffix?: string;
+export interface CoHostPricingBand {
+  id: "small" | "mid" | "large";
+  label: string;
+  size: string;
+  price: string;
+  priceSuffix: string;
   bestFor: string;
-  bestForDetail: string;
-  bullets: string[];
-  ownerHandles: string[];
-  cta: { label: string; href: string };
-  highlight?: boolean;
 }
 
-export const CO_HOST_TIERS: CoHostTier[] = [
+export const CO_HOST_PRICING_BANDS: CoHostPricingBand[] = [
   {
-    id: "standard",
-    name: "Co-Host Standard",
-    priceLabel: "$349",
+    id: "small",
+    label: "Up to 3 bedrooms",
+    size: "1–3 BR",
+    price: "$349",
     priceSuffix: "per month, flat",
-    bestFor: "Properties up to 3 bedrooms",
-    bestForDetail: "Annual gross under $80K. Standard residential rentals — cabins, condos, single-family homes.",
-    bullets: [
-      "Listing build or rebuild on Airbnb, VRBO, plus one channel of your choice",
-      "SEO-optimized title, description, and amenities",
-      "Photo audit with shot list",
-      "PriceLabs setup and weekly oversight (Frontier-managed account)",
-      "Calendar and channel sync",
-      "4 social posts per month",
-      "Reputation monitoring with monthly summary",
-      "Monthly 60-minute strategy call",
-      "Email support, 1 business day response",
-    ],
-    ownerHandles: [
-      "Guest communications",
-      "Cleaning logistics",
-      "Maintenance dispatch",
-      "Tax filings",
-      "Supply restocking",
-      "Review responses (we monitor and flag, you reply)",
-    ],
-    cta: { label: "Book a discovery call", href: "/audit#full-audit" },
+    bestFor: "Cabins, condos, single-family homes under ~$80K annual gross.",
   },
   {
-    id: "premier",
-    name: "Co-Host Premier",
-    priceLabel: "$599",
+    id: "mid",
+    label: "4 to 5 bedrooms",
+    size: "4–5 BR",
+    price: "$599",
     priceSuffix: "per month, flat",
-    bestFor: "4+ bedroom or luxury properties",
-    bestForDetail: "Annual gross between $80K and $150K. Design-forward, brand-sensitive, multi-channel.",
-    bullets: [
-      "Everything in Standard, plus:",
-      "8 social posts per month plus one short-form video",
-      "Active pricing management with daily algorithm review",
-      "Annual professional photo coordination",
-      "Review response handling (we draft, you approve)",
-      "Vendor referral network access",
-      "Quarterly tax document organization",
-      "Direct booking link setup if applicable",
-      "Bi-weekly 30-minute call or async equivalent",
-      "Slack Connect + email support, 4 business hour response",
-    ],
-    ownerHandles: [
-      "Guest communications (with templates we provide)",
-      "Tax filing",
-      "Supply restocking",
-      "Maintenance dispatch decisions",
-    ],
-    cta: { label: "Book a discovery call", href: "/audit#full-audit" },
-    highlight: true,
+    bestFor: "Larger cabins or design-forward properties between $80K–$150K annual gross.",
   },
   {
-    id: "custom",
-    name: "Co-Host Custom",
-    priceLabel: "Quoted",
+    id: "large",
+    label: "6+ bedrooms or portfolios",
+    size: "6+ BR / 3+ properties",
+    price: "Quoted",
     priceSuffix: "always flat fee",
-    bestFor: "Above $150K annual gross or 3+ properties",
-    bestForDetail: "Unique operations like glamping, treehouses, or multi-unit buildings. Specialized requirements.",
-    bullets: [
-      "Custom scope across listing, pricing, content, and operations",
-      "Multi-property coordination",
-      "Dedicated point of contact",
-      "Reporting cadence and SLAs per agreement",
-      "Discovery call required, proposal within 5 business days",
-    ],
-    ownerHandles: ["Per agreement"],
-    cta: { label: "Request a custom quote", href: "/audit#full-audit" },
+    bestFor: "Estates, multi-unit buildings, glamping, or 3+ properties on the same plan.",
   },
+];
+
+/**
+ * Identical for every Co-Host client regardless of property size. Service
+ * intensity (e.g. response time) scales with the conversation, not the
+ * marketing tier.
+ */
+export const CO_HOST_FEATURES = [
+  "Listing build or rebuild on Airbnb, VRBO, plus one channel of your choice",
+  "SEO-optimized title, description, and amenities",
+  "Free premium listing on hocha.town with an interactive guest guidebook",
+  "Owner website or direct-booking page tune-up at onboarding",
+  "Google Business Profile claim, cleanup, and review monitoring",
+  "PriceLabs setup and ongoing oversight (Frontier holds the account)",
+  "Calendar and channel sync",
+  "Social content production across Instagram and Facebook",
+  "Quarterly listing copy refresh",
+  "Reputation monitoring with monthly summary",
+  "Strategy call cadence that fits your property",
+  "Vendor referral network access (cleaners, photographers, handymen)",
+  "Email + Slack Connect support during business hours",
+];
+
+export const CO_HOST_OWNER_HANDLES = [
+  "Guest communications",
+  "Cleaning logistics",
+  "Maintenance dispatch",
+  "Tax filings",
+  "Supply restocking",
+  "Final review responses (we monitor and draft, you approve)",
 ];
 
 export interface CoHostAddon {
@@ -96,21 +77,21 @@ export interface CoHostAddon {
 }
 
 export const CO_HOST_ADDONS: CoHostAddon[] = [
-  { service: "Professional photo session coordination", price: "$400", notes: "Excludes photographer fee" },
-  { service: "Listing copy refresh", price: "$250", notes: "1 per channel per quarter" },
+  { service: "Owner website build", price: "$1,500 one-time", notes: "Direct booking, SEO, mobile-tested" },
+  { service: "Website refresh or fixes (existing site)", price: "$400", notes: "Copy, layout, speed, broken links" },
+  { service: "Additional listing copy refresh", price: "$250", notes: "Beyond the included quarterly refresh" },
   { service: "Additional social content (8 posts/mo)", price: "$200/month" },
+  { service: "Short-form video production", price: "$300/month", notes: "4 reels/TikToks per month" },
+  { service: "Listing migration to new channel", price: "$200/channel", notes: "Booking.com, Hopper, Plum Guide, etc." },
   { service: "Pricing intervention for events", price: "$150/event", notes: "Concerts, holidays, local events" },
   { service: "Owner training session (1:1)", price: "$200/hour" },
-  { service: "Direct booking website setup", price: "$1,500 one-time" },
-  { service: "Listing migration to new channel", price: "$200/channel", notes: "Booking.com, Hopper, Plum Guide, etc." },
-  { service: "Off-cycle health audit", price: "$300" },
+  { service: "Off-cycle listing or web health audit", price: "$300" },
 ];
 
 export const CO_HOST_FAQ = [
   {
     question: "Is there a setup fee?",
-    answer:
-      "No. Both Co-Host tiers include onboarding at no additional cost.",
+    answer: "No. Onboarding is included.",
   },
   {
     question: "Is there a contract?",
@@ -118,32 +99,27 @@ export const CO_HOST_FAQ = [
       "No annual contract. Month-to-month with 30 days notice to cancel.",
   },
   {
-    question: "Can I switch tiers?",
+    question: "What if my property changes size or I add another?",
     answer:
-      "Yes. Upgrades take effect immediately. Downgrades take effect the following billing cycle. No penalty either direction.",
+      "We just adjust to the right pricing band. Additional properties on the same plan get 10% off each, capped at 30%.",
   },
   {
     question: "Do you handle guest communications?",
     answer:
-      "Not under Co-Host. Owners handle guest communication on Standard and Premier. If you want guest comms handled, that's our Full Service tier (20% of bookings).",
+      "Not under Co-Host. You handle guest comms. If you want guest communication handled, that's our Full Service tier (20% of bookings).",
   },
   {
-    question: "Do I need to use specific software?",
+    question: "What software do you use?",
     answer:
-      "We use PriceLabs by default for dynamic pricing and we hold the account so you don't have a separate subscription to manage. Wheelhouse on request.",
-  },
-  {
-    question: "What if I have multiple properties?",
-    answer:
-      "After the first property, additional properties on the same plan get a 10% discount each, capped at 30%.",
+      "PriceLabs by default for dynamic pricing — and we hold the account so you don't have a separate subscription to manage. Wheelhouse on request.",
   },
   {
     question: "What's the difference between Co-Host and Full Service?",
     answer:
-      "Co-Host is flat-fee marketing and revenue support. You stay involved in operations. Full Service is true hands-off management at 20% of bookings.",
+      "Co-Host is flat-fee marketing, listing, and revenue support. You stay involved in operations. Full Service is true hands-off cabin management at 20% of bookings — guest comms, cleaning, maintenance, taxes, all of it.",
   },
   {
-    question: "Can I just buy à la carte without a Co-Host plan?",
+    question: "Can I just buy à la carte without Co-Host?",
     answer:
       "Yes. À la carte services are available to non-clients at a 25% premium.",
   },
@@ -157,40 +133,29 @@ export const CO_HOST_FAQ = [
     answer:
       "Reach out and we'll talk through it case-by-case. Co-Host is a different operating model, so the fit depends on how much of the work you want to take back on.",
   },
+  {
+    question: "What's the hocha.town listing?",
+    answer:
+      "Hocha.town is the destination guide for Hochatown — restaurants, things to do, local services. Frontier Co-Host clients get a free premium cabin listing on hocha.town with an interactive guest guidebook, which doubles as a marketing channel and a guest-experience touchpoint.",
+  },
 ];
 
-export const CO_HOST_PRICING_ROW_KEYS = [
-  "pricing",
-  "bestFor",
-  "setup",
-  "contract",
-  "listing",
-  "pricingOversight",
-  "social",
-  "guestComms",
-  "cleaning",
-  "maintenance",
-  "reviews",
-  "strategyCall",
-  "responseTime",
-] as const;
-
-export type PricingRowKey = (typeof CO_HOST_PRICING_ROW_KEYS)[number];
-
+/**
+ * Two-column comparison: Co-Host vs Full Service. Used by /pricing.
+ */
 export interface PricingComparisonColumn {
-  key: "standard" | "premier" | "fullService";
+  key: "cohost" | "fullService";
   label: string;
   highlight?: boolean;
 }
 
 export const PRICING_COLUMNS: PricingComparisonColumn[] = [
-  { key: "standard", label: "Co-Host Standard" },
-  { key: "premier", label: "Co-Host Premier", highlight: true },
+  { key: "cohost", label: "Co-Host", highlight: true },
   { key: "fullService", label: "Full Service" },
 ];
 
 export const PRICING_ROWS: {
-  key: PricingRowKey;
+  key: string;
   label: string;
   values: Record<PricingComparisonColumn["key"], string>;
 }[] = [
@@ -198,101 +163,71 @@ export const PRICING_ROWS: {
     key: "pricing",
     label: "Pricing",
     values: {
-      standard: "$349/month flat",
-      premier: "$599/month flat",
+      cohost: "$349–$599/mo flat (by size)",
       fullService: "20% of bookings",
-    },
-  },
-  {
-    key: "bestFor",
-    label: "Best for",
-    values: {
-      standard: "Up to 3BR, under $80K/year",
-      premier: "4+ BR or luxury",
-      fullService: "Hands-off owners",
     },
   },
   {
     key: "setup",
     label: "Setup fee",
-    values: { standard: "None", premier: "None", fullService: "None" },
+    values: { cohost: "None", fullService: "None" },
   },
   {
     key: "contract",
     label: "Contract",
     values: {
-      standard: "Month-to-month",
-      premier: "Month-to-month",
-      fullService: "30-day exit",
+      cohost: "Month-to-month, 30-day exit",
+      fullService: "Month-to-month, 30-day exit",
     },
   },
   {
     key: "listing",
-    label: "Listing build",
-    values: { standard: "Yes", premier: "Yes", fullService: "Yes" },
+    label: "Listing build + SEO",
+    values: { cohost: "Yes", fullService: "Yes" },
+  },
+  {
+    key: "hochatown",
+    label: "Free premium hocha.town listing + guidebook",
+    values: { cohost: "Yes", fullService: "Yes" },
+  },
+  {
+    key: "website",
+    label: "Owner website / direct booking help",
+    values: { cohost: "Yes", fullService: "Yes" },
   },
   {
     key: "pricingOversight",
-    label: "Pricing oversight",
-    values: { standard: "Weekly", premier: "Daily", fullService: "Daily" },
+    label: "Dynamic pricing (PriceLabs)",
+    values: { cohost: "Yes", fullService: "Yes" },
   },
   {
     key: "social",
-    label: "Social content",
-    values: {
-      standard: "4/month",
-      premier: "8/month + video",
-      fullService: "Custom",
-    },
+    label: "Social content production",
+    values: { cohost: "Yes", fullService: "Yes" },
   },
   {
     key: "guestComms",
     label: "Guest communication",
-    values: {
-      standard: "Owner handles",
-      premier: "Owner handles",
-      fullService: "We handle",
-    },
+    values: { cohost: "Owner handles", fullService: "We handle" },
   },
   {
     key: "cleaning",
     label: "Cleaning coordination",
-    values: {
-      standard: "Owner handles",
-      premier: "Owner handles",
-      fullService: "We handle",
-    },
+    values: { cohost: "Owner handles", fullService: "We handle" },
   },
   {
     key: "maintenance",
     label: "Maintenance dispatch",
-    values: {
-      standard: "Owner handles",
-      premier: "Owner handles",
-      fullService: "We handle",
-    },
+    values: { cohost: "Owner handles", fullService: "We handle" },
   },
   {
-    key: "reviews",
-    label: "Review response",
-    values: {
-      standard: "Owner handles",
-      premier: "We draft, you approve",
-      fullService: "We handle",
-    },
+    key: "taxes",
+    label: "Tax filings",
+    values: { cohost: "Owner handles", fullService: "We handle" },
   },
   {
-    key: "strategyCall",
-    label: "Strategy call cadence",
-    values: { standard: "Monthly", premier: "Bi-weekly", fullService: "Monthly" },
-  },
-  {
-    key: "responseTime",
-    label: "Response time",
-    values: {
-      standard: "1 business day",
-      premier: "4 business hours",
-      fullService: "Same day",
-    },
+    key: "monthlyStatement",
+    label: "Monthly owner statement",
+    values: { cohost: "Strategy summary", fullService: "Full P&L + payout" },
   },
 ];
