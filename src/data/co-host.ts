@@ -58,7 +58,7 @@ export const CO_HOST_FEATURES = [
   "Reputation monitoring with monthly summary",
   "Strategy call cadence that fits your property",
   "Vendor referral network access (cleaners, photographers, handymen)",
-  "Email + Slack Connect support during business hours",
+  "Email + chat support during business hours",
 ];
 
 export const CO_HOST_OWNER_HANDLES = [
@@ -80,12 +80,8 @@ export const CO_HOST_ADDONS: CoHostAddon[] = [
   { service: "Owner website build", price: "$1,500 one-time", notes: "Direct booking, SEO, mobile-tested" },
   { service: "Website refresh or fixes (existing site)", price: "$400", notes: "Copy, layout, speed, broken links" },
   { service: "Additional listing copy refresh", price: "$250", notes: "Beyond the included quarterly refresh" },
-  { service: "Additional social content (8 posts/mo)", price: "$200/month" },
   { service: "Short-form video production", price: "$300/month", notes: "4 reels/TikToks per month" },
   { service: "Listing migration to new channel", price: "$200/channel", notes: "Booking.com, Hopper, Plum Guide, etc." },
-  { service: "Pricing intervention for events", price: "$150/event", notes: "Concerts, holidays, local events" },
-  { service: "Owner training session (1:1)", price: "$200/hour" },
-  { service: "Off-cycle listing or web health audit", price: "$300" },
 ];
 
 export const CO_HOST_FAQ = [
