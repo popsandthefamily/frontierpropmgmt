@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
@@ -104,15 +104,57 @@ export default function CoHostPage() {
         }}
       />
 
-      <HeroSection
-        backgroundImage="/images/properties/sublime/sublime-2.jpg"
-        title="One Co-Host service. Flat fee. No percentages."
-        subtitle="Listing, pricing, social, and owner-website help — while you keep guest communication and cleaning. From $349/month."
-        size="large"
-        overlay="gradient"
-        cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
-        secondaryCta={{ label: "Compare with Full Service", href: "/pricing" }}
-      />
+      {/* Custom 2-column hero — handshake illustration alongside pitch */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-sage-dark via-sage to-sage/80">
+        <div className="mx-auto max-w-7xl px-4 pt-32 pb-16 md:pt-36 md:pb-24 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
+                Frontier Co-Host
+              </p>
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+                One Co-Host service. Flat fee. No percentages.
+              </h1>
+              <p className="mt-5 max-w-xl text-base text-white/90 md:text-lg">
+                Listing, pricing, social, and owner-website help — while you keep guest
+                communication and cleaning. From $349/month.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-white px-8 text-base font-semibold text-sage-dark hover:bg-cream"
+                >
+                  <Link href="/audit#full-audit">
+                    Book a discovery call
+                    <ArrowRight className="ml-2 size-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-white px-8 text-base text-white hover:bg-white/10"
+                >
+                  <Link href="/pricing">Compare with Full Service</Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="relative flex items-center justify-center lg:justify-end">
+              <Image
+                src="/images/co-host/handshake.webp"
+                alt="A handshake — partnership between cabin owner and Frontier Co-Host"
+                width={600}
+                height={400}
+                priority
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                className="w-full max-w-md drop-shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Breadcrumbs items={[{ label: "Co-Host" }]} />
 
