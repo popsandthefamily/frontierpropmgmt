@@ -119,7 +119,7 @@ export default function HomePage() {
             <span className="hidden sm:inline">Boutique · Owner-operated</span>
           </div>
 
-          <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-16">
+          <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
             {/* Left: pitch */}
             <div>
               <p className="text-sm font-medium text-sage md:text-base">
