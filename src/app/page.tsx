@@ -8,6 +8,10 @@ import {
   Award,
   DollarSign,
   Rocket,
+  MessageCircle,
+  Lock,
+  Home,
+  CalendarClock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
@@ -30,11 +34,11 @@ export const metadata: Metadata = {
     absolute: "Broken Bow Property Management | 20% Flat | Frontier",
   },
   description:
-    "Boutique, owner-operated cabin management in Broken Bow & Hochatown. We run our own high-performing flagship cabin and take on a limited number of owner partners. 20% of nightly-rental revenue, no monthly minimum.",
+    "Boutique, owner-operated cabin management in Broken Bow & Hochatown. For the remainder of 2026 we're accepting a limited number of new properties — one owner, one manager, a portfolio kept deliberately small. 20% of nightly-rental revenue, no monthly minimum.",
   openGraph: {
     title: "Broken Bow Property Management | Boutique & Owner-Operated | Frontier",
     description:
-      "Hands-on cabin management from the team that operates its own flagship Hochatown cabin. Free listing audit, no monthly minimum, month-to-month.",
+      "For the rest of 2026 we're taking on a limited number of Broken Bow & Hochatown cabins. Operator-led management, free listing audit, no monthly minimum, month-to-month.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -72,6 +76,27 @@ const TRUST_STATS = [
   },
 ];
 
+const EXCLUSIVITY_PILLARS = [
+  {
+    icon: MessageCircle,
+    title: "Communication you can count on",
+    description:
+      "You reach Hunter and the Frontier team directly — clear updates, quick answers, and honest reporting. Never a ticket number in a queue.",
+  },
+  {
+    icon: Lock,
+    title: "A deliberately capped portfolio",
+    description:
+      "We limit how many cabins we manage so every owner gets senior attention — you're never just another line on a spreadsheet.",
+  },
+  {
+    icon: Home,
+    title: "Professional, operator-grade management",
+    description:
+      "We run our own top-rated cabin and hold your listing to the same standard: pricing, guest care, and upkeep, all handled like it's ours.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -88,12 +113,26 @@ export default function HomePage() {
       />
 
       {/* ── 1. Owner-primary hero ───────────────────────────────────── */}
-      <section className="relative bg-gradient-to-br from-cream via-white to-sage/5">
-        <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 md:pt-32 md:pb-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-sage/5">
+        {/* Soft decorative glow for depth */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-24 -right-24 size-[34rem] rounded-full bg-sage/10 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 pt-24 pb-14 md:pt-32 md:pb-24">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
             {/* Left: pitch */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+              {/* Live availability pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-sage/25 bg-sage/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-widest text-sage-dark sm:text-xs">
+                <span className="relative flex size-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-75" />
+                  <span className="relative inline-flex size-2 rounded-full bg-sage" />
+                </span>
+                Accepting a few properties · Remainder of 2026
+              </div>
+
+              <p className="mt-5 text-xs font-semibold uppercase tracking-widest text-sage">
                 <Link
                   href="/hochatown-property-management"
                   className="hover:text-sage-dark hover:underline"
@@ -110,13 +149,16 @@ export default function HomePage() {
                 {" "}Property Management
               </p>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-charcoal md:text-5xl lg:text-6xl">
-                Boutique cabin management for owners who want hands-on attention.
+                Boutique cabin management for a limited number of owners.
               </h1>
               <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-                We operate our own high-performing cabin in the Broken Bow and
-                Hochatown market, and we take on a limited number of owner
-                partners where direct, local management can move the numbers.
-                20% of nightly-rental revenue, no monthly minimum.
+                We operate our own top-rated cabin in the Broken Bow and
+                Hochatown market — and for the remainder of 2026 we&apos;re
+                taking on only a handful of new owners. As your property manager
+                you get real communication and professionalism: clear reporting,
+                quick answers, and a listing we treat like our own — never a
+                support ticket or a line on a spreadsheet. 20% of nightly
+                revenue, no monthly minimum.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button
@@ -143,11 +185,15 @@ export default function HomePage() {
                   </DiscoveryCTALink>
                 </Button>
               </div>
+              <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+                <Lock className="size-3.5 shrink-0 text-sage" />
+                Limited 2026 availability — we cap how many cabins we manage.
+              </p>
             </div>
 
-            {/* Right: photo with owner badge */}
+            {/* Right: photo with floating credibility cards */}
             <div className="relative">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-lg lg:aspect-[5/6]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5 lg:aspect-[5/6]">
                 <Image
                   src="/images/properties/sublime/sublime-2.jpg"
                   alt="Sublime Retreat, a luxury cabin in Hochatown managed by Frontier"
@@ -156,6 +202,11 @@ export default function HomePage() {
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
                 />
+              </div>
+              {/* Top-rated floating badge */}
+              <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-charcoal shadow-lg backdrop-blur md:right-6">
+                <Star className="size-3.5 fill-peach text-peach" />
+                Airbnb Top-Rated Host
               </div>
               {/* Owner floating card */}
               <div className="absolute -bottom-6 left-4 right-4 flex items-center gap-3 rounded-xl bg-white/95 p-3 shadow-lg backdrop-blur md:left-6 md:right-auto md:max-w-xs">
@@ -197,6 +248,78 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── 2.5 Exclusivity / limited-availability band ──────────────── */}
+      <section className="relative overflow-hidden bg-forest text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_100%_0%,rgba(255,255,255,0.08),transparent)]"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+            {/* Left: statement */}
+            <AnimateInView direction="left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-widest text-white/80 sm:text-xs">
+                <CalendarClock className="size-3.5" />
+                By design, not by capacity
+              </div>
+              <h2 className="mt-5 text-3xl font-bold text-white md:text-4xl lg:text-[2.75rem] lg:leading-tight">
+                We keep our portfolio small — on purpose.
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+                Most managers chase doors. We don&apos;t. A capped portfolio
+                means your cabin is never one of two hundred — it&apos;s one of a
+                few. For the remainder of 2026 we&apos;re accepting a limited
+                number of new properties, and we&apos;d rather turn a listing
+                away than dilute the attention and communication every owner
+                gets.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-white text-forest hover:bg-cream px-8 text-base font-semibold"
+                >
+                  <DiscoveryCTALink
+                    source="homepage_exclusivity"
+                    href="/contact#discovery"
+                  >
+                    Apply for a 2026 spot
+                    <ArrowRight className="ml-2 size-4" />
+                  </DiscoveryCTALink>
+                </Button>
+                <span className="text-xs text-white/60">
+                  A short call. We&apos;ll tell you honestly if we&apos;re a fit.
+                </span>
+              </div>
+            </AnimateInView>
+
+            {/* Right: three pillars */}
+            <AnimateInView direction="right">
+              <ul className="space-y-4">
+                {EXCLUSIVITY_PILLARS.map((p) => (
+                  <li
+                    key={p.title}
+                    className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm transition hover:border-white/25 hover:bg-white/10"
+                  >
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-white">
+                      <p.icon className="size-5" />
+                    </div>
+                    <div>
+                      <div className="font-heading text-lg font-semibold tracking-wide text-white">
+                        {p.title}
+                      </div>
+                      <p className="mt-1 text-sm leading-relaxed text-white/70">
+                        {p.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </AnimateInView>
+          </div>
         </div>
       </section>
 
