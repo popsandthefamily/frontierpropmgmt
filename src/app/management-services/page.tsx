@@ -23,7 +23,8 @@ import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-st
 import { ContactForm } from "@/components/forms/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { siteConfig } from "@/data/site";
+import { AnswerBlock } from "@/components/seo/answer-block";
+import { availability, plans, siteConfig } from "@/data/site";
 import {
   onboardingSteps,
   addOns,
@@ -32,13 +33,13 @@ import {
 } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Cabin Management Services: Broken Bow & Hochatown STR",
+  title: "Property Manager Plan: Broken Bow & Hochatown Cabin Management",
   description:
-    "Full-service Broken Bow & Hochatown cabin management. Dynamic pricing, Airbnb/VRBO, guest support, cleaning. 20% of nightly-rental revenue, no monthly minimum.",
+    "Frontier's Property Manager plan: full-service Broken Bow & Hochatown cabin management at 20% of net rental income. Dynamic pricing, Airbnb/VRBO, guest support, cleaning, maintenance, taxes. No monthly minimum, month to month, limited 2026 availability.",
   openGraph: {
-    title: "Full-Service Cabin Management in Broken Bow & Hochatown",
+    title: "Property Manager Plan | Frontier Property Management",
     description:
-      "20% of nightly-rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance — we handle everything.",
+      "20% of net rental income, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, taxes. We take on a limited number of cabins.",
     images: [
       {
         url: "/images/services/DSC3079.jpg",
@@ -157,7 +158,7 @@ export default function ManagementServicesPage() {
         data={{
           name: "Full-Service Vacation Rental Management",
           description:
-            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of gross bookings.",
+            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of net rental income.",
           provider: {
             "@type": "RealEstateAgent",
             name: siteConfig.name,
@@ -173,7 +174,7 @@ export default function ManagementServicesPage() {
           offers: {
             "@type": "Offer",
             description:
-              "20% of nightly-rental revenue, no monthly minimum, no setup fee.",
+              "20% of net rental income, no monthly minimum, no setup fee.",
             priceCurrency: "USD",
           },
         }}
@@ -182,8 +183,8 @@ export default function ManagementServicesPage() {
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"
-        title="Boutique Hochatown STR Management"
-        subtitle="We operate our own flagship cabin in the same market and take on a limited number of owner partners. Pricing, guests, cleanings, issues — handled."
+        title="The Property Manager Plan"
+        subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental income. Pricing, guests, cleanings, maintenance, taxes, handled."
         size="large"
         overlay="gradient"
         cta={{
@@ -195,6 +196,34 @@ export default function ManagementServicesPage() {
       <Breadcrumbs
         items={[{ label: "Management Services" }]}
       />
+
+      {/* ── Direct-answer block ─────────────────────────────────────── */}
+      <SectionWrapper background="cream">
+        <AnswerBlock heading="The short version">
+          <p>
+            The Property Manager plan is Frontier&apos;s full-service option for
+            cabin owners in Broken Bow and Hochatown, Oklahoma. It costs{" "}
+            <strong>20% of net rental income</strong>, meaning{" "}
+            {plans.manager.feeBase}, and covers dynamic pricing,
+            listing and channel management, guest communication, cleaning
+            turnovers, maintenance, occupancy tax filing, and a monthly owner
+            statement. There is no setup fee, no monthly minimum, and no annual
+            contract, and cleaning, maintenance, and vendor invoices pass
+            through at cost with no markup. {availability.long}
+          </p>
+          <p className="text-base text-muted-foreground">
+            Prefer to keep your own bookings and just need someone on the
+            ground?{" "}
+            <Link
+              href={plans.local.href}
+              className="font-medium text-sage hover:text-sage-dark hover:underline"
+            >
+              See the Local Services plan
+            </Link>
+            .
+          </p>
+        </AnswerBlock>
+      </SectionWrapper>
 
       {/* ── Flagship case study ─────────────────────────────────────── */}
       <FlagshipCaseStudySection background="white" />

@@ -6,25 +6,29 @@ import { track, type AnalyticsEvent } from "@/lib/analytics";
 
 type LinkProps = ComponentProps<typeof Link>;
 
-interface TierCTAProps extends LinkProps {
-  tier: string;
+interface PlanCTAProps extends LinkProps {
+  /** Which plan the click is attributed to. */
+  plan: "manager" | "local";
   source: string;
-  event?: Extract<AnalyticsEvent, "cohost_tier_cta_clicked" | "pricing_tier_cta_clicked">;
+  event?: Extract<
+    AnalyticsEvent,
+    "plan_cta_clicked" | "pricing_tier_cta_clicked"
+  >;
 }
 
-export function CoHostTierCTA({
-  tier,
+export function PlanCTA({
+  plan,
   source,
-  event = "cohost_tier_cta_clicked",
+  event = "plan_cta_clicked",
   onClick,
   children,
   ...rest
-}: TierCTAProps) {
+}: PlanCTAProps) {
   return (
     <Link
       {...rest}
       onClick={(e) => {
-        track(event, { tier, source });
+        track(event, { plan, source });
         onClick?.(e);
       }}
     >

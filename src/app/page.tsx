@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     absolute: "Broken Bow Property Management | 20% Flat | Frontier",
   },
   description:
-    "Boutique, owner-operated cabin management in Broken Bow & Hochatown. For the remainder of 2026 we're accepting a limited number of new properties — one owner, one manager, a portfolio kept deliberately small. 20% of nightly-rental revenue, no monthly minimum.",
+    "Boutique, owner-operated cabin management in Broken Bow & Hochatown. For the remainder of 2026 we're accepting a limited number of new properties, a portfolio kept deliberately small. Two plans: full management at 20% of net rental income, or local cleaning and maintenance on a custom quote.",
   openGraph: {
     title: "Broken Bow Property Management | Boutique & Owner-Operated | Frontier",
     description:
@@ -133,7 +133,7 @@ export default function HomePage() {
                 and for the rest of 2026 we&apos;re taking on only a handful of
                 new owners. As your property manager you get real communication
                 and professionalism: clear reporting, quick answers, and a
-                listing we treat like our own. 20% of nightly revenue, no
+                listing we treat like our own. 20% of net rental income, no
                 monthly minimum.
               </p>
               <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center">

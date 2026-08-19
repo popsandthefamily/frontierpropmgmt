@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Airbnb Management in Hochatown, OK | Frontier",
   description:
-    "Airbnb management in Hochatown, OK from a boutique, owner-operated team that runs its own flagship cabin in this market. 20% of nightly-rental revenue, no monthly minimum, month-to-month.",
+    "Airbnb management in Hochatown, OK from a boutique, owner-operated team that runs its own flagship cabin in this market. 20% of net rental income, no monthly minimum, month-to-month.",
   keywords: [
     "Airbnb management Hochatown",
     "Hochatown Airbnb manager",
@@ -150,7 +150,7 @@ const COMPARISON_ROWS: {
   {
     label: "Headline fee",
     values: {
-      boutique: "20% of nightly-rental revenue",
+      boutique: "20% of net rental income",
       largeLocal: "20–30%",
       national: "25–40%",
       self: "0%, plus your time",
@@ -190,7 +190,7 @@ const pageFAQ = [
   {
     question: "What is the fee for Hochatown Airbnb management?",
     answer:
-      "20% of nightly-rental revenue, with no setup fee and no monthly minimum. Cleaning and pet fees pass through to cleaners and are not part of the 20%. Maintenance is itemized at cost.",
+      "20% of net rental income, with no setup fee and no monthly minimum. The 20% is calculated after platform host fees and occupancy taxes come out, not on the headline booking total. Cleaning and pet fees pass through to cleaners and are not part of the 20%. Maintenance is itemized at cost.",
   },
   {
     question: "Do you charge for photography or marketing?",
@@ -231,7 +231,7 @@ export default function AirbnbManagementHochatownPage() {
         data={{
           name: "Airbnb Management in Hochatown, Oklahoma",
           description:
-            "Boutique, owner-operated Airbnb and short-term rental management for Hochatown cabin owners. Daily dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting. 20% of nightly-rental revenue, no monthly minimum.",
+            "Boutique, owner-operated Airbnb and short-term rental management for Hochatown cabin owners. Daily dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting. 20% of net rental income, no monthly minimum.",
           provider: {
             "@type": "RealEstateAgent",
             name: siteConfig.name,

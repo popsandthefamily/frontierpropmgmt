@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Broken Bow Cabin Property Management | Frontier",
     description:
-      "Boutique, owner-operated Broken Bow cabin management from a team that runs its own flagship cabin in the same market. 20% of nightly-rental revenue, no monthly minimum.",
+      "Boutique, owner-operated Broken Bow cabin management from a team that runs its own flagship cabin in the same market. 20% of net rental income, no monthly minimum.",
     images: [
       {
         url: "/images/properties/old-broken-bow-highway/featured.jpg",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     ],
   },
   description:
-    "Broken Bow, OK cabin management by a locally based team. 20% of nightly-rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+    "Broken Bow, OK cabin management by a locally based team. 20% of net rental income, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
   keywords: [
     "Broken Bow property management",
     "Broken Bow cabin management",

@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { JsonLd } from "@/components/seo/json-ld";
-import { siteConfig } from "@/data/site";
+import { googleProfileUrl, plans, siteConfig } from "@/data/site";
 import "./globals.css";
 
 const yanone = Yanone_Kaffeesatz({
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Frontier",
   },
   description:
-    "Book a cabin in Broken Bow & Hochatown, or hire the boutique, owner-operated local team that runs its own flagship cabin in the same market. Full-service STR management — pricing, guests, cleanings, maintenance. 20% of nightly-rental revenue, no monthly minimum.",
+    "Book a cabin in Broken Bow & Hochatown, or hire the boutique, owner-operated local team that runs its own flagship cabin in the same market. Two plans: full management at 20% of net rental income, or local cleaning, maintenance, and logistics on a custom quote. No monthly minimum.",
   keywords: [
     "Broken Bow cabin rentals",
     "Hochatown cabin rentals",
@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     "McCurtain County cabin rentals",
     "Beavers Bend cabin",
     "Frontier Property Management",
+    "Broken Bow cabin cleaning service",
+    "Hochatown turnover cleaning",
+    "cabin maintenance Broken Bow Oklahoma",
     "Dallas cabin owner management",
     "DFW Broken Bow cabin management",
     "remote cabin management Dallas Texas",
@@ -66,7 +69,7 @@ export const metadata: Metadata = {
     title:
       "Frontier Property Management | Cabin Rentals & STR Management in Broken Bow",
     description:
-      "Book a cabin direct or let us manage your Broken Bow vacation rental. No platform fees. 20% management fee.",
+      "Book a cabin direct, or let us manage your Broken Bow vacation rental. Full management at 20% of net rental income, or local cleaning and maintenance on a custom quote.",
   },
   alternates: {
     canonical: "https://rentwithfrontier.com",
@@ -96,7 +99,7 @@ export default function RootLayout({
           data={{
             name: siteConfig.name,
             description:
-              "Full-service short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, and maintenance. 20% of nightly-rental revenue, no monthly minimum.",
+              "Boutique, owner-operated short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Two plans for owners: the Property Manager plan at 20% of net rental income covering pricing, guests, cleaning, maintenance, and taxes; and Local Services, a custom-quoted plan covering cleaning turnovers, maintenance, and on-the-ground logistics for owners who keep their own bookings. No setup fee, no monthly minimum, month to month.",
             url: siteConfig.url,
             telephone: siteConfig.phone,
             email: siteConfig.email,
@@ -124,7 +127,7 @@ export default function RootLayout({
             sameAs: [
               siteConfig.social.instagram,
               siteConfig.social.facebook,
-              siteConfig.social.google,
+              googleProfileUrl,
             ],
             priceRange: "$$",
             hasOfferCatalog: {
@@ -133,11 +136,34 @@ export default function RootLayout({
               itemListElement: [
                 {
                   "@type": "Offer",
+                  name: plans.manager.name,
+                  url: `${siteConfig.url}${plans.manager.href}`,
+                  availability: "https://schema.org/LimitedAvailability",
                   itemOffered: {
                     "@type": "Service",
-                    name: "Full-Service STR Management",
-                    description:
-                      "Complete vacation rental management including dynamic pricing, guest communication, cleaning, and maintenance",
+                    name: `${plans.manager.name} plan, full-service STR management`,
+                    description: plans.manager.summary,
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    priceCurrency: "USD",
+                    description: plans.manager.feeDefinition,
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  name: plans.local.name,
+                  url: `${siteConfig.url}${plans.local.href}`,
+                  availability: "https://schema.org/LimitedAvailability",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: `${plans.local.name}, cabin cleaning, maintenance, and logistics`,
+                    description: plans.local.summary,
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    priceCurrency: "USD",
+                    description: plans.local.feeDefinition,
                   },
                 },
                 {

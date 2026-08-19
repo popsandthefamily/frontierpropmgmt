@@ -48,14 +48,19 @@ const NAV_ITEMS: NavItem[] = [
         description: "Full-service STR management, pricing, and operations",
       },
       {
-        label: "Co-Host (Flat Fee)",
-        href: "/co-host",
-        description: "Listing, pricing, social & owner-website help from $349/mo",
+        label: "Local Services",
+        href: "/local-services",
+        description: "Cleaning, maintenance & logistics, custom quote",
       },
       {
         label: "Pricing",
         href: "/pricing",
-        description: "Co-Host vs full-service, side-by-side",
+        description: "Both plans, side-by-side",
+      },
+      {
+        label: "FAQ",
+        href: "/faq",
+        description: "Fees, switching, taxes, and the market, answered",
       },
       {
         label: "Hochatown Management",

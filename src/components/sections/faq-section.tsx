@@ -19,9 +19,11 @@ export function FAQSection({
 }: FAQSectionProps) {
   return (
     <div className={cn("mx-auto max-w-3xl", className)}>
-      <h2 className="mb-8 text-center text-3xl font-bold text-charcoal md:text-4xl">
-        {title}
-      </h2>
+      {title ? (
+        <h2 className="mb-8 text-center text-3xl font-bold text-charcoal md:text-4xl">
+          {title}
+        </h2>
+      ) : null}
 
       <Accordion type="single" collapsible className="w-full">
         {questions.map((item, i) => (

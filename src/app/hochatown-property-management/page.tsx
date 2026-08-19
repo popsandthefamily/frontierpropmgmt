@@ -17,7 +17,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "Hochatown Cabin Property Management",
   description:
-    "Hochatown, OK cabin management by a locally based team. 20% of nightly-rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+    "Hochatown, OK cabin management by a locally based team. 20% of net rental income, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
   keywords: [
     "Hochatown property management",
     "Hochatown cabin management",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Hochatown Cabin Property Management | Frontier",
     description:
-      "Boutique, owner-operated Hochatown cabin management from a team that runs its own flagship cabin in the same market. 20% of nightly-rental revenue, no monthly minimum.",
+      "Boutique, owner-operated Hochatown cabin management from a team that runs its own flagship cabin in the same market. 20% of net rental income, no monthly minimum.",
     images: [
       {
         url: "/images/discover/hochatown-pm-featured.png",

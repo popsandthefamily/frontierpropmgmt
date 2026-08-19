@@ -18,7 +18,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "Dallas Cabin Owners: Broken Bow Property Management from DFW",
   description:
-    "Own a Broken Bow cabin from Dallas? Frontier gives DFW owners local, hands-on STR management. 20% of nightly-rental revenue, no monthly minimum, month-to-month.",
+    "Own a Broken Bow cabin from Dallas? Frontier gives DFW owners local, hands-on STR management. 20% of net rental income, no monthly minimum, month-to-month.",
   keywords: [
     "Dallas cabin owner property management",
     "DFW Broken Bow cabin management",
@@ -60,7 +60,7 @@ const dallasFAQ = [
   {
     question: "What is your management fee?",
     answer:
-      "We charge 20% of gross booking revenue. This covers all core services including listing management, guest communication, cleaning coordination, maintenance oversight, and owner reporting. There are no hidden fees or setup costs.",
+      "We charge 20% of net rental income. This covers all core services including listing management, guest communication, cleaning coordination, maintenance oversight, and owner reporting. There are no hidden fees or setup costs.",
   },
   {
     question: "Can I switch from my current management company?",

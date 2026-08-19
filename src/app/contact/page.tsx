@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
+import { SocialProofStrip } from "@/components/sections/social-proof-strip";
 import { ContactFormTabbed } from "@/components/forms/contact-form-tabbed";
 import { DiscoveryCallEmbed } from "@/components/book/discovery-call-embed";
-import { siteConfig } from "@/data/site";
+import { googleProfileUrl, siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact Us: Book a Cabin or Get a Free Management Estimate",
@@ -56,7 +57,7 @@ const contactOptions = [
     emoji: "\u{2B50}",
     label: "Reviews",
     value: "See us on Google",
-    href: siteConfig.social.google,
+    href: googleProfileUrl,
   },
 ];
 
@@ -146,6 +147,8 @@ export default function ContactPage() {
           </div>
         </div>
       </SectionWrapper>
+
+      <SocialProofStrip />
     </>
   );
 }

@@ -7,26 +7,28 @@ import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { CoHostTierCTA } from "@/components/analytics/cohost-tier-cta";
+import { AnswerBlock } from "@/components/seo/answer-block";
+import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
-import { siteConfig } from "@/data/site";
-import { PRICING_COLUMNS, PRICING_ROWS, CO_HOST_PRICING_BANDS } from "@/data/co-host";
+import { availability, plans, siteConfig } from "@/data/site";
+import { PRICING_COLUMNS, PRICING_ROWS } from "@/data/local-services";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Pricing | Co-Host or Full Service | Frontier Property Management",
+  title: "Pricing | Two Plans, Stated Plainly | Frontier Property Management",
   description:
-    "Compare Frontier's Co-Host (flat fee, from $349/mo) and Full Service (20% of bookings). Same operator, two ways to work together. No setup fees, no hidden percentages.",
+    "Frontier's two plans for Broken Bow and Hochatown cabin owners: Property Manager at 20% of net rental income, or Local Services (cleaning, maintenance, logistics) on a custom quote. No setup fees, no monthly minimum, month to month.",
   keywords: [
     "Frontier property management pricing",
     "STR management pricing Broken Bow",
-    "co host vs property manager",
-    "flat fee property management",
+    "Broken Bow property management fees",
+    "Hochatown cabin management cost",
+    "vacation rental management fee Oklahoma",
   ],
   openGraph: {
     title: "Pricing | Frontier Property Management",
     description:
-      "Co-Host or Full Service. Side-by-side. No surprises.",
+      "Two plans. 20% of net rental income for full management, or a custom quote for local cleaning and maintenance.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -43,23 +45,16 @@ export const metadata: Metadata = {
 
 const HEADLINE_CARDS = [
   {
-    key: "cohost" as const,
-    name: "Co-Host",
-    price: "$349–$599",
-    priceSuffix: "/month flat",
-    pitch: "Listing, pricing, social, and owner-website help. You keep guest comms and cleaning. Pricing scales with property size.",
-    cta: { label: "See Co-Host details", href: "/co-host" },
+    plan: plans.manager,
+    cta: { label: "See the Property Manager plan", href: plans.manager.href },
     highlight: true,
   },
   {
-    key: "fullService" as const,
-    name: "Full Service",
-    price: "20%",
-    priceSuffix: "of bookings",
-    pitch: "Hands-off cabin management. Guest comms, cleaning, maintenance, taxes — all of it.",
-    cta: { label: "See Full Service details", href: "/management-services" },
+    plan: plans.local,
+    cta: { label: "See Local Services", href: plans.local.href },
+    highlight: false,
   },
-];
+] as const;
 
 export default function PricingPage() {
   return (
@@ -69,35 +64,42 @@ export default function PricingPage() {
       <JsonLd
         type="Service"
         data={{
-          name: "Frontier Property Management — Pricing",
+          name: "Frontier Property Management, plans and pricing",
           provider: {
             "@type": "LocalBusiness",
-            name: "Frontier Property Management",
-            url: "https://rentwithfrontier.com",
+            name: siteConfig.name,
+            url: siteConfig.url,
+            telephone: siteConfig.phone,
           },
           areaServed: [
             { "@type": "City", name: "Broken Bow" },
             { "@type": "Place", name: "Hochatown" },
+            { "@type": "Place", name: "McCurtain County, Oklahoma" },
           ],
           offers: [
             {
               "@type": "Offer",
-              name: "Co-Host (1–3 BR)",
-              price: "349",
-              priceCurrency: "USD",
-            },
-            {
-              "@type": "Offer",
-              name: "Co-Host (4–5 BR)",
-              price: "599",
-              priceCurrency: "USD",
-            },
-            {
-              "@type": "Offer",
-              name: "Full Service Property Management",
+              name: plans.manager.name,
+              description: plans.manager.feeDefinition,
+              url: `${siteConfig.url}${plans.manager.href}`,
+              availability: "https://schema.org/LimitedAvailability",
               priceSpecification: {
                 "@type": "PriceSpecification",
-                description: "20% of nightly-rental revenue",
+                priceCurrency: "USD",
+                description: "20% of net rental income",
+              },
+            },
+            {
+              "@type": "Offer",
+              name: plans.local.name,
+              description: plans.local.feeDefinition,
+              url: `${siteConfig.url}${plans.local.href}`,
+              availability: "https://schema.org/LimitedAvailability",
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "USD",
+                description:
+                  "Quoted per property after an on-site walkthrough",
               },
             },
           ],
@@ -107,113 +109,157 @@ export default function PricingPage() {
       <HeroSection
         backgroundImage="/images/services/DSC3079.jpg"
         title="Pricing"
-        subtitle="Two ways to work with Frontier. Pick the level of involvement that fits the property."
+        subtitle="Two plans, both month to month. Pick the one that matches how much of the cabin you want to keep running yourself."
         size="medium"
         overlay="dark"
-        cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
+        cta={{ label: "Book a discovery call", href: "/contact#discovery" }}
       />
 
       <Breadcrumbs items={[{ label: "Pricing" }]} />
 
-      {/* Two-card top */}
+      {/* Direct-answer block */}
       <SectionWrapper background="cream">
+        <AnswerBlock heading="The short version">
+          <p>
+            Frontier Property Management offers two plans to cabin owners in
+            Broken Bow and Hochatown, Oklahoma. The{" "}
+            <strong>Property Manager</strong> plan is full-service management at{" "}
+            <strong>20% of net rental income</strong> &mdash; that is,{" "}
+            {plans.manager.feeBase} &mdash; covering pricing, listings, guest
+            communication, cleaning, maintenance, occupancy taxes, and monthly
+            reporting. <strong>Local Services</strong> is cleaning,
+            maintenance, and on-the-ground logistics on a{" "}
+            <strong>custom quote</strong>, for owners who keep their own
+            bookings. Neither plan has a setup fee, a monthly minimum, or an
+            annual contract, and vendor invoices pass through at cost on both.{" "}
+            {availability.sentence}
+          </p>
+        </AnswerBlock>
+      </SectionWrapper>
+
+      {/* Two-card top */}
+      <SectionWrapper background="white">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-          {HEADLINE_CARDS.map((card) => (
+          {HEADLINE_CARDS.map(({ plan, cta, highlight }) => (
             <div
-              key={card.key}
+              key={plan.key}
               className={cn(
                 "flex flex-col rounded-2xl border bg-white p-6 shadow-sm",
-                card.highlight ? "border-sage shadow-md ring-1 ring-sage/40" : "border-charcoal/10",
+                highlight
+                  ? "border-sage shadow-md ring-1 ring-sage/40"
+                  : "border-charcoal/10",
               )}
             >
-              <h3 className="text-lg font-semibold text-charcoal">{card.name}</h3>
-              <div className="mt-3 flex items-baseline gap-2">
-                <span className="font-heading text-4xl font-bold text-charcoal">{card.price}</span>
-                <span className="text-sm text-muted-foreground">{card.priceSuffix}</span>
+              <h2 className="font-heading text-xl font-bold text-charcoal">
+                {plan.name}
+              </h2>
+              <p className="mt-1 text-sm font-medium text-sage-dark">
+                {plan.tagline}
+              </p>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="font-heading text-4xl font-bold text-charcoal">
+                  {plan.fee}
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  {plan.feeSuffix}
+                </span>
               </div>
-              <p className="mt-3 flex-1 text-sm text-muted-foreground">{card.pitch}</p>
+              <p className="mt-4 flex-1 text-sm text-muted-foreground">
+                {plan.summary}
+              </p>
               <Button
                 asChild
                 size="lg"
                 className={cn(
                   "mt-6 w-full text-base",
-                  card.highlight
+                  highlight
                     ? "bg-sage text-white hover:bg-sage-dark"
                     : "bg-charcoal text-white hover:bg-charcoal/90",
                 )}
               >
-                <CoHostTierCTA
-                  tier={card.key}
+                <PlanCTA
+                  plan={plan.key}
                   source="pricing_page_headline_card"
                   event="pricing_tier_cta_clicked"
-                  href={card.cta.href}
+                  href={cta.href}
                 >
-                  {card.cta.label}
-                </CoHostTierCTA>
+                  {cta.label}
+                </PlanCTA>
               </Button>
             </div>
           ))}
         </div>
+
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
+          Both plans are month to month with 30 days notice to cancel. No setup
+          fee on either. We do not mark up cleaning, maintenance, or vendor
+          invoices on either.
+        </p>
       </SectionWrapper>
 
-      {/* Co-Host pricing band detail */}
-      <SectionWrapper background="white">
+      {/* Fee definitions, the precise version */}
+      <SectionWrapper background="cream" id="what-the-fee-means">
         <div className="mx-auto max-w-4xl">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
-              Co-Host pricing by property size
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              What each number actually means
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
-              Same feature list at every size. The only thing that changes is the monthly fee.
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+              Headline rates are easy to state and easy to hide things behind.
+              Here is the unabbreviated version of both.
             </p>
           </div>
-          <div className="mt-8 overflow-x-auto rounded-2xl border bg-white shadow-sm">
-            <table className="w-full min-w-[480px] text-sm">
-              <thead>
-                <tr className="border-b bg-cream/60">
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    Property size
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    Best for
-                  </th>
-                  <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                    Monthly fee
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {CO_HOST_PRICING_BANDS.map((band, i) => (
-                  <tr key={band.id} className={i % 2 === 0 ? "bg-white" : "bg-cream/20"}>
-                    <td className="px-4 py-3 align-top text-sm font-medium text-charcoal">
-                      <div>{band.label}</div>
-                      <div className="text-xs text-muted-foreground">{band.size}</div>
-                    </td>
-                    <td className="px-4 py-3 align-top text-sm text-muted-foreground">
-                      {band.bestFor}
-                    </td>
-                    <td className="px-4 py-3 text-right align-top text-sm font-semibold text-charcoal whitespace-nowrap">
-                      {band.price}
-                      <div className="text-xs font-normal text-muted-foreground">{band.priceSuffix}</div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {[plans.manager, plans.local].map((plan) => (
+              <div
+                key={plan.key}
+                className="rounded-2xl border border-charcoal/10 bg-white p-6"
+              >
+                <h3 className="font-heading text-lg font-bold text-charcoal">
+                  {plan.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {plan.feeDefinition}
+                </p>
+                <Link
+                  href={plan.href}
+                  className="mt-4 inline-block text-sm font-medium text-sage hover:text-sage-dark hover:underline"
+                >
+                  Full detail &rarr;
+                </Link>
+              </div>
+            ))}
           </div>
+          <div className="mx-auto mt-8 max-w-3xl rounded-xl border-l-4 border-sage bg-sage/5 p-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+              Why two 20% quotes are not the same price
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-charcoal">
+              {plans.manager.feeComparisonNote}
+            </p>
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
+            Curious how 20% compares to the national operators?{" "}
+            <Link
+              href="/broken-bow-cabin-management-fees"
+              className="font-medium text-sage hover:text-sage-dark hover:underline"
+            >
+              We break down the real cost of each fee model &rarr;
+            </Link>
+          </p>
         </div>
       </SectionWrapper>
 
       {/* Full comparison */}
-      <SectionWrapper background="cream" id="compare">
+      <SectionWrapper background="white" id="compare">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Co-Host vs Full Service, side-by-side
+              Property Manager vs Local Services, side by side
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              Same operator. Two operating models. Where does the line fall on what you
-              want to keep doing yourself?
+              Same operator, same standards. The difference is where the line
+              falls on what you keep doing yourself.
             </p>
           </div>
 
@@ -230,7 +276,9 @@ export default function PricingPage() {
                       key={col.key}
                       className={cn(
                         "px-4 py-4 text-left text-xs font-semibold uppercase tracking-widest",
-                        col.highlight ? "bg-sage/10 text-sage" : "text-muted-foreground",
+                        col.highlight
+                          ? "bg-sage/10 text-sage"
+                          : "text-muted-foreground",
                       )}
                     >
                       {col.label}
@@ -240,7 +288,10 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {PRICING_ROWS.map((row, i) => (
-                  <tr key={row.key} className={i % 2 === 0 ? "bg-white" : "bg-cream/20"}>
+                  <tr
+                    key={row.key}
+                    className={i % 2 === 0 ? "bg-white" : "bg-cream/20"}
+                  >
                     <th
                       scope="row"
                       className="px-4 py-4 text-left text-sm font-medium text-charcoal align-top"
@@ -258,7 +309,7 @@ export default function PricingPage() {
                         )}
                       >
                         <div className="flex items-start gap-2">
-                          {col.highlight && (
+                          {row.values[col.key] === "We handle" && (
                             <Check className="mt-0.5 size-4 shrink-0 text-sage" />
                           )}
                           <span>{row.values[col.key]}</span>
@@ -278,7 +329,9 @@ export default function PricingPage() {
                 key={col.key}
                 className={cn(
                   "rounded-2xl border bg-white p-5 shadow-sm",
-                  col.highlight ? "border-sage ring-1 ring-sage/40" : "border-charcoal/10",
+                  col.highlight
+                    ? "border-sage ring-1 ring-sage/40"
+                    : "border-charcoal/10",
                 )}
               >
                 <h3
@@ -295,7 +348,9 @@ export default function PricingPage() {
                       <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         {row.label}
                       </dt>
-                      <dd className="text-sm text-charcoal">{row.values[col.key]}</dd>
+                      <dd className="text-sm text-charcoal">
+                        {row.values[col.key]}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -306,20 +361,22 @@ export default function PricingPage() {
       </SectionWrapper>
 
       {/* Internal links */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
             Want the detail behind each plan?
           </h2>
           <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/co-host">Co-Host details</Link>
+              <Link href={plans.manager.href}>Property Manager detail</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/management-services">Full-service details</Link>
+              <Link href={plans.local.href}>Local Services detail</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/broken-bow-cabin-management-fees">What 20% should include</Link>
+              <Link href="/broken-bow-cabin-management-fees">
+                What 20% should include
+              </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/audit">Free listing audit</Link>
@@ -330,9 +387,9 @@ export default function PricingPage() {
 
       <CTASection
         heading="Not sure which fits?"
-        subtext={`Book a free 30-minute discovery call. We'll look at your numbers and tell you the honest answer. ${siteConfig.phone}`}
+        subtext={`Book a free 30-minute discovery call. We'll look at your numbers and tell you the honest answer, even when it isn't us. ${siteConfig.phone}`}
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{ label: "Book a discovery call", href: "/audit#full-audit" }}
+        cta={{ label: "Book a discovery call", href: "/contact#discovery" }}
         secondaryCta={{ label: "Run my free listing audit", href: "/audit" }}
       />
     </>

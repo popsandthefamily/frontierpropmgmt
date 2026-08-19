@@ -9,6 +9,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { AvailabilityNote } from "@/components/sections/availability-note";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -171,7 +172,7 @@ const pageFAQ = [
   {
     question: "Does Frontier charge to onboard a switched listing?",
     answer:
-      "No. Frontier charges $0 setup, $0 monthly minimum, and 20% of nightly-rental revenue going forward. The transition is part of how we earn your business.",
+      "No. Frontier charges $0 setup, $0 monthly minimum, and 20% of net rental income going forward. The transition is part of how we earn your business.",
   },
   {
     question:
@@ -217,6 +218,8 @@ export default function SwitchPropertyManagersBrokenBowPage() {
           { label: "Switching Property Managers" },
         ]}
       />
+
+      <AvailabilityNote />
 
       {/* Honest intro */}
       <SectionWrapper background="cream">

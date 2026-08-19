@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
+import { SocialProofStrip } from "@/components/sections/social-proof-strip";
 import { BlogCard } from "@/components/cards/blog-card";
 import { getBlogPosts } from "@/data/blog-posts";
 
@@ -56,6 +57,11 @@ export default function BlogsPage() {
           ))}
         </div>
       </SectionWrapper>
+
+      <SocialProofStrip
+        heading="Every post goes to Facebook too"
+        subheading="If you'd rather get these in your feed than remember to check back, follow the page."
+      />
     </>
   );
 }

@@ -1,0 +1,749 @@
+<title>Frontier Off-Site Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;600;700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+  /* ------------------------------------------------------------------
+     Palette taken from the Frontier site's own tokens (globals.css):
+     forest / sage / peach / charcoal / off-white. Neutrals are biased
+     green so they sit with the accent instead of fighting it.
+     ------------------------------------------------------------------ */
+  :root {
+    --forest: #2f4a3a;
+    --sage: #4a6e5d;
+    --sage-light: #6f9f86;
+    --peach: #f6bc98;
+
+    --ground: #fafaf7;
+    --surface: #ffffff;
+    --surface-sunk: #f1f3ef;
+    --ink: #33322f;
+    --ink-strong: #22302a;
+    --ink-muted: #6b7570;
+    --rule: #dfe3dc;
+    --rule-strong: #c6cfc4;
+
+    --accent: var(--sage);
+    --accent-quiet: #eaf0eb;
+    --warm: #b46a3a;
+    --warm-quiet: #fbeee3;
+
+    --measure: 34rem;
+    --shadow: 0 1px 2px rgba(47, 74, 58, .05), 0 8px 24px -12px rgba(47, 74, 58, .18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #171d19;
+      --surface: #1e2621;
+      --surface-sunk: #232c26;
+      --ink: #dfe5df;
+      --ink-strong: #f0f4ef;
+      --ink-muted: #96a29a;
+      --rule: #303a33;
+      --rule-strong: #445046;
+
+      --accent: #8fbda2;
+      --accent-quiet: #223029;
+      --warm: #e0a377;
+      --warm-quiet: #2e2620;
+      --peach: #e0a377;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #171d19;
+    --surface: #1e2621;
+    --surface-sunk: #232c26;
+    --ink: #dfe5df;
+    --ink-strong: #f0f4ef;
+    --ink-muted: #96a29a;
+    --rule: #303a33;
+    --rule-strong: #445046;
+
+    --accent: #8fbda2;
+    --accent-quiet: #223029;
+    --warm: #e0a377;
+    --warm-quiet: #2e2620;
+    --peach: #e0a377;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -12px rgba(0, 0, 0, .6);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4.5rem) clamp(1.1rem, 5vw, 2rem) 6rem;
+  }
+
+  /* --- Masthead ---------------------------------------------------- */
+
+  .masthead { border-top: 3px solid var(--forest); padding-top: 1.1rem; }
+
+  :root[data-theme="dark"] .masthead,
+  :root:not([data-theme="light"]) .masthead { border-top-color: var(--accent); }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .masthead { border-top-color: var(--forest); }
+  }
+
+  .eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+    justify-content: space-between;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  h1 {
+    font-family: "Yanone Kaffeesatz", "Work Sans", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.9rem, 9vw, 4.6rem);
+    line-height: .95;
+    letter-spacing: -.005em;
+    text-wrap: balance;
+    color: var(--ink-strong);
+    margin: 1.6rem 0 0;
+  }
+
+  .standfirst {
+    max-width: var(--measure);
+    margin: 1.4rem 0 0;
+    font-size: 1.16rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .standfirst strong { color: var(--ink-strong); font-weight: 600; }
+
+  /* --- Contents ----------------------------------------------------- */
+
+  .contents {
+    margin: 2.75rem 0 0;
+    padding: 1.35rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+  }
+
+  .contents h2 {
+    margin: 0 0 .85rem;
+    font-family: "Work Sans", system-ui, sans-serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .contents ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: .1rem;
+    counter-reset: toc;
+  }
+
+  .contents li { counter-increment: toc; }
+
+  .contents a {
+    display: flex;
+    gap: .85rem;
+    align-items: baseline;
+    padding: .3rem 0;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .contents a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-variant-numeric: tabular-nums;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--accent);
+    min-width: 1.6rem;
+  }
+
+  .contents a:hover { color: var(--accent); }
+  .contents a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .contents li.unnumbered a::before { content: "—"; color: var(--ink-muted); }
+
+  /* --- Sections ----------------------------------------------------- */
+
+  section { margin-top: 3.75rem; }
+
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 1.75rem;
+  }
+
+  .kicker {
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 .5rem;
+  }
+
+  h2 {
+    font-family: "Yanone Kaffeesatz", "Work Sans", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.95rem, 4.5vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: .002em;
+    text-wrap: balance;
+    color: var(--ink-strong);
+    margin: 0 0 .75rem;
+  }
+
+  h3 {
+    font-family: "Work Sans", system-ui, sans-serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -.004em;
+    color: var(--ink-strong);
+    margin: 2.1rem 0 .55rem;
+  }
+
+  p, ul, ol { max-width: var(--measure); }
+  p { margin: 0 0 1.05rem; }
+  p:last-child { margin-bottom: 0; }
+
+  ul, ol { margin: 0 0 1.15rem; padding-left: 1.15rem; }
+  li { margin-bottom: .45rem; }
+  li::marker { color: var(--accent); }
+
+  strong { font-weight: 600; color: var(--ink-strong); }
+  em { font-style: italic; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  code {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+    font-size: .87em;
+    background: var(--surface-sunk);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .1em .35em;
+  }
+
+  pre {
+    max-width: var(--measure);
+    margin: 0 0 1.15rem;
+    padding: 1rem 1.1rem;
+    background: var(--surface-sunk);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    overflow-x: auto;
+    font-size: .87rem;
+    line-height: 1.6;
+  }
+
+  pre code { background: none; border: 0; padding: 0; font-size: 1em; }
+
+  /* --- Callouts ------------------------------------------------------ */
+
+  .note {
+    max-width: var(--measure);
+    margin: 1.5rem 0;
+    padding: 1.15rem 1.3rem;
+    background: var(--accent-quiet);
+    border-radius: 4px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .note.warm { background: var(--warm-quiet); border-left-color: var(--warm); }
+  .note.warm .note-label { color: var(--warm); }
+
+  .note-label {
+    display: block;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .4rem;
+  }
+
+  .note p { margin-bottom: .7rem; }
+  .note p:last-child { margin-bottom: 0; }
+
+  /* --- Tables -------------------------------------------------------- */
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 0 0 1.3rem;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    min-width: 30rem;
+    border-collapse: collapse;
+    font-size: .93rem;
+  }
+
+  thead th {
+    text-align: left;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: var(--surface-sunk);
+    padding: .7rem .9rem;
+    border-bottom: 1px solid var(--rule-strong);
+    white-space: nowrap;
+  }
+
+  tbody td, tbody th {
+    padding: .72rem .9rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+
+  tbody th {
+    font-weight: 600;
+    color: var(--ink-strong);
+    white-space: nowrap;
+  }
+
+  td.num, th.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .pill {
+    display: inline-block;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    background: var(--accent-quiet);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  blockquote {
+    max-width: var(--measure);
+    margin: 1.3rem 0;
+    padding: .2rem 0 .2rem 1.15rem;
+    border-left: 2px solid var(--peach);
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  blockquote p { margin: 0; }
+
+  footer {
+    margin-top: 4.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+    font-size: .82rem;
+    color: var(--ink-muted);
+    max-width: var(--measure);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .contents a, a { transition: color .15s ease; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Frontier Property Management</span>
+      <span>Broken Bow &amp; Hochatown, OK</span>
+    </div>
+    <h1>Getting found off the website</h1>
+    <p class="standfirst">
+      The site is done. Two plans are live, the fee is stated one way
+      everywhere, <code>llms.txt</code> and <code>llms-full.txt</code> are
+      serving, and every page carries structured data. That work made Frontier
+      <strong>quotable</strong>. This is the other half: making Frontier
+      <strong>findable</strong>. None of it lives in the repo, and most of it
+      is worth more than another landing page.
+    </p>
+
+    <nav class="contents" aria-label="Contents">
+      <h2>Priorities, in order</h2>
+      <ol>
+        <li><a href="#gbp">Google Business Profile</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#citations">Citations and directories</a></li>
+        <li><a href="#mentions">The mentions that actually get cited</a></li>
+        <li><a href="#facebook">Facebook, on rails</a></li>
+        <li class="unnumbered"><a href="#measure">What to measure</a></li>
+        <li class="unnumbered"><a href="#order">The first four weeks</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <section id="why">
+    <hr class="rule">
+    <p class="kicker">The premise</p>
+    <h2>Why this beats writing more pages</h2>
+    <p>
+      When someone asks ChatGPT or Claude &ldquo;who manages cabins in Broken
+      Bow,&rdquo; the model is not ranking websites the way Google does. It
+      retrieves whatever sources discuss the topic, then synthesises an answer.
+      In practice it leans on:
+    </p>
+    <ul>
+      <li><strong>Google Business Profiles</strong> and the text inside their reviews</li>
+      <li><strong>Third-party listicles</strong> &mdash; the &ldquo;best property managers in Broken Bow&rdquo; posts</li>
+      <li><strong>Reddit, forums, and Facebook groups</strong> where real owners name names</li>
+      <li><strong>Directory listings</strong> that confirm the business exists and where</li>
+    </ul>
+    <p>
+      Your own site is one voice in that set, and it is the one every model
+      discounts, because every company says good things about itself. A single
+      review that reads <em>&ldquo;Hunter drove out at 9pm when our hot tub
+      quit&rdquo;</em> does more for AI-driven discovery than three more pages
+      of copy.
+    </p>
+    <p>
+      The site is what converts someone once they arrive. Everything below is
+      what gets Frontier into the answer in the first place.
+    </p>
+  </section>
+
+  <section id="gbp">
+    <hr class="rule">
+    <p class="kicker">Priority 1</p>
+    <h2>Google Business Profile</h2>
+    <p>
+      The highest-leverage asset you own, and the one most small operators
+      leave half-finished.
+    </p>
+
+    <h3>Set the Place ID before anything else</h3>
+    <p>
+      Two features already built into the site are sitting dormant waiting on
+      this one value.
+    </p>
+    <ol>
+      <li>Find the Place ID with Google&rsquo;s <a href="https://developers.google.com/maps/documentation/places/web-service/place-id" target="_blank" rel="noopener">Place ID finder</a></li>
+      <li>Add it to the Vercel environment: <code>NEXT_PUBLIC_GOOGLE_PLACE_ID=ChIJ…</code></li>
+      <li>Redeploy</li>
+    </ol>
+    <div class="note">
+      <span class="note-label">What that unlocks</span>
+      <p>
+        The site&rsquo;s <code>sameAs</code> declaration switches from a
+        <code>share.google</code> redirect to the canonical Maps URL, which is
+        a materially stronger entity signal. And
+        <code>rentwithfrontier.com/review</code> becomes a one-tap deep link
+        straight into the review dialog instead of dropping people on the
+        profile to hunt for the star widget.
+      </p>
+    </div>
+
+    <h3>Categories &mdash; where Local Services changes the picture</h3>
+    <p>
+      Categories are the strongest single ranking factor on a profile, and
+      launching the Local Services plan makes Frontier legitimately eligible
+      for a set it could not claim before.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Slot</th><th>Category</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Primary</th><td>Property Management Company</td><td>Existing</td></tr>
+          <tr><th>Secondary</th><td>Vacation Home Rental Agency</td><td>Existing</td></tr>
+          <tr><th>Secondary</th><td>House Cleaning Service</td><td><span class="pill">Add now</span></td></tr>
+          <tr><th>Secondary</th><td>Handyman</td><td><span class="pill">Add now</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      &ldquo;Broken Bow cabin cleaning service&rdquo; is a real search with real
+      volume and almost no competition from companies that also do management.
+      Only ever claim a category you genuinely serve &mdash; but you do serve
+      these now, and leaving them off keeps the new plan invisible.
+    </p>
+
+    <h3>Finish the profile</h3>
+    <ul>
+      <li><strong>Description.</strong> Lead with the two plans and the market. Reuse the summary at the top of <code>llms.txt</code>; it was written for exactly this job.</li>
+      <li><strong>Services.</strong> Enter every item from the Local Services page as its own service entry. Free keyword surface, and almost nobody fills it in.</li>
+      <li><strong>Photos.</strong> Twenty minimum, weighted toward <em>work</em> rather than interiors &mdash; a turnover in progress, a finished cabin, the truck, you on site. Interiors read as a rental listing; work photos read as a service business. Add a few every month, because recency is scored.</li>
+      <li><strong>Q&amp;A.</strong> Seed it yourself. Post the five questions owners always ask and answer them from the business account. This section is a documented AI-retrieval source and it sits empty on nearly every competitor profile in the market.</li>
+      <li><strong>Hours.</strong> Must match the site exactly &mdash; Mon&ndash;Fri, 9&ndash;5. Mismatches suppress ranking.</li>
+    </ul>
+
+    <h3>Posts</h3>
+    <p>
+      Weekly, and nearly free now that the pipeline exists: the captions at
+      <code>/admin/social</code> paste into a Business Profile post exactly as
+      well as they paste into Facebook. Same text, third destination.
+    </p>
+  </section>
+
+  <section id="reviews">
+    <hr class="rule">
+    <p class="kicker">Priority 2</p>
+    <h2>Reviews</h2>
+    <p>
+      Volume, recency, and text quality, in that order. Ten reviews from the
+      last six months beat forty from three years ago.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Who to ask</th><th>When</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Guests of managed cabins</th><td>Checkout day</td><td>Highest volume. Automate it into the message flow.</td></tr>
+          <tr><th>Owner clients</th><td>After a save &mdash; a fixed disaster, a strong month</td><td>Low volume, highest value. This is what a prospective owner actually reads.</td></tr>
+          <tr><th>Local Services clients</th><td>After the first month</td><td>A source that did not exist before this plan launched.</td></tr>
+          <tr><th>Vendors and contractors</th><td>Anytime</td><td>Legitimate reciprocal relationships.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>How to ask</h3>
+    <p>
+      Text them <code>rentwithfrontier.com/review</code>. That is the entire
+      ask. Do not send a paragraph explaining why reviews matter to small
+      businesses &mdash; conversion drops with every additional sentence.
+    </p>
+    <div class="note warm">
+      <span class="note-label">Do not</span>
+      <p>
+        Never offer anything in exchange for a review. Google filters
+        incentivised reviews and can penalise the profile that solicited them.
+      </p>
+    </div>
+
+    <h3>Responding</h3>
+    <p>
+      Reply to every review within 48 hours, and write the reply for the
+      <em>next</em> reader rather than the reviewer. Work the market and the
+      service in naturally:
+    </p>
+    <blockquote>
+      <p>
+        Thanks Sarah &mdash; glad the freeze check gave you peace of mind. That
+        January cold snap caught a lot of Hochatown cabins off guard.
+      </p>
+    </blockquote>
+    <p>
+      That reply is now indexable text on your profile containing &ldquo;freeze
+      check,&rdquo; &ldquo;Hochatown,&rdquo; and &ldquo;January.&rdquo; Multiply
+      it by fifty reviews and the profile starts describing your service better
+      than your homepage does.
+    </p>
+    <p>
+      On negative reviews: answer factually, never defensively, and never with
+      detail that identifies the guest. A calm reply to a bad review persuades
+      more readers than five five-star ratings.
+    </p>
+  </section>
+
+  <section id="citations">
+    <hr class="rule">
+    <p class="kicker">Priority 3</p>
+    <h2>Citations and directories</h2>
+    <p>
+      The whole job here is <strong>NAP consistency</strong>: Name, Address,
+      Phone identical everywhere, character for character.
+    </p>
+    <pre><code>Frontier Property Management
+3156 Old Broken Bow Hwy, Broken Bow, OK 74728
+580-207-7154</code></pre>
+    <p>
+      Not &ldquo;Hwy.&rdquo; in one place and &ldquo;Highway&rdquo; in another,
+      not <code>(580) 207-7154</code> here and <code>580-207-7154</code> there.
+      Inconsistency is actively harmful rather than merely unhelpful &mdash; it
+      splits the entity across two records.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Tier</th><th>Listing</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><th rowspan="6">Do these</th><td>Bing Places</td><td>Feeds Copilot; Bing is a documented retrieval source for several AI products</td></tr>
+          <tr><td>Apple Business Connect</td><td>Apple Maps and Siri</td></tr>
+          <tr><td>Facebook Page</td><td>Verify address and hours match exactly</td></tr>
+          <tr><td>Yelp</td><td>Claim it even if you never touch it again &mdash; it gets scraped constantly</td></tr>
+          <tr><td>Chamber of Commerce</td><td>Broken Bow / McCurtain County</td></tr>
+          <tr><td>Better Business Bureau</td><td>Trust signal for owners comparing managers</td></tr>
+          <tr><th rowspan="2">For Local Services</th><td>Thumbtack, Angi</td><td>Under cleaning and handyman &mdash; newly relevant</td></tr>
+          <tr><td>Nextdoor Business</td><td>Local intent, low effort</td></tr>
+          <tr><th rowspan="2">Industry</th><td>VRMA member directory</td><td>Industry credibility</td></tr>
+          <tr><td>hocha.town</td><td>You control this one. List Frontier as a service provider, not only as cabins.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="mentions">
+    <hr class="rule">
+    <p class="kicker">Priority 4</p>
+    <h2>The mentions that actually get cited</h2>
+    <p>
+      The hardest section here, and the one with the highest ceiling.
+    </p>
+
+    <h3>Get into the listicles</h3>
+    <p>
+      Search &ldquo;best property management companies Broken Bow&rdquo; and
+      &ldquo;Broken Bow Airbnb management.&rdquo; Whoever ranks for those is
+      being fed to language models as the answer. Most are affiliate roundups
+      that will add you if you ask. Email the author with the two plans, the
+      fee structure, and the boutique angle. It is unglamorous outreach and it
+      works.
+    </p>
+
+    <h3>Be genuinely useful in public</h3>
+    <p>
+      r/AirBnB, r/airbnb_hosts, r/OklahomaCity, and the Broken Bow owner
+      Facebook groups all get scraped. Answer short-term rental questions as an
+      operator, without pitching, occasionally, signed with who you are. Models
+      cite Reddit heavily, and a manager who explains occupancy tax filing
+      clearly in a thread becomes a named entity in the model&rsquo;s picture of
+      this market.
+    </p>
+
+    <h3>Local press and podcasts</h3>
+    <p>
+      McCurtain Daily Gazette, Oklahoma tourism outlets, short-term rental
+      podcasts. &ldquo;Boutique manager who caps their portfolio and operates
+      their own cabin&rdquo; is an actual story angle, which is more than most
+      operators can offer a journalist.
+    </p>
+
+    <h3>Guest posts</h3>
+    <p>
+      One well-placed post on an established industry site, linking back, is
+      worth more than ten more articles on your own domain.
+    </p>
+  </section>
+
+  <section id="facebook">
+    <hr class="rule">
+    <p class="kicker">Priority 5</p>
+    <h2>Facebook, on rails</h2>
+    <p>
+      The pipeline is built. Discipline is the only missing part.
+    </p>
+    <ol>
+      <li>Publish the article to the site</li>
+      <li>Open <code>/admin/social?token=…</code> on your phone</li>
+      <li>Copy, paste to Facebook</li>
+      <li>Paste the same text as a Google Business Profile post</li>
+    </ol>
+    <p>
+      One article, three surfaces, under five minutes. Twice a month is enough
+      &mdash; consistency beats volume, and a page that posts twice a month for
+      a year outperforms one that posts daily for six weeks and then goes
+      silent.
+    </p>
+    <p>
+      Between articles: storm and freeze notices, a before-and-after turnover, a
+      seasonal booking note. Local and useful, not promotional.
+    </p>
+  </section>
+
+  <section id="measure">
+    <hr class="rule">
+    <p class="kicker">Instrumentation</p>
+    <h2>What to measure</h2>
+    <p>
+      Monthly, not weekly. Local search moves slowly, and weekly checking
+      produces noise and then bad decisions made on the noise.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Where</th><th>Target</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Profile views and calls</th><td>Business Profile insights</td><td>Up quarter over quarter</td></tr>
+          <tr><th>Review count and recency</th><td>Business Profile</td><td class="num">+2&ndash;4/month</td></tr>
+          <tr><th>&ldquo;How did you hear about us&rdquo;</th><td>Discovery call intake</td><td>Track AI as its own answer</td></tr>
+          <tr><th>Local pack position</th><td>Incognito, &ldquo;property management broken bow&rdquo;</td><td class="num">Top 3</td></tr>
+          <tr><th>Referral traffic from Facebook</th><td>GA4</td><td>Any at all</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="note-label">The one that costs nothing</span>
+      <p>
+        Add <strong>&ldquo;ChatGPT or another AI assistant&rdquo;</strong> as an
+        explicit option on your discovery-call intake question. You already know
+        owners are arriving that way, but right now you cannot prove how many
+        &mdash; and without that baseline there is no way to tell whether any of
+        this worked.
+      </p>
+    </div>
+  </section>
+
+  <section id="order">
+    <hr class="rule">
+    <p class="kicker">Sequence</p>
+    <h2>The first four weeks</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="num">Week</th><th>Do</th></tr>
+        </thead>
+        <tbody>
+          <tr><th class="num">1</th><td>Set <code>NEXT_PUBLIC_GOOGLE_PLACE_ID</code>. Add the two new categories. Fix hours and description.</td></tr>
+          <tr><th class="num">2</th><td>Photo push, twenty minimum. Seed five Q&amp;A entries. Start texting <code>/review</code> at every checkout.</td></tr>
+          <tr><th class="num">3</th><td>All six Tier 1 citations, in one sitting, with the NAP block open in front of you.</td></tr>
+          <tr><th class="num">4</th><td>Thumbtack and Angi for Local Services. First Business Profile post from the blog pipeline.</td></tr>
+          <tr><th>Ongoing</th><td>Two articles a month to site, Facebook, and Business Profile. One listicle outreach email a week.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Week one is a couple of hours of work and unlocks more than the other
+      three combined.
+    </p>
+  </section>
+
+  <footer>
+    Companion to the site work in
+    <code>rentwithfrontier.com</code>. The Place ID, review link, and social
+    captions referenced here are already wired into the codebase and are
+    waiting on the steps above.
+  </footer>
+
+</div>

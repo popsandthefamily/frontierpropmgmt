@@ -83,15 +83,48 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             ? `${siteConfig.url}${post.featuredImage}`
             : undefined,
           datePublished: post.date,
+          // No separate revision date is tracked yet, so the publish date
+          // stands in. Google treats a missing dateModified as unknown,
+          // which is worse than a date that equals datePublished.
+          dateModified: post.date,
+          inLanguage: "en-US",
+          // A named human author with a real role and employer is the
+          // strongest E-E-A-T signal available on a page like this, and it
+          // is what answer engines cite when they attribute a claim.
           author: {
-            "@type": "Organization",
-            name: post.author,
+            "@type": "Person",
+            name: siteConfig.owner,
+            jobTitle: "Owner and Operator",
+            worksFor: {
+              "@type": "Organization",
+              name: siteConfig.name,
+              url: siteConfig.url,
+            },
+            url: `${siteConfig.url}/about`,
           },
           publisher: {
             "@type": "Organization",
             name: siteConfig.name,
             url: siteConfig.url,
+            logo: {
+              "@type": "ImageObject",
+              url: `${siteConfig.url}/images/logos/Asset-1-2.png`,
+            },
+            sameAs: [
+              siteConfig.social.facebook,
+              siteConfig.social.instagram,
+              siteConfig.social.google,
+            ],
           },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `${siteConfig.url}/blogs/${post.slug}`,
+          },
+          about: [
+            { "@type": "Thing", name: "Short-term rental management" },
+            { "@type": "Place", name: "Broken Bow, Oklahoma" },
+            { "@type": "Place", name: "Hochatown, Oklahoma" },
+          ],
         }}
       />
 

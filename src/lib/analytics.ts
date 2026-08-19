@@ -30,8 +30,8 @@ export type AnalyticsEvent =
   | "comparison_table_viewed"
   | "guest_strip_clicked"
   | "nav_get_estimate_clicked"
-  | "cohost_page_viewed"
-  | "cohost_tier_cta_clicked"
+  | "local_services_page_viewed"
+  | "plan_cta_clicked"
   | "pricing_page_viewed"
   | "pricing_tier_cta_clicked";
 

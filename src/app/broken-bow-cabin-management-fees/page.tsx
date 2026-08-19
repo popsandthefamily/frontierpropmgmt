@@ -9,6 +9,8 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { AvailabilityNote } from "@/components/sections/availability-note";
+import { plans } from "@/data/site";
 import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -128,7 +130,7 @@ const FEE_ROWS: { label: string; values: Record<FeeKey, string> }[] = [
   {
     label: "Headline management fee",
     values: {
-      frontier: "20% of nightly-rental revenue",
+      frontier: "20% of net rental income",
       typicalLocal: "20–30%",
       national: "25–40%",
     },
@@ -188,12 +190,12 @@ const pageFAQ = [
     question:
       "What is the typical Broken Bow cabin management fee?",
     answer:
-      "Most professional STR managers in the Broken Bow / Hochatown area charge between 20% and 30% of nightly-rental revenue. National PMS companies range from 25% to 40%. Frontier charges 20% with $0 setup and $0 monthly minimum.",
+      "Most professional STR managers in the Broken Bow / Hochatown area charge between 20% and 30%, and national companies range from 25% to 40%. Frontier charges 20% with $0 setup and $0 monthly minimum. The percentage is only half the answer, though: ask every manager what the percentage is calculated on. A 20% fee on gross booking revenue costs more than a 20% fee on what is left after platform fees and taxes.",
   },
   {
     question: "Is the management fee taken out before or after platform fees?",
     answer:
-      "Platform host fees (Airbnb 3%, VRBO 5%) are deducted by the platform before any payout reaches the manager. The 20% management fee is then calculated on nightly-rental revenue. Cleaning and pet fees pass through directly to cleaners and are not part of the 20%.",
+      "After. Platform host fees (Airbnb 3%, VRBO 5%) are deducted by the platform before any payout reaches us, and state and local occupancy taxes are remitted to the taxing authority rather than counted as income. Frontier's 20% is calculated on what remains, not on the headline booking total. Cleaning and pet fees pass through directly to vendors and never enter the calculation.",
   },
   {
     question: "Are there hidden fees on top of the 20%?",
@@ -208,7 +210,7 @@ const pageFAQ = [
   {
     question: "What if my cabin earns $0 in a month?",
     answer:
-      "You owe Frontier $0. The 20% is a percentage of revenue — there is no monthly minimum.",
+      "You owe Frontier $0. The 20% is a percentage of income, so no income means no fee. There is no monthly minimum.",
   },
   {
     question: "Can I cancel if the fee structure stops working for me?",
@@ -255,6 +257,8 @@ export default function BrokenBowCabinManagementFeesPage() {
         ]}
       />
 
+      <AvailabilityNote />
+
       {/* Honest intro */}
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl prose prose-lg prose-charcoal">
@@ -267,12 +271,22 @@ export default function BrokenBowCabinManagementFeesPage() {
             what is layered on top of it.
           </p>
           <p>
-            Frontier&apos;s headline rate is 20% of nightly-rental revenue,
-            with $0 setup, $0 monthly minimum, and no markup on cleaning,
-            maintenance, or vendor invoices. Below is exactly what that 20%
-            covers, what is billed separately at cost, and the patterns to
-            watch for in any management agreement before you sign.
+            Frontier&apos;s headline rate is 20% of net rental income, with $0
+            setup, $0 monthly minimum, and no markup on cleaning, maintenance,
+            or vendor invoices. &ldquo;Net&rdquo; is doing real work in that
+            sentence: the 20% is calculated on {plans.manager.feeBase}, not on
+            the headline booking total. Below is exactly what that 20% covers,
+            what is billed separately at cost, and the patterns to watch for in
+            any management agreement before you sign.
           </p>
+          <div className="mt-6 rounded-xl border-l-4 border-sage bg-sage/5 p-5">
+            <p className="text-sm font-semibold uppercase tracking-widest text-sage">
+              The question almost nobody asks
+            </p>
+            <p className="mt-2 text-base text-charcoal">
+              {plans.manager.feeComparisonNote}
+            </p>
+          </div>
         </div>
       </SectionWrapper>
 

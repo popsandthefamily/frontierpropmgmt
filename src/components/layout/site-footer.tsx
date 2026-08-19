@@ -2,14 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/data/site";
+import { googleProfileUrl, siteConfig } from "@/data/site";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Management Services", href: "/management-services" },
-  { label: "Co-Host (Flat Fee)", href: "/co-host" },
+  { label: "Local Services", href: "/local-services" },
   { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/faq" },
   { label: "Hochatown Management", href: "/hochatown-property-management" },
   { label: "Broken Bow Management", href: "/broken-bow-property-management" },
   { label: "Dallas Cabin Owners", href: "/dallas-cabin-owners" },
@@ -92,7 +93,7 @@ export function SiteFooter() {
                   <Facebook className="size-4" />
                 </a>
                 <a
-                  href={siteConfig.social.google}
+                  href={googleProfileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full bg-charcoal/10 p-2 text-charcoal/70 transition-colors hover:bg-sage hover:text-white"

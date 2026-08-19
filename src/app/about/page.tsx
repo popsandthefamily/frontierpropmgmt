@@ -5,6 +5,7 @@ import { MapPin, Shield, TrendingUp, Check } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
+import { SocialProofStrip } from "@/components/sections/social-proof-strip";
 import { StepCard } from "@/components/cards/step-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Button } from "@/components/ui/button";
@@ -289,7 +290,7 @@ export default function AboutPage() {
             Full-Service STR Management
           </h2>
           <p className="mx-auto mb-8 max-w-xl text-xl text-white/90">
-            20% of Gross Bookings
+            20% of Net Rental Income
           </p>
           <Button
             asChild
@@ -302,6 +303,8 @@ export default function AboutPage() {
       </SectionWrapper>
 
       {/* 9. CTA */}
+      <SocialProofStrip background="white" />
+
       <CTASection
         heading="Ready to Partner With Frontier?"
         subtext="Let's talk about your cabin and how we can help you earn more with less stress."

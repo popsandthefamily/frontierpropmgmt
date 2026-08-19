@@ -11,6 +11,17 @@ export interface BlogPost {
   excerpt: string;
   featuredImage: string;
   content: string;
+  /**
+   * Ready-to-paste Facebook version of the post.
+   *
+   * Written to be pasted straight into the Frontier page with no editing:
+   * a hook short enough to survive Facebook's mobile truncation (~125
+   * characters), a few short paragraphs, and the article link last so the
+   * preview card renders. Plain text only, no HTML and no markdown.
+   *
+   * Copy them from /admin/social.
+   */
+  facebookPost?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -27,6 +38,17 @@ export const blogPosts: BlogPost[] = [
     category: "Owner Tips",
     excerpt:
       "Boutique vs. scale isn't about who's nicer or harder-working. It's a structural difference in how decisions get made on your cabin. Here's what actually changes.",
+    facebookPost: `"Boutique" gets thrown around a lot in cabin management. Here is what it actually changes on your property.
+
+It is not that small managers are nicer or work harder. National companies want their owners to win too, because bad numbers lose them clients. The real difference is structural: who is making decisions on your specific cabin, how often, and with how much context.
+
+On a small team, the person setting your weekend rates has stood in your cabin. They know whether the bunk room is a selling point or a qualifier. When a guest calls on a Friday night about a cloudy hot tub, that is a fifteen-minute round trip instead of a ticket in a queue.
+
+We also wrote the honest part: where scale genuinely wins. Multi-state portfolios, polished owner portals, and standardized service guarantees are all things a boutique operator cannot match. If those matter most to you, a national company is the right call.
+
+Full breakdown here, including the three questions that tell you which structure fits your cabin:
+
+https://rentwithfrontier.com/blogs/what-boutique-cabin-manager-does-differently`,
     featuredImage: "/images/properties/sublime/sublime-2.jpg",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, the <a href="/audit#full-audit">free listing audit</a> runs your specific Airbnb or VRBO listing against current AirROI data. That's the honest first step before any conversation about management.</em></p>
@@ -84,6 +106,15 @@ export const blogPosts: BlogPost[] = [
     category: "Owner Tips",
     excerpt:
       "A boutique cabin owner's checklist for evaluating any Hochatown Airbnb manager. The 12 questions that surface real differences in fees, lock-in, response time, and listing ownership before you sign anything.",
+    facebookPost: `Before you sign with any Hochatown cabin manager, ask them these 12 questions.
+
+Most management pitches sound identical. The differences that actually cost you money are buried in the contract: who owns the listing if you leave, what the exit terms really are, whether maintenance gets marked up, and how fast someone actually responds at 9pm on a Saturday.
+
+We wrote the checklist we would use if we were the ones shopping. Some of the answers will not favor us, and that is fine. An owner who asks all twelve ends up in the right place either way.
+
+Print it, bring it to every interview, and take notes on who gets uncomfortable.
+
+https://rentwithfrontier.com/blogs/questions-to-ask-hochatown-airbnb-manager`,
     featuredImage: "/images/discover/hochatown-pm-featured.png",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning before you start interviewing managers, run the <a href="/audit#full-audit">free listing audit</a>. The revenue gap on your specific listing is the only number that actually matters in these conversations.</em></p>
@@ -160,6 +191,21 @@ export const blogPosts: BlogPost[] = [
     category: "Owner Tips",
     excerpt:
       "Frontier operates Sublime Retreat in Hochatown. Here's what running our own high-performing cabin taught us about pricing, guests, vendors, and what's actually worth fighting for in this market.",
+    facebookPost: `We do not just manage cabins in Hochatown. We run one.
+
+Sublime Retreat is ours. Every pricing rule, cleaning standard, and guest message we use on owner properties gets tested there first, which means when something breaks we feel it before anybody else does.
+
+A few things running it taught us that we did not expect:
+
+Pricing software gets you a baseline, not an answer. The overrides are where the money is, and they require knowing the property.
+
+Your cleaner is the single most important vendor relationship you have. Not your photographer, not your pricing tool. Your cleaner.
+
+Most bad reviews are not about the cabin. They are about a gap between what the listing promised and what the guest walked into.
+
+The whole write-up, including what we would do differently if we bought again:
+
+https://rentwithfrontier.com/blogs/lessons-from-running-our-own-hochatown-cabin`,
     featuredImage: "/images/properties/sublime/sublime-1.jpg",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, run the <a href="/audit#full-audit">free listing audit</a>. The math we use on Sublime Retreat is the same math we run on owner cabins.</em></p>
@@ -206,6 +252,15 @@ export const blogPosts: BlogPost[] = [
     category: "Owner Tips",
     excerpt:
       "Bought a Broken Bow cabin as an investment from Dallas? Here is what remote ownership actually looks like, and how to make it profitable without driving 3 hours every weekend.",
+    facebookPost: `Bought a Broken Bow cabin from Dallas and starting to realize how far three hours actually is?
+
+You are not alone. A large share of cabins in this market are owned by DFW families who come down a handful of times a year and try to run the property from a group text the rest of the time.
+
+Remote ownership works. It just fails in specific, predictable ways: the cleaner who quietly stops showing up, the maintenance issue nobody catches until a guest reports it, the weekend you block off because you have to drive down and handle something yourself.
+
+This piece covers what remote ownership actually looks like, what to systematize first, and how to stop losing weekends to a property that was supposed to make you money.
+
+https://rentwithfrontier.com/blogs/managing-broken-bow-cabin-from-dallas`,
     featuredImage: "/images/hero/forest-aerial.jpg",
     content: `
 <h2>The Dallas-to-Broken-Bow Pipeline Is Real</h2>
@@ -253,6 +308,19 @@ export const blogPosts: BlogPost[] = [
     category: "Travel Guide",
     excerpt:
       "Planning a Broken Bow cabin trip? Here is what to expect each season, weather, crowds, pricing, and the best activities from spring wildflowers to winter hot tub soaks.",
+    facebookPost: `When is the best time to visit Broken Bow? Honest answer: it depends on what you want out of the trip.
+
+Spring brings wildflowers, full waterfalls, and the best hiking weather of the year, along with everybody else who figured that out.
+
+Summer is lake season. Hot, busy, and the best time to be on the water at Broken Bow Lake.
+
+Fall is our favorite. The hardwoods turn, the crowds thin after the first weeks of October, and the evenings are perfect for a fire.
+
+Winter is the underrated one. Lowest rates, quietest trails, and a hot tub hits differently when it is 35 degrees out.
+
+Season-by-season breakdown with weather, crowds, pricing, and what to do in each:
+
+https://rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
     featuredImage: "/images/discover/broken-bow-area.png",
     content: `
 <h2>When Should You Visit Broken Bow?</h2>
@@ -306,6 +374,21 @@ export const blogPosts: BlogPost[] = [
     category: "Travel Tips",
     excerpt:
       "Looking for a Broken Bow cabin with a hot tub or private pool? Here is how to pick the right one, what to expect, and why booking direct saves you money.",
+    facebookPost: `Booking a Broken Bow cabin with a hot tub or private pool? Read the listing carefully first.
+
+A few things that catch guests out around here:
+
+"Pool access" and "private pool" are very different things. One of them might be a shared community pool a mile away.
+
+Heated pools are usually only heated seasonally, and "seasonal" varies by property. Ask.
+
+Hot tub cleaning schedules matter more than hot tub size. Ask when it was last drained.
+
+Photos of a hot tub in the snow are usually taken in the one week a year it snows.
+
+None of this is a reason to skip the amenity. It is a reason to ask two questions before you book. Here is the full guide, plus why booking direct with a local company usually costs you less than the same cabin on a platform:
+
+https://rentwithfrontier.com/blogs/broken-bow-cabin-hot-tub-private-pool`,
     featuredImage: "/images/properties/sublime/sublime-5.jpg",
     content: `
 <h2>Hot Tubs and Pools Are the Top-Requested Amenity in Broken Bow</h2>
@@ -359,6 +442,15 @@ export const blogPosts: BlogPost[] = [
     category: "Owner Tips",
     excerpt:
       "Broken Bow has become one of the top cabin investment markets for Dallas buyers. Here is why DFW investors are choosing southeast Oklahoma, and what the numbers actually look like.",
+    facebookPost: `Broken Bow has quietly become one of the most active cabin investment markets for Dallas buyers. Here is why, and what the numbers actually look like.
+
+The pitch is easy to understand. It is roughly three hours from DFW, which puts it inside weekend-trip range for about eight million people. Oklahoma property taxes and insurance run well under Texas equivalents. And the market has real year-round demand rather than a single season.
+
+The part that gets glossed over in most investor pitches: this is an operating business, not a passive asset. Occupancy is won or lost on pricing, reviews, and whether somebody reliable shows up when the HVAC quits in July.
+
+We laid out the actual math, including what a realistic first year looks like and the costs that surprise new owners:
+
+https://rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-cabins`,
     featuredImage: "/images/discover/hochatown-area-2.png",
     content: `
 <h2>The Broken Bow Cabin Boom Is Not Slowing Down</h2>
@@ -400,7 +492,7 @@ export const blogPosts: BlogPost[] = [
 <ul>
   <li><strong>Pre-purchase:</strong> Free revenue projections for properties you are considering. We will tell you honestly whether a cabin will perform.</li>
   <li><strong>Setup:</strong> Professional photography, listing optimization, pricing strategy, and vendor onboarding.</li>
-  <li><strong>Ongoing management:</strong> Full-service operations at 20% of nightly-rental revenue, no setup fee, no monthly minimum, no long-term contracts. Optional professional photography available as an add-on.</li>
+  <li><strong>Ongoing management:</strong> Full-service operations at 20% of net rental income, no setup fee, no monthly minimum, no long-term contracts. Optional professional photography available as an add-on.</li>
 </ul>
 <p>If you are a Dallas investor considering a Broken Bow cabin purchase, <a href="/contact">reach out for a free consultation</a>. We will give you the local perspective that real estate listings do not.</p>
 `,
@@ -414,6 +506,17 @@ export const blogPosts: BlogPost[] = [
     category: "Travel Tips",
     excerpt:
       "Some of our best guest memories come from storm weekends, crackling fires, hot tubs in the snow, and cozy cabin vibes. Here is what to know before you head out.",
+    facebookPost: `Winter storm headed for Hochatown this weekend. If you have a trip booked, read this before you drive out.
+
+Some of our best guest memories happen on storm weekends. Snow on the pines, a fire going, a hot tub in the cold. It is genuinely one of the best times to be here.
+
+It does take a little preparation. The roads out here are rural and they do not get salted quickly. Cell service gets patchy. Power flickers.
+
+What we tell our own guests: pack for one extra day, bring more groceries than you think you need, fill your tank before you leave the highway, and know where the water shutoff is.
+
+Full checklist here, for guests and for cabin owners:
+
+https://rentwithfrontier.com/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
     featuredImage: "/images/blog/winter-storm.webp",
     content: `
 <h2>A Winter Storm Is Coming, Here Is What Guests Should Know</h2>
@@ -466,6 +569,15 @@ export const blogPosts: BlogPost[] = [
     category: "Industry News",
     excerpt:
       "Airbnb is shifting its fee structure, moving costs from guests to hosts. Here is what it means for cabin owners and how Frontier is helping owners navigate the change.",
+    facebookPost: `Airbnb changed how its fees work, and the cost moved toward hosts. Here is what it means if you own a cabin.
+
+The short version: under the host-only fee model, the service fee that used to be split with the guest lands on you instead. Your displayed nightly rate looks more competitive to guests, and your payout shrinks unless you adjust for it.
+
+Owners who do nothing take the hit quietly. Owners who reprice absorb most of it. It is not a crisis, but it is not nothing either, and it compounds over a full season.
+
+We wrote up what changed, what we are doing about it on the cabins we manage, and how to check whether your own pricing has been adjusted:
+
+https://rentwithfrontier.com/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
     featuredImage: "/images/blog/airbnb-fee-overhaul.webp",
     content: `
 <h2>Airbnb Is Changing Its Fee Structure, Here Is What Owners Need to Know</h2>
@@ -499,6 +611,15 @@ export const blogPosts: BlogPost[] = [
     category: "Miscellaneous",
     excerpt:
       "Hochatown is transitioning its short-term rental tax and licensing system from Avenu to Granicus. Here is what cabin owners need to know about the switch and how to stay compliant.",
+    facebookPost: `Hochatown short-term rental owners: the tax and licensing system changed. If you are still filing the old way, read this.
+
+Hochatown moved its STR tax and licensing administration from Avenu to Granicus. New portal, new process, same obligation.
+
+Compliance is the least interesting part of owning a cabin and the most expensive part to get wrong. Penalties and back taxes are not a fun way to find out you missed a filing.
+
+Here is what changed, what you need to do, and the deadlines to have on your calendar:
+
+https://rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
     featuredImage: "/images/blog/str-tax-shift.webp",
     content: `
 <h2>Hochatown's STR Licensing and Tax System Is Changing</h2>
