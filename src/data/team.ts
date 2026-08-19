@@ -19,6 +19,6 @@ export const team: TeamMember[] = [
     role: "Advisor",
     image: "/images/team/beth-collins.jpg",
     alt: "Beth Collins, advisor to Frontier Property Management",
-    bio: "Beth grew up in Broken Bow. The woods, the back roads, the cleaning crews who show up in a storm, and the small-town businesses that keep guests coming back — those relationships aren't something she learned for this job, they're her hometown. She advises Frontier on local market conditions, vendor relationships, and the community knowledge an out-of-town manager simply doesn't have. She is not an owner of the company and holds no operational role in it.",
+    bio: "Beth grew up in Broken Bow. The woods, the back roads, the cleaning crews who show up in a storm, and the small-town businesses that keep guests coming back — those relationships aren't something she learned for this job, they're her hometown. She advises Frontier on local market conditions, vendor relationships, and the community knowledge an out-of-town manager simply doesn't have.",
   },
 ];
