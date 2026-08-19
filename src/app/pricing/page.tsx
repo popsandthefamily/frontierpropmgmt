@@ -7,7 +7,6 @@ import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { AnswerBlock } from "@/components/seo/answer-block";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { availability, plans, siteConfig } from "@/data/site";
@@ -117,28 +116,8 @@ export default function PricingPage() {
 
       <Breadcrumbs items={[{ label: "Pricing" }]} />
 
-      {/* Direct-answer block */}
-      <SectionWrapper background="cream">
-        <AnswerBlock heading="The short version">
-          <p>
-            Frontier Property Management offers two plans to cabin owners in
-            Broken Bow and Hochatown, Oklahoma. The{" "}
-            <strong>Property Manager</strong> plan is full-service management at{" "}
-            <strong>20% of net rental income</strong> &mdash; that is,{" "}
-            {plans.manager.feeBase} &mdash; covering pricing, listings, guest
-            communication, cleaning, maintenance, occupancy taxes, and monthly
-            reporting. <strong>Local Services</strong> is cleaning,
-            maintenance, and on-the-ground logistics on a{" "}
-            <strong>custom quote</strong>, for owners who keep their own
-            bookings. Neither plan has a setup fee, a monthly minimum, or an
-            annual contract, and vendor invoices pass through at cost on both.{" "}
-            {availability.sentence}
-          </p>
-        </AnswerBlock>
-      </SectionWrapper>
-
       {/* Two-card top */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
           {HEADLINE_CARDS.map(({ plan, cta, highlight }) => (
             <div
@@ -192,8 +171,8 @@ export default function PricingPage() {
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
           Both plans are month to month with 30 days notice to cancel. No setup
-          fee on either. We do not mark up cleaning, maintenance, or vendor
-          invoices on either.
+          fee and no monthly minimum on either, and we do not mark up cleaning,
+          maintenance, or vendor invoices on either. {availability.sentence}
         </p>
       </SectionWrapper>
 
@@ -230,11 +209,11 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <div className="mx-auto mt-8 max-w-3xl rounded-xl border-l-4 border-sage bg-sage/5 p-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+          <div className="mx-auto mt-12 max-w-3xl border-t border-charcoal/20 pt-6 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-10">
+            <p className="text-[0.72rem] font-medium uppercase leading-relaxed tracking-[0.18em] text-charcoal/60">
               Why two 20% quotes are not the same price
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-charcoal">
+            <p className="mt-3 text-base leading-relaxed text-charcoal sm:mt-0">
               {plans.manager.feeComparisonNote}
             </p>
           </div>

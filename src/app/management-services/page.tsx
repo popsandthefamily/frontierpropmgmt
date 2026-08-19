@@ -23,8 +23,7 @@ import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-st
 import { ContactForm } from "@/components/forms/contact-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { AnswerBlock } from "@/components/seo/answer-block";
-import { availability, plans, siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/site";
 import {
   onboardingSteps,
   addOns,
@@ -196,34 +195,6 @@ export default function ManagementServicesPage() {
       <Breadcrumbs
         items={[{ label: "Management Services" }]}
       />
-
-      {/* ── Direct-answer block ─────────────────────────────────────── */}
-      <SectionWrapper background="cream">
-        <AnswerBlock heading="The short version">
-          <p>
-            The Property Manager plan is Frontier&apos;s full-service option for
-            cabin owners in Broken Bow and Hochatown, Oklahoma. It costs{" "}
-            <strong>20% of net rental income</strong>, meaning{" "}
-            {plans.manager.feeBase}, and covers dynamic pricing,
-            listing and channel management, guest communication, cleaning
-            turnovers, maintenance, occupancy tax filing, and a monthly owner
-            statement. There is no setup fee, no monthly minimum, and no annual
-            contract, and cleaning, maintenance, and vendor invoices pass
-            through at cost with no markup. {availability.long}
-          </p>
-          <p className="text-base text-muted-foreground">
-            Prefer to keep your own bookings and just need someone on the
-            ground?{" "}
-            <Link
-              href={plans.local.href}
-              className="font-medium text-sage hover:text-sage-dark hover:underline"
-            >
-              See the Local Services plan
-            </Link>
-            .
-          </p>
-        </AnswerBlock>
-      </SectionWrapper>
 
       {/* ── Flagship case study ─────────────────────────────────────── */}
       <FlagshipCaseStudySection background="white" />

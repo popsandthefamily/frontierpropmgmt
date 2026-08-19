@@ -336,7 +336,7 @@ export default function HomePage() {
               A local team, not a call center
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-              Frontier is family-owned and based at 3156 Old Broken Bow Hwy.
+              Frontier is owner-operated and based at 3156 Old Broken Bow Hwy.
               We&apos;re the people you&apos;ll actually work with, not a
               regional franchise or an overseas dispatch desk. That means fast
               response times, hands-on relationships with local cleaners and

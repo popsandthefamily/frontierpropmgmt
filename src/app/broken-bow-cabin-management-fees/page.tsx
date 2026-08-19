@@ -279,11 +279,11 @@ export default function BrokenBowCabinManagementFeesPage() {
             what is billed separately at cost, and the patterns to watch for in
             any management agreement before you sign.
           </p>
-          <div className="mt-6 rounded-xl border-l-4 border-sage bg-sage/5 p-5">
-            <p className="text-sm font-semibold uppercase tracking-widest text-sage">
+          <div className="mt-10 border-t border-charcoal/20 pt-6 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-10">
+            <p className="text-[0.72rem] font-medium uppercase leading-relaxed tracking-[0.18em] text-charcoal/60">
               The question almost nobody asks
             </p>
-            <p className="mt-2 text-base text-charcoal">
+            <p className="mt-3 text-base leading-relaxed text-charcoal sm:mt-0">
               {plans.manager.feeComparisonNote}
             </p>
           </div>

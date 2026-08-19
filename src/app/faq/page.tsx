@@ -7,9 +7,8 @@ import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { AnswerBlock } from "@/components/seo/answer-block";
 import { AvailabilityNote } from "@/components/sections/availability-note";
-import { availability, plans, siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/site";
 import { allFAQItems, faqGroups } from "@/data/faq";
 
 export const metadata: Metadata = {
@@ -71,40 +70,20 @@ export default function FAQPage() {
 
       <AvailabilityNote />
 
-      <SectionWrapper background="cream">
-        <AnswerBlock heading="The short version">
-          <p>
-            Frontier Property Management is a boutique, owner-operated cabin
-            management company in Broken Bow and Hochatown, Oklahoma, running
-            two plans. The <strong>{plans.manager.name}</strong> plan is
-            full-service management at <strong>{plans.manager.feeInline}</strong>{" "}
-            &mdash; {plans.manager.feeBase} &mdash; with no setup fee, no
-            monthly minimum, and no annual contract. <strong>
-              {plans.local.name}
-            </strong>{" "}
-            is cleaning, maintenance, and on-the-ground logistics on a custom
-            quote, for owners who keep their own bookings. Cleaning and vendor
-            invoices pass through at cost on both plans.{" "}
-            {availability.sentence}
-          </p>
-        </AnswerBlock>
-
-        {/* Jump links, so the page is navigable at this length */}
-        <nav
-          aria-label="FAQ sections"
-          className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2"
-        >
+      {/* Jump links, so the page is navigable at this length */}
+      <nav aria-label="FAQ sections" className="border-b border-border bg-cream">
+        <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-2 px-4 py-5">
           {faqGroups.map((group) => (
             <a
               key={group.id}
               href={`#${group.id}`}
-              className="rounded-full border border-charcoal/15 bg-white px-4 py-2 text-sm font-medium text-charcoal transition hover:border-sage hover:text-sage"
+              className="text-[0.72rem] font-medium uppercase tracking-[0.18em] text-charcoal/60 underline-offset-4 transition-colors hover:text-charcoal hover:underline"
             >
               {group.title}
             </a>
           ))}
-        </nav>
-      </SectionWrapper>
+        </div>
+      </nav>
 
       {faqGroups.map((group, i) => (
         <SectionWrapper

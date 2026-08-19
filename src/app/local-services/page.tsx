@@ -15,7 +15,6 @@ import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { AnswerBlock } from "@/components/seo/answer-block";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { availability, plans, siteConfig } from "@/data/site";
@@ -138,24 +137,8 @@ export default function LocalServicesPage() {
 
       <Breadcrumbs items={[{ label: "Local Services" }]} />
 
-      {/* Direct-answer block, the paragraph we want quoted */}
-      <SectionWrapper background="cream">
-        <AnswerBlock heading="The short version">
-          <p>
-            Local Services is Frontier&apos;s smaller plan: turnover cleaning,
-            maintenance, seasonal checks, and on-the-ground logistics for cabin
-            owners in Broken Bow and Hochatown who manage their own bookings, or
-            who already have a manager and still can&apos;t get anyone to show
-            up. It is quoted per property after a walkthrough rather than sold
-            from a price list, it never takes a percentage of your booking
-            revenue, and vendor invoices pass through at cost. Month to month,
-            no setup fee. {availability.sentence}
-          </p>
-        </AnswerBlock>
-      </SectionWrapper>
-
       {/* Why this plan exists */}
-      <SectionWrapper background="white">
+      <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
             The problem this solves is distance.
@@ -186,7 +169,7 @@ export default function LocalServicesPage() {
       </SectionWrapper>
 
       {/* What's covered */}
-      <SectionWrapper background="cream" id="included">
+      <SectionWrapper background="white" id="included">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
@@ -268,13 +251,13 @@ export default function LocalServicesPage() {
       </SectionWrapper>
 
       {/* Pricing explanation, no price list */}
-      <SectionWrapper background="white" id="pricing">
+      <SectionWrapper background="cream" id="pricing">
         <div className="mx-auto max-w-3xl">
-          <div className="rounded-2xl border border-sage/30 bg-sage/5 p-8 md:p-10">
-            <p className="text-xs font-semibold uppercase tracking-widest text-sage">
+          <div>
+            <p className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
               Pricing
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-charcoal md:text-4xl">
+            <h2 className="mt-6 text-3xl font-bold text-charcoal md:text-4xl">
               Quoted per property. On purpose.
             </h2>
             <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">

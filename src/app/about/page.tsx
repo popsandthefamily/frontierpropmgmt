@@ -17,11 +17,11 @@ import { team } from "@/data/team";
 export const metadata: Metadata = {
   title: "About Frontier: Local Broken Bow & Hochatown STR Experts",
   description:
-    "Meet Hunter and Beth Collins, the husband-and-wife team behind Frontier Property Management. Based in Broken Bow with lifelong local roots and a 4.95-star guest rating.",
+    "Meet Hunter Collins, owner of Frontier Property Management, and advisor Beth Collins. Based in Broken Bow with lifelong local roots and a 4.95-star guest rating.",
   openGraph: {
     title: "About Frontier Property Management",
     description:
-      "Hunter and Beth Collins, the family-owned Broken Bow cabin management team. Local, lifelong, 4.95★.",
+      "Owner-operated Broken Bow cabin management with lifelong local roots. Hunter Collins, owner. 4.95★.",
     images: [
       {
         url: "/images/team/hunter-collins.jpg",
@@ -75,7 +75,7 @@ export default function AboutPage() {
           url: siteConfig.url,
           logo: `${siteConfig.url}/images/logos/Asset-1-2.png`,
           description:
-            "Family-owned, locally operated vacation rental management company in Broken Bow and Hochatown, Oklahoma.",
+            "Owner-operated vacation rental management company in Broken Bow and Hochatown, Oklahoma.",
           founder: {
             "@type": "Person",
             name: "Hunter Collins",
@@ -87,12 +87,14 @@ export default function AboutPage() {
               name: "Hunter Collins",
               jobTitle: "Owner & Founder",
             },
-            {
-              "@type": "Person",
-              name: "Beth Collins",
-              jobTitle: "Co-Owner & Director of Local Operations",
-            },
           ],
+          // Beth advises the business; she is not an owner, employee, or
+          // officer, so she is declared as an advisor rather than a member.
+          advisors: {
+            "@type": "Person",
+            name: "Beth Collins",
+            jobTitle: "Advisor",
+          },
           areaServed: [
             { "@type": "Place", name: "Broken Bow, Oklahoma" },
             { "@type": "Place", name: "Hochatown, Oklahoma" },
@@ -108,7 +110,7 @@ export default function AboutPage() {
       <HeroSection
         backgroundImage="/images/hero/forest-aerial.jpg"
         title="About Frontier Property Management"
-        subtitle="Family-owned. Locally operated. Built on trust."
+        subtitle="Owner-operated. Locally rooted. Built on trust."
         size="medium"
         overlay="dark"
       />
@@ -120,9 +122,9 @@ export default function AboutPage() {
             Meet the team
           </h2>
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            Frontier is a husband-and-wife business. One of us is the
-            out-of-town perspective, the other is the Broken Bow native. Every
-            decision runs through both lenses.
+            Frontier is owner-operated by Hunter Collins, with Beth Collins
+            advising. One perspective is from outside Broken Bow, the other is
+            native to it. Decisions get looked at through both lenses.
           </p>
         </div>
 
