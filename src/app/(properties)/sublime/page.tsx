@@ -17,16 +17,36 @@ import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { CTASection } from "@/components/sections/cta-section";
+import { FAQSection } from "@/components/sections/faq-section";
+import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
 import { getPropertyBySlug } from "@/data/properties";
 import { siteConfig } from "@/data/site";
+import {
+  sublimeAtAGlance,
+  sublimeGoodFit,
+  sublimeGuestFAQ,
+  sublimeNotAFit,
+  sublimeSummary,
+} from "@/data/sublime";
 
 const property = getPropertyBySlug("sublime");
 
 export const metadata: Metadata = {
   title: "Sublime Retreat: Luxury Hochatown Cabin with Hot Tub & Zip Lines",
   description:
-    "Book Sublime Retreat direct & save. Luxury Hochatown cabin with 2 zip lines, hot tub, arcade, 3BR/3.5BA, sleeps 8, pet-friendly. No Airbnb fees.",
+    "Sublime Retreat is a 3BR/3.5BA luxury cabin in Hochatown, OK that sleeps 8: two private zip lines, hot tub, arcade, two king suites with en-suite baths, bunk room, 500 Mbps Wi-Fi, pet-friendly, minutes from Beavers Bend State Park. Book direct, no platform service fee.",
+  keywords: [
+    "Broken Bow cabin with zip line",
+    "Hochatown cabin with hot tub",
+    "cabin that sleeps 8 Broken Bow",
+    "pet friendly cabin Hochatown",
+    "Broken Bow cabin with arcade and game room",
+    "cabin near Beavers Bend State Park",
+    "Broken Bow cabin for two couples",
+    "luxury cabin Hochatown Oklahoma",
+    "book Broken Bow cabin direct no Airbnb fees",
+  ],
   openGraph: {
     title: "Sublime Retreat: Luxury Hochatown Cabin | Book Direct",
     description:
@@ -73,9 +93,36 @@ export default function SublimePage() {
             value: property.sleeps,
           },
           petsAllowed: true,
+          smokingAllowed: false,
+          checkinTime: "16:00",
+          checkoutTime: "10:00",
+          containedInPlace: {
+            "@type": "Place",
+            name: "Hochatown, Oklahoma",
+          },
           amenityFeature: property.amenities.map((a) => ({
             "@type": "LocationFeatureSpecification",
             name: a.label,
+            value: true,
+          })),
+          provider: {
+            "@type": "Organization",
+            name: siteConfig.name,
+            url: siteConfig.url,
+            telephone: siteConfig.phone,
+          },
+          tourBookingPage: `${siteConfig.url}/sublime`,
+        }}
+      />
+
+      {/* The guest questions, in the shape answer engines read */}
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: sublimeGuestFAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
           })),
         }}
       />
@@ -142,6 +189,60 @@ export default function SublimePage() {
               </h2>
               <div className="prose prose-lg max-w-none text-muted-foreground">
                 <p>{property.description}</p>
+              </div>
+            </div>
+
+            {/* At a glance, the spec sheet a guest (or an answer engine) asks for */}
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-charcoal">
+                Sublime Retreat at a glance
+              </h2>
+              <p className="mb-5 text-muted-foreground">{sublimeSummary}</p>
+              <dl className="text-sm md:text-base">
+                {sublimeAtAGlance.map((row) => (
+                  <div
+                    key={row.label}
+                    className="grid gap-1 border-b border-border py-3 sm:grid-cols-[11rem_1fr] sm:gap-4"
+                  >
+                    <dt className="font-medium text-charcoal">{row.label}</dt>
+                    <dd className="text-muted-foreground">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            {/* Who it suits, said plainly in both directions */}
+            <div>
+              <h2 className="mb-4 text-2xl font-bold text-charcoal">
+                Is Sublime Retreat right for your trip?
+              </h2>
+              <div className="grid gap-8 sm:grid-cols-2">
+                <div>
+                  <h3 className="mb-3 font-semibold text-charcoal">
+                    A good fit for
+                  </h3>
+                  <ul className="space-y-2 text-sm text-muted-foreground md:text-base">
+                    {sublimeGoodFit.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-sage" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="mb-3 font-semibold text-charcoal">
+                    Not the right cabin for
+                  </h3>
+                  <ul className="space-y-2 text-sm text-muted-foreground md:text-base">
+                    {sublimeNotAFit.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-charcoal/30" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -316,6 +417,14 @@ export default function SublimePage() {
           </div>
         </div>
       </div>
+
+      {/* Guest FAQ, the questions people ask before they book */}
+      <SectionWrapper background="cream">
+        <FAQSection
+          title="Questions guests ask about Sublime Retreat"
+          questions={sublimeGuestFAQ}
+        />
+      </SectionWrapper>
 
       {/* CTA */}
       <CTASection

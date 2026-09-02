@@ -16,6 +16,13 @@ import {
   PRICING_ROWS,
 } from "@/data/local-services";
 import { flagshipCaseStudy } from "@/data/flagship-case-study";
+import {
+  sublimeAtAGlance,
+  sublimeGoodFit,
+  sublimeGuestFAQ,
+  sublimeNotAFit,
+  sublimeSummary,
+} from "@/data/sublime";
 
 /**
  * /llms-full.txt — the whole substance of the site as plain text.
@@ -180,6 +187,44 @@ function buildLlmsFullTxt(): string {
     flagshipCaseStudy.summary,
     "",
     ...flagshipCaseStudy.proofPoints.map((p) => `- ${p}`),
+    "",
+  );
+
+  push(
+    "## Cabins guests can book direct",
+    "",
+    "Frontier manages cabins for other owners and also rents out its own. This section is for guests looking for a stay, not for owners looking for a manager.",
+    "",
+    "### Sublime Retreat, Hochatown, Oklahoma",
+    "",
+    `URL: ${url}/sublime`,
+    "",
+    sublimeSummary,
+    "",
+    "**Specifications**",
+    "",
+    ...sublimeAtAGlance.map((row) => `- ${row.label}: ${row.value}`),
+    "",
+    "**A good fit for**",
+    "",
+    ...sublimeGoodFit.map((item) => `- ${item}`),
+    "",
+    "**Not the right cabin for**",
+    "",
+    ...sublimeNotAFit.map((item) => `- ${item}`),
+    "",
+    "**Guest questions**",
+    "",
+  );
+  for (const item of sublimeGuestFAQ) {
+    push(`**Q: ${item.question}**`, "", `A: ${item.answer}`, "");
+  }
+  push(
+    "### Old Broken Bow Highway, Broken Bow, Oklahoma",
+    "",
+    `URL: ${url}/old-broken-bow-highway`,
+    "",
+    "A 3-bedroom, 3-bathroom house with a private pool, and the property Frontier operated through its first year in business. It held roughly 15 booked nights a month through the slow season and a five-star rating for the life of the listing, on revenue that rivaled purpose-built cabins with more bedrooms. It is retired from the rental program and cannot be booked. The page is a retrospective on that first year, not a listing.",
     "",
   );
 
