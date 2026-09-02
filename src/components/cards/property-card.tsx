@@ -14,6 +14,8 @@ interface PropertyCardProps {
   sleeps: number;
   featuredImage: string;
   startingPrice?: number;
+  /** Retired from the rental program: no price, links to its story instead. */
+  former?: boolean;
   className?: string;
 }
 
@@ -26,6 +28,7 @@ export function PropertyCard({
   sleeps,
   featuredImage,
   startingPrice,
+  former,
   className,
 }: PropertyCardProps) {
   return (
@@ -45,10 +48,16 @@ export function PropertyCard({
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          {startingPrice && (
-            <div className="absolute bottom-3 left-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
-              From ${startingPrice}/night
+          {former ? (
+            <div className="absolute bottom-3 left-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+              Former property
             </div>
+          ) : (
+            startingPrice && (
+              <div className="absolute bottom-3 left-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-sm font-semibold text-white backdrop-blur-sm">
+                From ${startingPrice}/night
+              </div>
+            )
           )}
         </div>
       </Link>
@@ -85,7 +94,7 @@ export function PropertyCard({
           href={`/${slug}`}
           className="inline-flex items-center text-sm font-medium text-sage transition-colors hover:text-sage-dark"
         >
-          View Property
+          {former ? "Read its story" : "View Property"}
           <svg
             className="ml-1 size-4 transition-transform group-hover:translate-x-1"
             fill="none"

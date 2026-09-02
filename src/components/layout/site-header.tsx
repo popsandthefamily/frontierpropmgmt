@@ -95,7 +95,7 @@ const NAV_ITEMS: NavItem[] = [
       {
         label: "Old Broken Bow Highway",
         href: "/old-broken-bow-highway",
-        description: "Cozy 3BR poolside getaway near Broken Bow Lake",
+        description: "The house we started the company on, now retired",
       },
       {
         label: "All Properties",

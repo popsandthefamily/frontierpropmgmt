@@ -26,7 +26,7 @@ export const navigationItems: NavItem[] = [
       {
         label: "Old Broken Bow Highway",
         href: "/old-broken-bow-highway",
-        description: "Rustic charm meets modern comfort",
+        description: "The house we started the company on, now retired",
       },
       {
         label: "Search Properties",

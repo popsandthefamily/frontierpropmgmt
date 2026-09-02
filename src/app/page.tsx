@@ -440,7 +440,8 @@ export default function HomePage() {
               Looking to book a stay instead?
             </h3>
             <p className="mt-3 text-base text-muted-foreground">
-              We have two cabins available for direct booking. No platform fees.
+              Book direct with us, no platform fees — plus the house we started
+              the company on.
             </p>
           </div>
           <div className="mt-10 grid gap-8 md:grid-cols-2">
@@ -455,6 +456,7 @@ export default function HomePage() {
                 sleeps={property.sleeps}
                 featuredImage={property.images[0].src}
                 startingPrice={property.startingPrice}
+                former={property.former}
               />
             ))}
           </div>

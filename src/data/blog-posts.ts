@@ -429,9 +429,8 @@ https://rentwithfrontier.com/blogs/broken-bow-cabin-hot-tub-private-pool`,
 <p>Looking for a hot tub or pool cabin managed by Frontier? Check out:</p>
 <ul>
   <li><a href="/sublime"><strong>Sublime Retreat</strong></a>, Luxury Hochatown cabin with a hot tub, 2 zip lines, arcade, and forest views. Sleeps 8.</li>
-  <li><a href="/old-broken-bow-highway"><strong>Old Broken Bow Highway</strong></a>, 3BR cabin with a private pool, hot tub, firepit, and pet-friendly policy. Sleeps 6.</li>
 </ul>
-<p>Both are professionally maintained with weekly hot tub service and pre-arrival quality checks. <a href="/search">Browse all our properties</a> to find the right fit for your trip.</p>
+<p>Every cabin we manage gets weekly hot tub service and pre-arrival quality checks. <a href="/search">Browse all our properties</a> to find the right fit for your trip.</p>
 `,
   },
   {

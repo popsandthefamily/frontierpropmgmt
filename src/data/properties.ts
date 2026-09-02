@@ -28,6 +28,8 @@ export interface Property {
   amenities: Amenity[];
   images: PropertyImage[];
   featured: boolean;
+  /** Retired from the rental program. Still listed, always sorted last. */
+  former?: boolean;
   sleepingArrangements?: SleepingArrangement[];
   bookingUrl?: string;
   startingPrice?: number;
@@ -37,54 +39,8 @@ export interface Property {
 /*  Properties                                                        */
 /* ------------------------------------------------------------------ */
 
+/** Bookable cabins first, former properties last. */
 export const properties: Property[] = [
-  {
-    slug: "old-broken-bow-highway",
-    name: "Cozy 3BR Poolside Getaway in Broken Bow",
-    tagline:
-      "Relax by the private pool, gather around the firepit, and enjoy the peaceful Broken Bow countryside in this comfortable 3-bedroom cabin.",
-    bedrooms: 3,
-    bathrooms: 3,
-    sleeps: 6,
-    description:
-      "Nestled along the scenic Old Broken Bow Highway, this charming 3-bedroom, 3-bathroom cabin is perfect for families and small groups looking for a peaceful getaway. The highlight is the private outdoor pool, ideal for cooling off on warm Oklahoma afternoons. Inside, you will find comfortable living spaces with central heating and AC, a fully equipped kitchen, and a washer and dryer for longer stays. Step outside to the covered deck with an outdoor firepit and grill, perfect for evening s'mores or a weekend cookout. The cabin is pet-friendly, so the whole family can come along. Located just minutes from Beavers Bend State Park and downtown Broken Bow, you are close to hiking, fishing, and local restaurants while still enjoying the privacy of your own retreat.",
-    amenities: [
-      { icon: "Waves", label: "Private outdoor pool" },
-      { icon: "Thermometer", label: "Central heating/AC" },
-      { icon: "WashingMachine", label: "Washer & dryer" },
-      { icon: "Flame", label: "Outdoor firepit and grill" },
-      { icon: "PawPrint", label: "Pet-friendly" },
-    ],
-    images: [
-      {
-        src: "/images/properties/old-broken-bow-highway/obb-2.jpg",
-        alt: "Exterior view of the Cozy 3BR cabin on Old Broken Bow Highway",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/obb-1.jpg",
-        alt: "Cozy bedroom with queen bed and hardwood floors",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/obb-3.jpg",
-        alt: "Comfortable living space inside the cabin",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/obb-4.png",
-        alt: "Cabin interior with modern amenities",
-      },
-      {
-        src: "/images/properties/old-broken-bow-highway/obb-5.jpg",
-        alt: "Outdoor pool area at Old Broken Bow Highway cabin",
-      },
-    ],
-    featured: true,
-    sleepingArrangements: [
-      { room: "Bedroom 1", details: "King bed" },
-      { room: "Bedroom 2", details: "Queen bed" },
-      { room: "Bedroom 3", details: "Two twin beds" },
-    ],
-    startingPrice: 150,
-  },
   {
     slug: "sublime",
     name: "Sublime Retreat",
@@ -154,6 +110,53 @@ export const properties: Property[] = [
       },
     ],
     startingPrice: 275,
+  },
+  {
+    slug: "old-broken-bow-highway",
+    name: "Cozy 3BR Poolside Getaway in Broken Bow",
+    tagline:
+      "Relax by the private pool, gather around the firepit, and enjoy the peaceful Broken Bow countryside in this comfortable 3-bedroom house.",
+    bedrooms: 3,
+    bathrooms: 3,
+    sleeps: 6,
+    description:
+      "Nestled along the scenic Old Broken Bow Highway, this charming 3-bedroom, 3-bathroom house is perfect for families and small groups looking for a peaceful getaway. The highlight is the private outdoor pool, ideal for cooling off on warm Oklahoma afternoons. Inside, you will find comfortable living spaces with central heating and AC, a fully equipped kitchen, and a washer and dryer for longer stays. Step outside to the covered deck with an outdoor firepit and grill, perfect for evening s'mores or a weekend cookout. The house is pet-friendly, so the whole family can come along. Located just minutes from Beavers Bend State Park and downtown Broken Bow, you are close to hiking, fishing, and local restaurants while still enjoying the privacy of your own retreat.",
+    amenities: [
+      { icon: "Waves", label: "Private outdoor pool" },
+      { icon: "Thermometer", label: "Central heating/AC" },
+      { icon: "WashingMachine", label: "Washer & dryer" },
+      { icon: "Flame", label: "Outdoor firepit and grill" },
+      { icon: "PawPrint", label: "Pet-friendly" },
+    ],
+    images: [
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-2.jpg",
+        alt: "Exterior view of the Cozy 3BR house on Old Broken Bow Highway",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-1.jpg",
+        alt: "Cozy bedroom with queen bed and hardwood floors",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-3.jpg",
+        alt: "Comfortable living space inside the house",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-4.png",
+        alt: "House interior with modern amenities",
+      },
+      {
+        src: "/images/properties/old-broken-bow-highway/obb-5.jpg",
+        alt: "Outdoor pool area at the Old Broken Bow Highway house",
+      },
+    ],
+    featured: false,
+    former: true,
+    sleepingArrangements: [
+      { room: "Bedroom 1", details: "King bed" },
+      { room: "Bedroom 2", details: "Queen bed" },
+      { room: "Bedroom 3", details: "Two twin beds" },
+    ],
   },
 ];
 

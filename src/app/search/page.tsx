@@ -113,6 +113,7 @@ export default function SearchPage() {
               bathrooms={property.bathrooms}
               sleeps={property.sleeps}
               featuredImage={property.images[0].src}
+              former={property.former}
             />
           ))}
         </div>

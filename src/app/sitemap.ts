@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const propertyPages: MetadataRoute.Sitemap = [
     { url: `${baseUrl}/sublime`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/old-broken-bow-highway`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/old-broken-bow-highway`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
   ];
 
   const blogPosts: MetadataRoute.Sitemap = [
