@@ -8,6 +8,7 @@ import {
 import { calculateLeaks } from "./pricing-math";
 import { summarizeAudit } from "./groq";
 import { newId, saveReport } from "./report-store";
+import { saveLead } from "./lead-store";
 import type { AuditReport } from "./types";
 
 export async function runFullAudit(params: {
@@ -59,5 +60,7 @@ export async function runFullAudit(params: {
   };
 
   await saveReport(report);
+  // Durable lead record. Best-effort, never blocks the owner's report.
+  await saveLead(report);
   return report;
 }
