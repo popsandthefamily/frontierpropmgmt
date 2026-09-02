@@ -129,7 +129,7 @@ export default function HomePage() {
                 Boutique cabin management for a limited number of owners.
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                We operate our own top-rated cabin in Broken Bow and Hochatown —
+                We operate a top-rated cabin in Broken Bow and Hochatown —
                 and for the rest of 2026 we&apos;re taking on only a handful of
                 new owners. As your property manager you get real communication
                 and professionalism: clear reporting, quick answers, and a
