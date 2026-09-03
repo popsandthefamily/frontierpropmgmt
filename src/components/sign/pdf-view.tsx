@@ -29,8 +29,26 @@ export function PdfView({ url, overlay, onPagesReady, maxWidth = 900 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [pages, setPages] = useState<PageBox[]>([]);
   const [error, setError] = useState<string | null>(null);
+  // Measured, not assumed. Rendering at a fixed width wider than the screen
+  // makes the browser zoom the whole page out to fit — on a phone the document
+  // and its signature boxes end up unreadable, which is exactly where most
+  // co-signers open the link.
+  const [available, setAvailable] = useState<number | null>(null);
 
   useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const measure = () => setAvailable(el.clientWidth || null);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const width = available;
+
+  useEffect(() => {
+    if (!width) return;
     let cancelled = false;
     const canvases: HTMLCanvasElement[] = [];
 
@@ -50,7 +68,10 @@ export function PdfView({ url, overlay, onPagesReady, maxWidth = 900 }: Props) {
           if (cancelled) return;
 
           const base = page.getViewport({ scale: 1 });
-          const scale = Math.min(maxWidth / base.width, 2);
+          const target = Math.min(width ?? maxWidth, maxWidth);
+          // Never below 1 on a phone, or the text stops being legible; the page
+          // scrolls sideways in its own container instead.
+          const scale = Math.min(Math.max(target / base.width, 0.55), 2);
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -101,7 +122,7 @@ export function PdfView({ url, overlay, onPagesReady, maxWidth = 900 }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [url, maxWidth, onPagesReady]);
+  }, [url, maxWidth, width, onPagesReady]);
 
   if (error) {
     return (
@@ -112,7 +133,7 @@ export function PdfView({ url, overlay, onPagesReady, maxWidth = 900 }: Props) {
   }
 
   return (
-    <div ref={containerRef} className="space-y-6">
+    <div ref={containerRef} className="w-full space-y-6 overflow-x-auto">
       {pages.length === 0 && (
         <p className="text-sm text-muted-foreground">Loading document…</p>
       )}
