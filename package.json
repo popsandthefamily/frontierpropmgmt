@@ -13,6 +13,7 @@
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
     "@marsidev/react-turnstile": "^1.5.0",
+    "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.114.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",

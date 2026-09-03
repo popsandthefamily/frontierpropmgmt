@@ -114,6 +114,7 @@ const SOLID_HEADER_PATHS = [
   "/",
   "/sublime",
   "/old-broken-bow-highway",
+  "/portal",
   "/privacy-policy",
   "/rental-agreement",
   "/audit",

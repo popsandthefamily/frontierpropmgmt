@@ -16,6 +16,7 @@ const QUICK_LINKS = [
   { label: "Dallas Cabin Owners", href: "/dallas-cabin-owners" },
   { label: "Contact", href: "/contact" },
   { label: "Blog", href: "/blogs" },
+  { label: "Owner Portal", href: "/portal" },
 ];
 
 const LOCAL_LINKS = [
