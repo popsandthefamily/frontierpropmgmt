@@ -9,7 +9,8 @@ import {
   type EditorSigner,
 } from "@/components/admin/field-editor";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
-import { requestSignature, voidRequest } from "./actions";
+import { SubmitButton } from "@/components/sign/submit-button";
+import { requestSignature, resendSignerLink, voidRequest } from "./actions";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -125,6 +126,19 @@ export default async function DocumentFieldsPage({
                       Sign as Frontier
                     </Link>
                   )}
+                  {!s.signed_at && s.kind !== "manager" && s.email && (
+                    <form action={resendSignerLink}>
+                      <input type="hidden" name="token" value={token ?? ""} />
+                      <input type="hidden" name="signer_id" value={s.id} />
+                      <input type="hidden" name="document_id" value={doc.id} />
+                      <SubmitButton
+                        pendingLabel="Sending…"
+                        className="text-xs font-medium text-charcoal underline underline-offset-4"
+                      >
+                        Send link again
+                      </SubmitButton>
+                    </form>
+                  )}
                 </li>
               ))}
             </ul>
@@ -139,13 +153,13 @@ export default async function DocumentFieldsPage({
                 ? "Add signers and place their fields below, then click Save — this button stays disabled until fields are saved."
                 : `${signerList.length} signer${signerList.length === 1 ? "" : "s"}, ${(fields ?? []).length} field${(fields ?? []).length === 1 ? "" : "s"}. Sending emails a signing link to anyone who isn't Frontier or a portal owner.`}
             </p>
-            <button
-              type="submit"
+            <SubmitButton
               disabled={(fields ?? []).length === 0}
+              pendingLabel="Sending…"
               className="rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
             >
               Send for signature
-            </button>
+            </SubmitButton>
           </form>
         )}
       </section>

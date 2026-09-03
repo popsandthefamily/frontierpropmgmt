@@ -102,8 +102,6 @@ export async function POST(request: NextRequest) {
       signer_user_agent: userAgent,
       consent_at: now.toISOString(),
       consent_text: consentText,
-      // The link has done its job.
-      token_hash: null,
     })
     .eq("id", signer.id as string);
 

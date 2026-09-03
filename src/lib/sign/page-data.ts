@@ -60,7 +60,7 @@ export async function loadSigningPage(input: {
 export const REASONS: Record<string, { title: string; body: string }> = {
   not_found: { title: "This link isn't valid", body: "Check you used the most recent link Frontier sent you. If in doubt, ask for a new one." },
   expired: { title: "This link has expired", body: "Signing links last 30 days. Ask Frontier to send a fresh one." },
-  already_signed: { title: "You've already signed", body: "Nothing further is needed from you. A completed copy is sent out once everyone has signed." },
+  already_signed: { title: "You've already signed this", body: "Thank you — nothing further is needed from you. Once every party has signed, a completed copy with a certificate of completion is filed and sent out." },
   void: { title: "This request was cancelled", body: "Frontier withdrew this signature request. Contact them if you were expecting to sign." },
   forbidden: { title: "Not your document", body: "This document was addressed to someone else." },
 };

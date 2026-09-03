@@ -119,6 +119,7 @@ const SOLID_HEADER_PATHS = [
   "/rental-agreement",
   "/audit",
   "/admin",
+  "/sign",
 ];
 
 export function SiteHeader() {

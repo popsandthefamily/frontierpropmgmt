@@ -32,7 +32,7 @@ export default async function TokenSignPage({
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-6xl px-4 pt-24 pb-10">
       <h1 className="text-[2rem] font-bold leading-tight tracking-tight text-charcoal sm:text-4xl">
         {data.documentTitle}
       </h1>

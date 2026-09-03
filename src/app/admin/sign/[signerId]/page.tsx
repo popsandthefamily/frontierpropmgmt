@@ -32,7 +32,7 @@ export default async function AdminSignPage({
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-6xl px-4 pt-24 pb-10">
       <Link href={back} className="text-sm font-medium text-charcoal underline-offset-4 hover:underline">
         ← Back to the document
       </Link>

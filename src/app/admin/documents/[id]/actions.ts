@@ -82,9 +82,10 @@ export async function requestSignature(formData: FormData): Promise<void> {
   for (const signer of signers) {
     const patch: Record<string, unknown> = { request_id: created.id };
 
-    // Frontier signs from the admin side and needs no link. Portal owners are
-    // authenticated by their session. Only true external signers get a token.
-    if (signer.kind === "external") {
+    // Everyone except Frontier gets a link. A portal owner can also sign from
+    // their dashboard, but issuing the link regardless means someone marked as
+    // a portal owner who has no account is never left with no way in.
+    if (signer.kind !== "manager" && signer.email) {
       const { token: raw, hash, expiresAt } = newSigningToken();
       patch.token_hash = hash;
       patch.token_expires_at = expiresAt;
@@ -149,4 +150,55 @@ export async function voidRequest(formData: FormData): Promise<void> {
 
   revalidatePath(`/admin/documents/${documentId}`);
   revalidatePath("/admin/owners");
+}
+
+/**
+ * Send a signer their link again.
+ *
+ * Emails get lost, forwarded, or filed in spam, and a signer who was set up as
+ * a portal owner without an account has no other way in. Each resend mints a
+ * fresh token and retires the previous one, so an old email in someone's inbox
+ * stops working rather than lingering as a second live credential.
+ */
+export async function resendSignerLink(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  if (!(await isAdmin(token))) throw new Error("Not authorised.");
+
+  const signerId = String(formData.get("signer_id"));
+  const documentId = String(formData.get("document_id"));
+  const admin = getSupabaseAdmin();
+
+  const { data: signer } = await admin
+    .from("signature_signers")
+    .select("*, owner_documents(title)")
+    .eq("id", signerId)
+    .single();
+
+  if (!signer) throw new Error("Signer not found.");
+  if (signer.signed_at) throw new Error(`${signer.name} has already signed.`);
+  if (!signer.email) throw new Error(`${signer.name} has no email address.`);
+  if (!signer.request_id) throw new Error("This document hasn't been sent for signature yet.");
+
+  const { token: raw, hash, expiresAt } = newSigningToken();
+  await admin
+    .from("signature_signers")
+    .update({ token_hash: hash, token_expires_at: expiresAt })
+    .eq("id", signerId);
+
+  const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rentwithfrontier.com").replace(/\/$/, "");
+  const sent = await sendSigningRequest({
+    to: signer.email,
+    signerName: signer.name,
+    documentTitle: (signer.owner_documents as unknown as { title: string } | null)?.title ?? "your document",
+    url: signingUrl(origin, raw),
+  });
+
+  await admin.from("signature_events").insert({
+    request_id: signer.request_id,
+    event_type: "link_resent",
+    detail: { signer: signer.name, delivered: sent.ok },
+  });
+
+  revalidatePath(`/admin/documents/${documentId}`);
+  if (!sent.ok) throw new Error(`Could not email ${signer.email}: ${sent.error}`);
 }
