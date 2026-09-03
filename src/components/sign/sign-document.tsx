@@ -62,25 +62,41 @@ export function SignDocument({
   const [error, setError] = useState<string | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
   const boxes = useRef(new Map<string, HTMLElement>());
+  // Where the last jump landed, so repeated clicks advance instead of sitting
+  // on the same field.
+  const cursor = useRef<string | null>(null);
 
   const missing = fields.filter((f) => f.required && !values[f.id]);
   const done = fields.length - missing.length;
   const canSign = consent && typedName.trim().length > 1 && missing.length === 0;
 
+  // Reading order, not the order they were placed: down the page, page by page.
+  const ordered = [...fields].sort(
+    (a, b) => a.page_number - b.page_number || a.y_pct - b.y_pct || a.x_pct - b.x_pct,
+  );
+
   /**
-   * Jump to the next field that still needs something, the way every other
-   * e-signature tool does. On a long agreement the fields are easy to miss,
-   * and "1 field still to complete" is useless if you can't find which one.
+   * Advance to the next field still needing something.
+   *
+   * Cycles rather than always returning to the first one. Clicking twice and
+   * not moving reads as a broken button, which is exactly what it looked like.
+   * Wraps at the end so the last field leads back to the first outstanding one.
    */
   const goToNext = useCallback(() => {
-    const target = missing[0] ?? fields[0];
-    if (!target) return;
+    const outstanding = ordered.filter((f) => !values[f.id]);
+    const pool = outstanding.length > 0 ? outstanding : ordered;
+    if (pool.length === 0) return;
+
+    const at = cursor.current ? pool.findIndex((f) => f.id === cursor.current) : -1;
+    const target = pool[(at + 1) % pool.length];
+
     const el = boxes.current.get(target.id);
     if (!el) return;
+    cursor.current = target.id;
     el.scrollIntoView({ behavior: "smooth", block: "center" });
     setFlash(target.id);
-    window.setTimeout(() => setFlash(null), 1600);
-  }, [missing, fields]);
+    window.setTimeout(() => setFlash(null), 2400);
+  }, [ordered, values]);
 
   // Nudge the signer to the first field once the document has rendered.
   useEffect(() => {
@@ -174,7 +190,7 @@ export function SignDocument({
                         style={style}
                         className={`absolute flex items-center justify-center rounded border-2 ${
                           value ? "border-sage bg-white" : "border-dashed border-sage bg-sage/10 hover:bg-sage/20"
-                        } ${flash === f.id ? "ring-4 ring-amber-400 ring-offset-2" : ""}`}
+                        } ${flash === f.id ? "z-10 ring-4 ring-amber-500 ring-offset-2 ring-offset-white shadow-lg" : ""}`}
                       >
                         {value ? (
                           // eslint-disable-next-line @next/next/no-img-element
@@ -198,7 +214,7 @@ export function SignDocument({
                       placeholder={f.label ?? ""}
                       style={style}
                       className={`absolute rounded border-2 border-dashed border-sage bg-sage/10 px-1 text-sm text-charcoal focus:border-solid focus:bg-white focus:outline-none ${
-                        flash === f.id ? "ring-4 ring-amber-400 ring-offset-2" : ""
+                        flash === f.id ? "z-10 ring-4 ring-amber-500 ring-offset-2 ring-offset-white shadow-lg" : ""
                       }`}
                     />
                   );
@@ -226,7 +242,7 @@ export function SignDocument({
               onClick={goToNext}
               className="rounded-md border border-sage px-3 py-1.5 text-sm font-medium text-sage-dark hover:bg-sage/10"
             >
-              Next field ↓
+              {missing.length > 1 ? `Next of ${missing.length} ↓` : "Go to field ↓"}
             </button>
           )}
 

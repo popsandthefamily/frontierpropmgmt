@@ -17,7 +17,9 @@ async function assertAdmin(token: string | undefined) {
 }
 
 function refresh() {
-  revalidatePath("/admin/owners");
+  // "layout" so the owner list and every owner workspace under it both update;
+  // a statement published from a detail page changes counts on the list too.
+  revalidatePath("/admin/owners", "layout");
 }
 
 /** Create the auth user and the owner profile together. */
