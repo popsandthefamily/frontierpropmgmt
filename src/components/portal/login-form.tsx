@@ -44,23 +44,16 @@ export function LoginForm() {
     const raw = searchParams.get("next");
     const next = raw && raw.startsWith("/") ? raw : "";
 
-    const { error } = await getSupabase().auth.signInWithOtp({
-      email: email.trim().toLowerCase(),
-      options: {
-        // Frontier creates owner accounts. Signing in must never create one,
-        // or anyone with an email address could mint a portal login.
-        shouldCreateUser: false,
-        // Carry the destination into the emailed link so an admin who started
-        // at /admin/owners is returned there rather than dumped in the portal.
-        emailRedirectTo: `${window.location.origin}/portal/auth/callback${
-          next ? `?next=${encodeURIComponent(next)}` : ""
-        }`,
-      },
+    // Decided on the server: an account gets a sign-in link, a pending signer
+    // with no account gets their signing link instead, and anyone else gets
+    // nothing — all with the same answer back, so this can't be used to test
+    // who is a client.
+    const res = await fetch("/api/portal/access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.trim().toLowerCase(), next }),
     });
-
-    // Deliberately not distinguishing "no such owner" from "sent". Saying which
-    // would turn this form into a way to test whether someone is a client.
-    if (error && !/signups not allowed|not found/i.test(error.message)) {
+    if (!res.ok) {
       setError("Something went wrong sending that link. Try again in a moment.");
       setStatus("error");
       return;
@@ -76,8 +69,8 @@ export function LoginForm() {
         </h2>
         <p className="mt-2 text-base leading-relaxed text-muted-foreground">
           If <span className="font-medium text-charcoal">{email}</span> is on a
-          Frontier management agreement, a sign-in link is on its way. It expires
-          in an hour.
+          Frontier management agreement, or has a document waiting to be signed,
+          a link is on its way. Sign-in links expire in an hour.
         </p>
         <button
           type="button"
