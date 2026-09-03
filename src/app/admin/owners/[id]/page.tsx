@@ -11,6 +11,7 @@ import {
   deleteDocument,
   saveStatement,
   setDocumentPublished,
+  sendOwnerInvite,
   setPublished,
   uploadDocument,
 } from "../actions";
@@ -88,10 +89,22 @@ export default async function OwnerWorkspacePage({
         ← All owners
       </Link>
       <h1 className="mt-4 text-3xl font-bold text-charcoal">{owner.full_name || owner.email}</h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        {owner.email}
-        {owner.phone ? ` · ${owner.phone}` : ""}
-      </p>
+      <div className="mt-1 flex flex-wrap items-center gap-4">
+        <p className="text-sm text-muted-foreground">
+          {owner.email}
+          {owner.phone ? ` · ${owner.phone}` : ""}
+        </p>
+        <form action={sendOwnerInvite}>
+          <input type="hidden" name="token" value={token ?? ""} />
+          <input type="hidden" name="owner_id" value={owner.id} />
+          <SubmitButton
+            pendingLabel="Sending…"
+            className="text-sm font-medium text-charcoal underline underline-offset-4"
+          >
+            Send portal invite
+          </SubmitButton>
+        </form>
+      </div>
 
       {/* Properties */}
       <section className="mt-12">

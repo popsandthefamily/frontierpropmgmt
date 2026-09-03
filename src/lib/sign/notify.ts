@@ -98,3 +98,63 @@ function escapeHtml(s: string): string {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!,
   );
 }
+
+/**
+ * Welcome an owner to the portal.
+ *
+ * Deliberately carries no sign-in token. An invitation can sit unread for days
+ * and a magic link lasts an hour, so a tokenised invite would mostly arrive
+ * already broken. This points at the sign-in page with their address prefilled
+ * and lets them request a link when they actually sit down to it — which also
+ * means the email is safe to forward or re-read without handing anyone access.
+ */
+export async function sendPortalInvite(params: {
+  to: string;
+  ownerName?: string | null;
+}): Promise<{ ok: boolean; error?: string }> {
+  const resend = client();
+  if (!resend) return { ok: false, error: "RESEND_API_KEY is not set" };
+
+  const url = `${SITE}/portal/login?email=${encodeURIComponent(params.to)}`;
+  const greeting = params.ownerName?.trim() ? `Hi ${params.ownerName.trim()},` : "Hi,";
+
+  const text = `${greeting}
+
+Your owner portal with Frontier Property Management is ready.
+
+It's where your monthly statements, payouts and documents live, and where you'll sign anything that needs signing.
+
+Open it here and enter this email address (${params.to}) — we'll send you a sign-in link. There's no password to create or remember:
+${url}
+
+Please do not reply to this message — it comes from an unmonitored address.
+Reach us at ${REPLY_TO} or call or text ${siteConfig.phone}.
+
+Frontier Property Management
+${SITE}`;
+
+  const html = layout(`<p style="margin:0 0 14px">${escapeHtml(greeting)}</p>
+<p style="margin:0 0 14px">Your owner portal with Frontier Property Management is ready. It's where your
+monthly statements, payouts and documents live, and where you'll sign anything that needs signing.</p>
+<p style="margin:28px 0">
+  <a href="${url}" style="background:#4a6b52;color:#ffffff;padding:13px 24px;border-radius:6px;text-decoration:none;font-weight:600;display:inline-block">Open your owner portal</a>
+</p>
+<p style="color:#71717a;font-size:13px;margin:0">
+  Enter <strong>${escapeHtml(params.to)}</strong> and we'll email you a sign-in link.
+  There's no password to create or remember.
+</p>`);
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM,
+      replyTo: REPLY_TO,
+      to: params.to,
+      subject: "Your Frontier owner portal",
+      text,
+      html,
+    });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}

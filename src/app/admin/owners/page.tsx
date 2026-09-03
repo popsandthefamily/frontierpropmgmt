@@ -134,9 +134,8 @@ export default async function AdminOwnersPage({
       <section className="mt-12 border-t border-border pt-8">
         <h2 className="font-heading text-xl font-semibold text-charcoal">Add an owner</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Creates their portal account. They sign in at /portal with a link
-          emailed to this address, so it has to be one they can receive. Nothing
-          is sent to them now.
+          Creates their portal account and emails them a welcome with the
+          sign-in link, so it has to be an address they can receive.
         </p>
         <form action={createOwner} className="mt-4 max-w-2xl">
           <input type="hidden" name="token" value={token ?? ""} />
@@ -154,6 +153,10 @@ export default async function AdminOwnersPage({
               <input id="o-phone" className={input} name="phone" />
             </div>
           </div>
+          <label className="mt-4 flex items-center gap-2 text-sm text-charcoal">
+            <input type="checkbox" name="invite" value="on" defaultChecked className="size-4" />
+            Email them a welcome with the sign-in link
+          </label>
           <SubmitButton
             pendingLabel="Creating…"
             className="mt-4 rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"

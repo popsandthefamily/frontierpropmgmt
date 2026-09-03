@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { sendPortalInvite } from "@/lib/sign/notify";
 import { isAdmin } from "@/lib/admin/auth";
 
 /**
@@ -55,6 +56,16 @@ export async function createOwner(formData: FormData): Promise<void> {
   }
 
   refresh();
+
+  // An account nobody is told about is an account nobody uses.
+  if (formData.get("invite") !== "off") {
+    const sent = await sendPortalInvite({ to: email, ownerName: fullName });
+    if (!sent.ok) {
+      throw new Error(
+        `${email} was created, but the welcome email failed: ${sent.error}. Use "Send portal invite" to try again.`,
+      );
+    }
+  }
 }
 
 export async function addProperty(formData: FormData): Promise<void> {
@@ -225,4 +236,22 @@ export async function deleteDocument(formData: FormData): Promise<void> {
   if (error) throw new Error(error.message);
 
   refresh();
+}
+
+/** Send, or re-send, the portal welcome email. */
+export async function sendOwnerInvite(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  await assertAdmin(token);
+
+  const admin = getSupabaseAdmin();
+  const { data: owner } = await admin
+    .from("owner_profiles")
+    .select("email, full_name")
+    .eq("id", String(formData.get("owner_id")))
+    .single();
+  if (!owner) throw new Error("Owner not found.");
+
+  const sent = await sendPortalInvite({ to: owner.email, ownerName: owner.full_name });
+  refresh();
+  if (!sent.ok) throw new Error(`Could not email ${owner.email}: ${sent.error}`);
 }

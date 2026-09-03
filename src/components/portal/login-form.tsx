@@ -8,7 +8,9 @@ import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
   const searchParams = useSearchParams();
-  const [email, setEmail] = useState("");
+  // The welcome email links here with the address already filled in, so the
+  // owner only has to press the button.
+  const [email, setEmail] = useState(searchParams.get("email") ?? "");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
