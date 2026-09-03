@@ -9,6 +9,7 @@ import {
   type EditorSigner,
 } from "@/components/admin/field-editor";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { centralTime } from "@/lib/portal/format";
 import { SubmitButton } from "@/components/sign/submit-button";
 import { requestSignature, resendSignerLink, voidRequest } from "./actions";
 
@@ -111,7 +112,7 @@ export default async function DocumentFieldsPage({
                   </span>
                   {s.signed_at ? (
                     <span className="text-sage">
-                      signed {new Date(s.signed_at).toLocaleString("en-US")}
+                      signed {centralTime(s.signed_at)}
                     </span>
                   ) : (
                     <span className="text-amber-600">

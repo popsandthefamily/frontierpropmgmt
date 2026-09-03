@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { centralWithUtc } from "@/lib/portal/format";
 import { resolveSigner } from "@/lib/sign/resolve";
 import {
   appendCertificate,
@@ -136,11 +137,11 @@ export async function POST(request: NextRequest) {
         typedName: s.typed_name ?? s.name,
         email: s.email ?? "",
         roleLabel: s.role_label ?? "Signer",
-        signedAt: s.signed_at ?? "",
+        signedAt: centralWithUtc(s.signed_at),
         ip: s.signer_ip ?? "unknown",
         userAgent: s.signer_user_agent ?? "unknown",
         consentText: s.consent_text ?? "",
-        consentAt: s.consent_at ?? "",
+        consentAt: centralWithUtc(s.consent_at),
       })),
     });
   }

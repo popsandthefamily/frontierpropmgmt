@@ -5,7 +5,7 @@ import { isAdmin } from "@/lib/admin/auth";
 import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 import { SubmitButton } from "@/components/sign/submit-button";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
-import { money, monthLabel } from "@/lib/portal/format";
+import { centralTime, money, monthLabel } from "@/lib/portal/format";
 import {
   addProperty,
   deleteDocument,
@@ -162,7 +162,10 @@ export default async function OwnerWorkspacePage({
                         {sig.signed === sig.total ? "fully signed" : `${sig.signed} of ${sig.total} signed`}
                       </span>
                     )}
-                    <span className={d.published_at ? "text-sage" : "text-amber-600"}>
+                    <span
+                      className={d.published_at ? "text-sage" : "text-amber-600"}
+                      title={d.published_at ? `Published ${centralTime(d.published_at)}` : undefined}
+                    >
                       {d.published_at ? "Published" : "Draft"}
                     </span>
                     <Link href={`/admin/documents/${d.id}${qs}`} className="font-medium text-charcoal underline underline-offset-4">
