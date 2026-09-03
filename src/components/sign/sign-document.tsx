@@ -236,13 +236,17 @@ export function SignDocument({
             complete
           </span>
 
-          {missing.length > 0 && (
+          {fields.length > 0 && (
             <button
               type="button"
               onClick={goToNext}
               className="rounded-md border border-sage px-3 py-1.5 text-sm font-medium text-sage-dark hover:bg-sage/10"
             >
-              {missing.length > 1 ? `Next of ${missing.length} ↓` : "Go to field ↓"}
+              {missing.length > 1
+                ? `Next of ${missing.length} ↓`
+                : missing.length === 1
+                  ? "Go to the field ↓"
+                  : "Review fields ↓"}
             </button>
           )}
 
