@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { getSupabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
@@ -16,6 +18,8 @@ export function LoginForm() {
     e.preventDefault();
     setStatus("sending");
     setError(null);
+    const raw = searchParams.get("next");
+    const next = raw && raw.startsWith("/") ? raw : "";
 
     const { error } = await getSupabase().auth.signInWithOtp({
       email: email.trim().toLowerCase(),
@@ -23,7 +27,11 @@ export function LoginForm() {
         // Frontier creates owner accounts. Signing in must never create one,
         // or anyone with an email address could mint a portal login.
         shouldCreateUser: false,
-        emailRedirectTo: `${window.location.origin}/portal/auth/callback`,
+        // Carry the destination into the emailed link so an admin who started
+        // at /admin/owners is returned there rather than dumped in the portal.
+        emailRedirectTo: `${window.location.origin}/portal/auth/callback${
+          next ? `?next=${encodeURIComponent(next)}` : ""
+        }`,
       },
     });
 

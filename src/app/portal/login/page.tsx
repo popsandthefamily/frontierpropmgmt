@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { LoginForm } from "@/components/portal/login-form";
 
 export default function PortalLoginPage() {
@@ -11,7 +12,9 @@ export default function PortalLoginPage() {
         you a sign-in link. No password to remember, and the link is good for
         one use.
       </p>
-      <LoginForm />
+      <Suspense fallback={null}>
+        <LoginForm />
+      </Suspense>
       <p className="mt-10 border-t border-border pt-4 text-sm text-muted-foreground">
         Not a Frontier owner yet?{" "}
         <a

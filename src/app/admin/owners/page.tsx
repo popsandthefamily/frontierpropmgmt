@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { money, monthLabel } from "@/lib/portal/format";
+import { isAdmin } from "@/lib/admin/auth";
+import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 import {
   addProperty,
   createOwner,
@@ -28,24 +30,11 @@ const button =
 
 export default async function AdminOwnersPage({ searchParams }: Props) {
   const { token } = await searchParams;
-  const expected = process.env.ADMIN_AUTH_SECRET;
 
-  if (!expected) {
+  if (!(await isAdmin(token))) {
     return (
       <Shell>
-        <p className="text-destructive">
-          ADMIN_AUTH_SECRET is not set. Add it to your env to access this page.
-        </p>
-      </Shell>
-    );
-  }
-  if (token !== expected) {
-    return (
-      <Shell>
-        <h1 className="text-2xl font-bold text-charcoal">Admin access</h1>
-        <p className="mt-2 text-muted-foreground">
-          Append <code>?token=YOUR_ADMIN_AUTH_SECRET</code> to this URL.
-        </p>
+        <AdminSignInPrompt />
       </Shell>
     );
   }
@@ -79,7 +68,7 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
           emailed to this address, so it has to be one they can receive.
         </p>
         <form action={createOwner} className="mt-4 max-w-2xl">
-          <input type="hidden" name="token" value={token} />
+          <input type="hidden" name="token" value={token ?? ""} />
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
               <label className={label} htmlFor="o-email">Email</label>
@@ -141,7 +130,7 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
             )}
 
             <form action={addProperty} className="mt-4 max-w-2xl">
-              <input type="hidden" name="token" value={token} />
+              <input type="hidden" name="token" value={token ?? ""} />
               <input type="hidden" name="owner_id" value={owner.id} />
               <div className="grid gap-4 sm:grid-cols-4">
                 <div>
@@ -180,7 +169,7 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
                       {s.published_at ? "Published" : "Draft"}
                     </span>
                     <form action={setPublished}>
-                      <input type="hidden" name="token" value={token} />
+                      <input type="hidden" name="token" value={token ?? ""} />
                       <input type="hidden" name="statement_id" value={s.id} />
                       <input type="hidden" name="publish" value={s.published_at ? "false" : "true"} />
                       <button className="text-sm font-medium text-charcoal underline underline-offset-4" type="submit">
@@ -194,7 +183,7 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
 
             {properties.length > 0 && (
               <form action={saveStatement} className="mt-4 max-w-3xl">
-                <input type="hidden" name="token" value={token} />
+                <input type="hidden" name="token" value={token ?? ""} />
                 <input type="hidden" name="owner_id" value={owner.id} />
                 <p className="text-sm text-muted-foreground">
                   Enter the four figures off the payout report. Net rental

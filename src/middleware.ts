@@ -60,5 +60,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/portal/:path*"],
+  // /admin is included so its session cookie is refreshed too. Only /portal
+  // redirects when signed out; the admin pages render their own sign-in prompt.
+  matcher: ["/portal/:path*", "/admin/:path*"],
 };

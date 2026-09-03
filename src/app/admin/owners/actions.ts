@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { isAdmin } from "@/lib/admin/auth";
 
 /**
  * Admin actions behind /admin/owners.
@@ -11,10 +12,8 @@ import { getSupabaseAdmin } from "@/lib/supabase/client";
  * would leave the mutations wide open to anyone who knows the action exists.
  * The check belongs here, on each action, not just on the page.
  */
-function assertAdmin(token: string | undefined) {
-  const expected = process.env.ADMIN_AUTH_SECRET;
-  if (!expected) throw new Error("ADMIN_AUTH_SECRET is not set.");
-  if (token !== expected) throw new Error("Not authorised.");
+async function assertAdmin(token: string | undefined) {
+  if (!(await isAdmin(token))) throw new Error("Not authorised.");
 }
 
 function refresh() {
@@ -24,7 +23,7 @@ function refresh() {
 /** Create the auth user and the owner profile together. */
 export async function createOwner(formData: FormData): Promise<void> {
   const token = String(formData.get("token") ?? "");
-  assertAdmin(token);
+  await assertAdmin(token);
 
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const fullName = String(formData.get("full_name") ?? "").trim();
@@ -58,7 +57,7 @@ export async function createOwner(formData: FormData): Promise<void> {
 
 export async function addProperty(formData: FormData): Promise<void> {
   const token = String(formData.get("token") ?? "");
-  assertAdmin(token);
+  await assertAdmin(token);
 
   const { error } = await getSupabaseAdmin().from("owner_properties").insert({
     owner_id: String(formData.get("owner_id")),
@@ -83,7 +82,7 @@ export async function addProperty(formData: FormData): Promise<void> {
  */
 export async function saveStatement(formData: FormData): Promise<void> {
   const token = String(formData.get("token") ?? "");
-  assertAdmin(token);
+  await assertAdmin(token);
 
   const num = (key: string) => Number(formData.get(key) ?? 0) || 0;
 
@@ -129,7 +128,7 @@ export async function saveStatement(formData: FormData): Promise<void> {
 /** Publishing is what makes a statement visible to the owner. */
 export async function setPublished(formData: FormData): Promise<void> {
   const token = String(formData.get("token") ?? "");
-  assertAdmin(token);
+  await assertAdmin(token);
 
   const publish = String(formData.get("publish")) === "true";
   const { error } = await getSupabaseAdmin()
