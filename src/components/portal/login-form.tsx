@@ -15,6 +15,27 @@ export function LoginForm() {
     "idle",
   );
   const [error, setError] = useState<string | null>(null);
+  // Owners who set a password can skip waiting on an email. The link stays the
+  // default because it always works, password or not.
+  const [mode, setMode] = useState<"link" | "password">("link");
+  const [password, setPassword] = useState("");
+
+  async function signInWithPassword(e: FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    setError(null);
+    const { error } = await getSupabase().auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
+    if (error) {
+      setError("That email and password combination didn't work.");
+      setStatus("error");
+      return;
+    }
+    const raw = searchParams.get("next");
+    window.location.replace(raw && raw.startsWith("/") ? raw : "/portal");
+  }
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -69,6 +90,53 @@ export function LoginForm() {
     );
   }
 
+  if (mode === "password") {
+    return (
+      <form onSubmit={signInWithPassword} className="mt-8">
+        <label htmlFor="portal-email" className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+          Email address
+        </label>
+        <Input
+          id="portal-email"
+          type="email"
+          required
+          autoComplete="username"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-3"
+        />
+        <label htmlFor="portal-password" className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+          Password
+        </label>
+        <Input
+          id="portal-password"
+          type="password"
+          required
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="mt-3"
+        />
+        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+        <Button
+          type="submit"
+          size="lg"
+          disabled={status === "sending"}
+          className="mt-5 w-full bg-sage text-white hover:bg-sage-dark text-base"
+        >
+          {status === "sending" ? "Signing in…" : "Sign in"}
+        </Button>
+        <button
+          type="button"
+          onClick={() => { setMode("link"); setError(null); }}
+          className="mt-4 text-sm font-medium text-charcoal underline underline-offset-4"
+        >
+          Email me a link instead
+        </button>
+      </form>
+    );
+  }
+
   return (
     <form onSubmit={onSubmit} className="mt-8">
       <label
@@ -96,6 +164,13 @@ export function LoginForm() {
       >
         {status === "sending" ? "Sending…" : "Email me a sign-in link"}
       </Button>
+      <button
+        type="button"
+        onClick={() => { setMode("password"); setError(null); }}
+        className="mt-4 text-sm font-medium text-charcoal underline underline-offset-4"
+      >
+        I have a password
+      </button>
     </form>
   );
 }

@@ -5,7 +5,7 @@ import { createHash } from "crypto";
 import { isAdmin } from "@/lib/admin/auth";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { newSigningToken, signingUrl } from "@/lib/sign/tokens";
-import { sendSigningRequest } from "@/lib/sign/notify";
+import { sendPortalSigningNotice, sendSigningRequest } from "@/lib/sign/notify";
 
 /**
  * Send a document out for signature.
@@ -82,10 +82,30 @@ export async function requestSignature(formData: FormData): Promise<void> {
   for (const signer of signers) {
     const patch: Record<string, unknown> = { request_id: created.id };
 
-    // Everyone except Frontier gets a link. A portal owner can also sign from
-    // their dashboard, but issuing the link regardless means someone marked as
-    // a portal owner who has no account is never left with no way in.
-    if (signer.kind !== "manager" && signer.email) {
+    if (signer.kind === "manager" || !signer.email) {
+      await admin.from("signature_signers").update(patch).eq("id", signer.id);
+      continue;
+    }
+
+    // Someone with a portal account is pointed at the portal: it never expires,
+    // it is where their documents already live, and signing there still
+    // requires them to be signed in as themselves. Everyone else gets a
+    // one-time link, which is the only way in for a signer with no account.
+    const { data: portalAccount } = await admin
+      .from("owner_profiles")
+      .select("id")
+      .eq("email", signer.email.toLowerCase())
+      .maybeSingle();
+
+    if (portalAccount) {
+      await admin.from("signature_signers").update(patch).eq("id", signer.id);
+      const sent = await sendPortalSigningNotice({
+        to: signer.email,
+        signerName: signer.name,
+        documentTitle: doc!.title,
+      });
+      if (!sent.ok) failures.push(`${signer.email}: ${sent.error}`);
+    } else {
       const { token: raw, hash, expiresAt } = newSigningToken();
       patch.token_hash = hash;
       patch.token_expires_at = expiresAt;
@@ -98,8 +118,6 @@ export async function requestSignature(formData: FormData): Promise<void> {
         url: signingUrl(origin, raw),
       });
       if (!sent.ok) failures.push(`${signer.email}: ${sent.error}`);
-    } else {
-      await admin.from("signature_signers").update(patch).eq("id", signer.id);
     }
   }
 
@@ -179,19 +197,37 @@ export async function resendSignerLink(formData: FormData): Promise<void> {
   if (!signer.email) throw new Error(`${signer.name} has no email address.`);
   if (!signer.request_id) throw new Error("This document hasn't been sent for signature yet.");
 
-  const { token: raw, hash, expiresAt } = newSigningToken();
-  await admin
-    .from("signature_signers")
-    .update({ token_hash: hash, token_expires_at: expiresAt })
-    .eq("id", signerId);
+  const title =
+    (signer.owner_documents as unknown as { title: string } | null)?.title ?? "your document";
 
-  const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rentwithfrontier.com").replace(/\/$/, "");
-  const sent = await sendSigningRequest({
-    to: signer.email,
-    signerName: signer.name,
-    documentTitle: (signer.owner_documents as unknown as { title: string } | null)?.title ?? "your document",
-    url: signingUrl(origin, raw),
-  });
+  const { data: portalAccount } = await admin
+    .from("owner_profiles")
+    .select("id")
+    .eq("email", signer.email.toLowerCase())
+    .maybeSingle();
+
+  let sent: { ok: boolean; error?: string };
+  if (portalAccount) {
+    sent = await sendPortalSigningNotice({
+      to: signer.email,
+      signerName: signer.name,
+      documentTitle: title,
+    });
+  } else {
+    const { token: raw, hash, expiresAt } = newSigningToken();
+    await admin
+      .from("signature_signers")
+      .update({ token_hash: hash, token_expires_at: expiresAt })
+      .eq("id", signerId);
+
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rentwithfrontier.com").replace(/\/$/, "");
+    sent = await sendSigningRequest({
+      to: signer.email,
+      signerName: signer.name,
+      documentTitle: title,
+      url: signingUrl(origin, raw),
+    });
+  }
 
   await admin.from("signature_events").insert({
     request_id: signer.request_id,

@@ -158,3 +158,62 @@ monthly statements, payouts and documents live, and where you'll sign anything t
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
 }
+
+/**
+ * Tell a portal owner there is something waiting for them.
+ *
+ * Owners with an account are sent to the portal rather than a one-time signing
+ * link. The portal is where their statements and documents already live, the
+ * link never expires, and it is safe to forward — signing still requires them
+ * to be signed in as themselves.
+ */
+export async function sendPortalSigningNotice(params: {
+  to: string;
+  signerName: string;
+  documentTitle: string;
+}): Promise<{ ok: boolean; error?: string }> {
+  const resend = client();
+  if (!resend) return { ok: false, error: "RESEND_API_KEY is not set" };
+
+  const url = `${SITE}/portal/login?email=${encodeURIComponent(params.to)}&next=%2Fportal`;
+
+  const text = `Hi ${params.signerName},
+
+You have a document waiting to be signed in your Frontier owner portal: "${params.documentTitle}".
+
+Open your portal here:
+${url}
+
+Sign in with an emailed link, or with your password if you've set one. You can set a password under Sign-in and security once you're in.
+
+Please do not reply to this message — it comes from an unmonitored address.
+Reach us at ${REPLY_TO} or call or text ${siteConfig.phone}.
+
+Frontier Property Management
+${SITE}`;
+
+  const html = layout(`<p style="margin:0 0 14px">Hi ${escapeHtml(params.signerName)},</p>
+<p style="margin:0 0 14px">You have a document waiting to be signed in your owner portal:
+<strong>${escapeHtml(params.documentTitle)}</strong>.</p>
+<p style="margin:28px 0">
+  <a href="${url}" style="background:#4a6b52;color:#ffffff;padding:13px 24px;border-radius:6px;text-decoration:none;font-weight:600;display:inline-block">Open your owner portal</a>
+</p>
+<p style="color:#71717a;font-size:13px;margin:0">
+  Sign in with an emailed link, or with your password if you've set one. You can
+  set a password under <em>Sign-in and security</em> once you're in — it's optional.
+</p>`);
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM,
+      replyTo: REPLY_TO,
+      to: params.to,
+      subject: `A document needs your signature: ${params.documentTitle}`,
+      text,
+      html,
+    });
+    return error ? { ok: false, error: error.message } : { ok: true };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}

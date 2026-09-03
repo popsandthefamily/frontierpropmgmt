@@ -29,6 +29,9 @@ export default async function PortalLayout({
               <span className="hidden normal-case tracking-normal sm:inline">
                 {owner.email}
               </span>
+              <Link href="/portal/security" className="hover:text-charcoal">
+                Security
+              </Link>
               <SignOutButton />
             </span>
           ) : (
