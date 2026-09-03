@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { PdfView, type PageBox } from "@/components/sign/pdf-view";
 
 export interface EditorField {
@@ -47,7 +48,12 @@ export function FieldEditor({
   initialFields: EditorField[];
   token: string;
 }) {
+  const router = useRouter();
   const [fields, setFields] = useState<EditorField[]>(initialFields);
+  // Set while a field is being dragged, and for a beat afterwards. Releasing a
+  // drag fires a click on the page underneath, which would otherwise drop a
+  // brand new field every time you moved an existing one.
+  const draggingRef = useRef(false);
   const [active, setActive] = useState<(typeof TYPES)[number]["type"]>("signature");
   const [role, setRole] = useState<"owner" | "manager">("owner");
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -55,6 +61,11 @@ export function FieldEditor({
 
   const addField = useCallback(
     (page: PageBox, e: React.MouseEvent<HTMLDivElement>) => {
+      // Ignore clicks that bubbled up from an existing field, and clicks that
+      // are really the tail end of a drag.
+      if (draggingRef.current) return;
+      if (e.target !== e.currentTarget) return;
+
       const rect = e.currentTarget.getBoundingClientRect();
       const spec = TYPES.find((t) => t.type === active)!;
       const x = (e.clientX - rect.left) / rect.width;
@@ -80,6 +91,7 @@ export function FieldEditor({
 
   function moveField(index: number, page: PageBox, e: React.MouseEvent) {
     e.stopPropagation();
+    draggingRef.current = true;
     const pageEl = (e.currentTarget as HTMLElement).parentElement;
     if (!pageEl) return;
     const rect = pageEl.getBoundingClientRect();
@@ -105,6 +117,10 @@ export function FieldEditor({
     function onUp() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
+      // Stay suppressed until after the click that this mouseup generates.
+      setTimeout(() => {
+        draggingRef.current = false;
+      }, 0);
     }
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
@@ -121,6 +137,10 @@ export function FieldEditor({
     if (res.ok) {
       setStatus("saved");
       setMessage(`${fields.length} field${fields.length === 1 ? "" : "s"} saved.`);
+      // The Request signature button is rendered from server data and is
+      // disabled while that data says there are no fields. Without this it
+      // stays disabled until a manual reload, which reads as a dead button.
+      router.refresh();
     } else {
       setStatus("error");
       setMessage((await res.json().catch(() => ({}))).error ?? "Could not save.");

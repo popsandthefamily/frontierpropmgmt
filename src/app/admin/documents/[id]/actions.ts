@@ -60,3 +60,37 @@ export async function requestSignature(formData: FormData): Promise<void> {
   revalidatePath(`/admin/documents/${documentId}`);
   revalidatePath("/admin/owners");
 }
+
+/**
+ * Cancel a signature request.
+ *
+ * Voided rather than deleted: the request, and the fact it was withdrawn, are
+ * part of the history. Voiding also frees the document to be requested again,
+ * because the uniqueness rule only counts requests that are not void.
+ */
+export async function voidRequest(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  if (!(await isAdmin(token))) throw new Error("Not authorised.");
+
+  const requestId = String(formData.get("request_id"));
+  const documentId = String(formData.get("document_id"));
+  const admin = getSupabaseAdmin();
+
+  const { data: req } = await admin
+    .from("signature_requests")
+    .select("status")
+    .eq("id", requestId)
+    .single();
+  if (req?.status === "executed") {
+    throw new Error("An executed agreement can't be cancelled.");
+  }
+
+  await admin.from("signature_requests").update({ status: "void" }).eq("id", requestId);
+  await admin.from("signature_events").insert({
+    request_id: requestId,
+    event_type: "voided",
+  });
+
+  revalidatePath(`/admin/documents/${documentId}`);
+  revalidatePath("/admin/owners");
+}

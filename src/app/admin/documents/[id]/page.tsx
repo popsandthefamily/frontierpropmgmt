@@ -5,7 +5,7 @@ import { isAdmin } from "@/lib/admin/auth";
 import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 import { FieldEditor, type EditorField } from "@/components/admin/field-editor";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
-import { requestSignature } from "./actions";
+import { requestSignature, voidRequest } from "./actions";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -83,14 +83,29 @@ export default async function DocumentFieldsPage({
                 </span>
               )}
             </p>
-            {openRequest.status === "signed" && (
-              <Link
-                href={`/admin/documents/${doc.id}/countersign${token ? `?token=${encodeURIComponent(token)}` : ""}`}
-                className="rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
-              >
-                Countersign to execute
-              </Link>
-            )}
+            <span className="flex items-center gap-4">
+              {openRequest.status === "signed" && (
+                <Link
+                  href={`/admin/documents/${doc.id}/countersign${token ? `?token=${encodeURIComponent(token)}` : ""}`}
+                  className="rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+                >
+                  Countersign to execute
+                </Link>
+              )}
+              {openRequest.status !== "executed" && (
+                <form action={voidRequest}>
+                  <input type="hidden" name="token" value={token ?? ""} />
+                  <input type="hidden" name="request_id" value={openRequest.id} />
+                  <input type="hidden" name="document_id" value={doc.id} />
+                  <button
+                    type="submit"
+                    className="text-sm font-medium text-destructive underline underline-offset-4"
+                  >
+                    Cancel request
+                  </button>
+                </form>
+              )}
+            </span>
           </div>
         ) : (
           <form action={requestSignature} className="flex flex-wrap items-center gap-4">
@@ -98,7 +113,9 @@ export default async function DocumentFieldsPage({
             <input type="hidden" name="document_id" value={doc.id} />
             <input type="hidden" name="owner_id" value={doc.owner_id} />
             <p className="text-sm text-muted-foreground">
-              Place the fields below, save them, then request the signature.
+              {(fields ?? []).length === 0
+                ? "Place the fields below and click Save fields — the button here stays disabled until at least one field is saved."
+                : `${(fields ?? []).length} field${(fields ?? []).length === 1 ? "" : "s"} saved. Requesting the signature makes the document visible to the owner and asks them to sign.`}
             </p>
             <button
               type="submit"
