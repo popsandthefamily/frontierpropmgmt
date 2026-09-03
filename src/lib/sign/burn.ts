@@ -82,37 +82,56 @@ export async function burnSignature(
 }
 
 /**
- * A plain-language audit page appended to the signed document.
+ * A plain-language audit page appended once every party has signed.
  *
  * The evidence lives in the database, but a PDF that travels on its own — to a
  * lender, an accountant, or a court — should carry its own proof rather than
- * depending on a system the reader cannot query.
+ * depending on a system the reader cannot query. Each party gets their own
+ * block, because they signed at different times, from different places, and
+ * each of those facts is part of the record.
  */
+export interface CertificateSigner {
+  name: string;
+  typedName: string;
+  email: string;
+  roleLabel: string;
+  signedAt: string;
+  ip: string;
+  userAgent: string;
+  consentText: string;
+  consentAt: string;
+}
+
 export async function appendCertificate(
   signedBytes: Uint8Array,
   info: {
     documentTitle: string;
-    signerName: string;
-    signerEmail: string;
-    signedAt: string;
-    ip: string;
-    userAgent: string;
-    consentText: string;
-    consentAt: string;
     sourceSha256: string;
     requestId: string;
+    signers: CertificateSigner[];
   },
 ): Promise<Uint8Array> {
   const pdf = await PDFDocument.load(signedBytes);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
-  const page = pdf.addPage();
-  const { height } = page.getSize();
 
+  let page = pdf.addPage();
+  let { height } = page.getSize();
   let y = height - 64;
   const left = 56;
-  const line = (text: string, opts: { bold?: boolean; size?: number; gap?: number } = {}) => {
+
+  const line = (
+    text: string,
+    opts: { bold?: boolean; size?: number; gap?: number } = {},
+  ) => {
     const size = opts.size ?? 10;
+    // Start a fresh page rather than writing off the bottom when there are
+    // several signers.
+    if (y < 70) {
+      page = pdf.addPage();
+      height = page.getSize().height;
+      y = height - 64;
+    }
     page.drawText(text, {
       x: left,
       y,
@@ -124,26 +143,28 @@ export async function appendCertificate(
   };
 
   line("Certificate of Completion", { bold: true, size: 18, gap: 28 });
-  line("Frontier Property Management LLC", { size: 10, gap: 22 });
+  line("Frontier Property Management LLC", { gap: 22 });
 
   line("Document", { bold: true, gap: 16 });
   line(info.documentTitle, { gap: 14 });
-  line(`SHA-256 of the document presented for signature:`, { gap: 13 });
-  line(info.sourceSha256, { size: 8, gap: 20 });
+  line("SHA-256 of the document presented for signature:", { gap: 13 });
+  line(info.sourceSha256, { size: 8, gap: 22 });
 
-  line("Signer", { bold: true, gap: 16 });
-  line(`${info.signerName} (${info.signerEmail})`, { gap: 20 });
+  for (const [i, s] of info.signers.entries()) {
+    line(`Signer ${i + 1} — ${s.roleLabel}`, { bold: true, gap: 16 });
+    line(`${s.name}${s.email ? ` (${s.email})` : ""}`, { gap: 13 });
+    if (s.typedName && s.typedName !== s.name) {
+      line(`Signed as: ${s.typedName}`, { gap: 13 });
+    }
+    line(`Signed at:  ${s.signedAt}`, { gap: 13 });
+    line(`IP address: ${s.ip}`, { gap: 13 });
+    for (const chunk of wrap(`Browser:    ${s.userAgent}`, 95)) line(chunk, { size: 9, gap: 12 });
+    line(`Consent recorded ${s.consentAt}:`, { size: 9, gap: 12 });
+    for (const chunk of wrap(s.consentText, 95)) line(chunk, { size: 9, gap: 12 });
+    y -= 8;
+  }
 
-  line("Consent to sign electronically", { bold: true, gap: 16 });
-  for (const chunk of wrap(info.consentText, 95)) line(chunk, { size: 9, gap: 12 });
-  line(`Consent recorded ${info.consentAt}`, { size: 9, gap: 20 });
-
-  line("Signature event", { bold: true, gap: 16 });
-  line(`Signed at:    ${info.signedAt}`, { gap: 13 });
-  line(`IP address:   ${info.ip}`, { gap: 13 });
-  for (const chunk of wrap(`Browser:      ${info.userAgent}`, 95)) line(chunk, { size: 9, gap: 12 });
-  line(`Reference:    ${info.requestId}`, { gap: 24 });
-
+  line(`Reference: ${info.requestId}`, { size: 9, gap: 20 });
   page.drawText(
     "This certificate is generated from an append-only audit record. Any change to the",
     { x: left, y, size: 8, font, color: rgb(0.45, 0.45, 0.45) },

@@ -4,13 +4,20 @@ import { revalidatePath } from "next/cache";
 import { createHash } from "crypto";
 import { isAdmin } from "@/lib/admin/auth";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { newSigningToken, signingUrl } from "@/lib/sign/tokens";
+import { sendSigningRequest } from "@/lib/sign/notify";
 
 /**
- * Ask an owner to sign a document.
+ * Send a document out for signature.
  *
- * The document is hashed at this moment, before the owner ever sees it, so the
- * record shows exactly which bytes were presented for signature. If the file
- * were ever swapped afterwards the hashes would not line up.
+ * The document is hashed at this moment, before anyone sees it, so the record
+ * shows exactly which bytes were presented. Each signer who is not Frontier
+ * gets a single-use link; only its hash is stored, so the database never holds
+ * a working credential.
+ *
+ * Email failures do not roll the request back. The request is valid and the
+ * links exist; what is needed is for someone to be told which addresses did not
+ * receive one, which is what the returned message is for.
  */
 export async function requestSignature(formData: FormData): Promise<void> {
   const token = String(formData.get("token") ?? "");
@@ -20,15 +27,33 @@ export async function requestSignature(formData: FormData): Promise<void> {
   const ownerId = String(formData.get("owner_id"));
   const admin = getSupabaseAdmin();
 
+  const { data: signers } = await admin
+    .from("signature_signers")
+    .select("*")
+    .eq("document_id", documentId)
+    .order("sort_order");
+  if (!signers || signers.length === 0) {
+    throw new Error("Add at least one signer before requesting a signature.");
+  }
+
+  const { data: fields } = await admin
+    .from("signature_fields")
+    .select("id, signer_id")
+    .eq("document_id", documentId);
+  const withFields = new Set((fields ?? []).map((f) => f.signer_id));
+  const idle = signers.filter((s) => !withFields.has(s.id));
+  if (idle.length > 0) {
+    throw new Error(
+      `${idle.map((s) => s.name).join(", ")} ${idle.length === 1 ? "has" : "have"} no fields to complete. Place their fields first.`,
+    );
+  }
+
   const { data: doc } = await admin
     .from("owner_documents")
-    .select("storage_path")
+    .select("title, storage_path")
     .eq("id", documentId)
     .single();
-
-  const { data: file } = await admin.storage
-    .from("owner-documents")
-    .download(doc!.storage_path);
+  const { data: file } = await admin.storage.from("owner-documents").download(doc!.storage_path);
   const bytes = Buffer.from(await file!.arrayBuffer());
   const sourceSha = createHash("sha256").update(bytes).digest("hex");
 
@@ -39,6 +64,7 @@ export async function requestSignature(formData: FormData): Promise<void> {
       owner_id: ownerId,
       status: "sent",
       source_sha256: sourceSha,
+      signers_total: signers.length,
     })
     .select("id")
     .single();
@@ -47,10 +73,36 @@ export async function requestSignature(formData: FormData): Promise<void> {
   await admin.from("signature_events").insert({
     request_id: created.id,
     event_type: "requested",
-    detail: { source_sha256: sourceSha },
+    detail: { source_sha256: sourceSha, signers: signers.length },
   });
 
-  // A document awaiting signature has to be visible to the owner to be signed.
+  const origin = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.rentwithfrontier.com").replace(/\/$/, "");
+  const failures: string[] = [];
+
+  for (const signer of signers) {
+    const patch: Record<string, unknown> = { request_id: created.id };
+
+    // Frontier signs from the admin side and needs no link. Portal owners are
+    // authenticated by their session. Only true external signers get a token.
+    if (signer.kind === "external") {
+      const { token: raw, hash, expiresAt } = newSigningToken();
+      patch.token_hash = hash;
+      patch.token_expires_at = expiresAt;
+      await admin.from("signature_signers").update(patch).eq("id", signer.id);
+
+      const sent = await sendSigningRequest({
+        to: signer.email,
+        signerName: signer.name,
+        documentTitle: doc!.title,
+        url: signingUrl(origin, raw),
+      });
+      if (!sent.ok) failures.push(`${signer.email}: ${sent.error}`);
+    } else {
+      await admin.from("signature_signers").update(patch).eq("id", signer.id);
+    }
+  }
+
+  // Owners sign in the portal, so the document has to be visible there.
   await admin
     .from("owner_documents")
     .update({ published_at: new Date().toISOString() })
@@ -59,6 +111,10 @@ export async function requestSignature(formData: FormData): Promise<void> {
 
   revalidatePath(`/admin/documents/${documentId}`);
   revalidatePath("/admin/owners");
+
+  if (failures.length > 0) {
+    throw new Error(`Request created, but these emails failed: ${failures.join("; ")}`);
+  }
 }
 
 /**

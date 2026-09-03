@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
+import { getCurrentOwner } from "@/lib/supabase/server";
 import { money, monthLabel, occupancy } from "@/lib/portal/format";
 
 export const dynamic = "force-dynamic";
@@ -56,10 +57,18 @@ export default async function PortalDashboard() {
         .order("created_at", { ascending: false }),
     ]);
 
-  const { data: pending } = await supabase
-    .from("signature_requests")
-    .select("id, document_id, status")
-    .in("status", ["sent", "viewed"]);
+  // Which documents is this owner personally being asked to sign? Signers are
+  // service-role only, so this is resolved here rather than through RLS.
+  const owner = await getCurrentOwner();
+  const { data: pendingSigners } = owner?.email
+    ? await getSupabaseAdmin()
+        .from("signature_signers")
+        .select("id, name, document_id, signed_at, request_id, owner_documents(title)")
+        .eq("email", owner.email.toLowerCase())
+        .is("signed_at", null)
+        .not("request_id", "is", null)
+    : { data: [] };
+  const pending = pendingSigners ?? [];
 
   const props = (properties ?? []) as Property[];
   const docs = (documents ?? []) as OwnerDocument[];
@@ -84,25 +93,28 @@ export default async function PortalDashboard() {
 
   return (
     <>
-      {(pending ?? []).length > 0 && (
+      {pending.length > 0 && (
         <section className="mt-10 border-l-4 border-sage bg-sage/8 p-6">
           <h2 className="font-heading text-xl font-semibold text-charcoal">
-            {(pending ?? []).length === 1
+            {pending.length === 1
               ? "One document needs your signature"
-              : `${(pending ?? []).length} documents need your signature`}
+              : `${pending.length} documents need your signature`}
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
             Read it through and sign online. It takes a couple of minutes and
             you get a signed copy straight away.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            {(pending ?? []).map((r) => (
+            {pending.map((s) => (
               <Link
-                key={r.id}
-                href={`/portal/sign/${r.id}`}
+                key={s.id}
+                href={`/portal/sign/${s.id}`}
                 className="rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-dark"
               >
                 Review and sign
+                {(s.owner_documents as unknown as { title: string } | null)?.title
+                  ? `: ${(s.owner_documents as unknown as { title: string }).title}`
+                  : ""}
               </Link>
             ))}
           </div>

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 
 export interface SignField {
   id: string;
-  signer_role?: string;
   page_number: number;
   x_pct: number;
   y_pct: number;
@@ -17,65 +16,70 @@ export interface SignField {
   required: boolean;
 }
 
-const OWNER_CONSENT =
-  "I agree to sign this document electronically, I intend my electronic signature to be my legally binding signature, and I agree that Frontier Property Management may deliver this and related records to me electronically.";
-
-const MANAGER_CONSENT =
-  "I am authorised to sign on behalf of Frontier Property Management LLC, and I intend this electronic signature to be the company's legally binding signature on this agreement.";
-
-export function SignForm({
-  requestId,
+/**
+ * The signing screen, shared by all three doors: an emailed link, a portal
+ * owner, and Frontier. Only how the signer was authorised differs.
+ */
+export function SignDocument({
   fileUrl,
   fields,
-  defaultName,
+  otherFields,
   documentTitle,
-  role = "owner",
-  submitUrl = "/api/portal/sign",
-  redirectTo = "/portal",
+  signerName,
+  roleLabel,
+  consentText,
   token,
-  /** Fields belonging to the other party, drawn but not editable. */
-  otherPartyFields = [],
+  signerId,
+  adminToken,
+  redirectTo,
 }: {
-  requestId: string;
   fileUrl: string;
   fields: SignField[];
-  defaultName: string;
+  otherFields: SignField[];
   documentTitle: string;
-  role?: "owner" | "manager";
-  submitUrl?: string;
-  redirectTo?: string;
+  signerName: string;
+  roleLabel: string;
+  consentText: string;
   token?: string;
-  otherPartyFields?: SignField[];
+  signerId?: string;
+  adminToken?: string;
+  redirectTo: string;
 }) {
-  const CONSENT_TEXT = role === "manager" ? MANAGER_CONSENT : OWNER_CONSENT;
   const [values, setValues] = useState<Record<string, string>>(() => {
     const today = new Date().toLocaleDateString("en-US");
     const seed: Record<string, string> = {};
     for (const f of fields) {
       if (f.field_type === "date") seed[f.id] = today;
-      if (f.field_type === "name") seed[f.id] = defaultName;
+      if (f.field_type === "name") seed[f.id] = signerName;
     }
     return seed;
   });
   const [drawingFor, setDrawingFor] = useState<string | null>(null);
-  const [signerName, setSignerName] = useState(defaultName);
+  const [typedName, setTypedName] = useState(signerName);
   const [consent, setConsent] = useState(false);
-  const [status, setStatus] = useState<"idle" | "saving" | "done" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "saving" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
   const missing = fields.filter((f) => f.required && !values[f.id]);
-  const canSign = consent && signerName.trim().length > 1 && missing.length === 0;
+  const canSign = consent && typedName.trim().length > 1 && missing.length === 0;
 
   async function submit() {
     setStatus("saving");
     setError(null);
-    const res = await fetch(submitUrl, {
+    const res = await fetch("/api/sign/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ requestId, values, signerName: signerName.trim(), consent: true, token }),
+      body: JSON.stringify({
+        token,
+        signerId,
+        adminToken,
+        values,
+        signerName: typedName.trim(),
+        consent: true,
+        consentText,
+      }),
     });
     if (res.ok) {
-      setStatus("done");
       window.location.replace(redirectTo);
     } else {
       setError((await res.json().catch(() => ({}))).error ?? "Could not complete the signature.");
@@ -100,7 +104,7 @@ export function SignForm({
           url={fileUrl}
           overlay={(page) => (
             <>
-              {otherPartyFields
+              {otherFields
                 .filter((f) => f.page_number === page.pageNumber)
                 .map((f) => (
                   <div
@@ -113,8 +117,8 @@ export function SignForm({
                     }}
                     className="absolute flex items-center justify-center rounded border border-dashed border-charcoal/25 bg-charcoal/5"
                   >
-                    <span className="overflow-hidden text-[10px] uppercase tracking-wide text-charcoal/40">
-                      {f.signer_role === "manager" ? "Frontier" : "Owner"}
+                    <span className="overflow-hidden whitespace-nowrap text-[10px] uppercase tracking-wide text-charcoal/40">
+                      {f.label}
                     </span>
                   </div>
                 ))}
@@ -166,37 +170,36 @@ export function SignForm({
         />
       </div>
 
-      {/* Consent and completion, deliberately below the document: it should not
-          be possible to agree before the thing being agreed to has been shown. */}
+      {/* Below the document on purpose: nobody should be able to agree to
+          something before it has been shown to them. */}
       <div className="sticky bottom-0 mt-8 border-t border-charcoal/25 bg-white/95 py-6 backdrop-blur">
         <div className="mx-auto max-w-2xl">
-          <label className="flex items-start gap-3 text-sm leading-relaxed text-charcoal">
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+            Signing as {roleLabel}
+          </p>
+          <label className="mt-3 flex items-start gap-3 text-sm leading-relaxed text-charcoal">
             <input
               type="checkbox"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
               className="mt-1 size-4 shrink-0"
             />
-            <span>{CONSENT_TEXT}</span>
+            <span>{consentText}</span>
           </label>
 
-          <label
-            htmlFor="signer-name"
-            className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
-          >
+          <label htmlFor="typed-name" className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
             Type your full legal name
           </label>
           <input
-            id="signer-name"
-            value={signerName}
-            onChange={(e) => setSignerName(e.target.value)}
+            id="typed-name"
+            value={typedName}
+            onChange={(e) => setTypedName(e.target.value)}
             className="mt-2 w-full rounded-md border border-border px-3 py-2 text-charcoal"
           />
 
           {missing.length > 0 && (
             <p className="mt-3 text-sm text-amber-700">
-              {missing.length} field{missing.length === 1 ? "" : "s"} still to
-              complete on the document above.
+              {missing.length} field{missing.length === 1 ? "" : "s"} still to complete above.
             </p>
           )}
           {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
@@ -212,8 +215,7 @@ export function SignForm({
           </Button>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
             Signing records the date and time, your IP address and browser, and a
-            fingerprint of this exact document. A copy with a certificate of
-            completion is filed to your portal immediately.
+            fingerprint of this exact document.
           </p>
         </div>
       </div>
@@ -221,14 +223,7 @@ export function SignForm({
   );
 }
 
-/** Draw-your-signature pad. */
-function SignaturePad({
-  onDone,
-  onCancel,
-}: {
-  onDone: (dataUrl: string) => void;
-  onCancel: () => void;
-}) {
+function SignaturePad({ onDone, onCancel }: { onDone: (d: string) => void; onCancel: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
   const [dirty, setDirty] = useState(false);
@@ -242,9 +237,7 @@ function SignaturePad({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/60 p-4">
       <div className="w-full max-w-lg rounded-lg bg-white p-6">
-        <h2 className="font-heading text-xl font-semibold text-charcoal">
-          Draw your signature
-        </h2>
+        <h2 className="font-heading text-xl font-semibold text-charcoal">Draw your signature</h2>
         <canvas
           ref={canvasRef}
           width={800}
@@ -252,20 +245,16 @@ function SignaturePad({
           onPointerDown={(e) => {
             drawing.current = true;
             const ctx = canvasRef.current!.getContext("2d")!;
-            ctx.lineWidth = 3;
-            ctx.lineCap = "round";
-            ctx.strokeStyle = "#1f2421";
+            ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.strokeStyle = "#1f2421";
             const { x, y } = pos(e);
-            ctx.beginPath();
-            ctx.moveTo(x, y);
+            ctx.beginPath(); ctx.moveTo(x, y);
             setDirty(true);
           }}
           onPointerMove={(e) => {
             if (!drawing.current) return;
             const ctx = canvasRef.current!.getContext("2d")!;
             const { x, y } = pos(e);
-            ctx.lineTo(x, y);
-            ctx.stroke();
+            ctx.lineTo(x, y); ctx.stroke();
           }}
           onPointerUp={() => (drawing.current = false)}
           onPointerLeave={() => (drawing.current = false)}
@@ -285,9 +274,7 @@ function SignaturePad({
             Clear
           </button>
           <span className="flex gap-3">
-            <button type="button" onClick={onCancel} className="text-sm font-medium text-charcoal">
-              Cancel
-            </button>
+            <button type="button" onClick={onCancel} className="text-sm font-medium text-charcoal">Cancel</button>
             <button
               type="button"
               disabled={!dirty}

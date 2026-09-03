@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     const { error } = await admin.from("signature_fields").insert(
       fields.map((f, i) => ({
         document_id: documentId,
-        signer_role: f.signer_role === "manager" ? "manager" : "owner",
+        signer_id: f.signer_id ?? null,
         page_number: f.page_number,
         x_pct: f.x_pct,
         y_pct: f.y_pct,
