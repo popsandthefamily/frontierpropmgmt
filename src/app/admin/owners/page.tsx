@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { money, monthLabel } from "@/lib/portal/format";
 import { isAdmin } from "@/lib/admin/auth";
@@ -207,6 +208,12 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
                       </span>
                     </span>
                     <span className="flex items-center gap-4">
+                      <Link
+                        href={`/admin/documents/${d.id}${token ? `?token=${encodeURIComponent(token)}` : ""}`}
+                        className="text-sm font-medium text-charcoal underline underline-offset-4"
+                      >
+                        Fields &amp; signature
+                      </Link>
                       <span className={d.published_at ? "text-sage" : "text-amber-600"}>
                         {d.published_at ? "Published" : "Draft"}
                       </span>

@@ -56,6 +56,11 @@ export default async function PortalDashboard() {
         .order("created_at", { ascending: false }),
     ]);
 
+  const { data: pending } = await supabase
+    .from("signature_requests")
+    .select("id, document_id, status")
+    .in("status", ["sent", "viewed"]);
+
   const props = (properties ?? []) as Property[];
   const docs = (documents ?? []) as OwnerDocument[];
 
@@ -79,6 +84,31 @@ export default async function PortalDashboard() {
 
   return (
     <>
+      {(pending ?? []).length > 0 && (
+        <section className="mt-10 border-l-4 border-sage bg-sage/8 p-6">
+          <h2 className="font-heading text-xl font-semibold text-charcoal">
+            {(pending ?? []).length === 1
+              ? "One document needs your signature"
+              : `${(pending ?? []).length} documents need your signature`}
+          </h2>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Read it through and sign online. It takes a couple of minutes and
+            you get a signed copy straight away.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {(pending ?? []).map((r) => (
+              <Link
+                key={r.id}
+                href={`/portal/sign/${r.id}`}
+                className="rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-dark"
+              >
+                Review and sign
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="mt-10">
         <h1 className="text-[2.2rem] font-bold leading-[0.95] tracking-tight text-charcoal sm:text-5xl">
           {props.length === 1 ? props[0].name : "Your properties"}
