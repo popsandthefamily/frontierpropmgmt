@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Owner documents are uploaded through a server action, and a scanned
+    // 1099 or an inspection photo set easily exceeds the 1 MB default.
+    serverActions: { bodySizeLimit: "25mb" },
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

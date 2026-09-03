@@ -6,8 +6,11 @@ import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 import {
   addProperty,
   createOwner,
+  deleteDocument,
   saveStatement,
+  setDocumentPublished,
   setPublished,
+  uploadDocument,
 } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -43,7 +46,7 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
   const { data: owners } = await admin
     .from("owner_profiles")
     .select(
-      "id, email, full_name, phone, owner_properties(id, name, city), owner_statements(id, period_start, owner_payout, published_at, property_id)",
+      "id, email, full_name, phone, owner_properties(id, name, city), owner_statements(id, period_start, owner_payout, published_at, property_id), owner_documents(id, title, kind, period_label, size_bytes, published_at)",
     )
     .order("created_at");
 
@@ -101,6 +104,10 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
           id: string; period_start: string; owner_payout: number;
           published_at: string | null; property_id: string;
         }[]).sort((a, b) => b.period_start.localeCompare(a.period_start));
+        const documents = (owner.owner_documents ?? []) as {
+          id: string; title: string; kind: string; period_label: string | null;
+          size_bytes: number | null; published_at: string | null;
+        }[];
 
         return (
           <section key={owner.id} className="mt-14 border-t border-charcoal/25 pt-6">
@@ -180,6 +187,81 @@ export default async function AdminOwnersPage({ searchParams }: Props) {
                 ))}
               </ul>
             )}
+
+            {/* Documents */}
+            <h3 className="mt-8 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-charcoal/60">
+              Documents
+            </h3>
+            {documents.length === 0 ? (
+              <p className="mt-2 text-sm text-muted-foreground">None yet.</p>
+            ) : (
+              <ul className="mt-2 text-sm">
+                {documents.map((d) => (
+                  <li key={d.id} className="flex flex-wrap items-center justify-between gap-3 border-b border-border py-2">
+                    <span className="text-charcoal">
+                      {d.title}
+                      <span className="text-muted-foreground">
+                        {" "}· {d.kind}
+                        {d.period_label ? ` · ${d.period_label}` : ""}
+                        {d.size_bytes ? ` · ${Math.round(d.size_bytes / 1024)} KB` : ""}
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-4">
+                      <span className={d.published_at ? "text-sage" : "text-amber-600"}>
+                        {d.published_at ? "Published" : "Draft"}
+                      </span>
+                      <form action={setDocumentPublished}>
+                        <input type="hidden" name="token" value={token ?? ""} />
+                        <input type="hidden" name="document_id" value={d.id} />
+                        <input type="hidden" name="publish" value={d.published_at ? "false" : "true"} />
+                        <button className="text-sm font-medium text-charcoal underline underline-offset-4" type="submit">
+                          {d.published_at ? "Unpublish" : "Publish"}
+                        </button>
+                      </form>
+                      <form action={deleteDocument}>
+                        <input type="hidden" name="token" value={token ?? ""} />
+                        <input type="hidden" name="document_id" value={d.id} />
+                        <button className="text-sm font-medium text-destructive underline underline-offset-4" type="submit">
+                          Delete
+                        </button>
+                      </form>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <form action={uploadDocument} className="mt-4 max-w-3xl">
+              <input type="hidden" name="token" value={token ?? ""} />
+              <input type="hidden" name="owner_id" value={owner.id} />
+              <div className="grid gap-4 sm:grid-cols-4">
+                <div>
+                  <label className={label} htmlFor={`d-file-${owner.id}`}>File</label>
+                  <input id={`d-file-${owner.id}`} className={input} name="file" type="file" required
+                    accept=".pdf,.png,.jpg,.jpeg,.csv,.xlsx,.xls" />
+                </div>
+                <div>
+                  <label className={label} htmlFor={`d-title-${owner.id}`}>Title</label>
+                  <input id={`d-title-${owner.id}`} className={input} name="title" placeholder="Defaults to the filename" />
+                </div>
+                <div>
+                  <label className={label} htmlFor={`d-kind-${owner.id}`}>Kind</label>
+                  <select id={`d-kind-${owner.id}`} className={input} name="kind" defaultValue="tax">
+                    <option value="tax">Tax document</option>
+                    <option value="statement">Statement</option>
+                    <option value="agreement">Agreement</option>
+                    <option value="inspection">Inspection</option>
+                    <option value="invoice">Invoice</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={label} htmlFor={`d-period-${owner.id}`}>Period</label>
+                  <input id={`d-period-${owner.id}`} className={input} name="period_label" placeholder="2026" />
+                </div>
+              </div>
+              <button className={button} type="submit">Upload document</button>
+            </form>
 
             {properties.length > 0 && (
               <form action={saveStatement} className="mt-4 max-w-3xl">

@@ -139,3 +139,88 @@ export async function setPublished(formData: FormData): Promise<void> {
 
   refresh();
 }
+
+/** Upload a document for an owner into the private bucket. */
+export async function uploadDocument(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  await assertAdmin(token);
+
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) {
+    throw new Error("Choose a file to upload.");
+  }
+
+  const ownerId = String(formData.get("owner_id"));
+  const propertyId = String(formData.get("property_id") ?? "");
+  const title = String(formData.get("title") ?? "").trim() || file.name;
+  const kind = String(formData.get("kind") ?? "other");
+  const periodLabel = String(formData.get("period_label") ?? "").trim();
+
+  const admin = getSupabaseAdmin();
+
+  // Namespaced by owner and prefixed with a random segment, so one owner's path
+  // can never be guessed from another's and re-uploading the same filename does
+  // not overwrite the previous document.
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-120);
+  const storagePath = `${ownerId}/${crypto.randomUUID()}-${safeName}`;
+
+  const { error: uploadError } = await admin.storage
+    .from("owner-documents")
+    .upload(storagePath, file, { contentType: file.type, upsert: false });
+  if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+
+  const { error } = await admin.from("owner_documents").insert({
+    owner_id: ownerId,
+    property_id: propertyId || null,
+    title,
+    kind,
+    storage_path: storagePath,
+    mime_type: file.type || null,
+    size_bytes: file.size,
+    period_label: periodLabel || null,
+  });
+  if (error) {
+    // Don't leave an orphaned object in the bucket behind a failed row.
+    await admin.storage.from("owner-documents").remove([storagePath]);
+    throw new Error(error.message);
+  }
+
+  refresh();
+}
+
+/** Publishing is what makes a document visible to the owner. */
+export async function setDocumentPublished(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  await assertAdmin(token);
+
+  const publish = String(formData.get("publish")) === "true";
+  const { error } = await getSupabaseAdmin()
+    .from("owner_documents")
+    .update({ published_at: publish ? new Date().toISOString() : null })
+    .eq("id", String(formData.get("document_id")));
+  if (error) throw new Error(error.message);
+
+  refresh();
+}
+
+/** Remove a document and its file together. */
+export async function deleteDocument(formData: FormData): Promise<void> {
+  const token = String(formData.get("token") ?? "");
+  await assertAdmin(token);
+
+  const admin = getSupabaseAdmin();
+  const id = String(formData.get("document_id"));
+  const { data } = await admin
+    .from("owner_documents")
+    .select("storage_path")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (data?.storage_path) {
+    await admin.storage.from("owner-documents").remove([data.storage_path]);
+  }
+  const { error } = await admin.from("owner_documents").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  refresh();
+}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSupabaseServer } from "@/lib/supabase/server";
+import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { money, monthLabel, occupancy } from "@/lib/portal/format";
 
 export const dynamic = "force-dynamic";
@@ -21,27 +22,56 @@ interface Property {
   status: string;
 }
 
+interface OwnerDocument {
+  id: string;
+  title: string;
+  kind: string;
+  period_label: string | null;
+  size_bytes: number | null;
+  storage_path: string;
+}
+
 export default async function PortalDashboard() {
   const supabase = await getSupabaseServer();
 
   // Both queries run as the signed-in owner, so row level security scopes them.
   // There is no owner_id filter here on purpose: the database applies it, which
   // means forgetting one cannot leak another owner's numbers.
-  const [{ data: properties }, { data: statements }] = await Promise.all([
-    supabase
-      .from("owner_properties")
-      .select("id, name, city, status")
-      .order("name"),
-    supabase
-      .from("owner_statements")
-      .select(
-        "id, period_start, gross_revenue, owner_payout, nights_booked, nights_available, property_id",
-      )
-      .order("period_start", { ascending: false })
-      .limit(12),
-  ]);
+  const [{ data: properties }, { data: statements }, { data: documents }] =
+    await Promise.all([
+      supabase
+        .from("owner_properties")
+        .select("id, name, city, status")
+        .order("name"),
+      supabase
+        .from("owner_statements")
+        .select(
+          "id, period_start, gross_revenue, owner_payout, nights_booked, nights_available, property_id",
+        )
+        .order("period_start", { ascending: false })
+        .limit(12),
+      supabase
+        .from("owner_documents")
+        .select("id, title, kind, period_label, size_bytes, storage_path")
+        .order("created_at", { ascending: false }),
+    ]);
 
   const props = (properties ?? []) as Property[];
+  const docs = (documents ?? []) as OwnerDocument[];
+
+  // The rows above came back through row level security as this owner, so
+  // ownership is already proven. Signing is done with the service role because
+  // the bucket is private and nothing is reachable by URL alone; each link is
+  // good for five minutes, so a forwarded or logged URL goes stale quickly.
+  const docLinks = new Map<string, string>();
+  if (docs.length > 0) {
+    const { data: signed } = await getSupabaseAdmin()
+      .storage.from("owner-documents")
+      .createSignedUrls(docs.map((d) => d.storage_path), 300);
+    for (const entry of signed ?? []) {
+      if (entry.path && entry.signedUrl) docLinks.set(entry.path, entry.signedUrl);
+    }
+  }
   const stmts = (statements ?? []) as Statement[];
   const latest = stmts[0];
   const trailing = stmts.slice(0, 12);
@@ -157,6 +187,55 @@ export default async function PortalDashboard() {
           </ul>
         </section>
       )}
+
+      {/* Documents */}
+      <section className="mt-14">
+        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+          Documents
+        </div>
+        {docs.length === 0 ? (
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Tax documents and signed paperwork will appear here. Nothing to
+            download yet.
+          </p>
+        ) : (
+          <ul className="mt-2">
+            {docs.map((d) => {
+              const href = docLinks.get(d.storage_path);
+              return (
+                <li
+                  key={d.id}
+                  className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5"
+                >
+                  <span>
+                    <span className="font-heading text-lg font-semibold text-charcoal">
+                      {d.title}
+                    </span>
+                    <span className="ml-2 text-sm text-muted-foreground">
+                      {d.period_label ? `${d.period_label} · ` : ""}
+                      {d.kind}
+                    </span>
+                  </span>
+                  {href ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-charcoal underline underline-offset-4"
+                    >
+                      Download
+                    </a>
+                  ) : (
+                    <span className="text-sm text-muted-foreground">
+                      Unavailable
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </section>
 
       <p className="mt-14 border-t border-border pt-4 text-sm text-muted-foreground">
         Questions about a number on any statement? Call or text Hunter at{" "}
