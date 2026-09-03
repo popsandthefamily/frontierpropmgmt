@@ -171,6 +171,8 @@ export default async function DocumentFieldsPage({
             fileUrl={signedUrl.signedUrl}
             token={token ?? ""}
             locked={Boolean(openRequest)}
+            ownerName={owner?.full_name ?? ""}
+            ownerEmail={owner?.email ?? ""}
             initialSigners={signerList.map((s) => ({
               id: s.id,
               name: s.name ?? "",

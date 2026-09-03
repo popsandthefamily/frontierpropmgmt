@@ -54,12 +54,17 @@ export function FieldEditor({
   initialSigners,
   token,
   locked,
+  ownerName,
+  ownerEmail,
 }: {
   documentId: string;
   fileUrl: string;
   initialFields: EditorField[];
   initialSigners: EditorSigner[];
   token: string;
+  /** The cabin owner this document belongs to. */
+  ownerName: string;
+  ownerEmail: string;
   /** True while a request is open: signers and fields are part of the record. */
   locked: boolean;
 }) {
@@ -67,7 +72,9 @@ export function FieldEditor({
   const [signers, setSigners] = useState<EditorSigner[]>(
     initialSigners.length > 0
       ? initialSigners
-      : [{ name: "", email: "", role_label: "Owner", kind: "owner" }],
+      // The cabin owner is almost always a signer, and is the only person who
+      // can sign from the portal, so start with them filled in.
+      : [{ name: ownerName, email: ownerEmail, role_label: "Owner", kind: "owner" }],
   );
   const [fields, setFields] = useState<EditorField[]>(initialFields);
   const [activeSigner, setActiveSigner] = useState(0);
@@ -198,13 +205,15 @@ export function FieldEditor({
       <section className="mb-8 border-y border-border py-6">
         <h2 className="font-heading text-lg font-semibold text-charcoal">Signers</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Everyone who has to sign, in order. Anyone other than Frontier gets
-          their own emailed link and does not need an account.
+          Everyone who has to sign, in order. The cabin owner
+          {ownerEmail ? ` (${ownerEmail})` : ""} signs in their portal; everyone
+          else gets their own one-time emailed link and needs no account.
+          Frontier signs from here.
         </p>
 
         <div className="mt-4 space-y-3">
           {signers.map((s, i) => (
-            <div key={i} className="grid items-center gap-3 sm:grid-cols-[1.5rem_1fr_1.4fr_1fr_1fr_2rem]">
+            <div key={i} className="grid items-center gap-3 sm:grid-cols-[1.5rem_1fr_1.4fr_1fr_1fr_8rem_2rem]">
               <span className={`size-4 rounded-full ${colour(i).solid}`} title="Field colour" />
               <input
                 className={input}
@@ -235,18 +244,28 @@ export function FieldEditor({
               />
               <select
                 className={input}
-                value={s.kind}
+                value={s.kind === "manager" ? "manager" : "signer"}
                 disabled={locked}
                 onChange={(e) =>
                   setSigners((prev) =>
-                    prev.map((x, j) => (j === i ? { ...x, kind: e.target.value as EditorSigner["kind"] } : x)),
+                    prev.map((x, j) =>
+                      j === i
+                        ? { ...x, kind: e.target.value === "manager" ? "manager" : "external" }
+                        : x,
+                    ),
                   )
                 }
               >
-                <option value="owner">Portal owner</option>
-                <option value="external">Emailed link</option>
-                <option value="manager">Frontier</option>
+                <option value="signer">Signer</option>
+                <option value="manager">Frontier (signs from admin)</option>
               </select>
+              <span className="hidden text-xs text-muted-foreground sm:block">
+                {s.kind === "manager"
+                  ? "signs from admin"
+                  : s.email.trim().toLowerCase() === ownerEmail.toLowerCase() && ownerEmail
+                    ? "signs in their portal"
+                    : "gets a one-time link"}
+              </span>
               <button
                 type="button"
                 disabled={locked || signers.length === 1}

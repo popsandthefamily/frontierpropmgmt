@@ -17,6 +17,18 @@ export async function POST(request: NextRequest) {
 
   const admin = getSupabaseAdmin();
 
+  // The cabin owner is whoever the document belongs to. Nobody else can be a
+  // portal signer, because nobody else has a portal: their statements and
+  // documents live under the owner's account, not a shared one.
+  const { data: doc } = await admin
+    .from("owner_documents")
+    .select("owner_id, owner_profiles(email)")
+    .eq("id", documentId)
+    .maybeSingle();
+  const ownerEmail = (
+    (doc?.owner_profiles as unknown as { email: string } | null)?.email ?? ""
+  ).toLowerCase();
+
   // A live request pins the signer list: it is who was asked, and changing it
   // afterwards would rewrite the record.
   const { data: live } = await admin
@@ -51,12 +63,25 @@ export async function POST(request: NextRequest) {
   await del;
 
   for (const [i, s] of signers.entries()) {
+    const email = s.email?.trim().toLowerCase() || null;
+
+    // Frontier signs from admin. Otherwise "portal owner" is earned by being
+    // the document's owner, not chosen from a dropdown: marking a co-signer as
+    // a portal owner previously left them with no portal and no link, stuck
+    // with nowhere to go.
+    const kind =
+      s.kind === "manager"
+        ? "manager"
+        : email && ownerEmail && email === ownerEmail
+          ? "owner"
+          : "external";
+
     const row = {
       document_id: documentId,
       name: s.name.trim(),
-      email: s.email?.trim().toLowerCase() || null,
-      role_label: s.role_label?.trim() || "Owner",
-      kind: s.kind === "manager" ? "manager" : s.kind === "owner" ? "owner" : "external",
+      email,
+      role_label: s.role_label?.trim() || (kind === "manager" ? "Frontier" : "Signer"),
+      kind,
       sort_order: i,
     };
     if (s.id) {
