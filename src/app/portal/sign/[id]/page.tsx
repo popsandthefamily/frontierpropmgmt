@@ -36,13 +36,14 @@ export default async function SignPage({
     admin.from("signature_fields").select("*").eq("document_id", req.document_id).order("sort_order"),
   ]);
 
-  if (req.status === "signed") {
+  if (req.status === "signed" || req.status === "executed") {
     return (
       <div className="mt-16 max-w-xl">
         <h1 className="text-3xl font-bold text-charcoal">Already signed</h1>
         <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-          {doc?.title} has been signed. The executed copy, with its certificate
-          of completion, is in your documents.
+          {doc?.title} has your signature. {req.status === "executed"
+            ? "The executed copy, with its certificate of completion, is in your documents."
+            : "Frontier is countersigning it now, and the executed copy will appear in your documents as soon as that's done."}
         </p>
         <Link
           href="/portal"
@@ -85,7 +86,8 @@ export default async function SignPage({
           requestId={req.id}
           fileUrl={url.signedUrl}
           documentTitle={doc!.title}
-          fields={(fields ?? []) as SignField[]}
+          fields={(fields ?? []).filter((f) => f.signer_role !== "manager") as SignField[]}
+          otherPartyFields={(fields ?? []).filter((f) => f.signer_role === "manager") as SignField[]}
           defaultName={profile?.full_name ?? ""}
         />
       ) : (

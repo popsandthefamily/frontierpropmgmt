@@ -5,6 +5,7 @@ import { PdfView, type PageBox } from "@/components/sign/pdf-view";
 
 export interface EditorField {
   id?: string;
+  signer_role: "owner" | "manager";
   page_number: number;
   x_pct: number;
   y_pct: number;
@@ -30,6 +31,11 @@ const TYPES = [
  * layout survives a different screen, a different zoom, and the conversion into
  * PDF points when the document is signed.
  */
+const ROLES = [
+  { role: "owner", label: "Owner", ring: "border-sage", fill: "bg-sage/15", text: "text-sage-dark", solid: "bg-sage" },
+  { role: "manager", label: "Frontier", ring: "border-amber-600", fill: "bg-amber-500/15", text: "text-amber-700", solid: "bg-amber-600" },
+] as const;
+
 export function FieldEditor({
   documentId,
   fileUrl,
@@ -43,6 +49,7 @@ export function FieldEditor({
 }) {
   const [fields, setFields] = useState<EditorField[]>(initialFields);
   const [active, setActive] = useState<(typeof TYPES)[number]["type"]>("signature");
+  const [role, setRole] = useState<"owner" | "manager">("owner");
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -55,6 +62,7 @@ export function FieldEditor({
       setFields((f) => [
         ...f,
         {
+          signer_role: role,
           page_number: page.pageNumber,
           // Drop centred on the click, kept inside the page.
           x_pct: Math.min(Math.max(x - spec.w / 2, 0), 1 - spec.w),
@@ -67,7 +75,7 @@ export function FieldEditor({
         },
       ]);
     },
-    [active],
+    [active, role],
   );
 
   function moveField(index: number, page: PageBox, e: React.MouseEvent) {
@@ -123,6 +131,23 @@ export function FieldEditor({
     <>
       <div className="sticky top-20 z-10 mb-6 flex flex-wrap items-center gap-3 border-y border-border bg-white/95 py-3 backdrop-blur">
         <span className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-charcoal/60">
+          Signed by
+        </span>
+        {ROLES.map((r) => (
+          <button
+            key={r.role}
+            type="button"
+            onClick={() => setRole(r.role)}
+            className={`rounded-md border px-3 py-1.5 text-sm ${
+              role === r.role
+                ? `${r.solid} border-transparent text-white`
+                : "border-border text-charcoal hover:border-charcoal"
+            }`}
+          >
+            {r.label}
+          </button>
+        ))}
+        <span className="ml-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-charcoal/60">
           Place
         </span>
         {TYPES.map((t) => (
@@ -164,7 +189,16 @@ export function FieldEditor({
       </div>
 
       <p className="mb-4 text-sm text-muted-foreground">
-        Click anywhere on the page to drop the selected field. Drag a field to
+        <span className="font-medium text-charcoal">
+          {fields.filter((f) => f.signer_role === "owner").length} owner
+        </span>
+        {" · "}
+        <span className="font-medium text-charcoal">
+          {fields.filter((f) => f.signer_role === "manager").length} Frontier
+        </span>
+        {" — "}
+        Owner fields are green, Frontier&apos;s are amber. Click anywhere on the
+        page to drop the selected field. Drag a field to
         move it, or click the × to remove it.
       </p>
 
@@ -177,7 +211,9 @@ export function FieldEditor({
                 <div
                   key={i}
                   onMouseDown={(e) => moveField(i, page, e)}
-                  className="group absolute cursor-move rounded border-2 border-sage bg-sage/15"
+                  className={`group absolute cursor-move rounded border-2 ${
+                    ROLES.find((r) => r.role === f.signer_role)?.ring
+                  } ${ROLES.find((r) => r.role === f.signer_role)?.fill}`}
                   style={{
                     left: `${f.x_pct * 100}%`,
                     top: `${f.y_pct * 100}%`,
@@ -185,8 +221,12 @@ export function FieldEditor({
                     height: `${f.h_pct * 100}%`,
                   }}
                 >
-                  <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-[10px] font-medium uppercase tracking-wide text-sage-dark">
-                    {f.label}
+                  <span
+                    className={`pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden text-[10px] font-medium uppercase tracking-wide ${
+                      ROLES.find((r) => r.role === f.signer_role)?.text
+                    }`}
+                  >
+                    {f.signer_role === "owner" ? "Owner" : "Frontier"} · {f.label}
                   </span>
                   <button
                     type="button"

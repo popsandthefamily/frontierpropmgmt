@@ -67,17 +67,31 @@ export default async function DocumentFieldsPage({
 
       <section className="mt-6 border-y border-border py-4">
         {openRequest ? (
-          <p className="text-sm">
-            <span className="font-medium text-charcoal">
-              Signature request: {openRequest.status}
-            </span>
-            {openRequest.signed_at && (
-              <span className="text-muted-foreground">
-                {" "}· signed by {openRequest.signer_name} on{" "}
-                {new Date(openRequest.signed_at).toLocaleString("en-US")}
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm">
+              <span className="font-medium text-charcoal">
+                {openRequest.status === "executed"
+                  ? "Executed by both parties"
+                  : openRequest.status === "signed"
+                    ? "Owner has signed — waiting on Frontier"
+                    : `Sent to the owner (${openRequest.status})`}
               </span>
+              {openRequest.signed_at && (
+                <span className="text-muted-foreground">
+                  {" "}· signed by {openRequest.signer_name} on{" "}
+                  {new Date(openRequest.signed_at).toLocaleString("en-US")}
+                </span>
+              )}
+            </p>
+            {openRequest.status === "signed" && (
+              <Link
+                href={`/admin/documents/${doc.id}/countersign${token ? `?token=${encodeURIComponent(token)}` : ""}`}
+                className="rounded-md bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700"
+              >
+                Countersign to execute
+              </Link>
             )}
-          </p>
+          </div>
         ) : (
           <form action={requestSignature} className="flex flex-wrap items-center gap-4">
             <input type="hidden" name="token" value={token ?? ""} />

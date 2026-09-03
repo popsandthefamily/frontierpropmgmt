@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export interface SignField {
   id: string;
+  signer_role?: string;
   page_number: number;
   x_pct: number;
   y_pct: number;
@@ -16,8 +17,11 @@ export interface SignField {
   required: boolean;
 }
 
-const CONSENT_TEXT =
+const OWNER_CONSENT =
   "I agree to sign this document electronically, I intend my electronic signature to be my legally binding signature, and I agree that Frontier Property Management may deliver this and related records to me electronically.";
+
+const MANAGER_CONSENT =
+  "I am authorised to sign on behalf of Frontier Property Management LLC, and I intend this electronic signature to be the company's legally binding signature on this agreement.";
 
 export function SignForm({
   requestId,
@@ -25,13 +29,25 @@ export function SignForm({
   fields,
   defaultName,
   documentTitle,
+  role = "owner",
+  submitUrl = "/api/portal/sign",
+  redirectTo = "/portal",
+  token,
+  /** Fields belonging to the other party, drawn but not editable. */
+  otherPartyFields = [],
 }: {
   requestId: string;
   fileUrl: string;
   fields: SignField[];
   defaultName: string;
   documentTitle: string;
+  role?: "owner" | "manager";
+  submitUrl?: string;
+  redirectTo?: string;
+  token?: string;
+  otherPartyFields?: SignField[];
 }) {
+  const CONSENT_TEXT = role === "manager" ? MANAGER_CONSENT : OWNER_CONSENT;
   const [values, setValues] = useState<Record<string, string>>(() => {
     const today = new Date().toLocaleDateString("en-US");
     const seed: Record<string, string> = {};
@@ -53,14 +69,14 @@ export function SignForm({
   async function submit() {
     setStatus("saving");
     setError(null);
-    const res = await fetch("/api/portal/sign", {
+    const res = await fetch(submitUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ requestId, values, signerName: signerName.trim(), consent: true }),
+      body: JSON.stringify({ requestId, values, signerName: signerName.trim(), consent: true, token }),
     });
     if (res.ok) {
       setStatus("done");
-      window.location.replace("/portal");
+      window.location.replace(redirectTo);
     } else {
       setError((await res.json().catch(() => ({}))).error ?? "Could not complete the signature.");
       setStatus("error");
@@ -84,6 +100,24 @@ export function SignForm({
           url={fileUrl}
           overlay={(page) => (
             <>
+              {otherPartyFields
+                .filter((f) => f.page_number === page.pageNumber)
+                .map((f) => (
+                  <div
+                    key={f.id}
+                    style={{
+                      left: `${f.x_pct * 100}%`,
+                      top: `${f.y_pct * 100}%`,
+                      width: `${f.w_pct * 100}%`,
+                      height: `${f.h_pct * 100}%`,
+                    }}
+                    className="absolute flex items-center justify-center rounded border border-dashed border-charcoal/25 bg-charcoal/5"
+                  >
+                    <span className="overflow-hidden text-[10px] uppercase tracking-wide text-charcoal/40">
+                      {f.signer_role === "manager" ? "Frontier" : "Owner"}
+                    </span>
+                  </div>
+                ))}
               {fields
                 .filter((f) => f.page_number === page.pageNumber)
                 .map((f) => {
