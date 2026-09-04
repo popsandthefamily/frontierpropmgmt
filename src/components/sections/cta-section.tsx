@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -26,9 +27,14 @@ export function CTASection({
       {/* Background, either image or sage fallback */}
       {backgroundImage ? (
         <>
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+          {/* No priority here, unlike the hero: this sits at the foot of the
+              page, so it should load lazily rather than compete with it. */}
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-black/50" />
         </>

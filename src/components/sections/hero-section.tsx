@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -40,10 +41,17 @@ export function HeroSection({
         sizeClasses[size]
       )}
     >
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+      {/* Background image. next/image rather than a CSS background so each
+          device gets a size and format it can actually use; a phone was
+          downloading the full desktop file. Decorative, so alt is empty, and
+          priority because the hero is the largest paint on every page. */}
+      <Image
+        src={backgroundImage}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
       />
 
       {/* Overlay */}
