@@ -321,7 +321,7 @@ Winter is the underrated one. Lowest rates, quietest trails, and a hot tub hits 
 Season-by-season breakdown with weather, crowds, pricing, and what to do in each:
 
 https://rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
-    featuredImage: "/images/discover/broken-bow-area.png",
+    featuredImage: "/images/discover/broken-bow-area.webp",
     content: `
 <h2>When Should You Visit Broken Bow?</h2>
 <p>The honest answer: there is no bad time. Broken Bow and Hochatown offer something different every season, and each one has its own appeal depending on what you are looking for. Here is what to expect month by month so you can plan the perfect trip.</p>
@@ -450,7 +450,7 @@ The part that gets glossed over in most investor pitches: this is an operating b
 We laid out the actual math, including what a realistic first year looks like and the costs that surprise new owners:
 
 https://rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-cabins`,
-    featuredImage: "/images/discover/hochatown-area-2.png",
+    featuredImage: "/images/discover/hochatown-area-2.webp",
     content: `
 <h2>The Broken Bow Cabin Boom Is Not Slowing Down</h2>
 <p>If you live in the Dallas-Fort Worth area and have looked into vacation rental investments, Broken Bow and Hochatown have probably come up in every conversation. The southeast Oklahoma cabin market has been one of the strongest-performing STR markets in the region for years, and DFW buyers are a huge part of that story.</p>
@@ -619,7 +619,7 @@ Compliance is the least interesting part of owning a cabin and the most expensiv
 Here is what changed, what you need to do, and the deadlines to have on your calendar:
 
 https://rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
-    featuredImage: "/images/blog/str-tax-shift.webp",
+    featuredImage: "/images/discover/hochatown-area.webp",
     content: `
 <h2>Hochatown's STR Licensing and Tax System Is Changing</h2>
 <p>If you own a short-term rental in the Hochatown or Broken Bow area, you have likely heard that the local government is transitioning its STR tax collection and licensing platform from Avenu to Granicus. This is a significant administrative change that affects every cabin owner in the area, and understanding it early is key to staying compliant and avoiding penalties.</p>
