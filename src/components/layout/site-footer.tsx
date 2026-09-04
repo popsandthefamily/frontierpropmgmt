@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { googleProfileUrl, siteConfig } from "@/data/site";
 
@@ -228,6 +228,13 @@ export function SiteFooter() {
             </p>
           </div>
           <div className="flex items-center gap-6">
+            <Link
+              href="/portal"
+              className="flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <LockKeyhole className="size-3.5" />
+              Owner Login
+            </Link>
             <Link
               href="/privacy-policy"
               className="transition-colors hover:text-white"

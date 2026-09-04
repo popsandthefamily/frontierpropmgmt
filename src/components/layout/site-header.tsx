@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, LockKeyhole } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
@@ -227,8 +227,24 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop CTAs, primary Estimate + ghost Book link */}
+        {/* Desktop CTAs, primary Estimate + ghost Book/Owner links */}
         <div className="hidden lg:flex shrink-0 items-center justify-end gap-4">
+          {/* Between lg and xl the nav bar is already tight, so the label is
+              dropped there and the lock icon carries the link on its own. */}
+          <Link
+            href="/portal"
+            aria-label="Owner login"
+            title="Owner login"
+            className={cn(
+              "inline-flex items-center gap-1.5 text-xs font-medium whitespace-nowrap transition-colors",
+              isScrolled
+                ? "text-muted-foreground hover:text-sage"
+                : "text-white/80 hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]",
+            )}
+          >
+            <LockKeyhole className="size-3.5 shrink-0" />
+            <span className="hidden xl:inline">Owner Login</span>
+          </Link>
           <Link
             href="/search"
             className={cn(
@@ -322,6 +338,14 @@ export function SiteHeader() {
                 <SheetClose asChild>
                   <Button asChild variant="outline" className="w-full">
                     <Link href="/search">Book a Cabin</Link>
+                  </Button>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button asChild variant="ghost" className="w-full">
+                    <Link href="/portal">
+                      <LockKeyhole className="size-4" />
+                      Owner Login
+                    </Link>
                   </Button>
                 </SheetClose>
               </div>
