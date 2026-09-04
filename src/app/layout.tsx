@@ -193,7 +193,7 @@ export default function RootLayout({
           }}
         />
         <SiteHeader />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen overflow-x-clip">{children}</main>
         <SiteFooter />
         <ScrollToTop />
 
