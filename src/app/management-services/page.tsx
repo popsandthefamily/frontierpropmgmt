@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "20% of net rental income, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, taxes. We take on a limited number of cabins.",
     images: [
       {
-        url: "/images/services/DSC3079.jpg",
+        url: "/images/services/DSC3079-og.jpg",
         width: 1200,
         height: 630,
         alt: "Frontier Property Management office and team in Broken Bow, Oklahoma",
@@ -181,7 +181,7 @@ export default function ManagementServicesPage() {
 
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
-        backgroundImage="/images/services/DSC3079.jpg"
+        backgroundImage="/images/services/DSC3079.webp"
         title="The Property Manager Plan"
         subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental income. Pricing, guests, cleanings, maintenance, taxes, handled."
         size="large"

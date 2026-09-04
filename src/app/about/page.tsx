@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Owner-operated Broken Bow cabin management with lifelong local roots. Hunter Collins, owner. 4.95★.",
     images: [
       {
-        url: "/images/team/hunter-collins.jpg",
+        url: "/images/team/hunter-collins-og.jpg",
         width: 1200,
         height: 630,
         alt: "Hunter Collins, owner of Frontier Property Management in Broken Bow",

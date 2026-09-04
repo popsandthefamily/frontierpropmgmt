@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       "Schedule a free discovery call or reach out for cabin booking assistance. Based in Broken Bow, OK.",
     images: [
       {
-        url: "/images/discover/hochatown-drive.png",
+        url: "/images/discover/hochatown-drive-og.jpg",
         width: 1200,
         height: 630,
         alt: "Scenic road through Hochatown, Oklahoma",
@@ -66,7 +66,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/discover/hochatown-drive.png"
+        backgroundImage="/images/discover/hochatown-drive.webp"
         title="Get in Touch"
         subtitle="Looking to book a cabin or need help managing your property? We're here for both."
         size="medium"

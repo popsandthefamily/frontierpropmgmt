@@ -83,7 +83,7 @@ export default function SearchPage() {
 
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/discover/hochatown-area.png"
+        backgroundImage="/images/discover/hochatown-area.webp"
         title="Explore Available Properties"
         subtitle="Find your perfect Broken Bow getaway"
         size="medium"

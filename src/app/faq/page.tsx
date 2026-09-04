@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "What the two plans cost, what the 20% is calculated on, and how switching works.",
     images: [
       {
-        url: "/images/services/DSC3082.jpg",
+        url: "/images/services/DSC3082-og.jpg",
         width: 1200,
         height: 630,
         alt: "Frontier Property Management, Broken Bow Oklahoma",
@@ -58,7 +58,7 @@ export default function FAQPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/services/DSC3082.jpg"
+        backgroundImage="/images/services/DSC3082.webp"
         title="Questions, answered"
         subtitle="Everything owners ask us before signing, in one place. Including the ones where the honest answer is not the flattering one."
         size="medium"

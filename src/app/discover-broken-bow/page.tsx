@@ -34,7 +34,7 @@ export const metadata: Metadata = {
       "Best spots, things to do, where to stay in Broken Bow & Hochatown. Plan your Oklahoma cabin getaway.",
     images: [
       {
-        url: "/images/discover/hochatown-area.png",
+        url: "/images/discover/hochatown-area-og.jpg",
         width: 1200,
         height: 630,
         alt: "Hochatown and Broken Bow area in southeast Oklahoma",
@@ -169,7 +169,7 @@ export default function DiscoverBrokenBowPage() {
 
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/discover/hochatown-area.png"
+        backgroundImage="/images/discover/hochatown-area.webp"
         title="Discover Broken Bow & Hochatown"
         subtitle="Learn more about what makes this place so special"
         size="medium"

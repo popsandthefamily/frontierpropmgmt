@@ -239,7 +239,7 @@ export default function BrokenBowCabinManagementFeesPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/services/DSC3079.jpg"
+        backgroundImage="/images/services/DSC3079.webp"
         title="Broken Bow Cabin Management Fees"
         subtitle="What a clean 20% should include, what's billed separately at cost, and the hidden fees that turn 20% into 30% on year one."
         size="large"

@@ -106,7 +106,7 @@ export default function PricingPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/services/DSC3079.jpg"
+        backgroundImage="/images/services/DSC3079.webp"
         title="Pricing"
         subtitle="Two plans, both month to month. Pick the one that matches how much of the cabin you want to keep running yourself."
         size="medium"

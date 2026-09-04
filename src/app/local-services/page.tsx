@@ -44,7 +44,7 @@ export const metadata: Metadata = {
       "Cleaning, maintenance, and logistics for cabin owners who keep their own bookings. Custom quote, month to month.",
     images: [
       {
-        url: "/images/services/DSC3076.jpg",
+        url: "/images/services/local-services-og.jpg",
         width: 1200,
         height: 630,
         alt: "Frontier local cleaning and maintenance services in Broken Bow",
@@ -126,7 +126,7 @@ export default function LocalServicesPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/services/DSC3076.jpg"
+        backgroundImage="/images/services/local-services-hero.webp"
         title="Local Services"
         subtitle="Cleaning, maintenance, and logistics for owners who keep their own bookings. You stay in control of the listing. We handle everything that needs a person on site."
         size="medium"

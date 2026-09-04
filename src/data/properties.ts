@@ -142,7 +142,7 @@ export const properties: Property[] = [
         alt: "Comfortable living space inside the house",
       },
       {
-        src: "/images/properties/old-broken-bow-highway/obb-4.png",
+        src: "/images/properties/old-broken-bow-highway/obb-4.webp",
         alt: "House interior with modern amenities",
       },
       {

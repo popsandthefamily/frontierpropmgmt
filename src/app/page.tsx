@@ -322,7 +322,7 @@ export default function HomePage() {
           <AnimateInView direction="left">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">
               <Image
-                src="/images/team/hunter-collins.jpg"
+                src="/images/team/hunter-collins.webp"
                 alt="Hunter Collins, Owner of Frontier Property Management"
                 fill
                 className="object-cover"
