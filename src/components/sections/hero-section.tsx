@@ -33,7 +33,10 @@ export function HeroSection({
   return (
     <section
       className={cn(
-        "relative flex items-center justify-center overflow-hidden",
+        // pt-20 clears the fixed h-20 header, which otherwise overlaps the
+        // heading on the shorter sizes. min-h is a floor, so tall content
+        // grows the section rather than being clipped by overflow-hidden.
+        "relative flex items-center justify-center overflow-hidden pt-20",
         sizeClasses[size]
       )}
     >
@@ -96,7 +99,7 @@ export function HeroSection({
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10 px-8 py-3 text-base"
+                className="border-white bg-transparent text-white hover:bg-white/10 px-8 py-3 text-base"
               >
                 <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
               </Button>
