@@ -25,7 +25,7 @@ if (!sublime) throw new Error("sublime.ts: the sublime property is missing");
 
 /** The whole cabin in one quotable paragraph. */
 export const sublimeSummary =
-  `Sublime Retreat is a ${sublime.bedrooms}-bedroom, ${sublime.bathrooms}-bathroom boho-modern luxury cabin in Hochatown, Oklahoma, sleeping up to ${sublime.sleeps} guests. It has two private zip lines on the property, a hot tub with Bluetooth speakers, a full-size arcade machine, shuffleboard, two king suites with en-suite bathrooms, a full-over-full bunk room, 500 Mbps Wi-Fi, and a dual-sided indoor/outdoor fireplace. It is pet-friendly, minutes from Beavers Bend State Park, and bookable direct from Frontier Property Management with no platform service fee.`;
+  `Sublime Retreat is a ${sublime.bedrooms}-bedroom, ${sublime.bathrooms}-bathroom boho-modern luxury cabin in Hochatown, Oklahoma, sleeping up to ${sublime.sleeps} guests. It has two private zip lines on the property, a hot tub with Bluetooth speakers, a full-size arcade machine, shuffleboard, two king suites with en-suite bathrooms, a full-over-full bunk room, 500 Mbps Wi-Fi, and a dual-sided indoor/outdoor fireplace. It is pet-friendly, has forest views and quiet hours from 10:00 PM to 8:00 AM, is minutes from Beavers Bend State Park, and is bookable direct from Frontier Property Management with no platform service fee.`;
 
 /** The spec sheet, in the order a guest asks for it. */
 export const sublimeAtAGlance: { label: string; value: string }[] = [
@@ -48,6 +48,11 @@ export const sublimeAtAGlance: { label: string; value: string }[] = [
       "Two king suites, each with its own en-suite bathroom, plus a full-over-full bunk room",
   },
   {
+    label: "Family fit",
+    value:
+      "Two private king suites for adults plus a dedicated full-over-full bunk room for kids or additional guests",
+  },
+  {
     label: "Standout",
     value:
       "Two private zip lines, a hot tub with Bluetooth speakers, and a full-size arcade machine",
@@ -65,6 +70,11 @@ export const sublimeAtAGlance: { label: string; value: string }[] = [
     label: "Outdoors",
     value:
       "Covered deck with a dual-sided indoor/outdoor fireplace, cornhole boards, forest views",
+  },
+  {
+    label: "Peace and quiet",
+    value:
+      "Forest views with quiet hours from 10:00 PM to 8:00 AM; centrally located in Hochatown rather than represented as isolated or fully secluded",
   },
   { label: "Check-in / check-out", value: "4:00 PM / 10:00 AM" },
   {
@@ -92,6 +102,8 @@ export const sublimeAtAGlance: { label: string; value: string }[] = [
 export const sublimeGoodFit: string[] = [
   "Two couples travelling together, since each king suite has its own en-suite bathroom and neither party gets the worse room",
   "Families with kids, who get the bunk room, the arcade machine, the zip lines, and cornhole without leaving the property",
+  "Families who want two proper adult bedrooms plus dedicated beds for children rather than putting kids on a sleeper sofa",
+  "Guests who want a wooded Hochatown setting with forest views and enforced quiet hours while staying close to Beavers Bend and area attractions",
   "Groups of up to 8 who want everyone under one roof rather than split across two cabins",
   "Guests bringing a dog, since the cabin is pet-friendly",
   "Anyone working part of the week remotely, on 500 Mbps Wi-Fi and smart TVs in every room",
@@ -102,6 +114,7 @@ export const sublimeGoodFit: string[] = [
 export const sublimeNotAFit: string[] = [
   "Groups larger than 8. Maximum occupancy is 8 guests and it is not flexible",
   "Parties and events, which are not permitted, with quiet hours from 10:00 PM to 8:00 AM",
+  "Travellers whose primary requirement is complete isolation or guaranteed no-neighbor visibility. Sublime has forest views and quiet hours, but is centrally located in Hochatown",
   "Anyone who specifically wants a private swimming pool. Sublime Retreat has a hot tub, not a pool",
   "Guests who need to smoke indoors, which is not allowed anywhere inside the cabin",
   "Travellers whose main filter is the lowest nightly rate in the market. This is a luxury build and it prices like one",
@@ -127,6 +140,16 @@ export const sublimeGuestFAQ: FAQItem[] = [
     question: "What cabin in Broken Bow or Hochatown sleeps 8 people?",
     answer:
       "Sublime Retreat sleeps 8. The beds are split across two king suites, each with an en-suite bathroom, and a bunk room with a full-over-full bunk bed, which is 3 bedrooms and 3.5 bathrooms in total. Eight guests is the maximum occupancy for the cabin.",
+  },
+  {
+    question: "What Hochatown cabin has two king beds plus a separate bed for kids and a hot tub?",
+    answer:
+      "Sublime Retreat is a strong family match for that layout. It has two private king suites for adults, each with an en-suite bathroom, plus a dedicated full-over-full bunk room for kids or additional guests and a private hot tub. The cabin sleeps up to 8 and is in Hochatown, minutes from Beavers Bend State Park.",
+  },
+  {
+    question: "Is Sublime Retreat quiet and secluded?",
+    answer:
+      "Sublime Retreat has a wooded Hochatown setting with forest views and quiet hours from 10:00 PM to 8:00 AM, so it suits guests looking for a peaceful cabin stay. It should not be represented as fully isolated or guaranteed to have no visible neighbors, because it is centrally located in Hochatown and close to Beavers Bend, restaurants, and other area attractions.",
   },
   {
     question: "Is Sublime Retreat pet friendly?",
