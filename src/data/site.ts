@@ -1,9 +1,15 @@
 export const siteConfig = {
   name: "Frontier Property Management",
-  tagline: "Boutique Cabin Management in Broken Bow & Hochatown",
+  tagline: "Local property management and home care in Broken Bow and Hochatown",
+  /** One-sentence descriptor used in the footer, schema, and llms files. */
   description:
-    "Boutique, owner-operated vacation rental management in Broken Bow and Hochatown, Oklahoma. A deliberately small portfolio.",
-  url: "https://rentwithfrontier.com",
+    "Frontier helps owners in two ways: full-service short-term rental management, or local home care while you keep control. We serve private second homes and rental cabins in Broken Bow and Hochatown.",
+  /**
+   * Canonical production host. Vercel already 307-redirects the apex host
+   * to www, so every canonical, sitemap URL, schema @id, and llms link uses
+   * the www form to match what actually serves the page.
+   */
+  url: "https://www.rentwithfrontier.com",
   phone: "580-207-7154",
   email: "info@rentwithfrontier.com",
   address: "3156 Old Broken Bow Hwy, Broken Bow, OK 74728",
@@ -51,8 +57,11 @@ export const availability = {
 } as const;
 
 /**
- * The two plans. Every price, name, and one-liner on the site reads from
- * here.
+ * The plans. Every price, name, and one-liner on the site reads from here.
+ *
+ * `manager` and `concierge` are the two primary services. `local` is the
+ * supporting STR cleaning and local-support offer for owners who keep their
+ * own bookings; it is not a third flagship plan.
  *
  * The fee base matters more than the percentage and is the thing owners get
  * burned on, so it is spelled out rather than left to "20%". Frontier's 20%
@@ -86,18 +95,37 @@ export const plans = {
     feeComparisonNote:
       "Most national operators calculate their percentage on gross booking revenue, before platform fees and taxes come out. Frontier calculates on what is left after. Two managers quoting the same percentage against different bases are not quoting the same price, so it is worth asking any manager which one they mean.",
   },
+  concierge: {
+    key: "concierge",
+    name: "Home Care Concierge",
+    href: "/home-care-concierge",
+    /** Big number on a pricing card. Pair with `feeSuffix`. */
+    fee: "From $500",
+    feeSuffix: "per month",
+    feeInline: "from $500 per month",
+    /** The base figure as a number, for structured data. */
+    basePrice: 500,
+    tagline: "Take care of my property locally while I keep control.",
+    summary:
+      "A defined monthly care plan for a private second home, an owner-used vacation home, or a cabin you rent out yourself: one scheduled care cycle a month covering an interior maintenance clean, hot-tub attention, light exterior upkeep, a visual property check, and a dated report. You keep your bookings, your listing, and your keys to the decisions.",
+    /** Sits beside the price, never in an FAQ. */
+    feeDefinition:
+      "From $500 per month for a defined monthly care plan, with the scope confirmed after a walkthrough. The base plan includes one scheduled monthly care cycle and one interior maintenance cleaning. Additional visits, guest turnovers, repairs, materials, and higher-frequency service are quoted separately. Month to month, 30 days notice to cancel.",
+  },
   local: {
     key: "local",
-    name: "Local Services",
+    name: "STR Cleaning & Local Support",
+    /** Shorter form for tight spaces such as table headers. */
+    shortName: "Local Support",
     href: "/local-services",
     fee: "Custom",
     feeSuffix: "quote, per property",
     feeInline: "a custom quote, scoped to your property",
-    tagline: "Boots on the ground, without changing who manages the booking.",
+    tagline: "Turnovers and local hands for a rental you run yourself.",
     summary:
-      "Cleaning turns, maintenance calls, restocking, freeze and storm checks, contractor meets, and the local logistics that are impossible to handle from out of town. You keep your listing and your bookings.",
+      "Turnover cleaning on your booking calendar, maintenance calls, restocking, freeze and storm checks, contractor meets, and the local logistics that are impossible to handle from out of town. You keep your listing and your bookings.",
     feeDefinition:
-      "Priced per property after a short scoping call, because no two owners want the same list. Month-to-month, no setup fee, no annual contract.",
+      "Priced per property after a short scoping call, because no two owners want the same list. Recurring work is a flat monthly figure; on-call work is a rate you approve in advance. Month-to-month, no setup fee, no annual contract.",
   },
 } as const;
 

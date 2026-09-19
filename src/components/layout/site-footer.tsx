@@ -3,13 +3,15 @@ import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { googleProfileUrl, siteConfig } from "@/data/site";
+import { CTA } from "@/data/home-care";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Management Services", href: "/management-services" },
-  { label: "Local Services", href: "/local-services" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Full-Service STR Management", href: "/management-services" },
+  { label: "Home Care Concierge", href: "/home-care-concierge" },
+  { label: "STR Cleaning & Local Support", href: "/local-services" },
+  { label: "Compare Services & Pricing", href: "/pricing" },
   { label: "FAQ", href: "/faq" },
   { label: "Hochatown Management", href: "/hochatown-property-management" },
   { label: "Broken Bow Management", href: "/broken-bow-property-management" },
@@ -42,10 +44,15 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row lg:px-8">
           <div className="text-center sm:text-left">
             <p className="text-lg font-heading font-bold text-white">
-              Ready for your Broken Bow getaway?
+              Own a home or cabin in Broken Bow?
             </p>
             <p className="text-sm text-white/70">
-              Browse our cabins and book direct, no platform fees.
+              Tell us about the property and we&apos;ll tell you what a
+              practical plan looks like. Or{" "}
+              <Link href="/search" className="underline underline-offset-4 hover:text-white">
+                book a cabin
+              </Link>{" "}
+              for your own stay.
             </p>
           </div>
           <Button
@@ -53,7 +60,7 @@ export function SiteFooter() {
             size="lg"
             className="bg-sage text-white hover:bg-sage-dark font-semibold px-8 shrink-0"
           >
-            <Link href="/search">Book a Cabin</Link>
+            <Link href={CTA.owner.href}>{CTA.owner.label}</Link>
           </Button>
         </div>
       </div>
@@ -72,7 +79,9 @@ export function SiteFooter() {
                 className="w-44 h-auto"
               />
               <p className="text-sm leading-relaxed text-charcoal/80">
-                Full-service cabin management in Hochatown &amp; Broken Bow
+                {siteConfig.tagline}. Full-service STR management, or Home
+                Care Concierge for private second homes and cabins you run
+                yourself.
               </p>
               <div className="flex items-center gap-3">
                 <a

@@ -8,7 +8,7 @@ type LinkProps = ComponentProps<typeof Link>;
 
 interface PlanCTAProps extends LinkProps {
   /** Which plan the click is attributed to. */
-  plan: "manager" | "local";
+  plan: "manager" | "local" | "concierge";
   source: string;
   event?: Extract<
     AnalyticsEvent,

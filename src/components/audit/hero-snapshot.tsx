@@ -94,8 +94,9 @@ export function HeroSnapshot({ auditHref = "#full-audit" }: Props) {
       </div>
 
       <p className="mt-3 text-xs text-muted-foreground">
-        Live AirROI market data, captured monthly. Paste your Airbnb URL on
-        the audit to see your listing&apos;s gap against these benchmarks.
+        AirROI market data, captured monthly and shown as of {m.asOf}, not a
+        live feed. Paste your Airbnb URL on the audit to see your
+        listing&apos;s gap against current benchmarks.
       </p>
     </div>
   );

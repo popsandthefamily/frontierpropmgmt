@@ -8,6 +8,7 @@ import { Menu, ChevronDown, LockKeyhole } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
+import { CTA } from "@/data/home-care";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,19 +44,24 @@ const NAV_ITEMS: NavItem[] = [
     label: "For Owners",
     children: [
       {
-        label: "Management Services",
+        label: "Full-Service STR Management",
         href: "/management-services",
-        description: "Full-service STR management, pricing, and operations",
+        description: "We run the rental: pricing, guests, cleaning, taxes",
       },
       {
-        label: "Local Services",
-        href: "/local-services",
-        description: "Cleaning, maintenance & logistics, custom quote",
+        label: "Home Care Concierge",
+        href: "/home-care-concierge",
+        description: "Monthly care for second homes and cabins, from $500",
       },
       {
-        label: "Pricing",
+        label: "Compare Services & Pricing",
         href: "/pricing",
-        description: "Both plans, side-by-side",
+        description: "Management vs. home care, side by side",
+      },
+      {
+        label: "STR Cleaning & Local Support",
+        href: "/local-services",
+        description: "Turnovers and local hands for a rental you run yourself",
       },
       {
         label: "FAQ",
@@ -120,6 +126,7 @@ const SOLID_HEADER_PATHS = [
   "/audit",
   "/admin",
   "/sign",
+  "/contact",
 ];
 
 export function SiteHeader() {
@@ -257,10 +264,10 @@ export function SiteHeader() {
             Book a Cabin →
           </Link>
           <Link
-            href="/#calculator"
+            href={CTA.owner.href}
             className="inline-flex items-center whitespace-nowrap rounded-full bg-sage px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-sage-dark"
           >
-            Get Estimate
+            {CTA.owner.label}
           </Link>
         </div>
 
@@ -332,7 +339,7 @@ export function SiteHeader() {
                     asChild
                     className="w-full bg-sage text-white hover:bg-sage-dark"
                   >
-                    <Link href="/#calculator">Get a Revenue Estimate</Link>
+                    <Link href={CTA.owner.href}>{CTA.owner.label}</Link>
                   </Button>
                 </SheetClose>
                 <SheetClose asChild>
