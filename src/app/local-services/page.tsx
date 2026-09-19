@@ -18,6 +18,7 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { availability, plans, siteConfig } from "@/data/site";
+import { CTA, homeCare } from "@/data/home-care";
 import {
   LOCAL_SERVICE_GROUPS,
   LOCAL_SERVICES_FAQ,
@@ -26,9 +27,9 @@ import {
 } from "@/data/local-services";
 
 export const metadata: Metadata = {
-  title: "Local Services | Cabin Cleaning, Maintenance & Logistics | Frontier",
+  title: { absolute: "STR Cleaning & Local Support in Broken Bow | Frontier" },
   description:
-    "On-the-ground cleaning, maintenance, and logistics for Broken Bow and Hochatown cabin owners who keep their own bookings. Turnovers, repairs, freeze checks, vendor meets. Custom quote, month to month.",
+    "Keep your bookings and get local support. Turnover cleaning, cabin maintenance, and agreed on-site services in Broken Bow and Hochatown.",
   keywords: [
     "Broken Bow cabin cleaning service",
     "Hochatown vacation rental turnover cleaning",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
     "vacation rental maintenance Oklahoma",
   ],
   openGraph: {
-    title: "Local Services | Frontier Property Management",
+    title: "STR Cleaning & Local Support | Frontier Property Management",
     description:
-      "Cleaning, maintenance, and logistics for cabin owners who keep their own bookings. Custom quote, month to month.",
+      "Turnover cleaning, maintenance, and logistics for cabin owners who keep their own bookings. Custom quote, month to month.",
     images: [
       {
         url: "/images/local-services/hero-og.jpg",
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/local-services",
+    canonical: `${siteConfig.url}${plans.local.href}`,
   },
 };
 
@@ -82,15 +83,12 @@ export default function LocalServicesPage() {
       <JsonLd
         type="Service"
         data={{
-          name: "Frontier Local Services",
-          alternateName: "Cabin cleaning, maintenance, and logistics",
+          "@id": `${siteConfig.url}${plans.local.href}#service`,
+          name: `${plans.local.name}, Broken Bow and Hochatown`,
+          alternateName: "Local Services",
           description: plans.local.summary,
-          provider: {
-            "@type": "LocalBusiness",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            telephone: siteConfig.phone,
-          },
+          url: `${siteConfig.url}${plans.local.href}`,
+          provider: { "@id": `${siteConfig.url}/#business` },
           serviceType:
             "Short-term rental cleaning, maintenance, and property logistics",
           areaServed: [
@@ -100,7 +98,7 @@ export default function LocalServicesPage() {
           ],
           offers: {
             "@type": "Offer",
-            name: "Local Services",
+            name: plans.local.name,
             description: plans.local.feeDefinition,
             priceSpecification: {
               "@type": "PriceSpecification",
@@ -112,7 +110,7 @@ export default function LocalServicesPage() {
           },
           hasOfferCatalog: {
             "@type": "OfferCatalog",
-            name: "Local Services",
+            name: plans.local.name,
             itemListElement: LOCAL_SERVICE_GROUPS.map((group) => ({
               "@type": "Offer",
               itemOffered: {
@@ -127,15 +125,15 @@ export default function LocalServicesPage() {
 
       <HeroSection
         backgroundImage="/images/local-services/hero.webp"
-        title="Local Services"
-        subtitle="Cleaning, maintenance, and logistics for owners who keep their own bookings. You stay in control of the listing. We handle everything that needs a person on site."
+        title="STR Cleaning & Local Support"
+        subtitle="Turnover cleaning, maintenance, and logistics for owners who keep their own bookings. You stay in control of the listing. We handle what needs a person on site."
         size="medium"
         overlay="dark"
-        cta={{ label: "Get a quote", href: "/contact#discovery" }}
-        secondaryCta={{ label: "Compare both plans", href: "/pricing" }}
+        cta={CTA.localSupport}
+        secondaryCta={{ label: "Compare services & pricing", href: "/pricing" }}
       />
 
-      <Breadcrumbs items={[{ label: "Local Services" }]} />
+      <Breadcrumbs items={[{ label: "STR Cleaning & Local Support" }]} />
 
       {/* Why this plan exists */}
       <SectionWrapper background="cream">
@@ -159,11 +157,53 @@ export default function LocalServicesPage() {
               weekend blocked off because you had to drive down yourself.
             </p>
             <p>
-              Local Services closes it without asking you to hand over the
+              Local support closes it without asking you to hand over the
               property. You keep the listing, the calendar, the pricing, and the
               guest relationship. We become the part of your operation that
               lives fifteen minutes away.
             </p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Relationship to Home Care Concierge */}
+      <SectionWrapper background="white">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-charcoal/10 bg-cream/40 p-6 md:p-8">
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-sage">
+            Which one do you need?
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-charcoal md:text-3xl">
+            Turnovers on a calendar, or one monthly care cycle?
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            This page is for a rental that turns over on a booking calendar:
+            departure and arrival cleans, restocking, and the maintenance that
+            comes with guests. It is scoped per property because no two
+            rentals want the same list.
+          </p>
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            If the property is a private second home, or a cabin you rent only
+            occasionally, {homeCare.name} is the recurring option:{" "}
+            {plans.concierge.feeInline}, one scheduled care cycle a month
+            covering a maintenance clean, hot-tub attention, light exterior
+            upkeep, a visual check, and a report. Guest turnovers and extra
+            visits are added to that plan as their own quoted line, never
+            folded into the base price.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href={plans.concierge.href}
+              className="group inline-flex items-center gap-1 text-sm font-semibold text-sage hover:text-sage-dark hover:underline"
+            >
+              See Home Care Concierge
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="/pricing"
+              className="text-sm font-medium text-charcoal underline-offset-4 hover:underline"
+            >
+              Compare services and pricing
+            </Link>
           </div>
         </div>
       </SectionWrapper>
@@ -219,7 +259,7 @@ export default function LocalServicesPage() {
 
           <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-charcoal/10 bg-white p-6">
             <h3 className="text-lg font-semibold text-charcoal">
-              What Local Services does not include
+              What local support does not include
             </h3>
             <p className="mt-2 text-sm text-muted-foreground">
               Anything touching your guests, your revenue, or your listing lives
@@ -287,9 +327,9 @@ export default function LocalServicesPage() {
                 <PlanCTA
                   plan="local"
                   source="local_services_pricing_block"
-                  href="/contact#discovery"
+                  href={CTA.localSupport.href}
                 >
-                  Get a quote
+                  {CTA.localSupport.label}
                   <ArrowRight className="ml-2 size-4" />
                 </PlanCTA>
               </Button>
@@ -299,7 +339,7 @@ export default function LocalServicesPage() {
                 size="lg"
                 className="px-8 text-base"
               >
-                <Link href="/pricing">Compare both plans</Link>
+                <Link href="/pricing">Compare services &amp; pricing</Link>
               </Button>
             </div>
           </div>
@@ -314,7 +354,8 @@ export default function LocalServicesPage() {
               How it works
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              From first call to first turnover, usually inside two weeks.
+              From first call to first turnover: scoping call, walkthrough,
+              written quote, handoff.
             </p>
           </div>
           <ol className="mt-10 space-y-4">
@@ -350,13 +391,13 @@ export default function LocalServicesPage() {
           </p>
           <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/pricing">Compare both plans</Link>
+              <Link href="/pricing">Compare services &amp; pricing</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href={plans.manager.href}>Property Manager plan</Link>
+              <Link href={plans.manager.href}>Full-service management</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/audit">Free listing audit</Link>
+              <Link href={plans.concierge.href}>Home Care Concierge</Link>
             </Button>
           </div>
         </div>
@@ -365,7 +406,7 @@ export default function LocalServicesPage() {
       {/* FAQ */}
       <SectionWrapper background="cream">
         <FAQSection
-          title="Local Services, common questions"
+          title="Local support, common questions"
           questions={LOCAL_SERVICES_FAQ}
         />
       </SectionWrapper>
@@ -374,8 +415,8 @@ export default function LocalServicesPage() {
         heading="Stop driving down to fix things yourself."
         subtext={`Book a free scoping call and we'll walk the property. ${availability.sentence} ${siteConfig.phone}`}
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{ label: "Get a quote", href: "/contact#discovery" }}
-        secondaryCta={{ label: "Compare both plans", href: "/pricing" }}
+        cta={CTA.localSupport}
+        secondaryCta={{ label: "Compare services & pricing", href: "/pricing" }}
       />
     </>
   );

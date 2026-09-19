@@ -11,7 +11,7 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
-import { siteConfig } from "@/data/site";
+import { plans, siteConfig } from "@/data/site";
 import { team } from "@/data/team";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/about",
+    canonical: `${siteConfig.url}/about`,
   },
 };
 
@@ -45,9 +45,9 @@ const whyChooseItems = [
   },
   {
     icon: Shield,
-    title: "Hands-Off Property Management",
+    title: "Two Ways to Work With Us",
     description:
-      "From listing to checkout, we handle it all so you don't have to.",
+      "Full-service rental management from listing to checkout, or Home Care Concierge for owners who keep control and want the property looked after.",
   },
   {
     icon: TrendingUp,
@@ -74,8 +74,8 @@ export default function AboutPage() {
           name: siteConfig.name,
           url: siteConfig.url,
           logo: `${siteConfig.url}/images/logos/Asset-1-2.png`,
-          description:
-            "Owner-operated vacation rental management company in Broken Bow and Hochatown, Oklahoma.",
+          "@id": `${siteConfig.url}/#business`,
+          description: siteConfig.description,
           founder: {
             "@type": "Person",
             name: "Hunter Collins",
@@ -160,8 +160,46 @@ export default function AboutPage() {
         </div>
       </SectionWrapper>
 
-      {/* 3. Why Choose Frontier */}
+      {/* 2.5 What the company does now */}
       <SectionWrapper background="cream">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            One local team, two services
+          </h2>
+          <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+            <p>
+              Frontier started as a short-term rental manager, and full-service
+              management is still the core of what we do: we run rental cabins
+              for owners who want the whole operation handled, at{" "}
+              {plans.manager.feeInline}.
+            </p>
+            <p>
+              The same owners kept asking for something else: a private second
+              home that is never rented, a family cabin that rents a few
+              weekends a year, or a self-managed rental that just needs a local
+              person to clean, check the hot tub, and look the place over once
+              a month. That is {plans.concierge.name}, {plans.concierge.feeInline},
+              with the scope written down after a walkthrough. The owner keeps
+              control; we perform the agreed care.
+            </p>
+            <p>
+              Both services are delivered by the same people, using the same
+              cleaners and technicians we use on the cabin we run ourselves.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href={plans.manager.href}>Full-service management</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href={plans.concierge.href}>Home Care Concierge</Link>
+            </Button>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* 3. Why Choose Frontier */}
+      <SectionWrapper background="white">
         <h2 className="mb-12 text-center text-3xl font-bold text-charcoal md:text-4xl">
           Why Choose Frontier?
         </h2>

@@ -1,6 +1,7 @@
 import { managementFAQ, type FAQItem } from "./services";
 import { hochatownFAQ } from "./hochatown-faq";
 import { LOCAL_SERVICES_FAQ } from "./local-services";
+import { HOME_CARE_FAQ } from "./home-care";
 import { plans } from "./site";
 
 /**
@@ -37,25 +38,27 @@ export interface FAQGroup {
 export const faqGroups: FAQGroup[] = [
   {
     id: "plans",
-    title: "Choosing between the two plans",
+    title: "Choosing between the services",
     blurb:
-      "Frontier runs two plans and nothing in between. The difference is who holds the guest relationship.",
+      "Two primary services, and one supporting offer for self-managed rentals. The difference is who operates the rental business versus who performs agreed physical care of the property.",
     items: [
       {
-        question: "What are the two plans, in one sentence each?",
-        answer: `${plans.manager.name} is full-service management at ${plans.manager.feeInline}: we run the listing, the pricing, the guests, the cleaning, the maintenance, and the taxes. ${plans.local.name} is ${plans.local.feeInline}: you keep the listing and the bookings, and we handle the cleaning turns, maintenance, seasonal checks, and logistics that need somebody physically on site.`,
+        question: "What are the services, in one sentence each?",
+        answer: `${plans.manager.name} is full-service short-term rental management at ${plans.manager.feeInline}: we run the listing, the pricing, the guests, the cleaning, the maintenance, and the taxes. ${plans.concierge.name} is ${plans.concierge.feeInline}: you keep control of the property and any bookings, and we perform one scheduled care cycle a month covering a maintenance clean, hot-tub attention, light exterior upkeep, a visual check, and a report. ${plans.local.name} is ${plans.local.feeInline}: turnovers on a booking calendar and local hands for a rental you run yourself.`,
       },
       {
-        question: "Which plan is right for my cabin?",
+        question: "Which service is right for my property?",
         answer:
-          "If you do not want to think about the cabin, take the Property Manager plan. If you enjoy running the listing and pricing it yourself but keep getting burned on cleaners and maintenance from three hours away, take Local Services. The honest test is whether you want to keep answering guest messages: that single question sorts almost every owner correctly.",
+          "If you want the rental run for you, take full management. If the property is a private second home, or a cabin you use yourself and rent only occasionally, take Home Care Concierge. If you run a rental yourself and need turnovers on a booking calendar, ask about STR Cleaning & Local Support. The honest test for the first choice is whether you want to keep answering guest messages. The test for the second is whether the property needs a monthly care cycle or a per-booking one.",
       },
-      pick(LOCAL_SERVICES_FAQ, "Can I use Local Services if another company manages my cabin?"),
-      pick(LOCAL_SERVICES_FAQ, "Can I start on Local Services and move to full management later?"),
+      pick(HOME_CARE_FAQ, "Does my home have to be rented?"),
+      pick(HOME_CARE_FAQ, "Can I use this for a short-term rental?"),
+      pick(LOCAL_SERVICES_FAQ, "Can I use local support if another company manages my cabin?"),
+      pick(LOCAL_SERVICES_FAQ, "Can I start on local support and move to full management later?"),
       {
-        question: "Do you have anything cheaper than these two plans?",
+        question: "Is Home Care Concierge a cheaper version of full management?",
         answer:
-          "No. We used to sell a flat-fee marketing and listing plan and retired it, because it sat awkwardly between the two things owners actually need: someone running the property, or someone on the ground. Adding a third tier would have made all three worse.",
+          "No. They answer different questions. Management is a share of rental income for operating the rental business. Home Care Concierge is a fixed monthly plan for agreed physical care of a property, whether or not it is rented. One is not a discount on the other, and a self-managed rental that needs weekly turnovers is not a fit for the monthly base plan without additional scoped visits.",
       },
       {
         question: "Why do you cap how many properties you take on?",
@@ -79,13 +82,14 @@ export const faqGroups: FAQGroup[] = [
         question: "Is your 20% the same as another company's 20%?",
         answer: plans.manager.feeComparisonNote,
       },
-      pick(LOCAL_SERVICES_FAQ, "How much does Local Services cost?"),
+      pick(HOME_CARE_FAQ, "What does the $500 base plan cover?"),
+      pick(LOCAL_SERVICES_FAQ, "How much does STR Cleaning & Local Support cost?"),
       pick(LOCAL_SERVICES_FAQ, "Why not just publish a price list?"),
       pick(LOCAL_SERVICES_FAQ, "Do you mark up vendor invoices?"),
       {
         question: "What if my cabin earns nothing in a month?",
         answer:
-          "On the Property Manager plan you owe us nothing. The fee is a percentage of income, and there is no monthly minimum and no setup fee, so a dead month costs you nothing in management. Local Services is different: it is payment for work performed, so if we cleaned and serviced the cabin during a month with no bookings, that work is still invoiced.",
+          "On the Property Manager plan you owe us nothing. The fee is a percentage of income, and there is no monthly minimum and no setup fee, so a dead month costs you nothing in management. Home Care Concierge and local support are different: they are payment for scheduled work performed, so the monthly plan fee, or the work we did on a self-managed rental, is invoiced whether or not the property earned anything.",
       },
       pick(managementFAQ, "Is there a long-term contract?"),
     ],
@@ -115,6 +119,21 @@ export const faqGroups: FAQGroup[] = [
       pick(managementFAQ, "Can I still use my cabin for personal stays?"),
       pick(managementFAQ, "How do I see how my property is performing?"),
       pick(LOCAL_SERVICES_FAQ, "Will you talk to my guests?"),
+    ],
+  },
+  {
+    id: "home-care",
+    title: "Home Care Concierge",
+    blurb:
+      "Monthly care for private second homes, owner-used vacation homes, and self-managed rentals. What the base plan covers, and what it does not.",
+    items: [
+      pick(HOME_CARE_FAQ, "Is every guest turnover included?"),
+      pick(HOME_CARE_FAQ, "How often do you visit?"),
+      pick(HOME_CARE_FAQ, "Is monthly hot-tub attention enough?"),
+      pick(HOME_CARE_FAQ, "Will you collect packages every day?"),
+      pick(HOME_CARE_FAQ, "Will you handle emergencies?"),
+      pick(HOME_CARE_FAQ, "Can you work alongside another property manager?"),
+      pick(HOME_CARE_FAQ, "What area do you cover?"),
     ],
   },
   {

@@ -9,6 +9,7 @@ import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { ConciergeCrossLink } from "@/components/sections/concierge-crosslink";
 import { managementFAQ } from "@/data/services";
 import { siteConfig } from "@/data/site";
 
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     "short-term rental management Broken Bow OK",
   ],
   alternates: {
-    canonical: "https://rentwithfrontier.com/broken-bow-property-management",
+    canonical: "https://www.rentwithfrontier.com/broken-bow-property-management",
   },
 };
 
@@ -215,6 +216,11 @@ export default function BrokenBowPropertyManagementPage() {
             </div>
         </div>
       </SectionWrapper>
+
+      <ConciergeCrossLink
+        heading="A Broken Bow home you keep for yourselves?"
+        body="Plenty of Broken Bow second homes are never listed. They still need a local person to clean before you arrive, check on the house after a storm, and keep an eye on the hot tub. That is a home-care question, not a management one."
+      />
 
       {/* What owners get from a small shop */}
       <SectionWrapper background="sage">

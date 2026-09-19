@@ -8,6 +8,7 @@ import { FAQSection } from "@/components/sections/faq-section";
 import { ServiceCard } from "@/components/cards/service-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { ConciergeCrossLink } from "@/components/sections/concierge-crosslink";
 import { managementFAQ } from "@/data/services";
 import { hochatownFAQ } from "@/data/hochatown-faq";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/hochatown-property-management",
+    canonical: "https://www.rentwithfrontier.com/hochatown-property-management",
   },
 };
 
@@ -236,6 +237,11 @@ export default function HochatownPropertyManagementPage() {
             </div>
         </div>
       </SectionWrapper>
+
+      <ConciergeCrossLink
+        heading="A Hochatown cabin you use yourselves, or rent only sometimes?"
+        body="Not every cabin on the mountain is an investment property. If yours is mostly a family place, or you run the occasional booking yourself, monthly care between your own visits fits better than a management agreement."
+      />
 
       {/* Live Hochatown market snapshot */}
       <SectionWrapper background="white" id="market">

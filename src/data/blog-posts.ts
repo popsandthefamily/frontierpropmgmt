@@ -22,6 +22,12 @@ export interface BlogPost {
    * Copy them from /admin/social.
    */
   facebookPost?: string;
+  /**
+   * Drafts stay in the content system but are never listed, linked, built,
+   * or included in the sitemap or llms files. Remove the flag, set the real
+   * publish date and author, and have the copy reviewed before it goes out.
+   */
+  draft?: boolean;
 }
 
 /* ------------------------------------------------------------------ */
@@ -48,7 +54,7 @@ We also wrote the honest part: where scale genuinely wins. Multi-state portfolio
 
 Full breakdown here, including the three questions that tell you which structure fits your cabin:
 
-https://rentwithfrontier.com/blogs/what-boutique-cabin-manager-does-differently`,
+https://www.rentwithfrontier.com/blogs/what-boutique-cabin-manager-does-differently`,
     featuredImage: "/images/properties/sublime/sublime-2.jpg",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, the <a href="/audit#full-audit">free listing audit</a> runs your specific Airbnb or VRBO listing against current AirROI data. That's the honest first step before any conversation about management.</em></p>
@@ -114,7 +120,7 @@ We wrote the checklist we would use if we were the ones shopping. Some of the an
 
 Print it, bring it to every interview, and take notes on who gets uncomfortable.
 
-https://rentwithfrontier.com/blogs/questions-to-ask-hochatown-airbnb-manager`,
+https://www.rentwithfrontier.com/blogs/questions-to-ask-hochatown-airbnb-manager`,
     featuredImage: "/images/discover/hochatown-pm-featured.png",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning before you start interviewing managers, run the <a href="/audit#full-audit">free listing audit</a>. The revenue gap on your specific listing is the only number that actually matters in these conversations.</em></p>
@@ -205,7 +211,7 @@ Most bad reviews are not about the cabin. They are about a gap between what the 
 
 The whole write-up, including what we would do differently if we bought again:
 
-https://rentwithfrontier.com/blogs/lessons-from-running-our-own-hochatown-cabin`,
+https://www.rentwithfrontier.com/blogs/lessons-from-running-our-own-hochatown-cabin`,
     featuredImage: "/images/properties/sublime/sublime-1.jpg",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning right now, run the <a href="/audit#full-audit">free listing audit</a>. The math we use on Sublime Retreat is the same math we run on owner cabins.</em></p>
@@ -260,7 +266,7 @@ Remote ownership works. It just fails in specific, predictable ways: the cleaner
 
 This piece covers what remote ownership actually looks like, what to systematize first, and how to stop losing weekends to a property that was supposed to make you money.
 
-https://rentwithfrontier.com/blogs/managing-broken-bow-cabin-from-dallas`,
+https://www.rentwithfrontier.com/blogs/managing-broken-bow-cabin-from-dallas`,
     featuredImage: "/images/hero/forest-aerial.jpg",
     content: `
 <h2>The Dallas-to-Broken-Bow Pipeline Is Real</h2>
@@ -320,7 +326,7 @@ Winter is the underrated one. Lowest rates, quietest trails, and a hot tub hits 
 
 Season-by-season breakdown with weather, crowds, pricing, and what to do in each:
 
-https://rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
+https://www.rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
     featuredImage: "/images/discover/broken-bow-area.webp",
     content: `
 <h2>When Should You Visit Broken Bow?</h2>
@@ -388,7 +394,7 @@ Photos of a hot tub in the snow are usually taken in the one week a year it snow
 
 None of this is a reason to skip the amenity. It is a reason to ask two questions before you book. Here is the full guide, plus why booking direct with a local company usually costs you less than the same cabin on a platform:
 
-https://rentwithfrontier.com/blogs/broken-bow-cabin-hot-tub-private-pool`,
+https://www.rentwithfrontier.com/blogs/broken-bow-cabin-hot-tub-private-pool`,
     featuredImage: "/images/properties/sublime/sublime-5.jpg",
     content: `
 <h2>Hot Tubs and Pools Are the Top-Requested Amenity in Broken Bow</h2>
@@ -449,7 +455,7 @@ The part that gets glossed over in most investor pitches: this is an operating b
 
 We laid out the actual math, including what a realistic first year looks like and the costs that surprise new owners:
 
-https://rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-cabins`,
+https://www.rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-cabins`,
     featuredImage: "/images/discover/hochatown-area-2.webp",
     content: `
 <h2>The Broken Bow Cabin Boom Is Not Slowing Down</h2>
@@ -515,7 +521,7 @@ What we tell our own guests: pack for one extra day, bring more groceries than y
 
 Full checklist here, for guests and for cabin owners:
 
-https://rentwithfrontier.com/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
+https://www.rentwithfrontier.com/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
     featuredImage: "/images/blog/winter-storm.webp",
     content: `
 <h2>A Winter Storm Is Coming, Here Is What Guests Should Know</h2>
@@ -576,7 +582,7 @@ Owners who do nothing take the hit quietly. Owners who reprice absorb most of it
 
 We wrote up what changed, what we are doing about it on the cabins we manage, and how to check whether your own pricing has been adjusted:
 
-https://rentwithfrontier.com/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
+https://www.rentwithfrontier.com/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
     featuredImage: "/images/blog/airbnb-fee-overhaul.webp",
     content: `
 <h2>Airbnb Is Changing Its Fee Structure, Here Is What Owners Need to Know</h2>
@@ -618,7 +624,7 @@ Compliance is the least interesting part of owning a cabin and the most expensiv
 
 Here is what changed, what you need to do, and the deadlines to have on your calendar:
 
-https://rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
+https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
     featuredImage: "/images/discover/hochatown-area.webp",
     content: `
 <h2>Hochatown's STR Licensing and Tax System Is Changing</h2>
@@ -646,6 +652,127 @@ https://rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 <p>Have questions about the Granicus transition or your STR compliance status? <a href="/contact">Contact us</a>, we are happy to help.</p>
 `,
   },
+  /* ---------------------------------------------------------------- */
+  /*  DRAFTS: Home Care Concierge launch content. Not published.       */
+  /*  Owner review required: facts, tone, author line, publish date.   */
+  /* ---------------------------------------------------------------- */
+  {
+    slug: "what-second-home-care-includes-broken-bow",
+    title: "What Does Second-Home Care Include in Broken Bow?",
+    date: "2026-09-19",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    draft: true,
+    excerpt:
+      "A monthly care plan for a Broken Bow second home is a defined list, not a vague promise. Here is what a realistic scope covers, what costs extra, and when a house needs more than monthly attention.",
+    featuredImage: "/images/local-services/hero.webp",
+    content: `
+<p>Most people who own a second home in Broken Bow or Hochatown do not rent it. They bought it to use it. And the question they eventually ask, usually after a drive down to deal with something small, is whether anyone local can just look after the place between visits.</p>
+<p>The answer is yes, but it is worth being precise about what "look after the place" means, because the phrase covers everything from a monthly walk-through to a full-time caretaker. This article describes the monthly scope we actually sell as <a href="/home-care-concierge">Home Care Concierge</a>, so you can judge whether it fits your house.</p>
+
+<h2>A monthly care cycle, not continuous monitoring</h2>
+<p>The base plan is built around one coordinated visit cycle per calendar month. Cleaning and technical work may happen on different days with different people, but the plan is monthly. It is not a weekly check, and it is not someone watching the property continuously. If your house needs more than that, it needs a different plan, and we will say so.</p>
+
+<h2>What one month of care covers</h2>
+<h3>An interior maintenance clean</h3>
+<p>One standard clean of the rooms and square footage agreed at onboarding: kitchen, bathrooms, floors, surfaces, and the beds you ask us to make. This is the clean that means you walk into a ready house rather than a dusty one. It is not a deep clean, it is not laundry service, and it is not a guest turnover.</p>
+
+<h3>Hot-tub attention</h3>
+<p>One scheduled check: test and record the water, routine balancing, accessible cleaning, filter attention, and a look at the cover and the equipment. A covered, unused tub between your visits is well served by this. A tub that gets used every weekend is not, and we scope that separately rather than pretend a monthly visit covers it.</p>
+
+<h3>Light exterior care</h3>
+<p>Blowing off the decks, porches, and paths you care about; tidying beds and low shrubs at ground level; picking up small debris. There is a time allowance for this in the written scope. Mowing, tree work, pressure washing, gutters, and storm cleanup are separate jobs with separate quotes.</p>
+
+<h3>A visual property check</h3>
+<p>A walk through accessible areas looking for the obvious: a leak under a sink, a wasp nest under the eave, an HVAC unit that is not running, a door that no longer latches. This is observation by someone who knows houses, not a licensed inspection or a security service, and it does not guarantee that nothing will ever go wrong.</p>
+
+<h3>Mail, packages, and small tasks</h3>
+<p>If you authorize it, we collect mail and packages during the visit and put them in a designated spot inside. We swap accessible filters, bulbs, and batteries you have supplied. We do not collect daily, we do not store things off site, and we do not do electrical or ladder work.</p>
+
+<h3>A report</h3>
+<p>After each cycle: a dated checklist of what was done, what we noticed, photos where you have authorized them, anything unresolved, and anything that needs your approval before money is spent. You should never wonder what happened at your house.</p>
+
+<h2>Arrival coordination</h2>
+<p>When scheduling permits, the monthly visit is timed to land before an arrival date you give us, so the house is clean when you get there. This is coordination, not an on-demand service. It does not create a free extra clean for every visit; if you come down three times in a month and want the house cleaned three times, that is additional scoped work.</p>
+
+<h2>What costs extra</h2>
+<p>The list is deliberately explicit, because the fastest way to sour a relationship is to discover on the invoice that something you assumed was included was not:</p>
+<ul>
+<li>Additional visits or a higher-frequency schedule</li>
+<li>Guest turnovers, restocking, and linen service</li>
+<li>Repairs, parts, and materials</li>
+<li>Mowing, major pruning, tree work, and storm cleanup</li>
+<li>Pressure washing, gutter work, hauling, and pest treatment</li>
+<li>Pool service, and hot-tub drains and refills</li>
+<li>Deep cleaning and specialty cleaning</li>
+<li>Emergency or after-hours attendance</li>
+<li>Waiting for deliveries, meeting vendors, grocery runs, and off-site storage</li>
+</ul>
+<p>Our own scheduled labor inside the plan is a flat monthly figure. When a plumber, electrician, or hot-tub technician is needed, their invoice passes through at cost.</p>
+
+<h2>When a house needs more than monthly attention</h2>
+<p>Some honest signals that the base plan is not enough on its own:</p>
+<ul>
+<li>A hot tub that stays filled and is used most weekends.</li>
+<li>Guests, whether paying or family, arriving more than once a month and expecting a clean house each time.</li>
+<li>A house that has had freeze damage before, in a winter with a hard-freeze forecast.</li>
+<li>Landscaping that grows faster than a monthly blow-off can keep up with.</li>
+</ul>
+<p>None of those are problems. They just mean the written scope adds visits or services on top of the base. What we will not do is quote the base plan and let the gaps show up later.</p>
+
+<h2>How it starts</h2>
+<p>Tell us about the property, we walk it with you or with your permission, you get a written scope with the price on it, and nothing begins until you approve it. If you own a second home in Broken Bow or Hochatown and want to know what a realistic plan looks like for it, <a href="/contact?type=concierge#inquiry">request a walkthrough</a>. No listing, rental income, or occupancy numbers required.</p>
+`,
+  },
+  {
+    slug: "self-managing-hochatown-cabin-what-local-team-handles",
+    title: "Self-Managing a Hochatown Cabin: What Can a Local Team Handle?",
+    date: "2026-09-19",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    draft: true,
+    excerpt:
+      "You run the listing, the pricing, and the guests. What can you hand to a local team without handing over the business? A practical split of responsibilities for self-managed Hochatown cabins.",
+    featuredImage: "/images/local-services/hero.webp",
+    content: `
+<p>A lot of Hochatown cabin owners are good at the online half of running a rental. They price well, they answer guests quickly, and they would rather keep that control than pay a percentage to have someone else do it. What they cannot do from Dallas or Oklahoma City is be at the cabin. This article is about drawing that line clearly: which jobs stay with you, and which a local team can take.</p>
+
+<h2>What stays with you</h2>
+<p>If you self-manage, these remain your responsibilities, and no local support arrangement changes that:</p>
+<ul>
+<li><strong>The listing.</strong> Photos, copy, platform accounts, and the reviews attached to them.</li>
+<li><strong>Pricing and the calendar.</strong> Nightly rates, minimum stays, blocks for your own use.</li>
+<li><strong>Guest communication.</strong> Inquiries, check-in instructions, the midnight message about the Wi-Fi.</li>
+<li><strong>Money and taxes.</strong> Payouts, occupancy tax, permits in your name.</li>
+</ul>
+<p>The moment you want those handled too, you are describing <a href="/management-services">full-service management</a>, which is a different arrangement with a different fee.</p>
+
+<h2>What a local team can take</h2>
+<h3>Turnovers on your booking calendar</h3>
+<p>Departure and arrival cleans timed to your bookings, linens, restocking of paper and soap and coffee, a photo set after each clean so you can see the cabin without driving to it, and same-day reporting of damage or wear. This is the core of what we call <a href="/local-services">STR Cleaning &amp; Local Support</a>, and it is scoped per property because a two-bedroom that turns twice a month and a five-bedroom that turns every weekend are different jobs.</p>
+
+<h3>Local checks</h3>
+<p>Vacancy checks between bookings and through the slow months, hard-freeze prep and post-freeze walk-throughs, storm assessment with photos, and a look at the deck, gutters, and drive. These are the visits that decide whether a cold snap costs you nothing or costs you a season.</p>
+
+<h3>Maintenance triage and vendor meets</h3>
+<p>Someone fifteen minutes away who can get inside and look at the problem a guest just reported, change the HVAC filter, balance the hot tub, and meet the licensed plumber or electrician when one is needed. Vendor invoices pass through at cost; you pay for the coordination, not a markup.</p>
+
+<h3>Supply coordination and logistics</h3>
+<p>Meeting the furniture delivery, receiving the package you shipped ahead, servicing the keypad, and the supply runs that mean you are not mailing paper towels from Dallas.</p>
+
+<h2>Two ways to buy this</h2>
+<p>Which arrangement fits depends on how often the cabin turns over.</p>
+<p><strong>If it rents most weekends,</strong> you need turnovers on a booking calendar, and that is STR Cleaning &amp; Local Support: a custom scope with recurring work at a flat monthly figure and on-call work at a rate you approve first.</p>
+<p><strong>If it is mostly yours and rents only now and then,</strong> <a href="/home-care-concierge">Home Care Concierge</a> is the simpler fit: a fixed monthly plan from $500 for one scheduled care cycle a month covering a maintenance clean, hot-tub attention, light exterior upkeep, a visual check, and a report. Guest turnovers are then added as a separately quoted line when you have a booking, and the included monthly clean can be timed after a stay so you are never billed twice for the same work.</p>
+<p>The thing both have in common: you keep the listing and the bookings. Neither arrangement takes a percentage of what the cabin earns.</p>
+
+<h2>Working alongside another manager</h2>
+<p>Some owners have a manager who handles the online side but has no one reliable on the ground here. We can fill that gap with your written authorization and a clear division of responsibilities, and we will identify what is genuinely incremental before quoting, so you are not paying two companies for the same task.</p>
+
+<h2>Where to start</h2>
+<p>Tell us about the cabin, how often it rents, and what has been falling through the cracks. We walk the property, write down exactly what we would handle and what it costs, and you decide. <a href="/contact?type=local-support#inquiry">Build your local support plan</a>, or if the cabin is mostly for you, <a href="/contact?type=concierge#inquiry">ask about monthly home care</a>.</p>
+`,
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -653,11 +780,11 @@ https://rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 /* ------------------------------------------------------------------ */
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-  return blogPosts.find((p) => p.slug === slug);
+  return blogPosts.find((p) => p.slug === slug && !p.draft);
 }
 
 export function getBlogPosts(): BlogPost[] {
-  return [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  return blogPosts
+    .filter((p) => !p.draft)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }

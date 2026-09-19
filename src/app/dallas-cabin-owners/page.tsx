@@ -12,6 +12,7 @@ import { StepCard } from "@/components/cards/step-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { ConciergeCrossLink } from "@/components/sections/concierge-crosslink";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { siteConfig } from "@/data/site";
 
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/dallas-cabin-owners",
+    canonical: "https://www.rentwithfrontier.com/dallas-cabin-owners",
   },
 };
 
@@ -240,6 +241,11 @@ export default function DallasCabinOwnersPage() {
           <HeroSnapshot auditHref="/audit#full-audit" />
         </div>
       </SectionWrapper>
+
+      <ConciergeCrossLink
+        heading="Own a Broken Bow home from Dallas that you don't rent?"
+        body="Three hours is a long way to drive to run the blower over the deck or find out why the hot tub is cloudy. Remote owners of private second homes get the same local team, on a monthly care plan, with a report after every visit. Dallas is where you live; Broken Bow and Hochatown are where we work."
+      />
 
       {/* Why Dallas Owners Choose Frontier */}
       <SectionWrapper background="cream">

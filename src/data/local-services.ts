@@ -1,7 +1,9 @@
 /**
- * Local Services is the smaller of Frontier's two plans: on-the-ground
- * cleaning, maintenance, and logistics for owners who keep control of their
- * own bookings.
+ * STR Cleaning & Local Support (the route is still /local-services): the
+ * supporting offer for owners who keep control of their own bookings and
+ * need turnovers on a booking calendar. It sits beside the two primary
+ * services, full management and Home Care Concierge, rather than as a
+ * third flagship plan.
  *
  * There is no price list here on purpose. Scope varies enough between a
  * two-bedroom that needs turns only and a five-bedroom with a pool, a hot
@@ -81,8 +83,8 @@ export const LOCAL_SERVICE_GROUPS: LocalServiceGroup[] = [
 ];
 
 /**
- * The line between the two plans. Anything involving guests, money, or the
- * listing itself belongs to Property Manager.
+ * The line between local support and full management. Anything involving
+ * guests, money, or the listing itself belongs to Property Manager.
  */
 export const LOCAL_SERVICES_NOT_INCLUDED = [
   "Guest communication and booking management",
@@ -128,7 +130,7 @@ export const LOCAL_SERVICES_STEPS: LocalServicesStep[] = [
 
 export const LOCAL_SERVICES_FAQ = [
   {
-    question: "How much does Local Services cost?",
+    question: "How much does STR Cleaning & Local Support cost?",
     answer:
       "It's quoted per property after a walkthrough. There's no published rate because the work isn't standard: a two-bedroom that needs turnover cleaning only and a five-bedroom with a pool, a hot tub, and a long gravel drive are genuinely different jobs. Recurring work is quoted as a flat monthly figure, and on-call work is quoted at a rate you approve before we start. No setup fee, no annual contract.",
   },
@@ -138,14 +140,14 @@ export const LOCAL_SERVICES_FAQ = [
       "Because we'd be wrong for most owners. A published rate either overcharges the simple properties or quietly excludes half of what a complex one needs, and then the real number shows up later as a surprise. We'd rather look at the cabin first and give you a figure that holds.",
   },
   {
-    question: "Can I use Local Services if another company manages my cabin?",
+    question: "Can I use local support if another company manages my cabin?",
     answer:
       "Yes. This plan is built for it. You keep your manager, your listing, and your bookings, and we handle the on-the-ground work they're not doing well or not doing at all. We also work with owners who self-manage entirely.",
   },
   {
     question: "Do you take a percentage of my bookings?",
     answer:
-      "No. Local Services never touches your booking revenue. You're paying for work performed, not for a share of what the cabin earns. The percentage model is our Property Manager plan, which is a different plan entirely.",
+      "No. Local support never touches your booking revenue. You're paying for work performed, not for a share of what the cabin earns. The percentage model is our Property Manager plan, which is a different service entirely.",
   },
   {
     question: "Do you mark up vendor invoices?",
@@ -168,117 +170,18 @@ export const LOCAL_SERVICES_FAQ = [
       "Broken Bow, Hochatown, and the surrounding McCurtain County area. Same footprint as our full management, because the whole plan depends on being close enough to actually show up.",
   },
   {
-    question: "Can I start on Local Services and move to full management later?",
+    question: "Can I start on local support and move to full management later?",
     answer:
       "Yes, and a fair number of owners do exactly that. It's a reasonable way to see how we work before handing over the whole property. Availability isn't guaranteed, though, since we cap how many cabins we manage.",
   },
   {
     question: "Is there a contract?",
     answer:
-      "Month to month, thirty days notice to cancel. No annual lock-in on either plan.",
-  },
-];
-
-/* ------------------------------------------------------------------ */
-/*  Two-plan comparison, used by /pricing                             */
-/* ------------------------------------------------------------------ */
-
-export interface PricingComparisonColumn {
-  key: "manager" | "local";
-  label: string;
-  highlight?: boolean;
-}
-
-export const PRICING_COLUMNS: PricingComparisonColumn[] = [
-  { key: "manager", label: "Property Manager", highlight: true },
-  { key: "local", label: "Local Services" },
-];
-
-export const PRICING_ROWS: {
-  key: string;
-  label: string;
-  values: Record<PricingComparisonColumn["key"], string>;
-}[] = [
-  {
-    key: "pricing",
-    label: "Pricing",
-    values: {
-      manager: "20% of net rental income",
-      local: "Custom quote, per property",
-    },
+      "Month to month, thirty days notice to cancel. No annual lock-in on any of our services.",
   },
   {
-    key: "bestFor",
-    label: "Best for",
-    values: {
-      manager: "Owners who want the cabin fully run for them",
-      local: "Owners who keep their own bookings but need local hands",
-    },
-  },
-  {
-    key: "setup",
-    label: "Setup fee",
-    values: { manager: "None", local: "None" },
-  },
-  {
-    key: "contract",
-    label: "Contract",
-    values: {
-      manager: "Month-to-month, 30-day exit",
-      local: "Month-to-month, 30-day exit",
-    },
-  },
-  {
-    key: "bookings",
-    label: "Who controls the listing and bookings",
-    values: { manager: "We do", local: "You do" },
-  },
-  {
-    key: "guestComms",
-    label: "Guest communication",
-    values: { manager: "We handle", local: "Owner handles" },
-  },
-  {
-    key: "pricingStrategy",
-    label: "Dynamic pricing & revenue strategy",
-    values: { manager: "We handle", local: "Not included" },
-  },
-  {
-    key: "listing",
-    label: "Listing build, SEO & channel management",
-    values: { manager: "We handle", local: "Not included" },
-  },
-  {
-    key: "cleaning",
-    label: "Turnover cleaning",
-    values: { manager: "We handle", local: "We handle" },
-  },
-  {
-    key: "maintenance",
-    label: "Maintenance & repairs",
-    values: { manager: "We handle", local: "We handle" },
-  },
-  {
-    key: "checks",
-    label: "Freeze, storm & vacancy checks",
-    values: { manager: "We handle", local: "We handle" },
-  },
-  {
-    key: "vendors",
-    label: "Vendor coordination",
-    values: { manager: "We handle, at cost", local: "We handle, at cost" },
-  },
-  {
-    key: "taxes",
-    label: "Occupancy tax filing",
-    values: { manager: "We handle", local: "Owner handles" },
-  },
-  {
-    key: "reporting",
-    label: "Reporting",
-    values: {
-      manager: "Monthly P&L + payout statement",
-      local: "Photo report after every visit",
-    },
+    question: "How is this different from Home Care Concierge?",
+    answer:
+      "Local support is scoped around a booking calendar: turnovers, restocking, and the maintenance that comes with guests, quoted per property. Home Care Concierge is a fixed monthly plan from $500 for one scheduled care cycle a month, built for private second homes and cabins that rent only occasionally. If you need turnovers every weekend, start here. If you need the house looked after once a month between your own visits, start with the concierge plan and add turnovers as a separate quoted line when you need them.",
   },
 ];

@@ -5,29 +5,28 @@ import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
+import { HomeCarePackage } from "@/components/sections/home-care-package";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { availability, plans, siteConfig } from "@/data/site";
-import { PRICING_COLUMNS, PRICING_ROWS } from "@/data/local-services";
+import {
+  CTA,
+  SERVICE_COMPARISON_COLUMNS,
+  SERVICE_COMPARISON_ROWS,
+  homeCare,
+} from "@/data/home-care";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Pricing | Two Plans, Stated Plainly | Frontier Property Management",
+  title: { absolute: "STR Management & Home Care Pricing | Frontier" },
   description:
-    "Frontier's two plans for Broken Bow and Hochatown cabin owners: Property Manager at 20% of net rental income, or Local Services (cleaning, maintenance, logistics) on a custom quote. No setup fees, no monthly minimum, month to month.",
-  keywords: [
-    "Frontier property management pricing",
-    "STR management pricing Broken Bow",
-    "Broken Bow property management fees",
-    "Hochatown cabin management cost",
-    "vacation rental management fee Oklahoma",
-  ],
+    "Compare full-service rental management with Home Care Concierge from $500/month. See service boundaries and request a property-specific scope.",
   openGraph: {
-    title: "Pricing | Frontier Property Management",
+    title: "STR Management & Home Care Pricing | Frontier",
     description:
-      "Two plans. 20% of net rental income for full management, or a custom quote for local cleaning and maintenance.",
+      "20% of net rental income for full management, or Home Care Concierge from $500 a month. What each includes, and what is quoted separately.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -38,19 +37,26 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/pricing",
+    canonical: `${siteConfig.url}/pricing`,
   },
 };
 
 const HEADLINE_CARDS = [
   {
     plan: plans.manager,
-    cta: { label: "See the Property Manager plan", href: plans.manager.href },
+    eyebrow: "Full-Service STR Management",
+    boundary:
+      "A percentage of income: a $0 month costs $0 in management. Labor, parts, and vendor invoices are billed at cost. No setup fee.",
+    cta: CTA.management,
+    detail: { label: "How management works", href: plans.manager.href },
     highlight: true,
   },
   {
-    plan: plans.local,
-    cta: { label: "See Local Services", href: plans.local.href },
+    plan: plans.concierge,
+    eyebrow: "Home Care Concierge",
+    boundary: homeCare.priceQualifier,
+    cta: CTA.concierge,
+    detail: { label: "What the plan includes", href: plans.concierge.href },
     highlight: false,
   },
 ] as const;
@@ -61,44 +67,60 @@ export default function PricingPage() {
       <PageViewTracker event="pricing_page_viewed" />
 
       <JsonLd
-        type="Service"
+        type="ItemList"
         data={{
-          name: "Frontier Property Management, plans and pricing",
-          provider: {
-            "@type": "LocalBusiness",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            telephone: siteConfig.phone,
-          },
-          areaServed: [
-            { "@type": "City", name: "Broken Bow" },
-            { "@type": "Place", name: "Hochatown" },
-            { "@type": "Place", name: "McCurtain County, Oklahoma" },
-          ],
-          offers: [
+          name: "Frontier Property Management services and pricing",
+          url: `${siteConfig.url}/pricing`,
+          itemListElement: [
             {
-              "@type": "Offer",
-              name: plans.manager.name,
-              description: plans.manager.feeDefinition,
-              url: `${siteConfig.url}${plans.manager.href}`,
-              availability: "https://schema.org/LimitedAvailability",
-              priceSpecification: {
-                "@type": "PriceSpecification",
-                priceCurrency: "USD",
-                description: "20% of net rental income",
+              "@type": "ListItem",
+              position: 1,
+              item: {
+                "@type": "Offer",
+                name: plans.manager.name,
+                url: `${siteConfig.url}${plans.manager.href}`,
+                description: plans.manager.feeDefinition,
+                offeredBy: { "@id": `${siteConfig.url}/#business` },
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  priceCurrency: "USD",
+                  description: plans.manager.feeInline,
+                },
+                availability: "https://schema.org/LimitedAvailability",
               },
             },
             {
-              "@type": "Offer",
-              name: plans.local.name,
-              description: plans.local.feeDefinition,
-              url: `${siteConfig.url}${plans.local.href}`,
-              availability: "https://schema.org/LimitedAvailability",
-              priceSpecification: {
-                "@type": "PriceSpecification",
-                priceCurrency: "USD",
-                description:
-                  "Quoted per property after an on-site walkthrough",
+              "@type": "ListItem",
+              position: 2,
+              item: {
+                "@type": "Offer",
+                name: `${plans.concierge.name} base plan`,
+                url: `${siteConfig.url}${plans.concierge.href}`,
+                description: plans.concierge.feeDefinition,
+                offeredBy: { "@id": `${siteConfig.url}/#business` },
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  minPrice: plans.concierge.basePrice,
+                  priceCurrency: "USD",
+                  description: `${homeCare.priceLine} ${homeCare.priceQualifier}`,
+                },
+                availability: "https://schema.org/LimitedAvailability",
+              },
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              item: {
+                "@type": "Offer",
+                name: plans.local.name,
+                url: `${siteConfig.url}${plans.local.href}`,
+                description: plans.local.feeDefinition,
+                offeredBy: { "@id": `${siteConfig.url}/#business` },
+                priceSpecification: {
+                  "@type": "PriceSpecification",
+                  priceCurrency: "USD",
+                  description: "Quoted per property after an on-site walkthrough",
+                },
               },
             },
           ],
@@ -107,11 +129,11 @@ export default function PricingPage() {
 
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
-        title="Pricing"
-        subtitle="Two plans, both month to month. Pick the one that matches how much of the cabin you want to keep running yourself."
+        title="Services & Pricing"
+        subtitle="Full-service rental management, or home care while you keep control. Both month to month. Here is what each one costs and where the line falls."
         size="medium"
         overlay="dark"
-        cta={{ label: "Book a discovery call", href: "/contact#discovery" }}
+        cta={CTA.owner}
       />
 
       <Breadcrumbs items={[{ label: "Pricing" }]} />
@@ -119,7 +141,7 @@ export default function PricingPage() {
       {/* Two-card top */}
       <SectionWrapper background="cream">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-          {HEADLINE_CARDS.map(({ plan, cta, highlight }) => (
+          {HEADLINE_CARDS.map(({ plan, eyebrow, boundary, cta, detail, highlight }) => (
             <div
               key={plan.key}
               className={cn(
@@ -129,12 +151,12 @@ export default function PricingPage() {
                   : "border-charcoal/10",
               )}
             >
-              <h2 className="font-heading text-xl font-bold text-charcoal">
-                {plan.name}
-              </h2>
-              <p className="mt-1 text-sm font-medium text-sage-dark">
-                {plan.tagline}
+              <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-sage">
+                {eyebrow}
               </p>
+              <h2 className="mt-2 font-heading text-xl font-bold text-charcoal">
+                {plan.tagline}
+              </h2>
               <div className="mt-4 flex items-baseline gap-2">
                 <span className="font-heading text-4xl font-bold text-charcoal">
                   {plan.fee}
@@ -143,6 +165,9 @@ export default function PricingPage() {
                   {plan.feeSuffix}
                 </span>
               </div>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                {boundary}
+              </p>
               <p className="mt-4 flex-1 text-sm text-muted-foreground">
                 {plan.summary}
               </p>
@@ -165,14 +190,22 @@ export default function PricingPage() {
                   {cta.label}
                 </PlanCTA>
               </Button>
+              <Link
+                href={detail.href}
+                className="mt-3 text-center text-sm font-medium text-sage hover:text-sage-dark hover:underline"
+              >
+                {detail.label} &rarr;
+              </Link>
             </div>
           ))}
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
-          Both plans are month to month with 30 days notice to cancel. No setup
-          fee and no monthly minimum on either, and we do not mark up cleaning,
-          maintenance, or vendor invoices on either. {availability.sentence}
+          Both services are month to month with 30 days notice to cancel and
+          no setup fee. Management has no monthly minimum because it is a
+          share of income. Home Care Concierge is a monthly plan fee for
+          scheduled work, so it is billed whether or not the home is rented.
+          Vendor invoices pass through at cost on both. {availability.sentence}
         </p>
       </SectionWrapper>
 
@@ -189,7 +222,7 @@ export default function PricingPage() {
             </p>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {[plans.manager, plans.local].map((plan) => (
+            {[plans.manager, plans.concierge].map((plan) => (
               <div
                 key={plan.key}
                 className="rounded-2xl border border-charcoal/10 bg-white p-6"
@@ -217,15 +250,6 @@ export default function PricingPage() {
               {plans.manager.feeComparisonNote}
             </p>
           </div>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground">
-            Curious how 20% compares to the national operators?{" "}
-            <Link
-              href="/broken-bow-cabin-management-fees"
-              className="font-medium text-sage hover:text-sage-dark hover:underline"
-            >
-              We break down the real cost of each fee model &rarr;
-            </Link>
-          </p>
         </div>
       </SectionWrapper>
 
@@ -234,11 +258,11 @@ export default function PricingPage() {
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              Property Manager vs Local Services, side by side
+              Management vs. Home Care, side by side
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              Same operator, same standards. The difference is where the line
-              falls on what you keep doing yourself.
+              The difference is who operates the rental business versus who
+              performs agreed physical care of the property.
             </p>
           </div>
 
@@ -250,7 +274,7 @@ export default function PricingPage() {
                   <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                     Feature
                   </th>
-                  {PRICING_COLUMNS.map((col) => (
+                  {SERVICE_COMPARISON_COLUMNS.map((col) => (
                     <th
                       key={col.key}
                       className={cn(
@@ -266,7 +290,7 @@ export default function PricingPage() {
                 </tr>
               </thead>
               <tbody>
-                {PRICING_ROWS.map((row, i) => (
+                {SERVICE_COMPARISON_ROWS.map((row, i) => (
                   <tr
                     key={row.key}
                     className={i % 2 === 0 ? "bg-white" : "bg-cream/20"}
@@ -277,13 +301,13 @@ export default function PricingPage() {
                     >
                       {row.label}
                     </th>
-                    {PRICING_COLUMNS.map((col) => (
+                    {SERVICE_COMPARISON_COLUMNS.map((col) => (
                       <td
                         key={col.key}
                         className={cn(
                           "px-4 py-4 align-top text-sm",
                           col.highlight
-                            ? "bg-sage/5 font-semibold text-charcoal"
+                            ? "bg-sage/5 font-medium text-charcoal"
                             : "text-muted-foreground",
                         )}
                       >
@@ -303,7 +327,7 @@ export default function PricingPage() {
 
           {/* Mobile stacked */}
           <div className="mt-10 grid gap-6 md:hidden">
-            {PRICING_COLUMNS.map((col) => (
+            {SERVICE_COMPARISON_COLUMNS.map((col) => (
               <div
                 key={col.key}
                 className={cn(
@@ -322,7 +346,7 @@ export default function PricingPage() {
                   {col.label}
                 </h3>
                 <dl className="mt-4 divide-y divide-cream">
-                  {PRICING_ROWS.map((row) => (
+                  {SERVICE_COMPARISON_ROWS.map((row) => (
                     <div key={row.key} className="grid grid-cols-2 gap-3 py-3">
                       <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         {row.label}
@@ -339,18 +363,62 @@ export default function PricingPage() {
         </div>
       </SectionWrapper>
 
+      {/* Home care package, price and exclusions together */}
+      <SectionWrapper background="cream" id="home-care">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            What $500 includes, and what it does not
+          </h2>
+        </div>
+        <HomeCarePackage />
+      </SectionWrapper>
+
+      {/* STR local support, beneath the comparison */}
+      <SectionWrapper background="white" id="local-support">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-charcoal/10 bg-cream/40 p-6 md:p-8">
+          <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+            Also available
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-charcoal md:text-3xl">
+            {plans.local.name}: {plans.local.fee.toLowerCase()} quote
+          </h2>
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+            {plans.local.summary}
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            {plans.local.feeDefinition} This is the right fit when you need
+            turnovers on a booking calendar rather than one monthly care
+            cycle. It is a custom scope, not a third flagship plan, and it is
+            never a percentage of your bookings.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href={plans.local.href}>See what local support covers</Link>
+            </Button>
+            <PlanCTA
+              plan="local"
+              source="pricing_page_local_block"
+              href={CTA.localSupport.href}
+              className="text-sm font-medium text-sage hover:text-sage-dark hover:underline"
+            >
+              {CTA.localSupport.label} &rarr;
+            </PlanCTA>
+          </div>
+        </div>
+      </SectionWrapper>
+
       {/* Internal links */}
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
-            Want the detail behind each plan?
+            Want the detail behind each service?
           </h2>
           <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href={plans.manager.href}>Property Manager detail</Link>
+              <Link href={plans.manager.href}>Full management detail</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href={plans.local.href}>Local Services detail</Link>
+              <Link href={plans.concierge.href}>Home Care Concierge detail</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/broken-bow-cabin-management-fees">
@@ -358,7 +426,7 @@ export default function PricingPage() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/audit">Free listing audit</Link>
+              <Link href="/faq">Owner FAQ</Link>
             </Button>
           </div>
         </div>
@@ -366,10 +434,10 @@ export default function PricingPage() {
 
       <CTASection
         heading="Not sure which fits?"
-        subtext={`Book a free 30-minute discovery call. We'll look at your numbers and tell you the honest answer, even when it isn't us. ${siteConfig.phone}`}
+        subtext={`Tell us about the property and we'll give you the honest answer, even when it isn't us. ${siteConfig.phone}`}
         backgroundImage="/images/hero/foggy-mountain.jpg"
-        cta={{ label: "Book a discovery call", href: "/contact#discovery" }}
-        secondaryCta={{ label: "Run my free listing audit", href: "/audit" }}
+        cta={CTA.owner}
+        secondaryCta={{ label: "Book a discovery call", href: "/contact#discovery" }}
       />
     </>
   );

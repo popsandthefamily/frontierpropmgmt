@@ -21,9 +21,12 @@ import { ServiceCard } from "@/components/cards/service-card";
 import { AnimateInView } from "@/components/motion/animate-in-view";
 import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-study";
 import { ContactForm } from "@/components/forms/contact-form";
+import { ComparisonTable } from "@/components/sections/comparison-table";
+import { ConciergeCrossLink } from "@/components/sections/concierge-crosslink";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { siteConfig } from "@/data/site";
+import { plans, siteConfig } from "@/data/site";
+import { CTA } from "@/data/home-care";
 import {
   onboardingSteps,
   addOns,
@@ -32,9 +35,9 @@ import {
 } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: "Property Manager Plan: Broken Bow & Hochatown Cabin Management",
+  title: { absolute: "Broken Bow STR Management | Frontier" },
   description:
-    "Frontier's Property Manager plan: full-service Broken Bow & Hochatown cabin management at 20% of net rental income. Dynamic pricing, Airbnb/VRBO, guest support, cleaning, maintenance, taxes. No monthly minimum, month to month, limited 2026 availability.",
+    "Local short-term rental management for Broken Bow and Hochatown cabins. Explore Frontier's management services, fees, and owner support.",
   openGraph: {
     title: "Property Manager Plan | Frontier Property Management",
     description:
@@ -49,7 +52,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/management-services",
+    canonical: `${siteConfig.url}${plans.manager.href}`,
   },
 };
 
@@ -155,15 +158,12 @@ export default function ManagementServicesPage() {
       <JsonLd
         type="Service"
         data={{
-          name: "Full-Service Vacation Rental Management",
+          "@id": `${siteConfig.url}${plans.manager.href}#service`,
+          name: "Full-Service Short-Term Rental Management",
           description:
             "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of net rental income.",
-          provider: {
-            "@type": "RealEstateAgent",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            telephone: siteConfig.phone,
-          },
+          url: `${siteConfig.url}${plans.manager.href}`,
+          provider: { "@id": `${siteConfig.url}/#business` },
           areaServed: [
             { "@type": "Place", name: "Broken Bow, Oklahoma" },
             { "@type": "Place", name: "Hochatown, Oklahoma" },
@@ -182,18 +182,19 @@ export default function ManagementServicesPage() {
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
-        title="The Property Manager Plan"
+        title="Full-Service STR Management"
         subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental income. Pricing, guests, cleanings, maintenance, taxes, handled."
         size="large"
         overlay="gradient"
-        cta={{
+        cta={CTA.management}
+        secondaryCta={{
           label: "Run my free listing audit",
           href: "/audit#full-audit",
         }}
       />
 
       <Breadcrumbs
-        items={[{ label: "Management Services" }]}
+        items={[{ label: "Full-Service STR Management" }]}
       />
 
       {/* ── Flagship case study ─────────────────────────────────────── */}
@@ -554,6 +555,27 @@ export default function ManagementServicesPage() {
           </div>
         </AnimateInView>
       </SectionWrapper>
+
+      {/* ── Compared to national operators ──────────────────────────── */}
+      <SectionWrapper background="cream">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+            Compared to the alternatives
+          </h2>
+          <p className="mt-4 text-base text-muted-foreground md:text-lg">
+            If you&apos;re weighing self-management or a national operator,
+            here&apos;s how the terms line up.
+          </p>
+        </div>
+        <ComparisonTable />
+      </SectionWrapper>
+
+      {/* ── Not renting? ────────────────────────────────────────────── */}
+      <ConciergeCrossLink
+        background="white"
+        heading="Own a cabin here that you don't rent, or only rent now and then?"
+        body="Full management is for owners who want the rental business run for them. If you keep the house for yourselves, or rent it only occasionally, you probably want the property cared for rather than operated."
+      />
 
       {/* ── Add-Ons ─────────────────────────────────────────────────── */}
       <SectionWrapper background="white">
