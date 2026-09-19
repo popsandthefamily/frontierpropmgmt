@@ -23,6 +23,7 @@ export function DiscoveryCTALink({
       {...rest}
       onClick={(e) => {
         track("discovery_call_cta_clicked", { source });
+        track("schedule_call_click", { source });
         onClick?.(e);
       }}
     >

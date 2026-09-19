@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/data/site";
+import { track } from "@/lib/analytics";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -43,6 +44,12 @@ export function ContactForm({ className }: { className?: string }) {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
+    // This form only ever appears on the management page, so the
+    // notification says so. Same endpoint, same fields as before.
+    formData.set("form_type", "Owner Inquiry");
+    formData.set("service_interest", "management");
+    formData.set("_subject", "Owner inquiry: Full-Service STR Management");
+    formData.set("source_page", window.location.pathname);
 
     const validationErrors = validate(formData);
     if (Object.keys(validationErrors).length > 0) {
@@ -62,6 +69,11 @@ export function ContactForm({ className }: { className?: string }) {
 
       if (response.ok) {
         setStatus("success");
+        track("generate_lead", {
+          form: "management_inline",
+          service_interest: "management",
+          source_page: window.location.pathname,
+        });
         form.reset();
       } else {
         setStatus("error");

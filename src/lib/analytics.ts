@@ -33,7 +33,18 @@ export type AnalyticsEvent =
   | "local_services_page_viewed"
   | "plan_cta_clicked"
   | "pricing_page_viewed"
-  | "pricing_tier_cta_clicked";
+  | "pricing_tier_cta_clicked"
+  | "home_care_page_viewed"
+  /** Visitor chooses management, concierge, or local support. */
+  | "service_select"
+  /** First meaningful interaction with a form, once per form session. */
+  | "form_start"
+  /** A valid inquiry was accepted by the submission endpoint. Never a click. */
+  | "generate_lead"
+  /** Telephone or email link clicked. Not a completed conversation. */
+  | "contact_click"
+  /** Scheduling path opened. */
+  | "schedule_call_click";
 
 export function track(
   event: AnalyticsEvent,
