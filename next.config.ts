@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "i0.wp.com" },
       { protocol: "https", hostname: "rentwithfrontier.com" },
+      { protocol: "https", hostname: "www.rentwithfrontier.com" },
     ],
   },
   async redirects() {

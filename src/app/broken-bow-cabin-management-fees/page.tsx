@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical:
-      "https://rentwithfrontier.com/broken-bow-cabin-management-fees",
+      "https://www.rentwithfrontier.com/broken-bow-cabin-management-fees",
   },
 };
 

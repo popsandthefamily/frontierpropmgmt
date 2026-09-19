@@ -22,7 +22,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  alternates: { canonical: "https://rentwithfrontier.com/audit" },
+  alternates: { canonical: "https://www.rentwithfrontier.com/audit" },
   robots: { index: true, follow: true },
 };
 

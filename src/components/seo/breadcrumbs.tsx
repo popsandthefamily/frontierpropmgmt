@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { JsonLd } from "./json-ld";
+import { siteConfig } from "@/data/site";
 
 export interface BreadcrumbItem {
   label: string;
@@ -12,7 +13,7 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const baseUrl = "https://rentwithfrontier.com";
+  const baseUrl = siteConfig.url;
 
   const allItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, ...items];
 

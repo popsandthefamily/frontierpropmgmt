@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
   if (messages.length > 0) {
     await sendAdminAlert(
       "Audit usage approaching cap",
-      messages.join("\n") + "\n\nhttps://rentwithfrontier.com/admin/audit-stats",
+      messages.join("\n") + "\n\nhttps://www.rentwithfrontier.com/admin/audit-stats",
     );
   }
 

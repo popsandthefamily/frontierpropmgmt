@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical:
-      "https://rentwithfrontier.com/switch-property-managers-broken-bow",
+      "https://www.rentwithfrontier.com/switch-property-managers-broken-bow",
   },
 };
 

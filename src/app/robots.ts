@@ -1,7 +1,12 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/data/site";
 
-/** Paths no crawler should index, AI or otherwise. */
-const DISALLOW = ["/api/", "/admin/", "/audit/result/"];
+/**
+ * Paths no crawler should index, AI or otherwise. Every route here is also
+ * protected by real access control or a noindex tag; robots is a courtesy
+ * to well-behaved crawlers, not the security boundary.
+ */
+const DISALLOW = ["/api/", "/admin/", "/audit/result/", "/portal/", "/sign/"];
 
 /**
  * Answer-engine crawlers, listed explicitly.
@@ -12,8 +17,11 @@ const DISALLOW = ["/api/", "/admin/", "/audit/result/"];
  * intentional rather than an oversight. Owners have started finding
  * Frontier through those tools, so this is a channel worth protecting.
  *
- * Google-Extended is the separate opt-in that governs Gemini and AI
- * Overviews; it does not affect normal Google Search ranking either way.
+ * Google-Extended is Google's separate token for whether content may be
+ * used to train and ground Gemini models. It does not affect Google Search
+ * ranking, and it does not control AI Overviews or AI Mode, which use the
+ * ordinary Googlebot crawl. Allowing it here is a deliberate choice to let
+ * Gemini learn from the site; change it only if the owner wants otherwise.
  */
 const AI_CRAWLERS = [
   "GPTBot",
@@ -43,7 +51,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: DISALLOW,
       })),
     ],
-    sitemap: "https://rentwithfrontier.com/sitemap.xml",
-    host: "https://rentwithfrontier.com",
+    sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: siteConfig.url,
   };
 }

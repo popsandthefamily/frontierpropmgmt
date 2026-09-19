@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/income-calculator",
+    canonical: "https://www.rentwithfrontier.com/income-calculator",
   },
 };
 

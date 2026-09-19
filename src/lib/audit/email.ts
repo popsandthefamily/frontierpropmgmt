@@ -10,7 +10,7 @@ function getClient(): Resend | null {
 const FROM = process.env.RESEND_FROM || "Frontier Audit <audit@rentwithfrontier.com>";
 
 function siteUrl(): string {
-  return process.env.NEXT_PUBLIC_SITE_URL || "https://rentwithfrontier.com";
+  return process.env.NEXT_PUBLIC_SITE_URL || "https://www.rentwithfrontier.com";
 }
 
 export async function sendVerificationEmail(email: string, code: string): Promise<void> {

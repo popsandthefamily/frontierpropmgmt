@@ -1,99 +1,61 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/data/site";
+import { getBlogPosts } from "@/data/blog-posts";
+
+const baseUrl = siteConfig.url;
+
+/**
+ * Static pages with the date their content last materially changed.
+ *
+ * These are maintained by hand rather than set to build time: Google reads
+ * lastModified as a signal and ignores it once it notices every page
+ * claims to have changed on every deploy. Bump a date when you change the
+ * page's substance, not its styling. The initial values are the last
+ * content commit for each route as of 2026-09-19.
+ *
+ * Only canonical, indexable pages belong here. Portal, admin, signing,
+ * audit results, API routes, and query variants of /contact are excluded
+ * on purpose.
+ */
+const STATIC_PAGES: { path: string; lastModified: string }[] = [
+  { path: "", lastModified: "2026-09-19" },
+  { path: "/management-services", lastModified: "2026-09-19" },
+  { path: "/home-care-concierge", lastModified: "2026-09-19" },
+  { path: "/local-services", lastModified: "2026-09-19" },
+  { path: "/pricing", lastModified: "2026-09-19" },
+  { path: "/faq", lastModified: "2026-09-19" },
+  { path: "/contact", lastModified: "2026-09-19" },
+  { path: "/about", lastModified: "2026-09-19" },
+  { path: "/search", lastModified: "2026-09-03" },
+  { path: "/income-calculator", lastModified: "2026-04-21" },
+  { path: "/audit", lastModified: "2026-04-27" },
+  { path: "/discover-broken-bow", lastModified: "2026-09-03" },
+  { path: "/hochatown-property-management", lastModified: "2026-09-19" },
+  { path: "/broken-bow-property-management", lastModified: "2026-09-19" },
+  { path: "/dallas-cabin-owners", lastModified: "2026-09-19" },
+  { path: "/airbnb-management-hochatown-ok", lastModified: "2026-08-19" },
+  { path: "/best-hochatown-property-management-company", lastModified: "2026-08-19" },
+  { path: "/broken-bow-cabin-management-fees", lastModified: "2026-09-03" },
+  { path: "/switch-property-managers-broken-bow", lastModified: "2026-08-19" },
+  { path: "/rental-agreement", lastModified: "2026-04-20" },
+  { path: "/privacy-policy", lastModified: "2026-04-20" },
+  { path: "/blogs", lastModified: "2026-08-19" },
+  { path: "/sublime", lastModified: "2026-09-02" },
+  { path: "/old-broken-bow-highway", lastModified: "2026-09-02" },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://rentwithfrontier.com";
+  const staticPages: MetadataRoute.Sitemap = STATIC_PAGES.map((p) => ({
+    url: `${baseUrl}${p.path}`,
+    lastModified: new Date(p.lastModified),
+  }));
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/management-services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/local-services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/pricing`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/search`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/income-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/audit`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/discover-broken-bow`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/hochatown-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/broken-bow-property-management`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/dallas-cabin-owners`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/airbnb-management-hochatown-ok`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/best-hochatown-property-management-company`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/broken-bow-cabin-management-fees`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/switch-property-managers-broken-bow`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.85 },
-    { url: `${baseUrl}/rental-agreement`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-    { url: `${baseUrl}/blogs`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-  ];
+  // Drafts are excluded by getBlogPosts(), so unpublished articles never
+  // reach the sitemap.
+  const blogPosts: MetadataRoute.Sitemap = getBlogPosts().map((post) => ({
+    url: `${baseUrl}/blogs/${post.slug}`,
+    lastModified: new Date(post.date),
+  }));
 
-  const propertyPages: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/sublime`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/old-broken-bow-highway`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
-  ];
-
-  const blogPosts: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/blogs/what-boutique-cabin-manager-does-differently`,
-      lastModified: new Date("2026-04-27"),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blogs/questions-to-ask-hochatown-airbnb-manager`,
-      lastModified: new Date("2026-04-26"),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blogs/lessons-from-running-our-own-hochatown-cabin`,
-      lastModified: new Date("2026-04-25"),
-      changeFrequency: "yearly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/blogs/managing-broken-bow-cabin-from-dallas`,
-      lastModified: new Date("2026-04-07"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blogs/best-time-to-visit-broken-bow`,
-      lastModified: new Date("2026-04-02"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blogs/broken-bow-cabin-hot-tub-private-pool`,
-      lastModified: new Date("2026-03-25"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blogs/why-dallas-investors-buying-broken-bow-cabins`,
-      lastModified: new Date("2026-03-18"),
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown`,
-      lastModified: new Date("2026-01-21"),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
-      lastModified: new Date("2025-10-13"),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/blogs/nights-number-taxes-hochatown`,
-      lastModified: new Date("2025-10-09"),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-  ];
-
-  return [...staticPages, ...propertyPages, ...blogPosts];
+  return [...staticPages, ...blogPosts];
 }

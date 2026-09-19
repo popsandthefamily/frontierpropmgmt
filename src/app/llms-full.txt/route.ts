@@ -12,9 +12,19 @@ import {
   LOCAL_SERVICE_GROUPS,
   LOCAL_SERVICES_NOT_INCLUDED,
   LOCAL_SERVICES_STEPS,
-  PRICING_COLUMNS,
-  PRICING_ROWS,
 } from "@/data/local-services";
+import {
+  HOME_CARE_AUDIENCES,
+  HOME_CARE_FAQ,
+  HOME_CARE_NOT_INCLUDED,
+  HOME_CARE_PRICING_NOTES,
+  HOME_CARE_SCOPE,
+  HOME_CARE_STEPS,
+  HOME_CARE_STR_NOTE,
+  SERVICE_COMPARISON_COLUMNS,
+  SERVICE_COMPARISON_ROWS,
+  homeCare,
+} from "@/data/home-care";
 import { flagshipCaseStudy } from "@/data/flagship-case-study";
 import {
   sublimeAtAGlance,
@@ -70,7 +80,7 @@ function buildLlmsFullTxt(): string {
   push(
     `# ${siteConfig.name} — full site content`,
     "",
-    "> Complete plain-text content for Frontier Property Management, a boutique, owner-operated short-term rental management company in Broken Bow and Hochatown, Oklahoma. The index version of this file is at /llms.txt.",
+    `> Complete plain-text content for Frontier Property Management, an owner-operated company in Broken Bow and Hochatown, Oklahoma. ${siteConfig.description} The index version of this file is at /llms.txt.`,
     "",
     "## Business facts",
     "",
@@ -81,7 +91,7 @@ function buildLlmsFullTxt(): string {
     `- Email: ${siteConfig.email}`,
     `- Address: ${siteConfig.address}`,
     `- Hours: ${siteConfig.hours}`,
-    `- Service area: Broken Bow, Hochatown, and McCurtain County, Oklahoma. Many owners are absentee, based in Dallas-Fort Worth or Oklahoma City.`,
+    `- Service area: Broken Bow, Hochatown, and nearby McCurtain County, Oklahoma. Many owners are absentee, based in Dallas-Fort Worth or Oklahoma City; Frontier does not operate in those cities.`,
     `- Google Business Profile: ${siteConfig.social.google}`,
     `- Facebook: ${siteConfig.social.facebook}`,
     `- Instagram: ${siteConfig.social.instagram}`,
@@ -90,11 +100,13 @@ function buildLlmsFullTxt(): string {
     "",
     availability.long,
     "",
-    "## Plans",
+    "## Services",
+    "",
+    "Two primary services, full-service STR management and Home Care Concierge, plus a supporting local-support offer for self-managed rentals. The distinction is who operates the rental business versus who performs agreed physical property care.",
     "",
   );
 
-  for (const plan of [plans.manager, plans.local]) {
+  for (const plan of [plans.manager, plans.concierge, plans.local]) {
     push(
       `### ${plan.name} — ${plan.feeInline}`,
       "",
@@ -113,13 +125,13 @@ function buildLlmsFullTxt(): string {
     "",
     plans.manager.feeComparisonNote,
     "",
-    "### Plan comparison",
+    "### Management vs. Home Care Concierge",
     "",
-    `| Feature | ${PRICING_COLUMNS.map((c) => c.label).join(" | ")} |`,
-    `| --- | ${PRICING_COLUMNS.map(() => "---").join(" | ")} |`,
-    ...PRICING_ROWS.map(
+    `| Feature | ${SERVICE_COMPARISON_COLUMNS.map((c) => c.label).join(" | ")} |`,
+    `| --- | ${SERVICE_COMPARISON_COLUMNS.map(() => "---").join(" | ")} |`,
+    ...SERVICE_COMPARISON_ROWS.map(
       (row) =>
-        `| ${row.label} | ${PRICING_COLUMNS.map((c) => row.values[c.key]).join(" | ")} |`,
+        `| ${row.label} | ${SERVICE_COMPARISON_COLUMNS.map((c) => row.values[c.key]).join(" | ")} |`,
     ),
     "",
     "## Property Manager plan, in detail",
@@ -153,16 +165,48 @@ function buildLlmsFullTxt(): string {
     );
   }
 
-  push("## Local Services plan, in detail", "");
+  push(
+    "## Home Care Concierge, in detail",
+    "",
+    `${homeCare.priceLine} ${homeCare.priceQualifier}`,
+    "",
+    "### Who it is for",
+    "",
+    ...HOME_CARE_AUDIENCES.map((a) => `**${a.label}.** ${a.body}`),
+    "",
+    HOME_CARE_STR_NOTE,
+    "",
+    "### What the base plan includes",
+    "",
+    ...HOME_CARE_SCOPE.map((b) => `**${b.title}.** ${b.body} Boundary: ${b.boundary}`),
+    "",
+    "### Quoted separately",
+    "",
+    ...HOME_CARE_NOT_INCLUDED.map((i) => `- ${i}`),
+    "",
+    "### How pricing works",
+    "",
+    ...HOME_CARE_PRICING_NOTES.map((n) => `- ${n}`),
+    "",
+    "### How Home Care Concierge starts",
+    "",
+    ...HOME_CARE_STEPS.map((s) => `${s.step}. **${s.title}** — ${s.body}`),
+    "",
+    "### Home Care Concierge FAQ",
+    "",
+    ...HOME_CARE_FAQ.flatMap((f) => [`**${f.question}**`, "", f.answer, ""]),
+  );
+
+  push("## STR Cleaning & Local Support, in detail", "");
   for (const group of LOCAL_SERVICE_GROUPS) {
     push(`### ${group.title}`, "", group.summary, "", ...group.items.map((i) => `- ${i}`), "");
   }
   push(
-    "### Not included in Local Services",
+    "### Not included in local support",
     "",
     ...LOCAL_SERVICES_NOT_INCLUDED.map((i) => `- ${i}`),
     "",
-    "### How Local Services starts",
+    "### How local support starts",
     "",
     ...LOCAL_SERVICES_STEPS.map((s) => `${s.step}. **${s.title}** — ${s.body}`),
     "",

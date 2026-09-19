@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical:
-      "https://rentwithfrontier.com/best-hochatown-property-management-company",
+      "https://www.rentwithfrontier.com/best-hochatown-property-management-company",
   },
 };
 

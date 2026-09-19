@@ -42,7 +42,7 @@ export async function generateMetadata({
       images: post.featuredImage ? [{ url: post.featuredImage }] : [],
     },
     alternates: {
-      canonical: `https://rentwithfrontier.com/blogs/${slug}`,
+      canonical: `https://www.rentwithfrontier.com/blogs/${slug}`,
     },
   };
 }

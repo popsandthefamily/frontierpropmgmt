@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { JsonLd } from "@/components/seo/json-ld";
 import { googleProfileUrl, plans, siteConfig } from "@/data/site";
+import { homeCare } from "@/data/home-care";
 import "./globals.css";
 
 const yanone = Yanone_Kaffeesatz({
@@ -21,14 +22,13 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rentwithfrontier.com"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default:
-      "Broken Bow & Hochatown Property Management | Frontier",
+    default: "Broken Bow Property Management & Home Care | Frontier",
     template: "%s | Frontier",
   },
   description:
-    "Book a cabin in Broken Bow & Hochatown, or hire the boutique, owner-operated local team that runs its own flagship cabin in the same market. Two plans: full management at 20% of net rental income, or local cleaning, maintenance, and logistics on a custom quote. No monthly minimum.",
+    "Full-service STR management and Home Care Concierge in Broken Bow and Hochatown. Local care for rental cabins and private second homes, from an owner-operated team that runs its own cabin in the same market.",
   keywords: [
     "Broken Bow cabin rentals",
     "Hochatown cabin rentals",
@@ -50,6 +50,10 @@ export const metadata: Metadata = {
     "DFW Broken Bow cabin management",
     "remote cabin management Dallas Texas",
     "Dallas vacation rental investment Broken Bow",
+    "second home care Broken Bow",
+    "home watch Hochatown",
+    "vacation home maintenance Broken Bow Oklahoma",
+    "home care concierge Broken Bow",
   ],
   openGraph: {
     type: "website",
@@ -67,13 +71,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Frontier Property Management | Cabin Rentals & STR Management in Broken Bow",
+      "Frontier Property Management | STR Management & Home Care in Broken Bow",
     description:
-      "Book a cabin direct, or let us manage your Broken Bow vacation rental. Full management at 20% of net rental income, or local cleaning and maintenance on a custom quote.",
+      "Let us run your short-term rental, or keep your home cared for while you keep control. Full management at 20% of net rental income, or Home Care Concierge from $500 a month.",
   },
-  alternates: {
-    canonical: "https://rentwithfrontier.com",
-  },
+  // No root-level canonical: each page declares its own so that nested
+  // routes never inherit the homepage URL.
   verification: {
     // Google: handled by the static file public/google39354f42bb809440.html
     // Bing: add your Bing Webmaster Tools meta tag here once the site is
@@ -93,13 +96,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${yanone.variable} ${workSans.variable}`}>
       <body className="antialiased font-body text-foreground bg-background">
-        {/* Structured Data, LocalBusiness */}
+        {/* Structured Data: the one business entity every service page
+            points at through its @id. LocalBusiness rather than
+            RealEstateAgent: Frontier manages and cares for property; it
+            does not hold itself out as a licensed brokerage. */}
         <JsonLd
-          type="RealEstateAgent"
+          type="LocalBusiness"
           data={{
+            "@id": `${siteConfig.url}/#business`,
             name: siteConfig.name,
-            description:
-              "Boutique, owner-operated short-term rental management and direct cabin bookings in Broken Bow and Hochatown, Oklahoma. Two plans for owners: the Property Manager plan at 20% of net rental income covering pricing, guests, cleaning, maintenance, and taxes; and Local Services, a custom-quoted plan covering cleaning turnovers, maintenance, and on-the-ground logistics for owners who keep their own bookings. No setup fee, no monthly minimum, month to month.",
+            legalName: "Frontier Property Management LLC",
+            description: `${siteConfig.description} Full-service STR management at ${plans.manager.feeInline}, or ${plans.concierge.name} ${plans.concierge.feeInline} with the scope confirmed after a walkthrough. Owner-operated, based in Broken Bow, Oklahoma.`,
             url: siteConfig.url,
             telephone: siteConfig.phone,
             email: siteConfig.email,
@@ -117,11 +124,12 @@ export default function RootLayout({
               latitude: 34.1515,
               longitude: -94.7685,
             },
+            // Where the work happens. Owners who live in Dallas are a
+            // market, not a service area.
             areaServed: [
               { "@type": "Place", name: "Broken Bow, Oklahoma" },
               { "@type": "Place", name: "Hochatown, Oklahoma" },
               { "@type": "Place", name: "McCurtain County, Oklahoma" },
-              { "@type": "Place", name: "Dallas-Fort Worth, Texas" },
             ],
             openingHours: "Mo-Fr 09:00-17:00",
             sameAs: [
@@ -132,16 +140,17 @@ export default function RootLayout({
             priceRange: "$$",
             hasOfferCatalog: {
               "@type": "OfferCatalog",
-              name: "Cabin Management Services",
+              name: "Property management and home care services",
               itemListElement: [
                 {
                   "@type": "Offer",
-                  name: plans.manager.name,
+                  name: `Full-Service STR Management (${plans.manager.name} plan)`,
                   url: `${siteConfig.url}${plans.manager.href}`,
                   availability: "https://schema.org/LimitedAvailability",
                   itemOffered: {
                     "@type": "Service",
-                    name: `${plans.manager.name} plan, full-service STR management`,
+                    "@id": `${siteConfig.url}${plans.manager.href}#service`,
+                    name: "Full-service short-term rental management",
                     description: plans.manager.summary,
                   },
                   priceSpecification: {
@@ -152,12 +161,30 @@ export default function RootLayout({
                 },
                 {
                   "@type": "Offer",
-                  name: plans.local.name,
-                  url: `${siteConfig.url}${plans.local.href}`,
+                  name: `${plans.concierge.name} base plan`,
+                  url: `${siteConfig.url}${plans.concierge.href}`,
                   availability: "https://schema.org/LimitedAvailability",
                   itemOffered: {
                     "@type": "Service",
-                    name: `${plans.local.name}, cabin cleaning, maintenance, and logistics`,
+                    "@id": `${siteConfig.url}${plans.concierge.href}#service`,
+                    name: `${plans.concierge.name}, second-home and cabin care`,
+                    description: plans.concierge.summary,
+                  },
+                  priceSpecification: {
+                    "@type": "PriceSpecification",
+                    minPrice: plans.concierge.basePrice,
+                    priceCurrency: "USD",
+                    description: `${homeCare.priceLine} ${homeCare.priceQualifier}`,
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  name: plans.local.name,
+                  url: `${siteConfig.url}${plans.local.href}`,
+                  itemOffered: {
+                    "@type": "Service",
+                    "@id": `${siteConfig.url}${plans.local.href}#service`,
+                    name: `${plans.local.name}, turnover cleaning, maintenance, and logistics`,
                     description: plans.local.summary,
                   },
                   priceSpecification: {
@@ -168,11 +195,12 @@ export default function RootLayout({
                 },
                 {
                   "@type": "Offer",
+                  url: `${siteConfig.url}/search`,
                   itemOffered: {
                     "@type": "Service",
-                    name: "Direct Cabin Bookings",
+                    name: "Direct cabin bookings",
                     description:
-                      "Book luxury cabins directly with no platform fees, best rate guaranteed",
+                      "Book Frontier's own cabins directly, with no platform service fee added.",
                   },
                 },
               ],
@@ -183,8 +211,10 @@ export default function RootLayout({
         <JsonLd
           type="WebSite"
           data={{
+            "@id": `${siteConfig.url}/#website`,
             name: siteConfig.name,
             url: siteConfig.url,
+            publisher: { "@id": `${siteConfig.url}/#business` },
             potentialAction: {
               "@type": "SearchAction",
               target: `${siteConfig.url}/search?q={search_term_string}`,

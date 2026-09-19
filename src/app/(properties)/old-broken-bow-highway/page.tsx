@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       : [],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/old-broken-bow-highway",
+    canonical: "https://www.rentwithfrontier.com/old-broken-bow-highway",
   },
 };
 

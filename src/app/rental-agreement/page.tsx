@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Rental Agreement",
   description:
     "Vacation rental agreement terms and conditions for properties managed by Frontier Property Management in Broken Bow and Hochatown, Oklahoma.",
-  alternates: { canonical: "https://rentwithfrontier.com/rental-agreement" },
+  alternates: { canonical: "https://www.rentwithfrontier.com/rental-agreement" },
 };
 
 export default function RentalAgreementPage() {

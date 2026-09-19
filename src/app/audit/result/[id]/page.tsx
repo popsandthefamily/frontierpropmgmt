@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       "Frontier audit report: see the revenue gap between your Airbnb listing and comparable top-performing properties in your market.",
     robots: { index: false, follow: false },
-    alternates: { canonical: `https://rentwithfrontier.com/audit/result/${id}` },
+    alternates: { canonical: `https://www.rentwithfrontier.com/audit/result/${id}` },
   };
 }
 
@@ -37,7 +37,7 @@ export default async function AuditResultPage({ params }: Props) {
   }
   if (!report) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rentwithfrontier.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rentwithfrontier.com";
 
   return (
     <div className="bg-cream/40">

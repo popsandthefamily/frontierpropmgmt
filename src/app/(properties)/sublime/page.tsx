@@ -63,7 +63,7 @@ export const metadata: Metadata = {
       : [],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/sublime",
+    canonical: "https://www.rentwithfrontier.com/sublime",
   },
 };
 

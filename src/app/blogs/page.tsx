@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/blogs",
+    canonical: "https://www.rentwithfrontier.com/blogs",
   },
 };
 

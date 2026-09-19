@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "https://rentwithfrontier.com/airbnb-management-hochatown-ok",
+    canonical: "https://www.rentwithfrontier.com/airbnb-management-hochatown-ok",
   },
 };
 
