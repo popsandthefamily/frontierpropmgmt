@@ -63,6 +63,36 @@ const NAV_ITEMS: NavItem[] = [
         href: "/local-services",
         description: "Turnovers and local hands for a rental you run yourself",
       },
+    ],
+  },
+  {
+    label: "Properties",
+    children: [
+      {
+        label: "Sublime Retreat",
+        href: "/sublime",
+        description: "Luxury 3BR with hot tub, 2 zip lines & arcade",
+      },
+      {
+        label: "Old Broken Bow Highway",
+        href: "/old-broken-bow-highway",
+        description: "The house we started the company on, now retired",
+      },
+      {
+        label: "All Properties",
+        href: "/search",
+        description: "Browse all available cabins & check dates",
+      },
+    ],
+  },
+  {
+    label: "About",
+    children: [
+      {
+        label: "About Frontier",
+        href: "/about",
+        description: "Who we are and the cabin we run ourselves",
+      },
       {
         label: "FAQ",
         href: "/faq",
@@ -88,30 +118,13 @@ const NAV_ITEMS: NavItem[] = [
         href: "/audit",
         description: "See the revenue gap in your Airbnb or Vrbo listing",
       },
-    ],
-  },
-  {
-    label: "Properties",
-    children: [
       {
-        label: "Sublime Retreat",
-        href: "/sublime",
-        description: "Luxury 3BR with hot tub, 2 zip lines & arcade",
-      },
-      {
-        label: "Old Broken Bow Highway",
-        href: "/old-broken-bow-highway",
-        description: "The house we started the company on, now retired",
-      },
-      {
-        label: "All Properties",
-        href: "/search",
-        description: "Browse all available cabins & check dates",
+        label: "Broken Bow Guide",
+        href: "/discover-broken-bow",
+        description: "Things to do, seasons, and local context for guests",
       },
     ],
   },
-  { label: "About", href: "/about" },
-  { label: "Broken Bow Guide", href: "/discover-broken-bow" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -184,7 +197,7 @@ export function SiteHeader() {
                 <div key={item.label} className="relative group">
                   <button
                     className={cn(
-                      "inline-flex h-9 items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                      "inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors",
                       isScrolled
                         ? "text-charcoal hover:text-sage"
                         : "text-white hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]"
@@ -222,7 +235,7 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "inline-flex h-9 items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "inline-flex h-9 items-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   isScrolled
                     ? "text-charcoal hover:text-sage"
                     : "text-white hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]"
@@ -234,38 +247,45 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Desktop CTAs, primary Estimate + ghost Book/Owner links */}
-        <div className="hidden lg:flex shrink-0 items-center justify-end gap-4">
-          {/* Between lg and xl the nav bar is already tight, so the label is
-              dropped there and the lock icon carries the link on its own. */}
+        {/* Desktop CTAs: one quiet utility link, then two pills that share
+            a size so the cluster reads as a set rather than three unrelated
+            bits of text. */}
+        <div className="hidden lg:flex shrink-0 items-center justify-end gap-3">
           <Link
             href="/portal"
             aria-label="Owner login"
             title="Owner login"
             className={cn(
-              "inline-flex items-center gap-1.5 text-xs font-medium whitespace-nowrap transition-colors",
+              "inline-flex h-9 items-center gap-1.5 rounded-full px-2 text-sm font-medium whitespace-nowrap transition-colors",
               isScrolled
                 ? "text-muted-foreground hover:text-sage"
-                : "text-white/80 hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]",
+                : "text-white/85 hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]",
             )}
           >
-            <LockKeyhole className="size-3.5 shrink-0" />
+            <LockKeyhole className="size-4 shrink-0" />
             <span className="hidden xl:inline">Owner Login</span>
           </Link>
+          <span
+            aria-hidden="true"
+            className={cn(
+              "h-5 w-px",
+              isScrolled ? "bg-charcoal/15" : "bg-white/30",
+            )}
+          />
           <Link
             href="/search"
             className={cn(
-              "text-xs font-medium whitespace-nowrap transition-colors",
+              "inline-flex h-9 items-center whitespace-nowrap rounded-full border px-4 text-sm font-semibold transition-colors",
               isScrolled
-                ? "text-muted-foreground hover:text-sage"
-                : "text-white/80 hover:text-white [text-shadow:_0_1px_3px_rgba(0,0,0,0.4)]",
+                ? "border-charcoal/20 text-charcoal hover:border-sage hover:text-sage"
+                : "border-white/60 text-white hover:bg-white/10",
             )}
           >
-            Book a Cabin →
+            Book a Cabin
           </Link>
           <Link
             href={CTA.owner.href}
-            className="inline-flex items-center whitespace-nowrap rounded-full bg-sage px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-sage-dark"
+            className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-sage px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-sage-dark"
           >
             {CTA.owner.label}
           </Link>
