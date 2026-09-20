@@ -11,6 +11,20 @@ import { expect, test, type Page } from "@playwright/test";
 
 const FORMSPREE = /formspree\.io/;
 
+/**
+ * Third-party widgets (Hospitable search, Cal.com, Google tag, Turnstile)
+ * are not under test and a slow CDN must not turn into a page-load timeout,
+ * so every request that leaves the site under test is aborted.
+ */
+test.beforeEach(async ({ page, baseURL }) => {
+  const origin = new URL(baseURL ?? "http://localhost:3000").host;
+  await page.route("**/*", (route) => {
+    const host = new URL(route.request().url()).host;
+    if (host === origin || FORMSPREE.test(host)) return route.continue();
+    return route.abort();
+  });
+});
+
 async function canonicalOf(page: Page): Promise<string | null> {
   return page.locator('link[rel="canonical"]').getAttribute("href");
 }
@@ -176,7 +190,9 @@ test.describe("contact form submission", () => {
     await page.fill("#contact-message", "Automated test, please ignore.");
     await page.getByRole("button", { name: /send my property details/i }).click();
 
-    await expect(page.getByRole("status")).toContainText(/thank you/i);
+    // The Cal.com embed lower on the page has its own role="status" while
+    // it loads, so filter to the form's confirmation.
+    await expect(page.getByRole("status").filter({ hasText: /thank you/i })).toBeVisible();
     expect(sent).toHaveLength(1);
     expect(sent[0].service_interest).toBe("concierge");
     expect(sent[0].property_use).toBe("private");

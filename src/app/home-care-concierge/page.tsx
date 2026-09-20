@@ -16,6 +16,7 @@ import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { HomeCarePackage } from "@/components/sections/home-care-package";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { PlanCTA } from "@/components/analytics/plan-cta";
@@ -218,6 +219,7 @@ export default function HomeCareConciergePage() {
             );
           })}
         </div>
+        <HotTubPartner variant="card" className="mt-10" />
       </SectionWrapper>
 
       {/* 3. Keep your bookings, add local support */}

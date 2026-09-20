@@ -14,6 +14,18 @@ import { expect, test } from "@playwright/test";
  *  - Tier 1 "Compare a different market" flow submits successfully
  */
 
+// Abort requests that leave the site under test (Turnstile, Google tag,
+// Cal.com). None of them are what these smoke tests check, and a slow CDN
+// otherwise turns into a page-load timeout.
+test.beforeEach(async ({ page, baseURL }) => {
+  const origin = new URL(baseURL ?? "http://localhost:3000").host;
+  await page.route("**/*", (route) =>
+    new URL(route.request().url()).host === origin
+      ? route.continue()
+      : route.abort(),
+  );
+});
+
 test.describe("audit page smoke", () => {
   test("renders Hochatown snapshot with live AirROI data", async ({ page }) => {
     await page.goto("/audit");

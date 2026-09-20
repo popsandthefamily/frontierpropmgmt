@@ -22,6 +22,7 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { TwoWaysToWork } from "@/components/sections/two-ways-to-work";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import { properties } from "@/data/properties";
 import { homepageOwnerFAQ } from "@/data/homepage-faq";
 import { plans, siteConfig } from "@/data/site";
@@ -332,6 +333,7 @@ export default function HomePage() {
             );
           })}
         </div>
+        <HotTubPartner className="mt-8" />
         <div className="mt-8 text-center">
           <Link
             href={plans.concierge.href}

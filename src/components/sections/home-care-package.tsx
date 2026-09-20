@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/site";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import {
   HOME_CARE_NOT_INCLUDED,
   HOME_CARE_PRICING_NOTES,
@@ -91,6 +92,7 @@ export function HomeCarePackage({
         <div className="mt-8 rounded-xl border border-charcoal/10 bg-cream/60 p-5">
           <p className="text-sm leading-relaxed text-charcoal">{HOME_CARE_STR_NOTE}</p>
         </div>
+        <HotTubPartner className="mt-4 max-w-none" />
 
         <ul className="mt-6 grid gap-2 text-xs leading-relaxed text-muted-foreground sm:grid-cols-2">
           {HOME_CARE_PRICING_NOTES.map((note) => (

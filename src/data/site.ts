@@ -129,6 +129,27 @@ export const plans = {
   },
 } as const;
 
+/**
+ * Businesses Frontier delivers part of its service through. Named on every
+ * page that describes the work they do, with the logo and a link, so the
+ * relationship is visible rather than implied.
+ */
+export const partners = {
+  hotTub: {
+    name: "Broken Bow Hot Tub Co.",
+    url: "https://www.brokenbowhottub.com",
+    displayUrl: "brokenbowhottub.com",
+    phone: "(580) 207-7270",
+    logo: "/images/partners/broken-bow-hot-tub-co.webp",
+    /** One line, for inline credits under any hot-tub list. */
+    sentence:
+      "Hot-tub cleaning, service, and repair on every Frontier plan is performed with our partner Broken Bow Hot Tub Co.",
+    /** A short paragraph, for the card on the concierge and about pages. */
+    blurb:
+      "Mobile hot-tub cleaning, troubleshooting, repair, and drain-and-refill service for cabin rentals and homeowners across McCurtain County. Frontier partners with Broken Bow Hot Tub Co. for all hot-tub work, so the technician balancing your water is a specialist, not a cleaner with a test strip.",
+  },
+} as const;
+
 /** Canonical Google Business Profile URL, for `sameAs` and outbound links. */
 export const googleProfileUrl = siteConfig.googlePlaceId
   ? `https://www.google.com/maps/place/?q=place_id:${siteConfig.googlePlaceId}`

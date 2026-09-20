@@ -23,9 +23,10 @@ import { FlagshipCaseStudySection } from "@/components/sections/flagship-case-st
 import { ContactForm } from "@/components/forms/contact-form";
 import { ComparisonTable } from "@/components/sections/comparison-table";
 import { ConciergeCrossLink } from "@/components/sections/concierge-crosslink";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { plans, siteConfig } from "@/data/site";
+import { partners, plans, siteConfig } from "@/data/site";
 import { CTA } from "@/data/home-care";
 import {
   onboardingSteps,
@@ -121,8 +122,7 @@ const notIncludedItems = [
   {
     label: "Pool and hot-tub service contracts",
     price: "Billed direct",
-    detail:
-      "We coordinate the vendor, they invoice you directly. No coordination markup.",
+    detail: `Hot-tub work is performed with our partner ${partners.hotTub.name}; we coordinate, they invoice you directly. No coordination markup.`,
   },
   {
     label: "Permit renewals and tax registrations",
@@ -451,6 +451,7 @@ export default function ManagementServicesPage() {
               </div>
             ))}
           </div>
+          <HotTubPartner className="mt-8" />
         </div>
       </SectionWrapper>
 

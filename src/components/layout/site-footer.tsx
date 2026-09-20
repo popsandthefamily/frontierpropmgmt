@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Instagram, Facebook, Star, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { googleProfileUrl, siteConfig } from "@/data/site";
+import { googleProfileUrl, partners, siteConfig } from "@/data/site";
 import { CTA } from "@/data/home-care";
 
 const QUICK_LINKS = [
@@ -26,6 +26,11 @@ const LOCAL_LINKS = [
   {
     label: "Hocha.Town",
     href: "https://hocha.town",
+    external: true,
+  },
+  {
+    label: `${partners.hotTub.name} (hot-tub partner)`,
+    href: partners.hotTub.url,
     external: true,
   },
 ];

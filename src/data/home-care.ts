@@ -1,4 +1,4 @@
-import { plans } from "./site";
+import { partners, plans } from "./site";
 
 /**
  * Home Care Concierge: the second of Frontier's two primary services.
@@ -115,7 +115,7 @@ export const HOME_CARE_SCOPE: HomeCareScopeBlock[] = [
     id: "hot-tub",
     title: "Hot-tub attention",
     icon: "Waves",
-    body: "One scheduled check within the agreed scope: test and document water condition, routine balancing, accessible cleaning, filter attention, and a visual check of operation and cover.",
+    body: `One scheduled check within the agreed scope, performed with our partner ${partners.hotTub.name}: test and document water condition, routine balancing, accessible cleaning, filter attention, and a visual check of operation and cover.`,
     boundary:
       "Once per month. A monthly check is not continuous water management. Your written plan states the between-visit responsibilities and any routine chemical allowance. A filled, actively used tub usually needs more than one visit a month, and we say so in the quote.",
   },
@@ -176,7 +176,8 @@ export const HOME_CARE_NOT_INCLUDED: string[] = [
 export const HOME_CARE_PRICING_NOTES: string[] = [
   "The base plan is a flat monthly figure for Frontier's own scheduled labor, confirmed in a written scope after the walkthrough.",
   "Extra visits, turnovers, and added services are quoted before they happen, at a rate you approve.",
-  "When a licensed plumber, electrician, or hot-tub technician is needed, their invoice passes through to you at cost.",
+  `Hot-tub work is performed with our partner ${partners.hotTub.name}; repairs, parts, and drain-and-refills beyond the monthly check are quoted before they happen.`,
+  "When a licensed plumber or electrician is needed, their invoice passes through to you at cost.",
   "Month to month, 30 days notice to cancel. Setup and cancellation terms are stated in the written scope.",
 ];
 
@@ -286,7 +287,7 @@ export const HOME_CARE_FAQ = [
   {
     question: "Is monthly hot-tub attention enough?",
     answer:
-      "Not necessarily. A monthly check is a good fit for a tub that sits covered and unused between your visits. A filled tub that is used often, or one at a rental with guests every weekend, needs more frequent testing and care than a monthly visit can provide. Your written plan states who handles what between visits, what the routine chemical allowance is, and when extra visits are needed. We will not tell you a monthly visit is enough when it is not.",
+      `Not necessarily. A monthly check is a good fit for a tub that sits covered and unused between your visits. A filled tub that is used often, or one at a rental with guests every weekend, needs more frequent testing and care than a monthly visit can provide. Your written plan states who handles what between visits, what the routine chemical allowance is, and when extra visits are needed. All hot-tub work is performed with our partner ${partners.hotTub.name}, and their recurring maintenance plans are the right answer for a tub that needs weekly attention. We will not tell you a monthly visit is enough when it is not.`,
   },
   {
     question: "Will you handle emergencies?",
@@ -386,8 +387,8 @@ export const SERVICE_COMPARISON_ROWS: {
     key: "hotTub",
     label: "Hot-tub scope",
     values: {
-      manager: "Scheduled around guest occupancy; service contracts billed direct",
-      concierge: "One monthly check in the base scope; higher frequency quoted",
+      manager: `Scheduled around guest occupancy with ${partners.hotTub.name}; service contracts billed direct`,
+      concierge: `One monthly check in the base scope with ${partners.hotTub.name}; higher frequency quoted`,
     },
   },
   {

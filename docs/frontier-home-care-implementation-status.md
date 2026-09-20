@@ -46,7 +46,9 @@ Done.
 - `/local-services`: retitled "STR Cleaning & Local Support", same URL. Added a "Turnovers on a calendar, or one monthly care cycle?" section explaining the relationship to concierge; "usually inside two weeks" removed from the how-it-works lead; CTAs use the local-support intent. An FAQ entry explaining the difference from concierge was added to `LOCAL_SERVICES_FAQ`. The old two-column pricing rows were removed from `local-services.ts` and replaced by `SERVICE_COMPARISON_ROWS` in `home-care.ts`.
 - `/management-services`: absolute title, canonical, and CTA updated; hero secondary keeps the audit; the national-operator comparison table added; a "Not renting?" cross-link block added. The pricing card's fee-base wording was left exactly as it was (see release gates).
 - `/faq`: the plans group rewritten around the services, the retired "anything cheaper than these two plans" answer replaced, a "Home Care Concierge" group added from `HOME_CARE_FAQ`, and the "cabin earns nothing" answer extended to cover the concierge plan fee.
-- `/about`: a "One local team, two services" section; the "Why choose" card that promised hands-off management now describes both services; Organization schema shares the root `@id`. No Broken Bow Hot Tub Co. relationship was added because it has not been approved.
+- `/about`: a "One local team, two services" section; the "Why choose" card that promised hands-off management now describes both services; Organization schema shares the root `@id`.
+- **Hot-tub partner (owner-confirmed 2026-09-19).** Broken Bow Hot Tub Co. (`https://www.brokenbowhottub.com`) performs all hot-tub cleaning, service, and repair. Defined once in `partners.hotTub` in `site.ts` with the logo at `public/images/partners/broken-bow-hot-tub-co.webp` (fetched from the partner site). A shared `HotTubPartner` component renders a co-branded credit with logo and link wherever hot-tub work is described: concierge page (card), homepage care section, the shared package block on pricing, local services, management pass-through section, about page (card), and the footer. The scope block, comparison row, FAQ answer, Hot-Tub Program add-on, and both llms files name the partner.
+- **Navigation regrouped (owner request 2026-09-19).** For Owners holds only the four service pages; FAQ, locality pages, Dallas, the audit, and the guide sit under a new About menu. The desktop CTA cluster is Owner Login, a divider, "Book a Cabin" as an outline pill, and the primary pill.
 - Locality pages and `/dallas-cabin-owners`: each gets one `ConciergeCrossLink` block with page-specific copy. The Dallas copy states that Dallas is where owners live and Broken Bow is where the work happens.
 - `src/data/blog-posts.ts`: `draft` flag added and honoured by `getBlogPosts` and `getBlogPostBySlug`. Two draft articles are in the file and are excluded from listings, static params, the sitemap, and the llms files. Direct requests to their slugs return 404.
 
@@ -90,6 +92,7 @@ Notes on the run:
 
 - Playwright's own Chromium download stalled twice from the Playwright CDN on this machine. `playwright.config.ts` gained an optional `PW_EXECUTABLE_PATH` override so the suite can run in an installed Chrome (Google Chrome 153 was used). Without the variable, the config is unchanged apart from the default `baseURL` now being the www host.
 - Two homepage smoke tests in the pre-existing `audit.spec.ts` were updated. One ("hero renders with owner CTA") asserted a heading string that does not exist on `main` either, so it was already failing before this work. The other ("comparison table is present") looked for the national-operator table on the homepage; that table was deliberately moved to `/management-services`, and the test now looks there. The three audit-page tests were not touched and pass locally because the market snapshot is static data.
+- Both specs now abort requests that leave the site under test (Hospitable search widget, Cal.com, Google tag, Turnstile). Those widgets are not what the tests check, and on this connection a slow CDN was turning into page-load timeouts. Formspree remains routable because it is mocked in place.
 - Screenshots at 1280px and 375px of the homepage, concierge page, pricing page, and the concierge-intent contact page are in `docs/screenshots/home-care-2026-09-19/`.
 
 ### What the new spec covers
@@ -126,7 +129,6 @@ Formspree is mocked with `page.route`; no test contacts the real endpoint.
 - Support hours and response promises. The site currently carries "24/7" guest messaging in several places, "7am-10pm" on the management page, "9am–9pm, on-call after" in the comparison table, "< 15min" average response, and "20-min average" maintenance response. None were changed; pick one set of true statements and the rest can be aligned in a follow-up.
 - The Hot-Tub Program add-on on the management page promises weekly testing and "guest-ready year-round". It predates this work and is worth a read against the new concierge hot-tub wording.
 - Insurance and vendor capability for the concierge activities as written (hot-tub handling, exterior work, package handling, filter and bulb swaps).
-- Broken Bow Hot Tub Co. relationship on the About page: not added, pending approval.
 - Draft articles: facts, tone, author line, and publish date before removing `draft: true`.
 
 ## Files changed

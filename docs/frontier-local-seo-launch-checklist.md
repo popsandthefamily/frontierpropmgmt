@@ -44,6 +44,8 @@ Suggested service description for owner review:
 - [ ] In GA4, mark `generate_lead` and `discovery_call_booked` as key events. Leave `contact_click`, `form_start`, `service_select`, and `schedule_call_click` as ordinary events; they are not conversions.
 - [ ] Do not assign a value to `generate_lead`. A form submission is not $500 of revenue.
 - [ ] Confirm the existing Google Ads tag (`AW-17777139722`) still receives page views and that no second page-view tag was introduced. Nothing in the tag setup changed.
+- [ ] Verify the Google tag itself. A plain request to `https://www.googletagmanager.com/gtag/js?id=GT-K4TS7SM2` returned 404 on 2026-09-19. That can be a request-context quirk, but it is also what an unpublished or mistyped tag ID looks like. Open the tag in Google Tag Manager or GA4 Admin, confirm the ID, and check the realtime report for a page view from the preview.
+- [ ] Ask Broken Bow Hot Tub Co. to add a reciprocal line and link on brokenbowhottub.com describing the Frontier partnership; the Frontier side is live in the footer and on every hot-tub mention.
 - [ ] Build one exploration: `generate_lead` by `service_interest` and `source_page`, so concierge and management inquiries can be counted separately.
 
 ## Lead log

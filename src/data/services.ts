@@ -202,7 +202,7 @@ export const addOns: AddOn[] = [
   {
     name: "Hot-Tub Program",
     description:
-      "Comprehensive hot tub maintenance program to keep your hot tub sparkling clean, chemically balanced, and guest-ready year-round.",
+      "A recurring hot tub maintenance program delivered with our partner Broken Bow Hot Tub Co. to keep your hot tub clean, chemically balanced, and ready for guests.",
     features: [
       "Weekly chemical testing & balancing",
       "Filter cleaning & replacement",

@@ -11,6 +11,7 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import { plans, siteConfig } from "@/data/site";
 import { team } from "@/data/team";
 
@@ -185,8 +186,11 @@ export default function AboutPage() {
             <p>
               Both services are delivered by the same people, using the same
               cleaners and technicians we use on the cabin we run ourselves.
+              Hot-tub cleaning, service, and repair on every plan is performed
+              with our partner Broken Bow Hot Tub Co.
             </p>
           </div>
+          <HotTubPartner variant="card" className="mt-8" />
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href={plans.manager.href}>Full-service management</Link>

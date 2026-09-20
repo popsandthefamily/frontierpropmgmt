@@ -15,6 +15,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { HotTubPartner } from "@/components/sections/hot-tub-partner";
 import { PlanCTA } from "@/components/analytics/plan-cta";
 import { PageViewTracker } from "@/components/analytics/page-view-tracker";
 import { availability, plans, siteConfig } from "@/data/site";
@@ -256,6 +257,8 @@ export default function LocalServicesPage() {
               );
             })}
           </div>
+
+          <HotTubPartner className="mt-8" />
 
           <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-charcoal/10 bg-white p-6">
             <h3 className="text-lg font-semibold text-charcoal">

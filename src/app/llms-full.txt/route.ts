@@ -1,4 +1,4 @@
-import { availability, plans, siteConfig } from "@/data/site";
+import { availability, partners, plans, siteConfig } from "@/data/site";
 import { getBlogPosts } from "@/data/blog-posts";
 import { faqGroups } from "@/data/faq";
 import {
@@ -92,6 +92,7 @@ function buildLlmsFullTxt(): string {
     `- Address: ${siteConfig.address}`,
     `- Hours: ${siteConfig.hours}`,
     `- Service area: Broken Bow, Hochatown, and nearby McCurtain County, Oklahoma. Many owners are absentee, based in Dallas-Fort Worth or Oklahoma City; Frontier does not operate in those cities.`,
+    `- Hot-tub partner: ${partners.hotTub.name}, ${partners.hotTub.url}, ${partners.hotTub.phone}. ${partners.hotTub.sentence}`,
     `- Google Business Profile: ${siteConfig.social.google}`,
     `- Facebook: ${siteConfig.social.facebook}`,
     `- Instagram: ${siteConfig.social.instagram}`,
