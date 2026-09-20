@@ -60,16 +60,21 @@ test.describe("audit page smoke", () => {
 });
 
 test.describe("homepage smoke", () => {
-  test("hero renders with owner CTA", async ({ page }) => {
+  test("hero renders with both owner CTAs", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("h1")).toContainText(/actually answers the phone/i);
+    await expect(page.locator("h1")).toContainText(/property management and home care/i);
     await expect(
-      page.getByRole("link", { name: /get a free revenue estimate/i }).first(),
+      page.getByRole("link", { name: /manage my rental/i }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Explore Home Care", exact: true }),
     ).toBeVisible();
   });
 
-  test("comparison table is present", async ({ page }) => {
-    await page.goto("/");
+  test("comparison table is present on the management page", async ({ page }) => {
+    // The national-operator comparison moved from the homepage to
+    // /management-services with the two-service launch.
+    await page.goto("/management-services");
     await expect(page.getByText(/compared to the alternatives/i)).toBeVisible();
     // Check for a row specific to the table (not the trust strip stat).
     await expect(page.getByText(/management fee/i).first()).toBeVisible();

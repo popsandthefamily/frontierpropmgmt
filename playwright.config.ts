@@ -13,9 +13,15 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: [["list"]],
   use: {
-    baseURL: process.env.BASE_URL || "https://rentwithfrontier.com",
+    baseURL: process.env.BASE_URL || "https://www.rentwithfrontier.com",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+    // Optional: point at an installed Chrome when the Playwright browser
+    // download is unavailable, e.g.
+    //   PW_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    ...(process.env.PW_EXECUTABLE_PATH
+      ? { launchOptions: { executablePath: process.env.PW_EXECUTABLE_PATH } }
+      : {}),
   },
   projects: [
     {
