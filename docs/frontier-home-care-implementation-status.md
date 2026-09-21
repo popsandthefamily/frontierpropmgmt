@@ -1,7 +1,11 @@
 # Home Care Concierge: implementation status
 
-Branch: `feat/home-care-concierge` (off `main` at `fe7709a`).
-Work date: 2026-09-19. Nothing has been pushed or deployed.
+Branch: `feat/home-care-concierge` (off `main` at `fe7709a`, merged with
+`origin/main` at `3f633d3`).
+Work dates: 2026-09-19 to 2026-09-21. Preview builds verified on Vercel;
+merged to `main` for production on 2026-09-21 at the owner's request.
+The release gates below were not individually signed off before launch;
+they remain open items to reconcile on the live site.
 
 This file records what was done for the two-service website update, the
 decisions that were made along the way, what was tested and how, and the
