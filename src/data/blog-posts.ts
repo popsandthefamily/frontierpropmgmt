@@ -497,7 +497,7 @@ https://www.rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-ca
 <ul>
   <li><strong>Pre-purchase:</strong> Free revenue projections for properties you are considering. We will tell you honestly whether a cabin will perform.</li>
   <li><strong>Setup:</strong> Professional photography, listing optimization, pricing strategy, and vendor onboarding.</li>
-  <li><strong>Ongoing management:</strong> Full-service operations at 20% of net rental income, no setup fee, no monthly minimum, no long-term contracts. Optional professional photography available as an add-on.</li>
+  <li><strong>Ongoing management:</strong> Full-service operations at 20% of net rental revenue, no setup fee, no monthly minimum, no long-term contracts. Optional professional photography available as an add-on.</li>
 </ul>
 <p>If you are a Dallas investor considering a Broken Bow cabin purchase, <a href="/contact">reach out for a free consultation</a>. We will give you the local perspective that real estate listings do not.</p>
 `,

@@ -65,9 +65,16 @@ export const availability = {
  *
  * The fee base matters more than the percentage and is the thing owners get
  * burned on, so it is spelled out rather than left to "20%". Frontier's 20%
- * applies to net rental income: what is left after the platform takes its
+ * applies to net rental revenue: what is left after the platform takes its
  * host fee and after occupancy taxes are remitted. Cleaning and pet fees
  * never enter the base at all, and vendor invoices pass through at cost.
+ *
+ * "Net rental revenue" is the owner-confirmed wording (2026-09-21) and this
+ * object is the single source of truth for it. Every page, the owner
+ * statements, and the llms files read the phrase from here rather than
+ * writing their own, because the management page once carried a second,
+ * contradictory base ("nightly-rental revenue") that took a production
+ * check to catch.
  *
  * That is a smaller base than the gross-booking figure most national
  * operators quote against, which means a competitor's 20% and Frontier's
@@ -80,9 +87,9 @@ export const plans = {
     href: "/management-services",
     /** Big number on a pricing card. Pair with `feeSuffix`. */
     fee: "20%",
-    feeSuffix: "of net rental income",
+    feeSuffix: "of net rental revenue",
     /** The same figure as one phrase, for running prose. */
-    feeInline: "20% of net rental income",
+    feeInline: "20% of net rental revenue",
     /** One clause explaining the base. Follows `feeInline` in body copy. */
     feeBase:
       "what's left after platform host fees and occupancy taxes come out",
@@ -90,7 +97,7 @@ export const plans = {
     summary:
       "We run the whole property: pricing, listings, guest communication, cleaning turns, maintenance, taxes, and monthly reporting. You own the cabin, we operate it.",
     feeDefinition:
-      "20% of net rental income, meaning the booking revenue that remains after platform host fees (Airbnb 3%, VRBO 5%) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
+      "20% of net rental revenue, meaning the booking revenue that remains after platform host fees (Airbnb 3%, VRBO 5%) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
     /** Why this 20% is not the same price as somebody else's 20%. */
     feeComparisonNote:
       "Most national operators calculate their percentage on gross booking revenue, before platform fees and taxes come out. Frontier calculates on what is left after. Two managers quoting the same percentage against different bases are not quoting the same price, so it is worth asking any manager which one they mean.",

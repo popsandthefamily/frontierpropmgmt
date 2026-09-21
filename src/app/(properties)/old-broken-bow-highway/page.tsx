@@ -89,7 +89,7 @@ const CHAPTERS = [
 const OPERATOR_LESSONS = [
   {
     title: "You feel the whole P&L",
-    body: "When the cleaning invoice, the platform fee, and the occupancy tax all come out of your own deposit, you stop talking about gross revenue. It is why Frontier's fee is charged on net rental income, and why we say so out loud.",
+    body: "When the cleaning invoice, the platform fee, and the occupancy tax all come out of your own deposit, you stop talking about gross revenue. It is why Frontier's fee is charged on net rental revenue, and why we say so out loud.",
   },
   {
     title: "You learn what actually moves the calendar",

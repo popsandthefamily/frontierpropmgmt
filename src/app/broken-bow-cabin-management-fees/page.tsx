@@ -133,7 +133,7 @@ const FEE_ROWS: { label: string; values: Record<FeeKey, string> }[] = [
   {
     label: "Headline management fee",
     values: {
-      frontier: "20% of net rental income",
+      frontier: "20% of net rental revenue",
       typicalLocal: "20–30%",
       national: "25–40%",
     },
@@ -274,7 +274,7 @@ export default function BrokenBowCabinManagementFeesPage() {
             what is layered on top of it.
           </p>
           <p>
-            Frontier&apos;s headline rate is 20% of net rental income, with $0
+            Frontier&apos;s headline rate is 20% of net rental revenue, with $0
             setup, $0 monthly minimum, and no markup on cleaning, maintenance,
             or vendor invoices. &ldquo;Net&rdquo; is doing real work in that
             sentence: the 20% is calculated on {plans.manager.feeBase}, not on

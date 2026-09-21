@@ -148,7 +148,7 @@ const PROFILE_ROWS: {
   {
     label: "Fee model",
     values: {
-      boutique: "20% of net rental income, no monthly minimum",
+      boutique: "20% of net rental revenue, no monthly minimum",
       scale: "20–40% plus possible setup, marketing, photo, monthly fees",
       self: "0% fee, but 15–25 hrs/mo of your time",
     },
@@ -193,7 +193,7 @@ const pageFAQ = [
     question:
       "What should the management fee be for a Hochatown cabin?",
     answer:
-      "Most professional managers charge between 20% and 40%. Frontier charges 20% of net rental income with $0 setup and $0 monthly minimum. Watch for layered fees — setup, monthly minimum, mandatory photo packages, and markups on cleaning or maintenance can add 5–10 percentage points to the real cost.",
+      "Most professional managers charge between 20% and 40%. Frontier charges 20% of net rental revenue with $0 setup and $0 monthly minimum. Watch for layered fees — setup, monthly minimum, mandatory photo packages, and markups on cleaning or maintenance can add 5–10 percentage points to the real cost.",
   },
   {
     question: "Do reviews transfer if I switch property managers?",

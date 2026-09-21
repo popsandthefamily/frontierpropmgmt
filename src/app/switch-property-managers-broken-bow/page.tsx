@@ -174,7 +174,7 @@ const pageFAQ = [
   {
     question: "Does Frontier charge to onboard a switched listing?",
     answer:
-      "No. Frontier charges $0 setup, $0 monthly minimum, and 20% of net rental income going forward. The transition is part of how we earn your business.",
+      "No. Frontier charges $0 setup, $0 monthly minimum, and 20% of net rental revenue going forward. The transition is part of how we earn your business.",
   },
   {
     question:

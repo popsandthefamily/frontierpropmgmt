@@ -334,7 +334,7 @@ export default function AboutPage() {
             Full-Service STR Management
           </h2>
           <p className="mx-auto mb-8 max-w-xl text-xl text-white/90">
-            20% of Net Rental Income
+            20% of Net Rental Revenue
           </p>
           <Button
             asChild

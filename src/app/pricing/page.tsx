@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "STR Management & Home Care Pricing | Frontier",
     description:
-      "20% of net rental income for full management, or Home Care Concierge from $500 a month. What each includes, and what is quoted separately.",
+      "20% of net rental revenue for full management, or Home Care Concierge from $500 a month. What each includes, and what is quoted separately.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",

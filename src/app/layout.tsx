@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title:
       "Frontier Property Management | STR Management & Home Care in Broken Bow",
     description:
-      "Let us run your short-term rental, or keep your home cared for while you keep control. Full management at 20% of net rental income, or Home Care Concierge from $500 a month.",
+      "Let us run your short-term rental, or keep your home cared for while you keep control. Full management at 20% of net rental revenue, or Home Care Concierge from $500 a month.",
   },
   // No root-level canonical: each page declares its own so that nested
   // routes never inherit the homepage URL.

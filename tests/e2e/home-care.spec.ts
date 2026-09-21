@@ -118,7 +118,7 @@ test.describe("pricing", () => {
     await page.goto("/pricing");
     await expect(page).toHaveTitle("STR Management & Home Care Pricing | Frontier");
     const body = page.locator("body");
-    await expect(body).toContainText(/20% of net rental income/i);
+    await expect(body).toContainText(/20% of net rental revenue/i);
     await expect(body).toContainText(/from \$500/i);
     await expect(body).toContainText(/one scheduled maintenance clean in the base scope/i);
     await expect(body).toContainText(/additional turnovers quoted separately/i);
@@ -305,6 +305,39 @@ test.describe("technical seo", () => {
         /\|\s*Frontier(\s+Property\s+Management)?\s*\|\s*Frontier/i,
       );
       expect(title.length, `${path} has no title`).toBeGreaterThan(10);
+    }
+  });
+
+  test("every page states one management fee base", async ({ page }) => {
+    // The owner-confirmed base is "net rental revenue" and it lives in
+    // plans.manager. The management page once carried a second, conflicting
+    // base on its own pricing card, so this walks the pages that quote the
+    // fee and fails on any wording that is not the confirmed one.
+    const paths = [
+      "/",
+      "/pricing",
+      "/management-services",
+      "/about",
+      "/faq",
+      "/hochatown-property-management",
+      "/broken-bow-property-management",
+      "/dallas-cabin-owners",
+      "/airbnb-management-hochatown-ok",
+      "/best-hochatown-property-management-company",
+      "/broken-bow-cabin-management-fees",
+      "/switch-property-managers-broken-bow",
+    ];
+    for (const path of paths) {
+      await page.goto(path);
+      const html = await page.content();
+      expect(html, `${path} uses a retired fee base`).not.toMatch(
+        /nightly[- ]rental revenue|net rental income/i,
+      );
+      if (/\b20%/.test(html)) {
+        expect(html, `${path} quotes 20% without the confirmed base`).toMatch(
+          /net rental revenue/i,
+        );
+      }
     }
   });
 

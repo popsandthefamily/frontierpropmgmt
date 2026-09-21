@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Property Manager Plan | Frontier Property Management",
     description:
-      "20% of net rental income, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, taxes. We take on a limited number of cabins.",
+      "20% of net rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, taxes. We take on a limited number of cabins.",
     images: [
       {
         url: "/images/services/DSC3079-og.jpg",
@@ -161,7 +161,7 @@ export default function ManagementServicesPage() {
           "@id": `${siteConfig.url}${plans.manager.href}#service`,
           name: "Full-Service Short-Term Rental Management",
           description:
-            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of net rental income.",
+            "Complete short-term rental management for cabin owners in Broken Bow and Hochatown, Oklahoma. Dynamic pricing, guest communication, cleaning coordination, maintenance, and reporting, 20% of net rental revenue.",
           url: `${siteConfig.url}${plans.manager.href}`,
           provider: { "@id": `${siteConfig.url}/#business` },
           areaServed: [
@@ -173,7 +173,7 @@ export default function ManagementServicesPage() {
           offers: {
             "@type": "Offer",
             description:
-              "20% of net rental income, no monthly minimum, no setup fee.",
+              "20% of net rental revenue, no monthly minimum, no setup fee.",
             priceCurrency: "USD",
           },
         }}
@@ -183,7 +183,7 @@ export default function ManagementServicesPage() {
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
         title="Full-Service STR Management"
-        subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental income. Pricing, guests, cleanings, maintenance, taxes, handled."
+        subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental revenue. Pricing, guests, cleanings, maintenance, taxes, handled."
         size="large"
         overlay="gradient"
         cta={CTA.management}
@@ -351,17 +351,19 @@ export default function ManagementServicesPage() {
                 <p className="text-base font-medium uppercase tracking-wider text-sage">
                   Full-Service STR Management
                 </p>
+                {/* Fee and base both read from plans.manager so this card
+                    cannot drift from the definition the rest of the site,
+                    the owner statements, and the llms files all state. */}
                 <CardTitle className="mt-2 text-4xl font-bold text-charcoal md:text-5xl">
-                  20%{" "}
+                  {plans.manager.fee}{" "}
                   <span className="text-lg font-normal text-muted-foreground md:text-xl">
-                    of nightly-rental revenue
+                    {plans.manager.feeSuffix}
                   </span>
                 </CardTitle>
                 <p className="mt-2 text-base text-muted-foreground">
-                  Calculated on nightly rate (plus any extra-guest or
-                  premium-stay fees). Cleaning and pet fees pass through
-                  directly to cleaners and are not part of the 20%. See the
-                  full{" "}
+                  Calculated on {plans.manager.feeBase}, not on the headline
+                  booking total. Cleaning and pet fees pass through directly
+                  to cleaners and are never part of the 20%. See the full{" "}
                   <Link
                     href="/broken-bow-cabin-management-fees"
                     className="font-semibold text-sage underline hover:text-sage-dark"
