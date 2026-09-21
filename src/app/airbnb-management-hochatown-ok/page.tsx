@@ -14,7 +14,7 @@ import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Airbnb Management in Hochatown, OK | Frontier",
+  title: { absolute: "Airbnb Management in Hochatown, OK | Frontier" },
   description:
     "Airbnb management in Hochatown, OK from a boutique, owner-operated team that runs its own flagship cabin in this market. 20% of net rental income, no monthly minimum, month-to-month.",
   keywords: [

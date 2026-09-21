@@ -13,8 +13,10 @@ import { AvailabilityNote } from "@/components/sections/availability-note";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title:
-    "How to Switch Property Managers in Broken Bow Without Losing Reviews | Frontier",
+  title: {
+    absolute:
+      "Switching Property Managers in Broken Bow, Without Losing Reviews | Frontier",
+  },
   description:
     "Step-by-step guide to switching cabin property managers in Broken Bow / Hochatown — what to check in your current contract, how listing ownership transfers, and how to keep your Airbnb / VRBO reviews.",
   keywords: [

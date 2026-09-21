@@ -13,7 +13,10 @@ import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Best Hochatown Property Management Company: Honest Guide | Frontier",
+  title: {
+    absolute:
+      "Best Hochatown Property Management Company: Honest Guide | Frontier",
+  },
   description:
     "How to pick the best Hochatown property management company for your cabin — boutique vs scale operator trade-offs, fee structure, and what \"best\" actually means in this small, seasonal market.",
   keywords: [

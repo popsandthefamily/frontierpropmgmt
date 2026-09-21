@@ -275,6 +275,39 @@ test.describe("technical seo", () => {
     }
   });
 
+  test("no public page renders the brand suffix twice", async ({ page }) => {
+    // The root layout applies a "%s | Frontier" template, so any child page
+    // whose own title already ends in the brand renders it twice. Pages that
+    // need the brand inside the title use `title.absolute`.
+    const paths = [
+      "/",
+      "/home-care-concierge",
+      "/pricing",
+      "/management-services",
+      "/local-services",
+      "/contact",
+      "/faq",
+      "/about",
+      "/audit",
+      "/blogs",
+      "/hochatown-property-management",
+      "/broken-bow-property-management",
+      "/dallas-cabin-owners",
+      "/airbnb-management-hochatown-ok",
+      "/best-hochatown-property-management-company",
+      "/broken-bow-cabin-management-fees",
+      "/switch-property-managers-broken-bow",
+    ];
+    for (const path of paths) {
+      await page.goto(path);
+      const title = await page.title();
+      expect(title, `${path} repeats the brand suffix`).not.toMatch(
+        /\|\s*Frontier(\s+Property\s+Management)?\s*\|\s*Frontier/i,
+      );
+      expect(title.length, `${path} has no title`).toBeGreaterThan(10);
+    }
+  });
+
   test("llms.txt describes the concierge service consistently", async ({ request }) => {
     const text = await (await request.get("/llms.txt")).text();
     expect(text).toContain("Home Care Concierge");

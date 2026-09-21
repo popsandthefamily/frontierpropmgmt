@@ -12,7 +12,9 @@ import { siteConfig } from "@/data/site";
 import { allFAQItems, faqGroups } from "@/data/faq";
 
 export const metadata: Metadata = {
-  title: "FAQ | Cabin Management in Broken Bow & Hochatown | Frontier",
+  title: {
+    absolute: "FAQ: Cabin Management in Broken Bow & Hochatown | Frontier",
+  },
   description:
     "Straight answers about Frontier's two plans, what the 20% fee is actually calculated on, switching managers, cleaning, taxes, permits, and the Broken Bow and Hochatown market.",
   keywords: [

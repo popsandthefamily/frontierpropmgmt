@@ -15,7 +15,10 @@ import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Broken Bow Cabin Management Fees: What 20% Should Include | Frontier",
+  title: {
+    absolute:
+      "Broken Bow Cabin Management Fees: What 20% Covers | Frontier",
+  },
   description:
     "What property management fees actually cover in Broken Bow — what a clean 20% should include, what's billed separately at cost, and the hidden fees to watch for before you sign.",
   keywords: [
