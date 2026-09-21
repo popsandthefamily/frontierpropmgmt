@@ -88,7 +88,7 @@ export async function addProperty(formData: FormData): Promise<void> {
  * Save a month's statement.
  *
  * Only the four figures that come off a payout report are entered by hand.
- * Net rental income, the management fee and the payout are derived here so the
+ * Net rental revenue, the management fee and the payout are derived here so the
  * arithmetic on the owner's statement is always internally consistent and
  * always matches the published fee definition, rather than depending on
  * whoever typed the numbers.

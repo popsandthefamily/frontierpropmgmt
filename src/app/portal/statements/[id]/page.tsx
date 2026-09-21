@@ -28,11 +28,15 @@ export default async function StatementPage({
 
   // The arithmetic, in the order it runs. Each row is the previous row minus a
   // deduction, so the statement can be checked line by line rather than trusted.
+  //
+  // The net-rental-revenue label matches plans.manager, which is the source of
+  // truth for the fee base. The `net_rental_income` column keeps its original
+  // name: renaming it would be a migration, and the figure is the same one.
   const ledger: { label: string; value: number; note?: string; running?: boolean }[] = [
     { label: "Gross booking revenue", value: Number(data.gross_revenue), running: true },
     { label: "Platform host fees", value: -Number(data.platform_fees), note: "What Airbnb or Vrbo withheld" },
     { label: "Occupancy taxes remitted", value: -Number(data.occupancy_taxes), note: "Collected from the guest and paid to the county" },
-    { label: "Net rental income", value: Number(data.net_rental_income), running: true, note: "The base the management fee is calculated on" },
+    { label: "Net rental revenue", value: Number(data.net_rental_income), running: true, note: "The base the management fee is calculated on" },
     { label: `Management fee (${plans.manager.feeInline})`, value: -Number(data.management_fee) },
     { label: "Pass-through costs", value: -Number(data.pass_through_costs), note: "Cleaning, maintenance, and vendor invoices, at cost with no markup" },
     { label: "Your payout", value: Number(data.owner_payout), running: true },

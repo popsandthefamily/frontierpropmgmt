@@ -250,7 +250,7 @@ export default async function OwnerWorkspacePage({
             <input type="hidden" name="token" value={token ?? ""} />
             <input type="hidden" name="owner_id" value={owner.id} />
             <p className="text-sm text-muted-foreground">
-              Enter the four figures off the payout report. Net rental income,
+              Enter the four figures off the payout report. Net rental revenue,
               the 20% fee and the payout are calculated from them.
             </p>
             <div className="mt-3 grid gap-4 sm:grid-cols-4">

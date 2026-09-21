@@ -125,7 +125,7 @@ Formspree is mocked with `page.route`; no test contacts the real endpoint.
 
 ## Owner release gates (approval required before production)
 
-- Management fee base: confirm "20% of net rental income" (after platform host fees and occupancy taxes) is the contractual definition, then reconcile the management page pricing card, which currently says "of nightly-rental revenue".
+- ~~Management fee base~~ **confirmed 2026-09-21 as "20% of net rental revenue"**, reconciled site-wide including the owner portal statement label. Two follow-ups sit outside this repo: the applied Supabase migration `20260902220000_owner_portal.sql` still carries the retired phrase in an explanatory comment (migrations are history and were deliberately not edited; the columns and arithmetic are unaffected), and any signed management agreement worded "net rental income" should be checked so the contract and the website name the same base.
 - Qualifying-home scope for the $500 base: rooms, square footage, and condition boundaries. The brief's 2,700 sq ft three-bedroom prospect is context; no square-footage promise was published.
 - Exterior time cap (proposed 60 person-minutes per month) and concierge task cap (proposed 30 person-minutes during scheduled visits).
 - Routine chemical allowance for the hot-tub check, and the between-visit responsibilities wording in the written scope.
