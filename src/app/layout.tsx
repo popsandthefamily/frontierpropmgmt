@@ -106,6 +106,13 @@ export default function RootLayout({
             "@id": `${siteConfig.url}/#business`,
             name: siteConfig.name,
             legalName: "Frontier Property Management LLC",
+            disambiguatingDescription:
+              "Owner-operated short-term rental management and home care company based in Broken Bow, Oklahoma, serving Broken Bow and Hochatown.",
+            founder: {
+              "@type": "Person",
+              "@id": `${siteConfig.url}/about#hunter-collins`,
+              name: siteConfig.owner,
+            },
             description: `${siteConfig.description} Full-service STR management at ${plans.manager.feeInline}, or ${plans.concierge.name} ${plans.concierge.feeInline} with the scope confirmed after a walkthrough. Owner-operated, based in Broken Bow, Oklahoma.`,
             url: siteConfig.url,
             telephone: siteConfig.phone,

@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   description:
     "Ask about STR management, Home Care Concierge, or local support for your cabin. Contact Frontier in Broken Bow and Hochatown.",
   openGraph: {
+    url: `${siteConfig.url}/contact`,
     title: "Discuss Your Broken Bow Property | Frontier",
     description:
       "Tell us about your property and we'll tell you what a practical plan looks like. Based in Broken Bow, OK.",
@@ -67,7 +68,7 @@ const INTENT_COPY: Record<
       "What is breaking, what is falling through, and how often you are driving down to fix it yourself.",
   },
   owner: {
-    heroTitle: "Talk about your property",
+    heroTitle: "Talk about your Broken Bow property",
     heroSubtitle:
       "Full-service rental management, or local home care while you keep control. We'll help you work out which fits.",
     formHeading: "Tell us about your property",

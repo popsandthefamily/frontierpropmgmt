@@ -10,7 +10,9 @@ interface JsonLdProps {
     | "Service"
     | "ItemList"
     | "RealEstateAgent"
-    | "CollectionPage";
+    | "CollectionPage"
+    | "AboutPage"
+    | "Person";
   data: Record<string, unknown>;
 }
 

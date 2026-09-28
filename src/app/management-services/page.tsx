@@ -36,10 +36,11 @@ import {
 } from "@/data/services";
 
 export const metadata: Metadata = {
-  title: { absolute: "Broken Bow STR Management | Frontier" },
+  title: { absolute: "Broken Bow & Hochatown Cabin Management (STR) | Frontier" },
   description:
     "Local short-term rental management for Broken Bow and Hochatown cabins. Explore Frontier's management services, fees, and owner support.",
   openGraph: {
+    url: `${siteConfig.url}${plans.manager.href}`,
     title: "Property Manager Plan | Frontier Property Management",
     description:
       "20% of net rental revenue, no monthly minimum. Dynamic pricing, guest communication, cleaning, maintenance, taxes. We take on a limited number of cabins.",
@@ -182,7 +183,7 @@ export default function ManagementServicesPage() {
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
-        title="Full-Service STR Management"
+        title="Full-Service Cabin Management in Broken Bow & Hochatown"
         subtitle="Boutique, owner-operated cabin management in Broken Bow and Hochatown at 20% of net rental revenue. Pricing, guests, cleanings, maintenance, taxes, handled."
         size="large"
         overlay="gradient"

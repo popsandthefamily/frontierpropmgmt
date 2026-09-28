@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     absolute: "FAQ: Cabin Management in Broken Bow & Hochatown | Frontier",
   },
   description:
-    "Straight answers about Frontier's two plans, what the 20% fee is actually calculated on, switching managers, cleaning, taxes, permits, and the Broken Bow and Hochatown market.",
+    "Answers for Broken Bow and Hochatown cabin owners: what 20% of net rental revenue means, second home care, switching managers, cleaning, and taxes.",
   keywords: [
     "Broken Bow property management questions",
     "Hochatown cabin management FAQ",
@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     "switching property managers Oklahoma",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/faq",
     title: "Frequently Asked Questions | Frontier Property Management",
     description:
       "What the two plans cost, what the 20% is calculated on, and how switching works.",
@@ -61,7 +62,7 @@ export default function FAQPage() {
 
       <HeroSection
         backgroundImage="/images/services/DSC3082.webp"
-        title="Questions, answered"
+        title="Broken Bow & Hochatown Cabin Owner FAQ"
         subtitle="Everything owners ask us before signing, in one place. Including the ones where the honest answer is not the flattering one."
         size="medium"
         overlay="dark"

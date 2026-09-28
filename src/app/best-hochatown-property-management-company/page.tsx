@@ -15,10 +15,10 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Best Hochatown Property Management Company: Honest Guide | Frontier",
+      "Best Hochatown Property Manager: How to Choose | Frontier",
   },
   description:
-    "How to pick the best Hochatown property management company for your cabin — boutique vs scale operator trade-offs, fee structure, and what \"best\" actually means in this small, seasonal market.",
+    "How to choose the best Hochatown property management company for your cabin: boutique vs. scale, fee structures, and what best means in this market.",
   keywords: [
     "best Hochatown property management company",
     "best Hochatown cabin manager",
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "boutique Hochatown property manager",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/best-hochatown-property-management-company",
     title: "Best Hochatown Property Management Company: Honest Guide",
     description:
       "Boutique vs scale, fee structure, local presence — how to pick the right Hochatown property management company.",

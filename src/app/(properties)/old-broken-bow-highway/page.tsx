@@ -15,12 +15,13 @@ const property = getPropertyBySlug("old-broken-bow-highway");
 
 const PAGE_TITLE = "Old Broken Bow Highway: The House Frontier Started On";
 const PAGE_DESCRIPTION =
-  "The 3BR poolside house on Old Broken Bow Highway was Frontier's first year in business: 15 booked nights a month through the slow season, five stars start to finish, and revenue that kept pace with bigger cabins. No longer available to book.";
+  "Frontier's first rental: a 3BR poolside house on Old Broken Bow Highway, 15 booked nights a month through the slow season. Retired; no longer bookable.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
   openGraph: {
+    url: "https://www.rentwithfrontier.com/old-broken-bow-highway",
     title: "Old Broken Bow Highway | The House Frontier Learned On",
     description:
       "A retrospective on Frontier's first year running its own rental house in Broken Bow. This property is no longer available to book.",

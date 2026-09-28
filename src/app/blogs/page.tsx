@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Tips for Broken Bow cabin owners and guests, STR management insights, Hochatown travel guides, and vacation rental industry news.",
   openGraph: {
+    url: "https://www.rentwithfrontier.com/blogs",
     title: "From the Frontier: Broken Bow & Hochatown Cabin Blog",
     description:
       "STR tips, Hochatown travel guides, and industry news for cabin owners and guests.",

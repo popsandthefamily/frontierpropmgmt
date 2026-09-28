@@ -16,10 +16,11 @@ import { plans, siteConfig } from "@/data/site";
 import { team } from "@/data/team";
 
 export const metadata: Metadata = {
-  title: "About Frontier: Local Broken Bow & Hochatown STR Experts",
+  title: { absolute: "About Frontier Property Management | Broken Bow, OK" },
   description:
-    "Meet Hunter Collins, owner of Frontier Property Management, and advisor Beth Collins. Based in Broken Bow with lifelong local roots and a 4.95-star guest rating.",
+    "Meet Hunter Collins, owner of Frontier Property Management in Broken Bow, Oklahoma. Owner-operated STR management and home care, 4.95-star guest rating.",
   openGraph: {
+    url: `${siteConfig.url}/about`,
     title: "About Frontier Property Management",
     description:
       "Owner-operated Broken Bow cabin management with lifelong local roots. Hunter Collins, owner. 4.95★.",
@@ -68,42 +69,28 @@ const whatYouGetItems = [
 export default function AboutPage() {
   return (
     <>
-      {/* JSON-LD, Organization */}
+      {/* JSON-LD, AboutPage */}
+      {/* The business entity itself is declared once, in the root layout,
+          as LocalBusiness with @id /#business. This page describes it and
+          names the person behind it rather than redeclaring it: an earlier
+          version reused the /#business @id under a second type and used an
+          `advisors` property that schema.org does not define. */}
       <JsonLd
-        type="Organization"
+        type="AboutPage"
         data={{
-          name: siteConfig.name,
-          url: siteConfig.url,
-          logo: `${siteConfig.url}/images/logos/Asset-1-2.png`,
-          "@id": `${siteConfig.url}/#business`,
-          description: siteConfig.description,
-          founder: {
+          "@id": `${siteConfig.url}/about#page`,
+          url: `${siteConfig.url}/about`,
+          name: "About Frontier Property Management",
+          isPartOf: { "@id": `${siteConfig.url}/#website` },
+          about: { "@id": `${siteConfig.url}/#business` },
+          mainEntity: {
             "@type": "Person",
-            name: "Hunter Collins",
-            jobTitle: "Owner & Founder",
+            "@id": `${siteConfig.url}/about#hunter-collins`,
+            name: siteConfig.owner,
+            jobTitle: "Owner",
+            worksFor: { "@id": `${siteConfig.url}/#business` },
+            image: `${siteConfig.url}/images/team/hunter-collins.webp`,
           },
-          member: [
-            {
-              "@type": "Person",
-              name: "Hunter Collins",
-              jobTitle: "Owner & Founder",
-            },
-          ],
-          // Beth advises the business; she is not an owner, employee, or
-          // officer, so she is declared as an advisor rather than a member.
-          advisors: {
-            "@type": "Person",
-            name: "Beth Collins",
-            jobTitle: "Advisor",
-          },
-          areaServed: [
-            { "@type": "Place", name: "Broken Bow, Oklahoma" },
-            { "@type": "Place", name: "Hochatown, Oklahoma" },
-          ],
-          sameAs: [
-            siteConfig.social.instagram,
-            siteConfig.social.facebook,
-          ],
         }}
       />
 
@@ -188,6 +175,12 @@ export default function AboutPage() {
               cleaners and technicians we use on the cabin we run ourselves.
               Hot-tub cleaning, service, and repair on every plan is performed
               with our partner Broken Bow Hot Tub Co.
+            </p>
+            <p>
+              Frontier Property Management LLC is based at{" "}
+              {siteConfig.address}. There are unrelated companies with the
+              same name in other states; this one works only in Broken Bow,
+              Hochatown, and the surrounding part of McCurtain County.
             </p>
           </div>
           <HotTubPartner variant="card" className="mt-8" />

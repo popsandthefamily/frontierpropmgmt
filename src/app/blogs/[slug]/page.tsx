@@ -31,9 +31,10 @@ export async function generateMetadata({
   }
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: post.seoTitle ? { absolute: post.seoTitle } : post.title,
+    description: post.seoDescription ?? post.excerpt,
     openGraph: {
+      url: `https://www.rentwithfrontier.com/blogs/${slug}`,
       title: post.title,
       description: post.excerpt,
       type: "article",

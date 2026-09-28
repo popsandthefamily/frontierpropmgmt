@@ -24,6 +24,7 @@ export const metadata: Metadata = {
   description:
     "Compare full-service rental management with Home Care Concierge from $500/month. See service boundaries and request a property-specific scope.",
   openGraph: {
+    url: `${siteConfig.url}/pricing`,
     title: "STR Management & Home Care Pricing | Frontier",
     description:
       "20% of net rental revenue for full management, or Home Care Concierge from $500 a month. What each includes, and what is quoted separately.",
@@ -129,7 +130,7 @@ export default function PricingPage() {
 
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
-        title="Services & Pricing"
+        title="Cabin Management & Home Care Pricing in Broken Bow"
         subtitle="Full-service rental management, or home care while you keep control. Both month to month. Here is what each one costs and where the line falls."
         size="medium"
         overlay="dark"
@@ -427,6 +428,9 @@ export default function PricingPage() {
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/faq">Owner FAQ</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/income-calculator">Cabin income calculator</Link>
             </Button>
           </div>
         </div>

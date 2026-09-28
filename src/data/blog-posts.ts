@@ -23,6 +23,15 @@ export interface BlogPost {
    */
   facebookPost?: string;
   /**
+   * Optional search-result title and description. The headline (`title`)
+   * stays as written on the page; these exist because a good headline is
+   * often too long for a search result, which cuts titles near 60
+   * characters and descriptions near 160. `seoTitle` is rendered without
+   * the "| Frontier" suffix appended, so include it if you want it.
+   */
+  seoTitle?: string;
+  seoDescription?: string;
+  /**
    * Drafts stay in the content system but are never listed, linked, built,
    * or included in the sitemap or llms files. Remove the flag, set the real
    * publish date and author, and have the copy reviewed before it goes out.
@@ -37,6 +46,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "what-boutique-cabin-manager-does-differently",
+    seoTitle: "What a Boutique Cabin Manager Does Differently | Frontier",
     title:
       "What a Boutique Cabin Manager Actually Does Differently",
     date: "2026-04-27",
@@ -105,6 +115,8 @@ https://www.rentwithfrontier.com/blogs/what-boutique-cabin-manager-does-differen
   },
   {
     slug: "questions-to-ask-hochatown-airbnb-manager",
+    seoTitle: "12 Questions to Ask a Hochatown Airbnb Manager | Frontier",
+    seoDescription: "Twelve questions to ask any Hochatown Airbnb or cabin manager before you sign: fees, what the percentage is charged on, contract terms, and reporting.",
     title:
       "Airbnb Management in Hochatown: 12 Questions to Ask Before You Sign",
     date: "2026-04-26",
@@ -190,6 +202,7 @@ https://www.rentwithfrontier.com/blogs/questions-to-ask-hochatown-airbnb-manager
   },
   {
     slug: "lessons-from-running-our-own-hochatown-cabin",
+    seoDescription: "What running our own Hochatown cabin taught us about pricing, reviews, cleaning, and hot tubs, and how it shapes how we manage owners' cabins.",
     title:
       "What We Learned Operating Our Own Hochatown Cabin",
     date: "2026-04-25",
@@ -252,6 +265,8 @@ https://www.rentwithfrontier.com/blogs/lessons-from-running-our-own-hochatown-ca
   },
   {
     slug: "managing-broken-bow-cabin-from-dallas",
+    seoTitle: "Managing a Broken Bow Cabin from Dallas | Frontier",
+    seoDescription: "What DFW owners need to run a Broken Bow cabin from three hours away: local help, cleaning, maintenance, taxes, and when to hire a manager.",
     title: "Managing Your Broken Bow Cabin from Dallas: What Every DFW Owner Should Know",
     date: "2026-04-07",
     author: "Frontier Property Management",
@@ -308,6 +323,8 @@ https://www.rentwithfrontier.com/blogs/managing-broken-bow-cabin-from-dallas`,
   },
   {
     slug: "best-time-to-visit-broken-bow",
+    seoTitle: "Best Time to Visit Broken Bow & Hochatown | Frontier",
+    seoDescription: "A season-by-season guide to Broken Bow and Hochatown: fall foliage, spring, summer on the lake, winter cabin trips, crowds, and prices.",
     title: "The Best Time to Visit Broken Bow & Hochatown: A Season-by-Season Guide",
     date: "2026-04-02",
     author: "Frontier Property Management",
@@ -374,6 +391,7 @@ https://www.rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
   },
   {
     slug: "broken-bow-cabin-hot-tub-private-pool",
+    seoTitle: "Broken Bow Cabins with Hot Tubs & Pools | Frontier",
     title: "Broken Bow Cabins with Hot Tubs & Private Pools: What to Know Before You Book",
     date: "2026-03-25",
     author: "Frontier Property Management",
@@ -441,6 +459,8 @@ https://www.rentwithfrontier.com/blogs/broken-bow-cabin-hot-tub-private-pool`,
   },
   {
     slug: "why-dallas-investors-buying-broken-bow-cabins",
+    seoTitle: "Why Dallas Investors Buy Broken Bow Cabins | Frontier",
+    seoDescription: "Why Dallas investors buy Broken Bow cabins in 2026: the drive market, demand, what cabins earn, and the costs and risks to weigh before buying.",
     title: "Why Dallas Investors Are Buying Broken Bow Cabins in 2026",
     date: "2026-03-18",
     author: "Frontier Property Management",
@@ -504,6 +524,7 @@ https://www.rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-ca
   },
   {
     slug: "what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown",
+    seoTitle: "Hochatown Winter Storm: What to Know | Frontier",
     title:
       "What You Need to Know Before This Weekend's Winter Storm Hits Hochatown",
     date: "2026-01-21",
@@ -567,6 +588,8 @@ https://www.rentwithfrontier.com/blogs/what-you-need-to-know-before-this-weekend
   },
   {
     slug: "how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul",
+    seoTitle: "Airbnb's Host-Only Fee Change, Explained | Frontier",
+    seoDescription: "What Airbnb's switch to host-only service fees means for Broken Bow cabin owners, what changes on your payout, and how to adjust pricing.",
     title:
       "How Frontier Property Management Smooths the Transition Amid Airbnb's Fee Overhaul",
     date: "2025-10-13",

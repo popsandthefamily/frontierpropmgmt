@@ -16,6 +16,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "Broken Bow Cabin Property Management",
   openGraph: {
+    url: "https://www.rentwithfrontier.com/broken-bow-property-management",
     title: "Broken Bow Cabin Property Management | Frontier",
     description:
       "Boutique, owner-operated Broken Bow cabin management from a team that runs its own flagship cabin in the same market. 20% of net rental revenue, no monthly minimum.",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     ],
   },
   description:
-    "Broken Bow, OK cabin management by a locally based team. 20% of net rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+    "Broken Bow, OK cabin management by a locally based team: pricing, guests, cleaning, and maintenance at 20% of net rental revenue, no monthly minimum.",
   keywords: [
     "Broken Bow property management",
     "Broken Bow cabin management",

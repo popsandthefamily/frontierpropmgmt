@@ -18,7 +18,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "Hochatown Cabin Property Management",
   description:
-    "Hochatown, OK cabin management by a locally based team. 20% of net rental revenue, no monthly minimum, dynamic pricing, 24/7 guest support, cleaning, and maintenance.",
+    "Hochatown, OK cabin management by a locally based team: pricing, guests, cleaning, and maintenance at 20% of net rental revenue, no monthly minimum.",
   keywords: [
     "Hochatown property management",
     "Hochatown cabin management",
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     "Broken Bow / Hochatown property manager",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/hochatown-property-management",
     title: "Hochatown Cabin Property Management | Frontier",
     description:
       "Boutique, owner-operated Hochatown cabin management from a team that runs its own flagship cabin in the same market. 20% of net rental revenue, no monthly minimum.",
@@ -268,7 +269,7 @@ export default function HochatownPropertyManagementPage() {
           <p>
             Hochatown sits directly at the gateway to{" "}
             <a
-              href="https://www.travelok.com/listings/view.profile/id.6919"
+              href="https://www.travelok.com/state-parks/beavers-bend-state-park"
               target="_blank"
               rel="noopener noreferrer"
             >

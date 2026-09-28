@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Broken Bow Cabin Management Fees: What 20% Covers | Frontier",
   },
   description:
-    "What property management fees actually cover in Broken Bow — what a clean 20% should include, what's billed separately at cost, and the hidden fees to watch for before you sign.",
+    "What Broken Bow property management fees cover: what 20% should include, what is billed at cost, and the hidden fees to watch for before you sign.",
   keywords: [
     "Broken Bow cabin management fees",
     "Hochatown property management fees",
@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     "Airbnb management fee Broken Bow",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/broken-bow-cabin-management-fees",
     title: "Broken Bow Cabin Management Fees: What 20% Should Include",
     description:
       "Honest fee breakdown for Broken Bow STR management. What's bundled, what's pass-through, and what's a red flag.",

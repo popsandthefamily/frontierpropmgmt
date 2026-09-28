@@ -25,10 +25,11 @@ import { AnimateInView } from "@/components/motion/animate-in-view";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
-  title: "Discover Broken Bow & Hochatown: Things to Do & Local Tips",
+  title: { absolute: "Broken Bow & Hochatown Guide: Things to Do | Frontier" },
   description:
     "Your guide to Broken Bow & Hochatown, Oklahoma. Best neighborhoods, Beavers Bend activities, fishing, hiking, restaurants & tips for the perfect cabin trip.",
   openGraph: {
+    url: "https://www.rentwithfrontier.com/discover-broken-bow",
     title: "Discover Broken Bow & Hochatown: Complete Visitor Guide",
     description:
       "Best spots, things to do, where to stay in Broken Bow & Hochatown. Plan your Oklahoma cabin getaway.",
@@ -145,7 +146,7 @@ const discoverFAQ = [
   {
     question: "Do you book cabins directly?",
     answer:
-      "Yes! We manage several cabins in the Broken Bow and Hochatown area that can be booked directly through our website. Booking direct means you avoid platform fees and get the best rate guaranteed. Visit our search page to see available properties.",
+      "Yes. Sublime Retreat, our 3-bedroom cabin in Hochatown, can be booked directly through our website. Booking direct means no platform service fee is added to your total. Visit our booking page to check dates.",
   },
 ];
 

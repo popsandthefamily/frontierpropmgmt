@@ -34,10 +34,11 @@ import {
 } from "@/data/home-care";
 
 export const metadata: Metadata = {
-  title: { absolute: "Broken Bow Home Care Concierge | Frontier" },
+  title: { absolute: "Second Home Care & Home Watch in Broken Bow | Frontier" },
   description:
-    "Home care for private second homes and rental cabins in Broken Bow and Hochatown. Monthly plans from $500; scope confirmed after a walkthrough.",
+    "Second home care and monthly home watch for Broken Bow and Hochatown cabins: cleaning, hot-tub care, and property checks. From $500/month.",
   openGraph: {
+    url: `${siteConfig.url}${plans.concierge.href}`,
     title: "Home Care Concierge in Broken Bow & Hochatown | Frontier",
     description:
       "Your place here, cared for while you're away. Agreed cleaning, hot-tub care, light exterior upkeep, and property checks, without handing over your bookings.",
@@ -68,6 +69,17 @@ export default function HomeCareConciergePage() {
   return (
     <>
       <PageViewTracker event="home_care_page_viewed" />
+
+      <JsonLd
+        type="FAQPage"
+        data={{
+          mainEntity: HOME_CARE_FAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }}
+      />
 
       {/* Service schema, tied to the single business entity in the root
           layout. The offer mirrors the visible price and qualifier. */}
@@ -109,8 +121,8 @@ export default function HomeCareConciergePage() {
 
       <HeroSection
         backgroundImage="/images/local-services/hero.webp"
-        title="Home Care Concierge in Broken Bow & Hochatown"
-        subtitle={homeCare.lead}
+        title="Second Home Care in Broken Bow & Hochatown"
+        subtitle={`Home Care Concierge. ${homeCare.lead}`}
         size="large"
         overlay="dark"
         cta={CTA.concierge}
@@ -146,7 +158,7 @@ export default function HomeCareConciergePage() {
       <SectionWrapper background="white">
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            Your home does not have to be a rental.
+            Home Care Concierge: your home does not have to be a rental.
           </h2>
           <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
             <p>
@@ -184,7 +196,7 @@ export default function HomeCareConciergePage() {
       <SectionWrapper background="cream" id="included">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-            One monthly plan. A defined list of responsibilities.
+            Monthly cabin checks and care, with a defined list of responsibilities.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
             Every item states its frequency or its boundary. A long list of

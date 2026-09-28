@@ -40,6 +40,7 @@ export const metadata: Metadata = {
   description:
     "Full-service STR management and home care concierge in Broken Bow and Hochatown. Local care for rental cabins and private second homes.",
   openGraph: {
+    url: siteConfig.url,
     title: "Broken Bow Property Management & Home Care | Frontier",
     description:
       "Let us run your short-term rental, or keep your home clean, checked, and cared for while you keep control. One local team for rental cabins and private second homes.",
@@ -381,6 +382,12 @@ export default function HomePage() {
               >
                 Already listed? Run the free listing audit
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                href="/income-calculator"
+                className="text-sm font-medium text-charcoal underline-offset-4 hover:underline"
+              >
+                What cabins earn here
               </Link>
             </div>
           </div>

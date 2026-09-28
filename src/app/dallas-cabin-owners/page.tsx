@@ -17,7 +17,7 @@ import { HeroSnapshot } from "@/components/audit/hero-snapshot";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Dallas Cabin Owners: Broken Bow Property Management from DFW",
+  title: { absolute: "Broken Bow Cabin Management for Dallas Owners | Frontier" },
   description:
     "Own a Broken Bow cabin from Dallas? Frontier gives DFW owners local, hands-on STR management. 20% of net rental revenue, no monthly minimum, month-to-month.",
   keywords: [
@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     "Dallas STR management Oklahoma",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/dallas-cabin-owners",
     title: "Dallas & DFW Cabin Owners: Broken Bow Property Management",
     description:
       "Local Broken Bow management for out-of-town owners. Frontier handles everything so you can invest from Dallas with confidence.",

@@ -15,10 +15,10 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Switching Property Managers in Broken Bow, Without Losing Reviews | Frontier",
+      "Switching Property Managers in Broken Bow | Frontier",
   },
   description:
-    "Step-by-step guide to switching cabin property managers in Broken Bow / Hochatown — what to check in your current contract, how listing ownership transfers, and how to keep your Airbnb / VRBO reviews.",
+    "How to switch cabin managers in Broken Bow and Hochatown: your contract, listing transfer, existing bookings, and keeping your Airbnb and VRBO reviews.",
   keywords: [
     "switch property manager Broken Bow",
     "change cabin manager Hochatown",
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     "property management transition Broken Bow",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/switch-property-managers-broken-bow",
     title: "How to Switch Property Managers in Broken Bow Without Losing Reviews",
     description:
       "Honest guide to a clean handoff — contract review, listing transfer, review preservation, and the full transition timeline.",

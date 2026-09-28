@@ -6,10 +6,11 @@ import { Tier2Form } from "@/components/audit/tier2-form";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 
 export const metadata: Metadata = {
-  title: "Free Airbnb Audit: See What Your Cabin Is Leaving on the Table",
+  title: { absolute: "Free Airbnb Listing Audit for Broken Bow Cabins | Frontier" },
   description:
     "Paste your Airbnb URL. In 45 seconds, see how your pricing, occupancy, and amenities compare to similar cabins earning more in your market.",
   openGraph: {
+    url: "https://www.rentwithfrontier.com/audit",
     title: "Free Airbnb Audit for Broken Bow & Hochatown Cabins",
     description:
       "Live AirROI market data. See the revenue gap on your specific Airbnb listing in under 2 minutes.",

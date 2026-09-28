@@ -33,9 +33,9 @@ import {
 const property = getPropertyBySlug("sublime");
 
 export const metadata: Metadata = {
-  title: "Sublime Retreat: Luxury Hochatown Cabin with Hot Tub & Zip Lines",
+  title: { absolute: "Sublime Retreat: Hochatown Cabin, Hot Tub & Zip Lines" },
   description:
-    "Sublime Retreat is a 3BR/3.5BA luxury cabin in Hochatown, OK that sleeps 8: two private zip lines, hot tub, arcade, two king suites with en-suite baths, bunk room, 500 Mbps Wi-Fi, pet-friendly, minutes from Beavers Bend State Park. Book direct, no platform service fee.",
+    "3BR Hochatown cabin that sleeps 8: two private zip lines, hot tub, arcade, two king suites, bunk room, pet-friendly. Book direct, no platform service fee.",
   keywords: [
     "Broken Bow cabin with zip line",
     "Hochatown cabin with hot tub",
@@ -48,6 +48,7 @@ export const metadata: Metadata = {
     "book Broken Bow cabin direct no Airbnb fees",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/sublime",
     title: "Sublime Retreat: Luxury Hochatown Cabin | Book Direct",
     description:
       "2 zip lines, hot tub, arcade, Calcutta quartz kitchen. 3BR luxury cabin in Hochatown. Book direct, no platform fees.",

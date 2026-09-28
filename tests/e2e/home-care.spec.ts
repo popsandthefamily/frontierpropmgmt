@@ -91,8 +91,10 @@ test.describe("home care concierge page", () => {
   test("renders with its own metadata, price, and boundaries", async ({ page }) => {
     const response = await page.goto("/home-care-concierge");
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle("Broken Bow Home Care Concierge | Frontier");
-    await expect(page.locator("h1")).toContainText(/home care concierge/i);
+    await expect(page).toHaveTitle("Second Home Care & Home Watch in Broken Bow | Frontier");
+    await expect(page.locator("h1")).toContainText(/second home care/i);
+    // The product name stays visible even though the H1 leads with the searched phrase.
+    await expect(page.locator("body")).toContainText(/home care concierge/i);
     expect(await canonicalOf(page)).toBe("https://www.rentwithfrontier.com/home-care-concierge");
 
     const body = page.locator("body");
@@ -174,7 +176,7 @@ test.describe("contact intent routing", () => {
     const html = await page.content();
     expect(html).not.toContain("<img src=x");
     expect(await page.locator("img[onerror]").count()).toBe(0);
-    await expect(page.locator("h1").first()).toContainText(/talk about your property/i);
+    await expect(page.locator("h1").first()).toContainText(/talk about your broken bow property/i);
   });
 });
 
@@ -277,8 +279,8 @@ test.describe("technical seo", () => {
 
   test("nested pages canonicalise to themselves and titles carry one brand suffix", async ({ page }) => {
     for (const [path, title] of [
-      ["/local-services", "STR Cleaning & Local Support in Broken Bow | Frontier"],
-      ["/management-services", "Broken Bow STR Management | Frontier"],
+      ["/local-services", "Cabin Cleaning & Turnover Service in Broken Bow | Frontier"],
+      ["/management-services", "Broken Bow & Hochatown Cabin Management (STR) | Frontier"],
       ["/contact", "Discuss Your Broken Bow Property | Frontier"],
     ] as const) {
       await page.goto(path);
@@ -370,6 +372,7 @@ test.describe("technical seo", () => {
       "/faq",
       "/management-services",
       "/local-services",
+      "/home-care-concierge",
       "/hochatown-property-management",
       "/broken-bow-property-management",
       "/dallas-cabin-owners",

@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: { absolute: "Airbnb Management in Hochatown, OK | Frontier" },
   description:
-    "Airbnb management in Hochatown, OK from a boutique, owner-operated team that runs its own flagship cabin in this market. 20% of net rental revenue, no monthly minimum, month-to-month.",
+    "Airbnb management in Hochatown, OK from an owner-operated team that runs its own cabin here. 20% of net rental revenue, no monthly minimum.",
   keywords: [
     "Airbnb management Hochatown",
     "Hochatown Airbnb manager",
@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     "owner-operated Airbnb manager Oklahoma",
   ],
   openGraph: {
+    url: "https://www.rentwithfrontier.com/airbnb-management-hochatown-ok",
     title: "Airbnb Management in Hochatown, OK | Boutique & Owner-Operated",
     description:
       "Hands-on Airbnb management for Hochatown cabin owners. We operate our own flagship cabin in the same market.",

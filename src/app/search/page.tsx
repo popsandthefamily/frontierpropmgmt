@@ -39,19 +39,20 @@ const bookDirectBenefits = [
 ];
 
 export const metadata: Metadata = {
-  title: "Broken Bow Cabins for Rent: Book Direct, No Platform Fees",
+  title: { absolute: "Book a Hochatown Cabin Direct: Sublime Retreat | Frontier" },
   description:
-    "Browse luxury cabins in Broken Bow & Hochatown for direct booking. Hot tubs, pools, game rooms & more. Skip Airbnb fees, best rate guaranteed.",
+    "Book Sublime Retreat, a 3-bedroom Hochatown cabin with a hot tub, two zip lines, and an arcade, direct with Frontier. No platform service fee added.",
   openGraph: {
-    title: "Broken Bow Cabins for Rent: Book Direct & Save",
+    url: "https://www.rentwithfrontier.com/search",
+    title: "Book Sublime Retreat Direct in Hochatown",
     description:
-      "Luxury Hochatown & Broken Bow cabins. Book direct, skip the platform fees, get the best rate guaranteed.",
+      "A 3-bedroom Hochatown cabin with a hot tub, zip lines, and an arcade. Book direct with no platform service fee added.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
         width: 1200,
         height: 630,
-        alt: "Luxury cabins for rent in Broken Bow and Hochatown, Oklahoma",
+        alt: "Sublime Retreat, a cabin for rent in Hochatown, Oklahoma",
       },
     ],
   },
@@ -84,8 +85,8 @@ export default function SearchPage() {
       {/* Hero */}
       <HeroSection
         backgroundImage="/images/discover/hochatown-area.webp"
-        title="Explore Available Properties"
-        subtitle="Find your perfect Broken Bow getaway"
+        title="Book a Hochatown Cabin Direct"
+        subtitle="Sublime Retreat, booked with us, with no platform service fee added"
         size="medium"
         overlay="dark"
       />

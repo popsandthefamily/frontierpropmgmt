@@ -28,9 +28,9 @@ import {
 } from "@/data/local-services";
 
 export const metadata: Metadata = {
-  title: { absolute: "STR Cleaning & Local Support in Broken Bow | Frontier" },
+  title: { absolute: "Cabin Cleaning & Turnover Service in Broken Bow | Frontier" },
   description:
-    "Keep your bookings and get local support. Turnover cleaning, cabin maintenance, and agreed on-site services in Broken Bow and Hochatown.",
+    "Cabin cleaning and turnover service for self-managed rentals in Broken Bow and Hochatown. Keep your bookings; we handle cleans, maintenance, and checks.",
   keywords: [
     "Broken Bow cabin cleaning service",
     "Hochatown vacation rental turnover cleaning",
@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     "vacation rental maintenance Oklahoma",
   ],
   openGraph: {
+    url: `${siteConfig.url}${plans.local.href}`,
     title: "STR Cleaning & Local Support | Frontier Property Management",
     description:
       "Turnover cleaning, maintenance, and logistics for cabin owners who keep their own bookings. Custom quote, month to month.",
@@ -126,8 +127,8 @@ export default function LocalServicesPage() {
 
       <HeroSection
         backgroundImage="/images/local-services/hero.webp"
-        title="STR Cleaning & Local Support"
-        subtitle="Turnover cleaning, maintenance, and logistics for owners who keep their own bookings. You stay in control of the listing. We handle what needs a person on site."
+        title="Cabin Cleaning & Turnovers in Broken Bow & Hochatown"
+        subtitle="STR Cleaning & Local Support for owners who self-manage: turnover cleaning, maintenance, and logistics. You keep the listing and the bookings. We handle what needs a person on site."
         size="medium"
         overlay="dark"
         cta={CTA.localSupport}
