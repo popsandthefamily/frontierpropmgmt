@@ -107,7 +107,7 @@ const passThroughItems = [
     detail: "Billed as needed at our vendor cost.",
   },
   {
-    label: "Platform host fees (Airbnb 3%, VRBO 5%)",
+    label: "Platform host fees (Airbnb, VRBO)",
     detail: "Deducted by the platform before your payout reaches us.",
   },
 ];
@@ -371,7 +371,15 @@ export default function ManagementServicesPage() {
                   >
                     fee breakdown
                   </Link>{" "}
-                  for what 20% covers vs. what is billed at cost.
+                  for what 20% covers vs. what is billed at cost, or compare
+                  any other quote in the{" "}
+                  <Link
+                    href="/management-fee-calculator"
+                    className="font-semibold text-sage underline hover:text-sage-dark"
+                  >
+                    fee calculator
+                  </Link>
+                  .
                 </p>
               </CardHeader>
 

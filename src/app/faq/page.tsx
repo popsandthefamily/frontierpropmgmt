@@ -129,6 +129,16 @@ export default function FAQPage() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/hochatown-str-license-lodging-tax">
+                Hochatown STR license &amp; taxes
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/co-host-vs-property-manager-broken-bow">
+                Co-host vs property manager
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/audit">Free listing audit</Link>
             </Button>
           </div>

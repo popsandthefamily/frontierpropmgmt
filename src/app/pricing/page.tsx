@@ -427,6 +427,9 @@ export default function PricingPage() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/management-fee-calculator">Fee calculator: net vs gross</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href="/faq">Owner FAQ</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">

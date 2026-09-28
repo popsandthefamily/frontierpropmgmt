@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, AlertCircle } from "lucide-react";
+import { Check, AlertCircle, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
@@ -12,15 +12,16 @@ import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { AvailabilityNote } from "@/components/sections/availability-note";
 import { plans } from "@/data/site";
 import { siteConfig } from "@/data/site";
+import { FEES_CHECKED, PUBLISHED_FEES } from "@/data/published-fees";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: {
     absolute:
-      "Broken Bow Cabin Management Fees: What 20% Covers | Frontier",
+      "Broken Bow Property Management Fees Compared (2026) | Frontier",
   },
   description:
-    "What Broken Bow property management fees cover: what 20% should include, what is billed at cost, and the hidden fees to watch for before you sign.",
+    "What Broken Bow and Hochatown managers publish for fees, what each percentage is charged on, what 20% should include, and the hidden fees to ask about.",
   keywords: [
     "Broken Bow cabin management fees",
     "Hochatown property management fees",
@@ -79,7 +80,7 @@ const passThrough = [
     detail: "Billed at vendor cost when restocked.",
   },
   {
-    label: "Platform host fees (Airbnb 3%, VRBO 5%)",
+    label: "Platform host fees (Airbnb, VRBO)",
     detail:
       "Deducted by the platform before payout reaches us — separate from the management fee.",
   },
@@ -199,7 +200,7 @@ const pageFAQ = [
   {
     question: "Is the management fee taken out before or after platform fees?",
     answer:
-      "After. Platform host fees (Airbnb 3%, VRBO 5%) are deducted by the platform before any payout reaches us, and state and local occupancy taxes are remitted to the taxing authority rather than counted as income. Frontier's 20% is calculated on what remains, not on the headline booking total. Cleaning and pet fees pass through directly to vendors and never enter the calculation.",
+      "After. Platform host fees (whatever Airbnb or VRBO withholds, which depends on the fee model the listing uses) are deducted by the platform before any payout reaches us, and state and local occupancy taxes are remitted to the taxing authority rather than counted as income. Frontier's 20% is calculated on what remains, not on the headline booking total. Cleaning and pet fees pass through directly to vendors and never enter the calculation.",
   },
   {
     question: "Are there hidden fees on top of the 20%?",
@@ -244,8 +245,8 @@ export default function BrokenBowCabinManagementFeesPage() {
 
       <HeroSection
         backgroundImage="/images/services/DSC3079.webp"
-        title="Broken Bow Cabin Management Fees"
-        subtitle="What a clean 20% should include, what's billed separately at cost, and the hidden fees that turn 20% into 30% on year one."
+        title="Broken Bow Property Management Fees, Compared"
+        subtitle="What local managers publish, what the percentage is charged on, what a clean 20% should include, and the hidden fees that turn 20% into 30%."
         size="large"
         overlay="gradient"
         cta={{
@@ -390,6 +391,100 @@ export default function BrokenBowCabinManagementFeesPage() {
         </div>
       </SectionWrapper>
 
+      {/* Published rates, sourced and dated */}
+      <SectionWrapper background="white" id="published-rates" className="scroll-mt-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
+              What Broken Bow &amp; Hochatown managers publish
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
+              Every rate below is quoted from the manager&apos;s own website,
+              checked {FEES_CHECKED}. Where a manager does not publish a rate,
+              or does not say what the percentage is charged on, we say so
+              rather than guess.
+            </p>
+          </div>
+
+          <div className="mt-10 overflow-x-auto rounded-2xl border bg-white shadow-sm">
+            <table className="w-full min-w-[760px] text-sm">
+              <caption className="sr-only">
+                Published property management fees in Broken Bow and Hochatown, checked {FEES_CHECKED}
+              </caption>
+              <thead>
+                <tr className="border-b bg-cream/60">
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">Manager</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">Published rate</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">Charged on</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-widest text-muted-foreground">Other published fees and terms</th>
+                </tr>
+              </thead>
+              <tbody>
+                {PUBLISHED_FEES.map((f) => (
+                  <tr
+                    key={f.name}
+                    className={cn(
+                      "border-b border-charcoal/5 align-top",
+                      f.isFrontier && "bg-sage/5",
+                    )}
+                  >
+                    <th scope="row" className="px-4 py-3 text-left font-medium text-charcoal">
+                      {f.name}
+                      <a
+                        href={f.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 flex items-center gap-0.5 text-xs font-normal text-muted-foreground underline underline-offset-2 hover:text-sage"
+                      >
+                        Source <ExternalLink className="size-3" />
+                      </a>
+                    </th>
+                    <td className="px-4 py-3 font-semibold text-charcoal">{f.rate}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{f.base}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{f.other}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mx-auto mt-8 grid max-w-4xl gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-charcoal/10 bg-cream/40 p-5">
+              <h3 className="text-base font-semibold text-charcoal">
+                Most managers do not say what the percentage is charged on
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Of the rates above, only Frontier and Great Escapes Homes say
+                what their percentage applies to, and both exclude cleaning and
+                platform fees. For the rest, ask: is it gross or net, and does
+                it include cleaning fees? The same 20% can differ by thousands a
+                year depending on the answer.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-sage/30 bg-sage/5 p-5">
+              <h3 className="text-base font-semibold text-charcoal">
+                Put two quotes side by side
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Our{" "}
+                <Link href="/management-fee-calculator" className="font-medium text-sage hover:underline">
+                  management fee calculator
+                </Link>{" "}
+                runs any rate on any base against 20% of net rental revenue,
+                using your cabin&apos;s own numbers.
+              </p>
+            </div>
+          </div>
+
+          <p className="mx-auto mt-6 max-w-3xl text-center text-xs text-muted-foreground">
+            Published rates, not negotiated ones: what an individual owner pays
+            can differ, and rates change. Confirm current terms with each
+            manager. If a rate here is out of date, tell us and we will correct
+            it.
+          </p>
+        </div>
+      </SectionWrapper>
+
       {/* Side-by-side fee model */}
       <SectionWrapper background="cream">
         <div className="mx-auto max-w-5xl">
@@ -398,8 +493,9 @@ export default function BrokenBowCabinManagementFeesPage() {
               Fee structure side-by-side
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-              Category-level. Specific managers vary; this is the typical
-              shape of each tier.
+              The general shape of each type of manager, from our experience
+              in this market rather than any one company. For specific,
+              sourced rates, see the table above.
             </p>
           </div>
 

@@ -632,6 +632,11 @@ https://www.rentwithfrontier.com/blogs/how-frontier-property-management-smooths-
   },
   {
     slug: "nights-number-taxes-hochatown",
+    // Superseded by the maintained guide at /hochatown-str-license-lodging-tax,
+    // which next.config.ts redirects this URL to. Kept, unpublished, for the
+    // record: it attributed the Granicus switch to McCurtain County, and the
+    // Town's own STR page says the Town made it.
+    draft: true,
     title:
       "Nights, Numbers, and New Tax Realities: Hochatown's STR Shift",
     date: "2025-10-09",
@@ -675,17 +680,191 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 <p>Have questions about the Granicus transition or your STR compliance status? <a href="/contact">Contact us</a>, we are happy to help.</p>
 `,
   },
+  {
+    slug: "hochatown-airbnb-lodging-tax-lawsuit",
+    title: "Hochatown Sues Airbnb Over Lodging Tax: What Cabin Owners Should Know",
+    seoTitle: "Hochatown Sues Airbnb: What Cabin Owners Should Know | Frontier",
+    seoDescription: "Why the Town of Hochatown sued Airbnb, Broken Bow, and the Oklahoma Tax Commission over tax allocation, where the case stands, and what it means for owners.",
+    date: "2026-09-27",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt: "In July 2026 the Town of Hochatown sued Airbnb, alleging taxes on rentals inside the town were sent to Broken Bow. What the case is about, where it stands, and what it does and does not mean for cabin owners.",
+    featuredImage: "/images/discover/hochatown-area.webp",
+    content: `
+<p><em>This explains a pending court case from public filings and news coverage. It is not legal or tax advice, and we will update it as the case moves. Last updated September 27, 2026.</em></p>
+
+<h2>What happened</h2>
+<p>On July 15, 2026, the Town of Hochatown filed a lawsuit in McCurtain County District Court (case CJ-2026-00131) against Airbnb, Inc., the City of Broken Bow, and the Oklahoma Tax Commission. The Town alleges that Airbnb's tax system assigned some rentals inside Hochatown's town limits to Broken Bow, so municipal sales and lodging tax from those stays went to Broken Bow instead of Hochatown.</p>
+<p>Broken Bow is not accused of doing anything wrong. The petition says the city is named because it received the money and so has to be part of the case. The Town's attorney, Liz George, told the Southwest Ledger: "The Town places no blame with Broken Bow and understands that the actions of Airbnb have put them in a very difficult position as well."</p>
+
+<h2>What the Town alleges</h2>
+<p>The petition says the misallocation was caused "in whole or in part" by Airbnb's reliance on inaccurate ZIP code heuristics, defective jurisdictional mapping, inaccurate GIS integration, faulty platform controls, or improper administrative processes. It says Airbnb has acknowledged issues involving unmapped addresses, latitude and longitude inputs, and mapping limitations, and that the Tax Commission kept sending the money to Broken Bow after learning of the problem.</p>
+<p>The petition does not put a number on it. It says the amount "is presently unknown but is believed to be substantial." You may see $4.3 million quoted in coverage: that is roughly what KGOU reported Hochatown collected in lodging tax last year, nearly half the town's revenue, not the amount in dispute.</p>
+
+<h2>What the Town is asking for</h2>
+<ul>
+<li>A court declaration of which municipality is legally owed the disputed tax, and what Airbnb and the Tax Commission must do about it.</li>
+<li>A temporary order putting disputed tax revenue from properties that may be inside Hochatown into escrow while the case is decided.</li>
+<li>An order that Airbnb stop assigning properties to municipalities through defective or inaccurate methods.</li>
+</ul>
+<p>The legal claims include unjust enrichment, conversion, negligence in tax administration, and declaratory judgment. The case concerns municipal sales and lodging tax, not property tax.</p>
+
+<h2>What the defendants have said</h2>
+<p>Airbnb told The Oklahoman: "We can't comment on active litigation. Airbnb is committed to fair and accurate tax collection." The company said it remitted more than $22 million in Oklahoma tourism taxes last year. We found no public statement from the Tax Commission or the City of Broken Bow.</p>
+
+<h2>Where the case stands</h2>
+<p>As of September 27, 2026, the case is pending, according to the public court docket:</p>
+<ul>
+<li>July 15: the Town files its petition.</li>
+<li>August 7: the Oklahoma Tax Commission files an answer.</li>
+<li>August 10: the City of Broken Bow files an answer.</li>
+<li>September 3: Airbnb files a motion to dismiss.</li>
+<li>September 21: the Town files its response and objection to that motion.</li>
+</ul>
+<p>No hearing is on the docket, and there has been no ruling on the escrow request.</p>
+
+<h2>Why ZIP codes come up</h2>
+<p>Hochatown has no ZIP code or post office of its own. Addresses inside the town use 74728, Broken Bow's ZIP, which is one reason a system that leans on ZIP codes can put a Hochatown cabin in Broken Bow. KGOU reported that U.S. Sen. James Lankford introduced a measure to create a Hochatown ZIP code, and that the bills have stalled without a vote.</p>
+
+<h2>What it means for cabin owners</h2>
+<p>Nothing in the filings or the coverage asks owners to do anything, and the relief the Town wants is aimed at Airbnb, the Tax Commission, and the court. What has not changed is the Town's own guidance on its 4% lodging tax: its FAQ says it has not received lodging tax payments from Airbnb, VRBO, or similar platforms, and that paying it remains the cabin owner's responsibility. If your cabin is inside Hochatown town limits, do not assume a platform has remitted the Town's lodging tax for you. Our <a href="/hochatown-str-license-lodging-tax">Hochatown STR license and lodging tax guide</a> explains what is owed, how it is filed, and links the Town's documents.</p>
+<p>If you are unsure how the tax on your own cabin has been handled, talk to your accountant or the Town. On our full-service plan, lodging-tax filing is part of the job; <a href="/contact?type=management#inquiry">ask us</a> if that is something you would rather hand off.</p>
+
+<h2>Sources</h2>
+<ul>
+<li><a href="https://www.oscn.net/dockets/GetCaseInformation.aspx?db=mccurtain&number=CJ-2026-00131" target="_blank" rel="noopener noreferrer">OSCN docket, Town of Hochatown v. Airbnb, Inc., et al., CJ-2026-00131</a></li>
+<li><a href="https://www.kgou.org/business-and-economy/2026-07-23/hochatown-sues-airbnb-says-lodging-taxes-were-wrongly-sent-to-broken-bow" target="_blank" rel="noopener noreferrer">KGOU, July 23, 2026</a></li>
+<li><a href="https://www.southwestledger.news/news/hochatown-files-lawsuit-over-how-short-term-rental-tax-allocated" target="_blank" rel="noopener noreferrer">Southwest Ledger, July 21, 2026</a></li>
+<li><a href="https://www.aol.com/articles/hochatown-sues-airbnb-over-tax-100418000.html" target="_blank" rel="noopener noreferrer">The Oklahoman, July 21, 2026 (via AOL)</a></li>
+<li><a href="https://www.kxii.com/2026/07/17/hochatown-files-lawsuit-against-airbnb-over-short-term-rental-tax-revenue-distribution/" target="_blank" rel="noopener noreferrer">KXII, July 17, 2026</a></li>
+<li><a href="https://www.hochatown.gov/_files/ugd/8c9e93_8052d66c37824086a0e8aefb4befa8a2.pdf" target="_blank" rel="noopener noreferrer">Town of Hochatown Lodging Tax FAQ</a></li>
+</ul>
+`,
+  },
+  {
+    slug: "winter-freeze-storm-prep-out-of-town-cabin-owners",
+    title: "Winter Freeze & Storm Prep for Out-of-Town Broken Bow Cabin Owners",
+    seoTitle: "Cabin Winterization Checklist for Broken Bow Owners | Frontier",
+    seoDescription: "A winter prep checklist for Broken Bow and Hochatown cabin owners who live out of town: pipes, heat, the hot tub, power outages, and who checks after a storm.",
+    date: "2026-09-27",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt: "Winter in Broken Bow is usually mild, until it isn't. A checklist for owners who live out of town: what to do before the first hard freeze, what to do when a storm is forecast, and who checks the cabin afterward.",
+    featuredImage: "/images/hero/foggy-mountain.jpg",
+    content: `
+<p>Most winter days in Broken Bow and Hochatown are mild. The trouble is the handful that are not: an ice storm that takes out power on a Friday, or a hard freeze that arrives while the cabin is empty and you are three hours away in Dallas. A burst pipe in an empty cabin can run for days before anyone notices. This checklist is for owners who will not be there when it happens, whether the cabin is rented or not.</p>
+<p><em>General guidance, not a substitute for a licensed plumber, electrician, or your insurer's own requirements. If your policy or your cabin's builder specifies something different, follow that.</em></p>
+
+<h2>Before the first hard freeze (do this in October or early November)</h2>
+<ul>
+<li><strong>Know where the main water shutoff is,</strong> and make sure whoever checks the cabin knows too. Label it. If a pipe bursts, this is the first thing anyone will need.</li>
+<li><strong>Insulate exposed pipes</strong> in crawlspaces, under-deck runs, and exterior walls. Foam sleeves are cheap; a flooded crawlspace is not.</li>
+<li><strong>Disconnect and drain garden hoses,</strong> and cover outdoor spigots.</li>
+<li><strong>Service the heat.</strong> Have the HVAC checked and change the filter, so the system that keeps the pipes warm is not the thing that fails.</li>
+<li><strong>Check the hot tub cover</strong> for tears and a good seal, and confirm the tub's freeze-protection setting is on. More on the tub below.</li>
+<li><strong>Test smoke and carbon monoxide detectors,</strong> especially if the cabin has a fireplace or gas appliances.</li>
+<li><strong>Set up remote monitoring if you can:</strong> a smart thermostat or temperature sensor that alerts your phone when the cabin gets cold is the cheapest early warning there is.</li>
+</ul>
+
+<h2>When a hard freeze is forecast</h2>
+<ul>
+<li><strong>Keep the heat on, even when the cabin is empty.</strong> A thermostat setting around 55°F is a common recommendation for an unoccupied house; check what your insurer requires.</li>
+<li><strong>Open cabinet doors</strong> under sinks on exterior walls so warm air reaches the pipes.</li>
+<li><strong>Let faucets on exterior walls drip</strong> during the hardest cold. Moving water is harder to freeze.</li>
+<li><strong>If guests are arriving,</strong> tell them what to leave on and what not to touch, and make sure they know not to turn the heat off when they leave.</li>
+</ul>
+
+<h2>The hot tub in winter</h2>
+<p>A filled hot tub is one of the most expensive things in the cabin to lose to a freeze. As long as it has power and is running, its own circulation and heater usually protect it. The risk is a power outage: without power the water stops moving, and pumps and plumbing can freeze and crack.</p>
+<ul>
+<li>Keep the tub running and the cover on through the cold months rather than leaving it filled and switched off.</li>
+<li>Do not drain a tub in freezing weather unless the lines can be fully blown out; water left in the plumbing is what freezes.</li>
+<li>If the power goes out in a freeze and does not come back quickly, someone needs to check the tub.</li>
+</ul>
+<p>Hot-tub work on every Frontier plan is performed with our partner <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a>, who can winterize a tub properly if you are closing the cabin for the season. See also <a href="/blogs/how-often-should-a-cabin-hot-tub-be-serviced">how often a cabin hot tub needs service</a>.</p>
+
+<h2>When a storm knocks out power</h2>
+<ul>
+<li><strong>Find out how long it will be out.</strong> Check the electric cooperative's outage map before you assume the worst.</li>
+<li><strong>Roads come first.</strong> Hochatown's hills and gravel drives ice over quickly. Nobody should be sent up an icy drive to check a cabin; wait until it is safe.</li>
+<li><strong>If there are guests,</strong> they need to know where the breaker panel, flashlights, and main water shutoff are, and who to call. Our <a href="/blogs/what-you-need-to-know-before-this-weekends-winter-storm-hits-hochatown">storm post for guests</a> covers the guest side.</li>
+<li><strong>A generator</strong> only helps if it is installed correctly and someone can run it. A portable generator must never run inside the cabin or a closed garage.</li>
+</ul>
+
+<h2>After the storm: the walkthrough</h2>
+<p>The most important thing after a freeze or a storm is that someone actually walks the cabin, because damage in an empty house is silent until it is expensive. The walkthrough should cover:</p>
+<ul>
+<li>Water: under every sink, around the water heater, in the crawlspace, and at every exterior spigot.</li>
+<li>Heat: is the cabin at its set temperature, and is the system running?</li>
+<li>The hot tub: water temperature, circulation, and any error codes.</li>
+<li>The roof, gutters, and deck for fallen limbs and ice damage.</li>
+<li>Photos of anything that needs attention, so you can decide from wherever you are.</li>
+</ul>
+
+<h2>Who checks the cabin when you can't?</h2>
+<p>If you live out of town, the honest answer to this whole article is: someone local. That is the gap our services fill. <a href="/home-care-concierge">Second home care</a> includes a monthly visual check and hot-tub attention, and extra freeze or storm checks are added by agreement. <a href="/local-services">Local support</a> covers freeze prep, post-storm walkthroughs, and vacancy checks for self-managed rentals. Either way, <a href="/contact?type=owner#inquiry">tell us about the cabin</a> before the first freeze, not after it.</p>
+`,
+  },
+  {
+    slug: "how-often-should-a-cabin-hot-tub-be-serviced",
+    title: "How Often Should a Cabin Hot Tub Be Serviced? Rental vs. Second Home",
+    seoTitle: "How Often Should a Cabin Hot Tub Be Serviced? | Frontier",
+    seoDescription: "How hot-tub service differs for a Broken Bow rental cabin and a second home you rarely use, what a monthly check covers, and when a tub needs more.",
+    date: "2026-09-27",
+    author: "Hunter Collins, Frontier Property Management",
+    category: "Owner Tips",
+    excerpt: "A hot tub at a busy rental and a hot tub at a second home need very different care. What drives the schedule, what a monthly check covers, and when a tub needs more, written with our hot-tub partner, Broken Bow Hot Tub Co.",
+    featuredImage: "/images/properties/sublime/sublime-2.jpg",
+    content: `
+<p>In a cabin market like Broken Bow and Hochatown, the hot tub is often the amenity guests remember, and the one they complain about first when it is cloudy, cold, or not working. For owners who do not rent, it is simply the most expensive thing in the house to neglect. Either way, the question is the same: how often does it need attention?</p>
+<p>The honest answer is that it depends on how the tub is used, and anyone who gives you a single schedule for every tub is guessing. Hot-tub work on every Frontier plan is performed with our partner <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a>, and for a specific tub they are the people to ask. This is how we think about it.</p>
+<p><em>General guidance only. Follow your tub manufacturer's instructions, and rely on a qualified technician for water chemistry and repairs.</em></p>
+
+<h2>What drives how often a tub needs service</h2>
+<ul>
+<li><strong>How many people use it, and how often.</strong> Bather load is the biggest factor. A tub used by a new group of guests every weekend needs far more attention than one used by the same family twice a month.</li>
+<li><strong>Whether it sits between uses.</strong> A covered, unused tub still needs its water checked and its cover and equipment looked at, but on a much longer cycle.</li>
+<li><strong>The season.</strong> Winter adds freeze risk if the power fails. Summer heat and pollen add their own work.</li>
+<li><strong>The tub itself.</strong> Filtration, sanitizing system, cover condition, and age all change the schedule.</li>
+</ul>
+
+<h2>A rental cabin's hot tub</h2>
+<p>At a rental, the tub is part of every turnover. Each new group of guests expects clear, warm water, so the water needs checking and the tub needs attention between stays, not once a month. Drains and refills also come around far more often than at a private home, because the water is doing much more work. If a rental tub is only checked when a guest complains, the review has already been written.</p>
+<p>That is why we scope rental hot tubs around occupancy, not a calendar. On our <a href="/management-services">full-service plan</a>, the tub is handled as part of operating the rental, and service contracts are billed at cost. For <a href="/local-services">self-managed rentals</a>, tub care is part of the local support scope, on your booking calendar.</p>
+
+<h2>A second home's hot tub</h2>
+<p>At a second home the tub is used less and sits more. Our <a href="/home-care-concierge">second home care plan</a> includes one scheduled hot-tub check a month: test and record the water, routine balancing, accessible cleaning, filter attention, and a look at the operation and the cover. For a tub that stays covered and mostly unused between your visits, that is a sensible baseline.</p>
+<p>It is not enough for every tub, and we say so. A monthly check is not continuous water management. If the tub stays filled and gets used often, or the family is there most weekends, it needs more than one visit a month, and we would rather scope that honestly than pretend a monthly check covers it.</p>
+
+<h2>Signs a tub needs attention now</h2>
+<ul>
+<li>Cloudy, foamy, or discolored water, or a strong chemical smell.</li>
+<li>Water that will not reach temperature, or an error code on the panel.</li>
+<li>A cover that is torn, waterlogged, or no longer seals.</li>
+<li>Jets or pumps that are noisy, weak, or not running.</li>
+<li>A power outage during freezing weather.</li>
+</ul>
+
+<h2>If you are closing the cabin for the winter</h2>
+<p>A tub that will sit through the cold months either needs to keep running with the cover on, or be properly winterized with the lines blown out. Draining a tub in freezing weather without clearing the plumbing is how pumps crack. Our <a href="/blogs/winter-freeze-storm-prep-out-of-town-cabin-owners">winter prep checklist for out-of-town owners</a> covers the rest of the cabin.</p>
+
+<h2>Who to call</h2>
+<p>For repairs, drain-and-refills, troubleshooting, or a recurring maintenance plan, go straight to <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a>. If you want the tub looked after as part of caring for the whole cabin, <a href="/contact?type=owner#inquiry">tell us about the property</a>.</p>
+`,
+  },
   /* ---------------------------------------------------------------- */
-  /*  DRAFTS: Home Care Concierge launch content. Not published.       */
-  /*  Owner review required: facts, tone, author line, publish date.   */
+  /*  Home Care Concierge launch content. Written as drafts on         */
+  /*  2026-09-19; published 2026-09-27 as part of the SEO plan.        */
   /* ---------------------------------------------------------------- */
   {
     slug: "what-second-home-care-includes-broken-bow",
     title: "What Does Second-Home Care Include in Broken Bow?",
-    date: "2026-09-19",
+    seoTitle: "Second Home Care in Broken Bow: What It Includes | Frontier",
+    seoDescription:
+      "What a monthly second-home care plan for a Broken Bow cabin covers: cleaning, hot-tub care, exterior upkeep, checks, and what costs extra.",
+    date: "2026-09-27",
     author: "Hunter Collins, Frontier Property Management",
     category: "Owner Tips",
-    draft: true,
     excerpt:
       "A monthly care plan for a Broken Bow second home is a defined list, not a vague promise. Here is what a realistic scope covers, what costs extra, and when a house needs more than monthly attention.",
     featuredImage: "/images/local-services/hero.webp",
@@ -701,7 +880,7 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 <p>One standard clean of the rooms and square footage agreed at onboarding: kitchen, bathrooms, floors, surfaces, and the beds you ask us to make. This is the clean that means you walk into a ready house rather than a dusty one. It is not a deep clean, it is not laundry service, and it is not a guest turnover.</p>
 
 <h3>Hot-tub attention</h3>
-<p>One scheduled check: test and record the water, routine balancing, accessible cleaning, filter attention, and a look at the cover and the equipment. A covered, unused tub between your visits is well served by this. A tub that gets used every weekend is not, and we scope that separately rather than pretend a monthly visit covers it.</p>
+<p>One scheduled check, performed with our partner <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a>: test and record the water, routine balancing, accessible cleaning, filter attention, and a look at the cover and the equipment. A covered, unused tub between your visits is well served by this. A tub that gets used every weekend is not, and we scope that separately rather than pretend a monthly visit covers it. Our guide to <a href="/blogs/how-often-should-a-cabin-hot-tub-be-serviced">how often a cabin hot tub needs service</a> goes further.</p>
 
 <h3>Light exterior care</h3>
 <p>Blowing off the decks, porches, and paths you care about; tidying beds and low shrubs at ground level; picking up small debris. There is a time allowance for this in the written scope. Mowing, tree work, pressure washing, gutters, and storm cleanup are separate jobs with separate quotes.</p>
@@ -748,17 +927,35 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 `,
   },
   {
-    slug: "self-managing-hochatown-cabin-what-local-team-handles",
-    title: "Self-Managing a Hochatown Cabin: What Can a Local Team Handle?",
-    date: "2026-09-19",
+    slug: "self-manage-broken-bow-cabin-local-backup-plan",
+    title: "Self-Managing a Broken Bow Cabin From Out of Town: Your Local Backup Plan",
+    seoTitle: "Self-Manage a Broken Bow Cabin: Local Backup Plan | Frontier",
+    seoDescription:
+      "Can you self-manage a Broken Bow cabin from Dallas, Tulsa, or OKC? The local backup you need: cleaners, a handyman, an emergency contact, and checks.",
+    date: "2026-09-27",
     author: "Hunter Collins, Frontier Property Management",
     category: "Owner Tips",
-    draft: true,
     excerpt:
-      "You run the listing, the pricing, and the guests. What can you hand to a local team without handing over the business? A practical split of responsibilities for self-managed Hochatown cabins.",
+      "Plenty of owners self-manage a Broken Bow cabin from Dallas, Tulsa, or Oklahoma City, and do it well. What they all need is a local backup plan for the things a phone cannot fix.",
     featuredImage: "/images/local-services/hero.webp",
     content: `
-<p>A lot of Hochatown cabin owners are good at the online half of running a rental. They price well, they answer guests quickly, and they would rather keep that control than pay a percentage to have someone else do it. What they cannot do from Dallas or Oklahoma City is be at the cabin. This article is about drawing that line clearly: which jobs stay with you, and which a local team can take.</p>
+<p>Can you self-manage a Broken Bow or Hochatown cabin from out of town? Yes. Plenty of owners run theirs from Dallas, Tulsa, or Oklahoma City, and do the online half well: they price sensibly, answer guests quickly, and would rather keep that control than pay a percentage for someone else to do it. What none of them can do from three hours away is be at the cabin. This article is about the local backup plan every remote self-manager needs, and where the line falls between what stays with you and what a local team can take.</p>
+
+<h2>Your local backup list</h2>
+<p>Before the first booking, have a name and a phone number for each of these. The time to find them is not the Friday night something breaks.</p>
+<ul>
+<li><strong>A primary cleaner, and a backup cleaner.</strong> Your cleaner is the vendor your reviews depend on most. Cleaners get sick, get booked up on peak weekends, and occasionally stop answering. A second cleaner who already knows the cabin turns a crisis into a phone call.</li>
+<li><strong>A handyman.</strong> For the small jobs that come up between guests: a stuck door, a leaking trap, a smoke detector chirping at 2 a.m.</li>
+<li><strong>A hot-tub technician.</strong> Cloudy water and a tripped heater are among the most common guest complaints in this market, and they are not a cleaner's job.</li>
+<li><strong>Licensed trades.</strong> A plumber, an electrician, and an HVAC company who will come out to Hochatown.</li>
+<li><strong>An emergency contact.</strong> See the next section: inside Hochatown this is a legal requirement, not a nice-to-have.</li>
+</ul>
+
+<h2>Hochatown requires a 24-hour emergency contact</h2>
+<p>If the cabin is inside Hochatown town limits, the Town's short-term rental ordinance requires you to name an emergency contact who can be reached 24 hours a day, seven days a week. When the Town calls them about a problem, they must reach you within the hour, and you must start fixing it immediately. An emergency contact who does not answer counts as non-compliance, and three instances in 12 months can cost your license. If you live three hours away, the emergency contact needs to be someone who can actually get to the cabin. Our <a href="/hochatown-str-license-lodging-tax">Hochatown STR license and lodging tax guide</a> covers the rest of the ordinance.</p>
+
+<h2>When the power goes out or the pipes freeze</h2>
+<p>This is where remote self-management is most exposed. A winter storm can take out power for a day or more, and a cabin with no heat and a filled hot tub is at risk within hours. Someone needs to be able to get there on icy roads, check the pipes, and deal with the tub. Our <a href="/blogs/winter-freeze-storm-prep-out-of-town-cabin-owners">winter prep checklist for out-of-town owners</a> covers what to do before the season.</p>
 
 <h2>What stays with you</h2>
 <p>If you self-manage, these remain your responsibilities, and no local support arrangement changes that:</p>
@@ -778,7 +975,7 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
 <p>Vacancy checks between bookings and through the slow months, hard-freeze prep and post-freeze walk-throughs, storm assessment with photos, and a look at the deck, gutters, and drive. These are the visits that decide whether a cold snap costs you nothing or costs you a season.</p>
 
 <h3>Maintenance triage and vendor meets</h3>
-<p>Someone fifteen minutes away who can get inside and look at the problem a guest just reported, change the HVAC filter, balance the hot tub, and meet the licensed plumber or electrician when one is needed. Vendor invoices pass through at cost; you pay for the coordination, not a markup.</p>
+<p>Someone fifteen minutes away who can get inside and look at the problem a guest just reported, change the HVAC filter, and meet the licensed plumber or electrician when one is needed. Hot-tub work is performed with our partner <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a> Vendor invoices pass through at cost; you pay for the coordination, not a markup.</p>
 
 <h3>Supply coordination and logistics</h3>
 <p>Meeting the furniture delivery, receiving the package you shipped ahead, servicing the keypad, and the supply runs that mean you are not mailing paper towels from Dallas.</p>

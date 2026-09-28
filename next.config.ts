@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
       // The flat-fee Co-Host plan was retired in favour of Local Services.
       // Permanent so the old URL's ranking history follows it.
       { source: "/co-host", destination: "/local-services", permanent: true },
+      // The 2025 tax post became the maintained licensing and lodging-tax
+      // guide. Permanent, so the post's search history follows it.
+      {
+        source: "/blogs/nights-number-taxes-hochatown",
+        destination: "/hochatown-str-license-lodging-tax",
+        permanent: true,
+      },
     ];
   },
 };

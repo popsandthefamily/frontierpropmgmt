@@ -21,6 +21,14 @@ const QUICK_LINKS = [
   { label: "Owner Portal", href: "/portal" },
 ];
 
+const OWNER_GUIDES = [
+  { label: "Hochatown STR License & Lodging Tax", href: "/hochatown-str-license-lodging-tax" },
+  { label: "Management Fees Compared", href: "/broken-bow-cabin-management-fees" },
+  { label: "Management Fee Calculator", href: "/management-fee-calculator" },
+  { label: "Co-Host vs Property Manager", href: "/co-host-vs-property-manager-broken-bow" },
+  { label: "Cabin Income Calculator", href: "/income-calculator" },
+];
+
 const LOCAL_LINKS = [
   { label: "Broken Bow Guide", href: "/discover-broken-bow" },
   {
@@ -145,6 +153,22 @@ export function SiteFooter() {
               </h3>
               <ul className="flex flex-col gap-2">
                 {PROPERTIES.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-charcoal/70 transition-colors hover:text-sage"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <h3 className="mb-4 mt-8 text-lg font-heading text-charcoal">
+                Owner Guides
+              </h3>
+              <ul className="flex flex-col gap-2">
+                {OWNER_GUIDES.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}

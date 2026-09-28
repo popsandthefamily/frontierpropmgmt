@@ -401,6 +401,17 @@ export default function LocalServicesPage() {
               <Link href={plans.manager.href}>Full-service management</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/co-host-vs-property-manager-broken-bow">Co-host vs manager</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/blogs/self-manage-broken-bow-cabin-local-backup-plan">
+                Self-managing from out of town
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
+              <Link href="/hochatown-str-license-lodging-tax">Hochatown license &amp; taxes</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-sm">
               <Link href={plans.concierge.href}>Home Care Concierge</Link>
             </Button>
           </div>

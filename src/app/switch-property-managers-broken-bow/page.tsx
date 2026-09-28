@@ -95,6 +95,12 @@ const transitionSteps = [
       "Listing copy refreshed, photos audited, dynamic pricing configured for Hochatown demand and event weekends. Local cleaning and maintenance vendors onboarded for your cabin.",
   },
   {
+    days: "Days 5–7",
+    title: "Tell the Town of Hochatown",
+    description:
+      "If the cabin is inside Hochatown town limits, its STR license names the management company. The Town's Change of Cabin Management Company form updates it: you need your license number, there is no fee, and the Town emails an updated certificate. We help you file it so the license and the listing change hands together.",
+  },
+  {
     days: "Days 7–10",
     title: "Calendar sync + go live",
     description:
@@ -150,6 +156,12 @@ const switchingMyths = [
 ];
 
 const pageFAQ = [
+  {
+    question:
+      "Do I need to tell the Town of Hochatown when I change property managers?",
+    answer:
+      "Yes, if the cabin is inside Hochatown town limits. The Town's Change of Cabin Management Company form updates the management company on your STR license. It needs your license number, there is no fee, and the Town emails an updated license certificate to the owner. Cabins outside the town limits are not covered by the Hochatown license.",
+  },
   {
     question:
       "Will I lose my Airbnb or VRBO reviews if I switch property managers?",

@@ -196,7 +196,14 @@ export default function HomePage() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
             Three situations cover almost everyone who calls. Pick yours and
-            we&apos;ll point you at the right page.
+            we&apos;ll point you at the right page, or take the{" "}
+            <Link
+              href="/co-host-vs-property-manager-broken-bow#quiz"
+              className="font-medium text-sage hover:underline"
+            >
+              three-question quiz
+            </Link>
+            .
           </p>
         </div>
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">

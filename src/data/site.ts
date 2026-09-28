@@ -97,7 +97,7 @@ export const plans = {
     summary:
       "We run the whole property: pricing, listings, guest communication, cleaning turns, maintenance, taxes, and monthly reporting. You own the cabin, we operate it.",
     feeDefinition:
-      "20% of net rental revenue, meaning the booking revenue that remains after platform host fees (Airbnb 3%, VRBO 5%) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
+      "20% of net rental revenue, meaning the booking revenue that remains after platform host fees (whatever Airbnb or VRBO withholds under the fee model the listing uses) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
     /** Why this 20% is not the same price as somebody else's 20%. */
     feeComparisonNote:
       "Most national operators calculate their percentage on gross booking revenue, before platform fees and taxes come out. Frontier calculates on what is left after. Two managers quoting the same percentage against different bases are not quoting the same price, so it is worth asking any manager which one they mean.",

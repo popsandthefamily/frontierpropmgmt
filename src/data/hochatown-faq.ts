@@ -16,7 +16,7 @@ export const hochatownFAQ: FAQItem[] = [
   {
     question: "Do I need a permit to operate a short-term rental in Hochatown?",
     answer:
-      "Hochatown became Oklahoma's newest incorporated town in 2024 and is actively developing its short-term rental regulations. Current STR owners should watch for town-level permit requirements and plan for registration through the Granicus Host Compliance system used by many Oklahoma jurisdictions. Frontier tracks these changes and helps owners stay compliant. We are not legal advisors and recommend confirming current permit requirements with the Town of Hochatown directly.",
+      "Yes. Inside Hochatown town limits, a short-term rental needs a Town STR license before it is rented or advertised (Ordinance No. 6, 2024). A new license costs $400 the first year: a one-time $300 registration fee plus the $100 annual fee. Renewal is $100 a year, normally due July 1, and the Town charges a $250-per-month late fee for late renewals and for rentals that were never registered. The license must be displayed near the main entry, and the owner must name an emergency contact reachable 24 hours a day. Hochatown incorporated in November 2022. Rules change, so confirm current requirements with the Town of Hochatown; our Hochatown STR license and lodging tax guide links every source.",
   },
   {
     question: "How does Hochatown compare to Broken Bow for cabin investment?",

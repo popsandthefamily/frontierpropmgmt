@@ -283,10 +283,15 @@ export default function HochatownPropertyManagementPage() {
             core drive-market pool.
           </p>
           <p>
-            Hochatown became Oklahoma&apos;s newest incorporated town in 2024,
-            meaning STR regulations are actively evolving. Owners here need a
-            management partner who follows these changes closely, handles
-            permit and occupancy-tax compliance, and adjusts pricing around
+            Hochatown incorporated as a town in November 2022, and it now
+            licenses short-term rentals and collects its own 4% lodging tax.
+            The rules are still young and do change (the{" "}
+            <a href="/hochatown-str-license-lodging-tax">
+              Hochatown STR license and lodging tax guide
+            </a>{" "}
+            tracks them). Owners here need a management partner who follows
+            those changes, handles licensing and lodging-tax compliance, and
+            adjusts pricing around
             local peak events (Beavers Bend Marathon, fall foliage, spring
             break, winter holidays) rather than applying a generic national
             model.

@@ -259,8 +259,8 @@ test.describe("technical seo", () => {
     expect(xml).toContain("https://www.rentwithfrontier.com/home-care-concierge");
     expect(xml).not.toContain("<loc>https://rentwithfrontier.com");
     expect(xml).not.toMatch(/\/portal|\/admin|\/sign\/|\/api\/|\/audit\/result|\?type=/);
-    // Drafts never reach the sitemap.
-    expect(xml).not.toContain("what-second-home-care-includes-broken-bow");
+    // Retired and draft posts never reach the sitemap.
+    expect(xml).not.toContain("nights-number-taxes-hochatown");
   });
 
   test("robots points at the www sitemap and keeps private routes out", async ({ request }) => {
@@ -311,6 +311,11 @@ test.describe("technical seo", () => {
       "/best-hochatown-property-management-company",
       "/broken-bow-cabin-management-fees",
       "/switch-property-managers-broken-bow",
+      "/hochatown-str-license-lodging-tax",
+      "/management-fee-calculator",
+      "/co-host-vs-property-manager-broken-bow",
+      "/income-calculator",
+      "/search",
     ];
     for (const path of paths) {
       await page.goto(path);
@@ -377,6 +382,10 @@ test.describe("technical seo", () => {
       "/broken-bow-property-management",
       "/dallas-cabin-owners",
       "/switch-property-managers-broken-bow",
+      "/broken-bow-cabin-management-fees",
+      "/hochatown-str-license-lodging-tax",
+      "/management-fee-calculator",
+      "/co-host-vs-property-manager-broken-bow",
     ];
     for (const path of paths) {
       const html = await (await request.get(path)).text();
@@ -401,8 +410,100 @@ test.describe("technical seo", () => {
     expect(text).toContain("https://www.rentwithfrontier.com/home-care-concierge");
   });
 
-  test("draft articles are not served", async ({ request }) => {
-    const res = await request.get("/blogs/what-second-home-care-includes-broken-bow");
+  test("unknown blog slugs are not served", async ({ request }) => {
+    const res = await request.get("/blogs/this-post-does-not-exist");
     expect(res.status()).toBe(404);
+  });
+});
+
+test.describe("seo plan content", () => {
+  test("hochatown guide states the verified figures and links its sources", async ({ request }) => {
+    const res = await request.get("/hochatown-str-license-lodging-tax");
+    expect(res.status()).toBe(200);
+    const html = await res.text();
+    const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+    for (const fact of ["$300", "$100", "July 1", "$250", "4%", "16.25%", "9.25%", "580-896-5242", "November 2022"]) {
+      expect(markup, `guide is missing "${fact}"`).toContain(fact);
+    }
+    expect(markup).toContain("https://www.hochatown.gov/str");
+    // The Town's lodging tax is not remitted by the platforms, per the Town.
+    expect(markup).toMatch(/has not received (this tax|lodging tax)/i);
+  });
+
+  test("old tax post redirects permanently to the guide", async ({ request }) => {
+    const res = await request.get("/blogs/nights-number-taxes-hochatown", { maxRedirects: 0 });
+    expect(res.status()).toBe(308);
+    expect(res.headers()["location"]).toMatch(/\/hochatown-str-license-lodging-tax$/);
+  });
+
+  test("published fee table lists every manager with a source link", async ({ page }) => {
+    await page.goto("/broken-bow-cabin-management-fees#published-rates");
+    const rows = page.locator("#published-rates tbody tr");
+    await expect(rows).toHaveCount(9);
+    await expect(page.locator("#published-rates")).toContainText("Frontier Property Management");
+    await expect(page.locator("#published-rates")).toContainText("net rental revenue", { ignoreCase: true });
+    const sources = page.locator('#published-rates tbody a:has-text("Source")');
+    await expect(sources).toHaveCount(9);
+  });
+
+  test("fee calculator shows the worked example and recalculates", async ({ page }) => {
+    await page.goto("/management-fee-calculator");
+    // Server-rendered worked example: $50,000 rent, $8,000 guest fees, 15% host fee.
+    // 20% of gross incl. fees = $11,600; 20% of net rent = $8,500.
+    const body = page.locator("body");
+    await expect(body).toContainText("$11,600");
+    await expect(body).toContainText("$8,500");
+    // Interactive: switch the other manager to the net base, fees become equal.
+    await page.getByLabel(/net rent, after platform host fees/i).check();
+    await expect(page.getByText(/about the same on these numbers/i)).toBeVisible();
+    // Change the rent; Frontier's fee updates (20% of 100,000 x 0.85 = 17,000).
+    const rent = page.getByLabel(/nightly-rate revenue for the year/i);
+    await rent.fill("100000");
+    await expect(page.locator("[aria-live=polite]").first()).toContainText("$17,000");
+  });
+
+  test("service quiz recommends by situation", async ({ page }) => {
+    await page.goto("/co-host-vs-property-manager-broken-bow#quiz");
+    await page.getByRole("radio", { name: /no, it's ours/i }).click();
+    await expect(page.getByText("Best fit")).toBeVisible();
+    await expect(page.locator("#quiz h3")).toContainText(/home care concierge/i);
+
+    await page.getByRole("button", { name: /start over/i }).click();
+    await page.getByRole("radio", { name: /yes, regularly/i }).click();
+    await page.getByRole("radio", { name: /someone else/i }).click();
+    await expect(page.locator("#quiz h3")).toContainText(/full-service str management/i);
+
+    await page.getByRole("button", { name: /start over/i }).click();
+    await page.getByRole("radio", { name: /yes, regularly/i }).click();
+    await page.getByRole("radio", { name: /me, i'll keep that/i }).click();
+    await page.getByRole("radio", { name: /most weekends/i }).click();
+    await expect(page.locator("#quiz h3")).toContainText(/local support/i);
+  });
+
+  test("new pages are in the sitemap and new posts are published", async ({ request }) => {
+    const xml = await (await request.get("/sitemap.xml")).text();
+    for (const path of [
+      "/hochatown-str-license-lodging-tax",
+      "/management-fee-calculator",
+      "/co-host-vs-property-manager-broken-bow",
+      "/blogs/hochatown-airbnb-lodging-tax-lawsuit",
+      "/blogs/winter-freeze-storm-prep-out-of-town-cabin-owners",
+      "/blogs/how-often-should-a-cabin-hot-tub-be-serviced",
+      "/blogs/what-second-home-care-includes-broken-bow",
+      "/blogs/self-manage-broken-bow-cabin-local-backup-plan",
+    ]) {
+      expect(xml, `sitemap is missing ${path}`).toContain(`https://www.rentwithfrontier.com${path}<`);
+    }
+    expect(xml).not.toContain("nights-number-taxes-hochatown");
+    for (const slug of ["hochatown-airbnb-lodging-tax-lawsuit", "how-often-should-a-cabin-hot-tub-be-serviced"]) {
+      expect((await request.get(`/blogs/${slug}`)).status()).toBe(200);
+    }
+  });
+
+  test("hot-tub pages credit the partner with a link", async ({ request }) => {
+    for (const path of ["/blogs/how-often-should-a-cabin-hot-tub-be-serviced", "/home-care-concierge"]) {
+      const html = await (await request.get(path)).text();
+      expect(html, `${path} does not link the hot-tub partner`).toContain("https://www.brokenbowhottub.com");
+    }
   });
 });

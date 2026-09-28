@@ -330,7 +330,7 @@ export const managementFAQ: FAQItem[] = [
   {
     question: "Do you handle occupancy taxes and permits?",
     answer:
-      "Yes. Oklahoma lodging tax and McCurtain County occupancy tax are collected through the booking platforms and remitted on your behalf. We also track short-term rental permit requirements and help renew them as regulations change. Any city-specific permits are your responsibility to hold in your name, but we help you stay on top of what is due and when.",
+      "Yes, on the Property Manager plan lodging-tax filing is part of the service, and we track license renewals. What is owed depends on where the cabin sits. Inside Hochatown town limits the Town charges a 4% lodging tax on the full amount the guest pays, including cleaning and pet fees, filed with the Town monthly by the 15th. The Town's guidance is that it has not received lodging tax from Airbnb, VRBO, or similar platforms and that paying it remains the owner's responsibility, so it is not safe to assume the platform handled it. The Town also requires an STR license, which stays in your name. Our Hochatown STR license and lodging tax guide lays out every tax and links the sources. We are not a CPA or attorney; confirm your own filings with a tax professional.",
   },
   {
     question: "What insurance do I need?",
