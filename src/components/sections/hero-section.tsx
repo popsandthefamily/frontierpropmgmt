@@ -65,7 +65,10 @@ export function HeroSection({
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+      {/* Vertical padding so the CTA never sits on the section's bottom
+          edge: min-h is only a floor, and a long title plus subtitle grows
+          the hero right up to its content. */}
+      <div className="relative z-10 mx-auto max-w-4xl px-4 py-12 text-center md:py-16">
         <motion.h1
           className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           initial={{ opacity: 0, y: 30 }}
