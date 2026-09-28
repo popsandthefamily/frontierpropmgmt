@@ -80,3 +80,16 @@ At each mark, compare against the saved baseline and note seasonality:
 - For concierge clients: actual cost to serve against the plan fee.
 
 Small numbers are small numbers. Report them as such.
+
+## Added by the SEO plan (2026-09-27)
+
+- [ ] **Airbnb host fee.** The fee definition no longer quotes "Airbnb 3%", because the site's own post on Airbnb's host-only fee says about 15%. Confirm which fee model your listings use; the definition can name the number again once it is confirmed.
+- [ ] **"Best Rate Guaranteed"** on the booking page and the booking widget. Confirm it is a real guest policy, or remove it.
+- [ ] **Non-affiliation statement** on the About page (other companies named Frontier Property Management in other states). Confirm it is accurate.
+- [ ] **Shared phone number.** The sheet notes 580-207-7154 is also Frontier Consulting Group's number, which feeds the brand-name confusion in search. Decide whether that is acceptable.
+- [ ] **Google Place ID.** Set `NEXT_PUBLIC_GOOGLE_PLACE_ID` in Vercel so `/review` becomes a one-hop link to the review dialog.
+- [ ] **AirROI snapshot.** The market figures are from April 2026. Refresh `src/data/hochatown-market.ts` (the AirROI key is not in `.env.local`).
+- [ ] **Search Console.** The sheet found Google still showing the old homepage title ("20% Flat"). Request indexing for `/`, and for the three new pages: `/hochatown-str-license-lodging-tax`, `/management-fee-calculator`, `/co-host-vs-property-manager-broken-bow`.
+- [ ] **Re-verify on a schedule.** The Hochatown guide and the published-fees table carry a "checked" date. Re-check the Town's documents each July (license renewal season) and competitor rates quarterly, and update the dates with the facts.
+- [ ] **Hochatown v. Airbnb.** Update the explainer when the court rules on Airbnb's motion to dismiss or the escrow request.
+- [ ] **Owner data for the remaining ideas.** Sublime Retreat figures for the case study (#12), and proof points for the About page (#14).

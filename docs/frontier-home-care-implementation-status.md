@@ -143,3 +143,68 @@ New: `src/data/home-care.ts`, `src/app/home-care-concierge/page.tsx`, `src/compo
 Modified: `src/data/site.ts`, `src/data/homepage-faq.ts`, `src/data/faq.ts`, `src/data/local-services.ts`, `src/data/blog-posts.ts`, `src/app/page.tsx`, `src/app/layout.tsx`, `src/app/contact/page.tsx`, `src/app/pricing/page.tsx`, `src/app/local-services/page.tsx`, `src/app/management-services/page.tsx`, `src/app/about/page.tsx`, `src/app/broken-bow-property-management/page.tsx`, `src/app/hochatown-property-management/page.tsx`, `src/app/dallas-cabin-owners/page.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts`, `src/app/llms.txt/route.ts`, `src/app/llms-full.txt/route.ts`, `src/components/forms/contact-form-tabbed.tsx`, `src/components/forms/contact-form.tsx`, `src/components/layout/site-header.tsx`, `src/components/layout/site-footer.tsx`, `src/components/sections/two-ways-to-work.tsx`, `src/components/seo/breadcrumbs.tsx`, `src/components/audit/hero-snapshot.tsx`, `src/components/analytics/plan-cta.tsx`, `src/components/analytics/discovery-cta.tsx`, `src/lib/analytics.ts`, `next.config.ts`, plus host-only edits (`https://rentwithfrontier.com` to `https://www.rentwithfrontier.com`) in the remaining page, blog, and email files.
 
 Untouched on purpose: `/portal`, `/sign`, `/admin`, `/audit` logic, API routes, Supabase, the booking widget and property routes, both lockfiles, `.env.local`.
+
+## SEO plan, 2026-09-27
+
+Source: the "SEO Ideas Board - Frontier sites" sheet (Ideas, Questions,
+Competitors, and Site audit tabs). Built on branch `feat/seo-plan` and
+deployed to a Vercel preview only. Facts were verified against primary
+sources on 2026-09-27 before anything was written: the Town of
+Hochatown's ordinances, FAQ, and forms; the Broken Bow municipal code; the
+Oklahoma Tax Commission; the McCurtain County court docket; and each
+competitor's own website.
+
+### Corrections to the plan itself
+
+The research overturned several assumptions in the sheet, and the site
+now follows the sources:
+
+- Airbnb and VRBO have not been paying Hochatown's town lodging tax,
+  according to the Town's FAQ; the owner remains responsible.
+- Hochatown's ordinances set no quiet hours and no occupancy cap; general
+  nuisance and noise rules apply.
+- The 2026 renewal deadline was extended to August 29 (Resolution 2026-06).
+- Inside Broken Bow city limits, short-term rentals are only permitted in
+  C-5 commercial zones (Ordinance 428, February 2024).
+- Book Broken Bow does publish a fee (18%, in its onboarding PDF).
+
+### Site audit
+
+| Finding | Outcome |
+| --- | --- |
+| FAQ answers only in JSON-LD, not in HTML (critical) | Fixed site-wide: accordion panels force-mount. A test fetches raw server HTML and requires every FAQPage answer outside `<script>`; it fails against the pre-fix production build. An earlier check of mine matched the JSON-LD and wrongly reported the answers as rendered. |
+| No og:url anywhere | Fixed on all 24 pages that set Open Graph data. |
+| About page schema conflict and invalid `advisors` | Fixed: AboutPage with Hunter as Person; founder and a disambiguating description on the single business entity. |
+| Search-phrasing gaps on concierge and local support | Fixed: second home care / home watch, cabin cleaning / turnovers in titles, H1s, and headings. Product names stay visible. |
+| Generic H1s (pricing, FAQ, contact, management) | Fixed with location and service terms. |
+| Titles over 60 and descriptions over 160 characters | Trimmed on 22 routes; blog posts gained optional `seoTitle` and `seoDescription`. |
+| `/search` overclaims (pools, several cabins) | Fixed to describe the one bookable cabin. |
+| Income calculator thin and near-orphaned | Crawlable benchmark table and methodology; linked from home, pricing, footer. |
+| Dead travelok link | Replaced with the park's working page. |
+| Outdated Hochatown facts (2024 incorporation, "still developing" rules, county Granicus attribution) | Corrected from primary sources. |
+| Images "missing alt" | Not a defect: every flagged image is a decorative background with intentional `alt=""`. |
+| Hero LCP "no priority" | Not a defect: the hero is preloaded. |
+| `/review` redirect chain | Needs a Google Place ID (account setting); the code already switches to the one-hop link. |
+
+### Page ideas
+
+| # | Idea | Status |
+| --- | --- | --- |
+| 1 | Hochatown STR license and lodging tax guide | Built: `/hochatown-str-license-lodging-tax`. Old tax post retired and redirected. |
+| 2 | Second-home care / home watch | Built as a rewrite of `/home-care-concierge` plus the published second-home-care article. No separate "home watch" page: it would compete with the concierge page, and Frontier does not sell a watch-only service. |
+| 3 | Cabin cleaning and turnover rewrite | Built on `/local-services`. No price range added; local support is quoted per property. |
+| 4 | Fees compared | Built on `/broken-bow-cabin-management-fees#published-rates`. |
+| 5 | Out-of-town owner's local backup plan | Built: published article. |
+| 6 | Hochatown v. Airbnb explainer | Built: published article. Update as the case moves. |
+| 7 | Management fee calculator | Built: `/management-fee-calculator`. |
+| 8 | Co-host vs manager decision guide and quiz | Built: `/co-host-vs-property-manager-broken-bow`. |
+| 9 | Winter freeze and storm prep | Built: published article. |
+| 10 | Hot-tub servicing with Broken Bow Hot Tub Co. | Built: published article. |
+| 11 | Hochatown STR rules in plain English | Folded into #1. |
+| 12 | Sublime Retreat by the numbers | Not built: needs Hunter's real figures. |
+| 13 | Switching managers, with the Town form | Built on `/switch-property-managers-broken-bow`. |
+| 14 | About page proof points and schema | Schema and name disambiguation done. Proof points (years, response time, client cap) need owner data. |
+| 15 | Is a Broken Bow cabin still a good investment? | Not built: heavily covered by high-authority sites and needs cost data. |
+| 16 | Income calculator rewrite | Built, 3-bedroom data only. |
+| 17 | Turnover cleaning checklist | Not built: lowest-evidence of the remaining ideas. |
+| 18 | Remote owners from Tulsa, OKC, and Houston | Not built: the plan ranks it last. |
