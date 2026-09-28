@@ -48,6 +48,18 @@ async function readAnalytics(page: Page): Promise<unknown[][]> {
   );
 }
 
+/**
+ * The served HTML with every <script> removed: what the page actually
+ * renders. Checking raw HTML is not enough, because JSON-LD and the React
+ * payload both carry page copy, and a check that matches there can pass
+ * while the text is missing from the page (which is how unrendered FAQ
+ * answers went unnoticed).
+ */
+async function renderedMarkup(page: Page): Promise<string> {
+  const html = await page.content();
+  return html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+}
+
 async function jsonLd(page: Page): Promise<Record<string, unknown>[]> {
   const raw = await page.locator('script[type="application/ld+json"]').allTextContents();
   return raw.map((text) => JSON.parse(text) as Record<string, unknown>);
@@ -329,7 +341,7 @@ test.describe("technical seo", () => {
     ];
     for (const path of paths) {
       await page.goto(path);
-      const html = await page.content();
+      const html = await renderedMarkup(page);
       expect(html, `${path} uses a retired fee base`).not.toMatch(
         /nightly[- ]rental revenue|net rental income/i,
       );
@@ -337,6 +349,44 @@ test.describe("technical seo", () => {
         expect(html, `${path} quotes 20% without the confirmed base`).toMatch(
           /net rental revenue/i,
         );
+      }
+    }
+  });
+
+  test("faq answers are in the server html, not only in scripts", async ({ request }) => {
+    // Checks the raw server response, which is what a crawler receives, not
+    // the hydrated DOM. Every FAQPage answer in the JSON-LD must also appear
+    // in the markup outside <script> tags. Radix unmounts closed accordion
+    // panels by default, which once left every answer on the site readable
+    // only inside the JSON-LD and the React payload.
+    const escapeLikeReact = (text: string) =>
+      text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#x27;");
+    const paths = [
+      "/faq",
+      "/management-services",
+      "/local-services",
+      "/hochatown-property-management",
+      "/broken-bow-property-management",
+      "/dallas-cabin-owners",
+      "/switch-property-managers-broken-bow",
+    ];
+    for (const path of paths) {
+      const html = await (await request.get(path)).text();
+      const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+      const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .map((m) => JSON.parse(m[1]) as { "@type"?: string; mainEntity?: { acceptedAnswer?: { text?: string } }[] });
+      const answers = (ld.find((b) => b["@type"] === "FAQPage")?.mainEntity ?? [])
+        .map((q) => q.acceptedAnswer?.text ?? "")
+        .filter(Boolean);
+      expect(answers.length, `${path} has no FAQPage answers to check`).toBeGreaterThan(0);
+      for (const answer of answers) {
+        const probe = escapeLikeReact(answer.slice(0, 60));
+        expect(markup, `${path}: answer missing from server html: "${answer.slice(0, 50)}"`).toContain(probe);
       }
     }
   });

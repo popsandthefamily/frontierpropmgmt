@@ -47,14 +47,25 @@ function AccordionTrigger({
   )
 }
 
+/**
+ * Content is force-mounted so every answer is in the server-rendered HTML.
+ *
+ * Radix unmounts closed panels by default, which left every FAQ answer on the
+ * site existing only inside the JSON-LD and the React payload: crawlers and
+ * answer engines saw the questions and no answers. Force-mounting keeps the
+ * panel in the markup and Radix marks it `hidden` while closed, the standard
+ * crawlable accordion. Pass `forceMount={undefined}` to opt a panel out.
+ */
 function AccordionContent({
   className,
   children,
+  forceMount = true,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
+      forceMount={forceMount}
       className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}
     >
