@@ -507,3 +507,41 @@ test.describe("seo plan content", () => {
     }
   });
 });
+
+test.describe("images", () => {
+  // Photos we cannot use: a stranger, cabins that are not ours, and stock
+  // people. The files are removed; this keeps them from coming back.
+  const BANNED = [
+    "hochatown-pm-featured",
+    "hochatown-area.webp",
+    "hochatown-area-og",
+    "hochatown-area-2",
+    "broken-bow-area",
+    "airbnb-fee-overhaul",
+    "computer.jpg",
+    "handshake.webp",
+  ];
+
+  test("no page or post uses a photo we cannot use", async ({ request }) => {
+    const xml = await (await request.get("/sitemap.xml")).text();
+    const paths = [...xml.matchAll(/<loc>https:\/\/www\.rentwithfrontier\.com([^<]*)<\/loc>/g)].map(
+      (m) => m[1] || "/",
+    );
+    expect(paths.length).toBeGreaterThan(20);
+    for (const path of paths) {
+      const html = await (await request.get(path)).text();
+      for (const name of BANNED) {
+        expect(html, `${path} still uses ${name}`).not.toContain(name);
+      }
+    }
+  });
+
+  test("posts without a fitting photo get an emoji cover", async ({ page }) => {
+    await page.goto("/blogs/hochatown-airbnb-lodging-tax-lawsuit");
+    const cover = page.getByRole("img", { name: /hochatown sues airbnb/i }).first();
+    await expect(cover).toBeVisible();
+    await expect(cover).toContainText("⚖️");
+    await page.goto("/blogs");
+    await expect(page.getByRole("img", { name: /questions to ask/i }).first()).toContainText("📋");
+  });
+});

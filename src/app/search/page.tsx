@@ -84,7 +84,7 @@ export default function SearchPage() {
 
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/discover/hochatown-area.webp"
+        backgroundImage="/images/properties/sublime/sublime-2.jpg"
         title="Book a Hochatown Cabin Direct"
         subtitle="Sublime Retreat, booked with us, with no platform service fee added"
         size="medium"

@@ -1,15 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { PostCover } from "@/components/cards/post-cover";
 
 interface BlogCardProps {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
-  featuredImage: string;
+  featuredImage?: string;
+  emoji?: string;
   category?: string;
   className?: string;
 }
@@ -29,6 +30,7 @@ export function BlogCard({
   date,
   excerpt,
   featuredImage,
+  emoji,
   category,
   className,
 }: BlogCardProps) {
@@ -42,11 +44,11 @@ export function BlogCard({
       {/* Image */}
       <Link href={`/blogs/${slug}`} className="block overflow-hidden">
         <div className="relative aspect-[16/9] overflow-hidden">
-          <Image
-            src={featuredImage}
+          <PostCover
+            image={featuredImage}
+            emoji={emoji}
             alt={title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            hoverZoom
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ReadingProgressBar } from "@/components/layout/reading-progress-bar";
+import { PostCover } from "@/components/cards/post-cover";
 import { BlogCard } from "@/components/cards/blog-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
@@ -19,6 +17,9 @@ interface BlogPostPageProps {
 export function generateStaticParams() {
   return getBlogPosts().map((post) => ({ slug: post.slug }));
 }
+
+/** Share image for posts whose cover is an emoji panel: an owned landscape. */
+const BLOG_SHARE_FALLBACK = "/images/hero/forest-aerial.jpg";
 
 export async function generateMetadata({
   params,
@@ -40,7 +41,8 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
-      images: post.featuredImage ? [{ url: post.featuredImage }] : [],
+      // Posts with an emoji cover share with an owned landscape instead.
+      images: [{ url: post.featuredImage ?? BLOG_SHARE_FALLBACK }],
     },
     alternates: {
       canonical: `https://www.rentwithfrontier.com/blogs/${slug}`,
@@ -80,9 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         data={{
           headline: post.title,
           description: post.excerpt,
-          image: post.featuredImage
-            ? `${siteConfig.url}${post.featuredImage}`
-            : undefined,
+          image: `${siteConfig.url}${post.featuredImage ?? BLOG_SHARE_FALLBACK}`,
           datePublished: post.date,
           // No separate revision date is tracked yet, so the publish date
           // stands in. Google treats a missing dateModified as unknown,
@@ -131,11 +131,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Featured Image */}
       <div className="relative h-[40vh] w-full md:h-[50vh]">
-        <Image
-          src={post.featuredImage}
+        <PostCover
+          image={post.featuredImage}
+          emoji={post.emoji}
           alt={post.title}
-          fill
-          className="object-cover"
           sizes="100vw"
           priority
         />
@@ -214,6 +213,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 date={otherPost.date}
                 excerpt={otherPost.excerpt}
                 featuredImage={otherPost.featuredImage}
+                emoji={otherPost.emoji}
                 category={otherPost.category}
               />
             ))}

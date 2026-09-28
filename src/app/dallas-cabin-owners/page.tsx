@@ -291,8 +291,8 @@ export default function DallasCabinOwnersPage() {
           <AnimateInView direction="right">
             <div className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl">
               <Image
-                src="/images/services/computer.jpg"
-                alt="Owner portal showing cabin performance data"
+                src="/images/discover/hochatown-drive.webp"
+                alt="The road into Hochatown, the drive Dallas owners make to their cabins"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"

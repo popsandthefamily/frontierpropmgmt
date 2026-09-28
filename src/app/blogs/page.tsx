@@ -53,6 +53,7 @@ export default function BlogsPage() {
               date={post.date}
               excerpt={post.excerpt}
               featuredImage={post.featuredImage}
+              emoji={post.emoji}
               category={post.category}
             />
           ))}

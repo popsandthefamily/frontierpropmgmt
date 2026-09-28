@@ -9,7 +9,14 @@ export interface BlogPost {
   author: string;
   category: string;
   excerpt: string;
-  featuredImage: string;
+  /**
+   * An owned photo only: Sublime Retreat, the Old Broken Bow Highway house,
+   * local landscapes and landmarks. No stock people, no cabins that are not
+   * ours. Leave it out and set `emoji` when nothing owned fits the topic.
+   */
+  featuredImage?: string;
+  /** Cover fallback when there is no fitting owned photo. */
+  emoji?: string;
   content: string;
   /**
    * Ready-to-paste Facebook version of the post.
@@ -133,7 +140,7 @@ We wrote the checklist we would use if we were the ones shopping. Some of the an
 Print it, bring it to every interview, and take notes on who gets uncomfortable.
 
 https://www.rentwithfrontier.com/blogs/questions-to-ask-hochatown-airbnb-manager`,
-    featuredImage: "/images/discover/hochatown-pm-featured.png",
+    emoji: "📋",
     content: `
 <p><em>Quick CTA before we get into it: if you want to know what your cabin should be earning before you start interviewing managers, run the <a href="/audit#full-audit">free listing audit</a>. The revenue gap on your specific listing is the only number that actually matters in these conversations.</em></p>
 
@@ -344,7 +351,7 @@ Winter is the underrated one. Lowest rates, quietest trails, and a hot tub hits 
 Season-by-season breakdown with weather, crowds, pricing, and what to do in each:
 
 https://www.rentwithfrontier.com/blogs/best-time-to-visit-broken-bow`,
-    featuredImage: "/images/discover/broken-bow-area.webp",
+    featuredImage: "/images/properties/sublime/sublime-7.jpg",
     content: `
 <h2>When Should You Visit Broken Bow?</h2>
 <p>The honest answer: there is no bad time. Broken Bow and Hochatown offer something different every season, and each one has its own appeal depending on what you are looking for. Here is what to expect month by month so you can plan the perfect trip.</p>
@@ -476,7 +483,7 @@ The part that gets glossed over in most investor pitches: this is an operating b
 We laid out the actual math, including what a realistic first year looks like and the costs that surprise new owners:
 
 https://www.rentwithfrontier.com/blogs/why-dallas-investors-buying-broken-bow-cabins`,
-    featuredImage: "/images/discover/hochatown-area-2.webp",
+    emoji: "📈",
     content: `
 <h2>The Broken Bow Cabin Boom Is Not Slowing Down</h2>
 <p>If you live in the Dallas-Fort Worth area and have looked into vacation rental investments, Broken Bow and Hochatown have probably come up in every conversation. The southeast Oklahoma cabin market has been one of the strongest-performing STR markets in the region for years, and DFW buyers are a huge part of that story.</p>
@@ -606,7 +613,7 @@ Owners who do nothing take the hit quietly. Owners who reprice absorb most of it
 We wrote up what changed, what we are doing about it on the cabins we manage, and how to check whether your own pricing has been adjusted:
 
 https://www.rentwithfrontier.com/blogs/how-frontier-property-management-smooths-the-transition-amid-airbnbs-fee-overhaul`,
-    featuredImage: "/images/blog/airbnb-fee-overhaul.webp",
+    emoji: "🧾",
     content: `
 <h2>Airbnb Is Changing Its Fee Structure, Here Is What Owners Need to Know</h2>
 <p>In late 2025, Airbnb announced a significant shift in how it charges fees on bookings. The platform is moving toward a host-only fee model in more markets, which means the service fee that was previously split between hosts and guests is increasingly being absorbed entirely by the host side. For many cabin owners in Broken Bow and Hochatown, this change has raised questions about its impact on their bottom line.</p>
@@ -653,7 +660,7 @@ Compliance is the least interesting part of owning a cabin and the most expensiv
 Here is what changed, what you need to do, and the deadlines to have on your calendar:
 
 https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
-    featuredImage: "/images/discover/hochatown-area.webp",
+    emoji: "🧾",
     content: `
 <h2>Hochatown's STR Licensing and Tax System Is Changing</h2>
 <p>If you own a short-term rental in the Hochatown or Broken Bow area, you have likely heard that the local government is transitioning its STR tax collection and licensing platform from Avenu to Granicus. This is a significant administrative change that affects every cabin owner in the area, and understanding it early is key to staying compliant and avoiding penalties.</p>
@@ -689,7 +696,7 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
     author: "Hunter Collins, Frontier Property Management",
     category: "Owner Tips",
     excerpt: "In July 2026 the Town of Hochatown sued Airbnb, alleging taxes on rentals inside the town were sent to Broken Bow. What the case is about, where it stands, and what it does and does not mean for cabin owners.",
-    featuredImage: "/images/discover/hochatown-area.webp",
+    emoji: "⚖️",
     content: `
 <p><em>This explains a pending court case from public filings and news coverage. It is not legal or tax advice, and we will update it as the case moves. Last updated September 27, 2026.</em></p>
 
@@ -814,7 +821,7 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
     author: "Hunter Collins, Frontier Property Management",
     category: "Owner Tips",
     excerpt: "A hot tub at a busy rental and a hot tub at a second home need very different care. What drives the schedule, what a monthly check covers, and when a tub needs more, written with our hot-tub partner, Broken Bow Hot Tub Co.",
-    featuredImage: "/images/properties/sublime/sublime-2.jpg",
+    featuredImage: "/images/properties/sublime/sublime-5.jpg",
     content: `
 <p>In a cabin market like Broken Bow and Hochatown, the hot tub is often the amenity guests remember, and the one they complain about first when it is cloudy, cold, or not working. For owners who do not rent, it is simply the most expensive thing in the house to neglect. Either way, the question is the same: how often does it need attention?</p>
 <p>The honest answer is that it depends on how the tub is used, and anyone who gives you a single schedule for every tub is guessing. Hot-tub work on every Frontier plan is performed with our partner <a href="https://www.brokenbowhottub.com" target="_blank" rel="noopener noreferrer">Broken Bow Hot Tub Co.</a>, and for a specific tub they are the people to ask. This is how we think about it.</p>
@@ -937,7 +944,7 @@ https://www.rentwithfrontier.com/blogs/nights-number-taxes-hochatown`,
     category: "Owner Tips",
     excerpt:
       "Plenty of owners self-manage a Broken Bow cabin from Dallas, Tulsa, or Oklahoma City, and do it well. What they all need is a local backup plan for the things a phone cannot fix.",
-    featuredImage: "/images/local-services/hero.webp",
+    featuredImage: "/images/discover/hochatown-drive.webp",
     content: `
 <p>Can you self-manage a Broken Bow or Hochatown cabin from out of town? Yes. Plenty of owners run theirs from Dallas, Tulsa, or Oklahoma City, and do the online half well: they price sensibly, answer guests quickly, and would rather keep that control than pay a percentage for someone else to do it. What none of them can do from three hours away is be at the cabin. This article is about the local backup plan every remote self-manager needs, and where the line falls between what stays with you and what a local team can take.</p>
 

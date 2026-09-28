@@ -227,7 +227,7 @@ export default function BestHochatownPropertyManagementPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/discover/hochatown-pm-featured.png"
+        backgroundImage="/images/properties/sublime/sublime-1.jpg"
         title="Best Hochatown Property Management Company"
         subtitle='"Best" depends on what kind of owner you are. Here is the honest version.'
         size="large"

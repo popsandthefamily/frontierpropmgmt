@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "Boutique, owner-operated Hochatown cabin management from a team that runs its own flagship cabin in the same market. 20% of net rental revenue, no monthly minimum.",
     images: [
       {
-        url: "/images/discover/hochatown-pm-featured.png",
+        url: "/images/properties/sublime/sublime-2.jpg",
         width: 1200,
         height: 630,
         alt: "Hochatown cabin managed by Frontier Property Management",
@@ -142,7 +142,7 @@ export default function HochatownPropertyManagementPage() {
 
       {/* Hero */}
       <HeroSection
-        backgroundImage="/images/discover/hochatown-pm-featured.png"
+        backgroundImage="/images/properties/sublime/sublime-2.jpg"
         title="Boutique Hochatown Cabin Management"
         subtitle="We run our own high-performing cabin in this market and take on a limited number of owner partners where hands-on attention can move the numbers."
         size="large"

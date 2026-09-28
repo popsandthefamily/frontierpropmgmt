@@ -249,7 +249,7 @@ export default function AirbnbManagementHochatownPage() {
       />
 
       <HeroSection
-        backgroundImage="/images/discover/hochatown-pm-featured.png"
+        backgroundImage="/images/properties/sublime/sublime-5.jpg"
         title="Airbnb Management in Hochatown, OK"
         subtitle="Boutique, owner-operated. We run our own flagship cabin in this market and take on a limited number of owner partners."
         size="large"

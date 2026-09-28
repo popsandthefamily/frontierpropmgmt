@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/images/discover/hochatown-area-og.jpg",
+        url: "/images/services/DSC3082-og.jpg",
         width: 1200,
         height: 630,
         alt: "Hochatown, Oklahoma",
@@ -82,7 +82,7 @@ export default function HochatownStrGuidePage() {
       />
 
       <HeroSection
-        backgroundImage="/images/discover/hochatown-area.webp"
+        backgroundImage="/images/services/DSC3082.webp"
         title="Hochatown STR License & Lodging Tax Guide"
         subtitle={`What a short-term rental owner owes the Town, and when. Checked against the Town's own documents on ${LAST_VERIFIED}.`}
         size="medium"
