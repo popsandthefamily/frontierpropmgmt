@@ -545,3 +545,30 @@ test.describe("images", () => {
     await expect(page.getByRole("img", { name: /questions to ask/i }).first()).toContainText("📋");
   });
 });
+
+test.describe("faq ux", () => {
+  // Answers are force-mounted for crawlers, which once left every closed
+  // answer showing. Closed must mean hidden, on every page with an FAQ.
+  test("closed answers are hidden and open one at a time", async ({ page }) => {
+    for (const path of ["/faq", "/management-services", "/home-care-concierge", "/local-services", "/hochatown-str-license-lodging-tax"]) {
+      await page.goto(path);
+      await expect(page.locator('[data-slot="accordion-content"]:visible'), `${path} shows closed answers`).toHaveCount(0);
+    }
+    await page.goto("/faq");
+    const triggers = page.locator('[data-slot="accordion-trigger"]');
+    await triggers.nth(0).click();
+    await expect(page.locator('[data-slot="accordion-content"]:visible')).toHaveCount(1);
+    await triggers.nth(1).click();
+    await expect(page.locator('[data-slot="accordion-content"]:visible')).toHaveCount(1);
+  });
+
+  test("topic navigation jumps to a section and marks it current", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/faq");
+    const sidebar = page.locator('aside nav[aria-label="FAQ sections"]');
+    await expect(sidebar.locator('a[href^="#"]')).toHaveCount(7);
+    await sidebar.getByRole("link", { name: /fees and how the money works/i }).click();
+    await expect(page.locator("#fees")).toBeInViewport();
+    await expect(sidebar.locator('a[href="#fees"]')).toHaveAttribute("aria-current", "true");
+  });
+});

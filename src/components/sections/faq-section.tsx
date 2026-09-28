@@ -32,10 +32,13 @@ export function FAQSection({
             value={`faq-${i}`}
             className="border-b border-border data-[state=open]:border-sage"
           >
-            <AccordionTrigger className="text-left text-base font-medium text-charcoal hover:text-sage hover:no-underline">
+            {/* The trigger sits inside an <h3>, whose condensed display font
+                it would otherwise inherit; questions read better in the body
+                face. */}
+            <AccordionTrigger className="py-5 text-left font-body text-base font-semibold leading-snug text-charcoal hover:text-sage hover:no-underline md:text-[1.0625rem]">
               {item.question}
             </AccordionTrigger>
-            <AccordionContent className="text-base text-muted-foreground leading-relaxed">
+            <AccordionContent className="max-w-prose pb-6 text-base leading-relaxed text-muted-foreground">
               {item.answer}
             </AccordionContent>
           </AccordionItem>

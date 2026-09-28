@@ -55,6 +55,10 @@ function AccordionTrigger({
  * answer engines saw the questions and no answers. Force-mounting keeps the
  * panel in the markup and Radix marks it `hidden` while closed, the standard
  * crawlable accordion. Pass `forceMount={undefined}` to opt a panel out.
+ *
+ * Radix treats a force-mounted panel as present and never sets `hidden` on
+ * it, so closed panels are hidden here by their data-state instead. Without
+ * that, every closed answer renders open.
  */
 function AccordionContent({
   className,
@@ -66,7 +70,7 @@ function AccordionContent({
     <AccordionPrimitive.Content
       data-slot="accordion-content"
       forceMount={forceMount}
-      className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
+      className="data-[state=closed]:hidden data-[state=open]:animate-accordion-down overflow-hidden text-sm"
       {...props}
     >
       <div className={cn("pt-0 pb-4", className)}>{children}</div>

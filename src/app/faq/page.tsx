@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { SectionWrapper } from "@/components/sections/section-wrapper";
 import { CTASection } from "@/components/sections/cta-section";
 import { FAQSection } from "@/components/sections/faq-section";
+import { FaqActiveSection } from "@/components/sections/faq-active-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { AvailabilityNote } from "@/components/sections/availability-note";
 import { siteConfig } from "@/data/site";
+import { CTA } from "@/data/home-care";
 import { allFAQItems, faqGroups } from "@/data/faq";
 
 export const metadata: Metadata = {
@@ -43,6 +45,15 @@ export const metadata: Metadata = {
   },
 };
 
+const DEEPER_READING = [
+  { label: "Compare services & pricing", href: "/pricing", note: "Full management and home care, side by side." },
+  { label: "Management fees compared", href: "/broken-bow-cabin-management-fees", note: "What local managers publish, and what 20% should include." },
+  { label: "Management fee calculator", href: "/management-fee-calculator", note: "Net against gross, on your own numbers." },
+  { label: "Hochatown STR license & taxes", href: "/hochatown-str-license-lodging-tax", note: "Fees, renewal dates, and the 4% lodging tax." },
+  { label: "Switching property managers", href: "/switch-property-managers-broken-bow", note: "Keeping your reviews and bookings." },
+  { label: "Co-host vs property manager", href: "/co-host-vs-property-manager-broken-bow", note: "Which kind of help fits, with a short quiz." },
+];
+
 export default function FAQPage() {
   return (
     <>
@@ -73,75 +84,112 @@ export default function FAQPage() {
 
       <AvailabilityNote />
 
-      {/* Jump links, so the page is navigable at this length */}
-      <nav aria-label="FAQ sections" className="border-b border-border bg-cream">
-        <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-2 px-4 py-5">
-          {faqGroups.map((group) => (
-            <a
-              key={group.id}
-              href={`#${group.id}`}
-              className="text-[0.72rem] font-medium uppercase tracking-[0.18em] text-charcoal/60 underline-offset-4 transition-colors hover:text-charcoal hover:underline"
-            >
-              {group.title}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      {faqGroups.map((group, i) => (
-        <SectionWrapper
-          key={group.id}
-          id={group.id}
-          background={i % 2 === 0 ? "white" : "cream"}
+      {/* One continuous FAQ. On desktop a sticky table of contents sits
+          beside the questions; on small screens a sticky, scrollable chip
+          row does the same job. Answers stay collapsed, so the page reads as
+          a list of questions rather than a wall of text. */}
+      <section className="bg-white">
+        {/* Mobile section chips */}
+        <nav
+          aria-label="FAQ sections"
+          data-faq-nav
+          className="sticky top-20 z-30 border-b border-border bg-white/95 backdrop-blur lg:hidden"
         >
-          <div className="mx-auto mb-8 max-w-3xl text-center">
-            <h2 className="text-3xl font-bold text-charcoal md:text-4xl">
-              {group.title}
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
-              {group.blurb}
-            </p>
-          </div>
-          <FAQSection title="" questions={group.items} />
-        </SectionWrapper>
-      ))}
+          <ul data-faq-chips className="flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {faqGroups.map((group) => (
+              <li key={group.id} className="shrink-0">
+                <a
+                  href={`#${group.id}`}
+                  className="group inline-flex items-center gap-1.5 rounded-full border border-charcoal/15 bg-cream/60 px-3.5 py-2 text-sm font-medium text-charcoal transition-colors hover:border-sage hover:text-sage aria-[current=true]:border-sage aria-[current=true]:bg-sage aria-[current=true]:text-white"
+                >
+                  {group.title}
+                  <span className="text-xs text-muted-foreground group-aria-[current=true]:text-white/80">
+                    {group.items.length}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <SectionWrapper background="white">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-12 md:py-16 lg:grid-cols-[15rem_1fr] lg:gap-16 lg:px-8">
+          {/* Desktop table of contents */}
+          <aside className="hidden lg:block">
+            <nav aria-label="FAQ sections" data-faq-nav className="sticky top-28">
+              <p className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+                Topics
+              </p>
+              <ul className="mt-4 space-y-1 border-l border-border">
+                {faqGroups.map((group) => (
+                  <li key={group.id}>
+                    <a
+                      href={`#${group.id}`}
+                      className="-ml-px flex items-baseline justify-between gap-3 border-l-2 border-transparent py-1.5 pl-4 pr-1 text-sm text-charcoal/80 transition-colors hover:border-sage hover:text-sage aria-[current=true]:border-sage aria-[current=true]:font-semibold aria-[current=true]:text-sage"
+                    >
+                      <span>{group.title}</span>
+                      <span className="text-xs tabular-nums text-muted-foreground">
+                        {group.items.length}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={CTA.owner.href}
+                className="mt-8 inline-flex text-sm font-semibold text-sage hover:text-sage-dark hover:underline"
+              >
+                Ask us something else &rarr;
+              </Link>
+            </nav>
+          </aside>
+
+          <div className="min-w-0 space-y-14 md:space-y-16">
+            {faqGroups.map((group) => (
+              <div key={group.id} id={group.id} className="scroll-mt-40 lg:scroll-mt-28">
+                <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
+                  {group.title}
+                </h2>
+                <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+                  {group.blurb}
+                </p>
+                <FAQSection title="" questions={group.items} className="mx-0 mt-4 max-w-none" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FaqActiveSection ids={faqGroups.map((g) => g.id)} />
+
+      {/* Deeper reading: a tidy grid instead of a row of buttons */}
+      <SectionWrapper background="cream">
+        <div className="mx-auto max-w-5xl">
           <h2 className="text-2xl font-bold text-charcoal md:text-3xl">
             Still deciding?
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
-            These pages go deeper than an accordion answer can.
+          <p className="mt-2 max-w-2xl text-base text-muted-foreground">
+            These pages go deeper than an FAQ answer can.
           </p>
-          <div className="mx-auto mt-8 flex flex-wrap justify-center gap-3">
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/pricing">Both plans compared</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/broken-bow-cabin-management-fees">
-                What 20% should include
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/switch-property-managers-broken-bow">
-                How switching works
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/hochatown-str-license-lodging-tax">
-                Hochatown STR license &amp; taxes
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/co-host-vs-property-manager-broken-bow">
-                Co-host vs property manager
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="text-sm">
-              <Link href="/audit">Free listing audit</Link>
-            </Button>
-          </div>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {DEEPER_READING.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="group flex h-full items-start justify-between gap-3 rounded-xl border border-charcoal/10 bg-white p-4 transition-colors hover:border-sage"
+                >
+                  <span>
+                    <span className="block text-sm font-semibold text-charcoal group-hover:text-sage">
+                      {item.label}
+                    </span>
+                    <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">
+                      {item.note}
+                    </span>
+                  </span>
+                  <ArrowRight className="mt-0.5 size-4 shrink-0 text-sage transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </SectionWrapper>
 
