@@ -150,7 +150,7 @@ export default async function PortalDashboard() {
 
       {/* Headline numbers */}
       {latest && (
-        <section className="mt-10 grid grid-cols-2 border-y border-border lg:grid-cols-4">
+        <section className="mt-8 grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-cream/50 lg:grid-cols-4">
           {[
             { stat: money(latest.owner_payout), label: `Your payout, ${monthLabel(latest.period_start)}` },
             { stat: money(latest.gross_revenue), label: "Gross revenue that month" },
@@ -162,12 +162,12 @@ export default async function PortalDashboard() {
           ].map((s) => (
             <div
               key={s.label}
-              className="border-border px-5 py-8 lg:border-l lg:px-7 [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:[&:first-child]:border-l-0 lg:[&:nth-child(n+3)]:border-t-0"
+              className="border-border px-5 py-6 [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:border-l lg:[&:first-child]:border-l-0 lg:[&:nth-child(n+3)]:border-t-0"
             >
-              <div className="font-heading text-3xl font-bold leading-none text-charcoal md:text-4xl">
+              <div className="font-heading text-3xl font-bold leading-none text-charcoal">
                 {s.stat}
               </div>
-              <div className="mt-3 text-xs leading-relaxed text-muted-foreground">
+              <div className="mt-2 text-xs leading-snug text-muted-foreground">
                 {s.label}
               </div>
             </div>
@@ -176,10 +176,10 @@ export default async function PortalDashboard() {
       )}
 
       {/* Statements */}
-      <section className="mt-14">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+      <section className="mt-12">
+        <h2 className="font-heading text-2xl font-bold text-charcoal">
           Monthly statements
-        </div>
+        </h2>
 
         {stmts.length === 0 ? (
           <div className="mt-6 border-b border-border pb-8">
@@ -194,53 +194,52 @@ export default async function PortalDashboard() {
             </p>
           </div>
         ) : (
-          byYear.map((group) => (
-            <div key={group.year} className="mt-6 first:mt-2">
-              <div className="flex items-baseline justify-between gap-4 border-b border-charcoal/25 pb-2">
-                <h2 className="font-heading text-xl font-semibold text-charcoal">
-                  {group.year}
-                </h2>
-                <span className="text-sm text-muted-foreground">
-                  {money(group.payout)} paid out across {group.rows.length}{" "}
-                  {group.rows.length === 1 ? "statement" : "statements"}
-                </span>
-              </div>
-              <ul>
+          <div className="mt-4 overflow-hidden rounded-xl border border-border">
+            {byYear.map((group) => (
+              <div key={group.year}>
+                <div className="flex items-baseline justify-between gap-4 border-b border-border bg-cream/60 px-5 py-2.5">
+                  <span className="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-charcoal/70">
+                    {group.year}
+                  </span>
+                  <span className="text-[0.78rem] text-muted-foreground">
+                    {money(group.payout)} paid out · {group.rows.length}{" "}
+                    {group.rows.length === 1 ? "statement" : "statements"}
+                  </span>
+                </div>
                 {group.rows.map((s) => (
-                  <li key={s.id}>
-                    <Link
-                      href={`/portal/statements/${s.id}`}
-                      className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5 sm:grid-cols-[1fr_auto_auto]"
-                    >
-                      <span className="font-heading text-lg font-semibold text-charcoal group-hover:text-sage">
-                        {monthLabel(s.period_start)}
-                      </span>
-                      <span className="hidden text-sm text-muted-foreground sm:block">
-                        {money(s.gross_revenue)} gross
-                      </span>
-                      <span className="text-right font-medium text-charcoal">
-                        {money(s.owner_payout)}
-                      </span>
-                    </Link>
-                  </li>
+                  <Link
+                    key={s.id}
+                    href={`/portal/statements/${s.id}`}
+                    className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border px-5 py-3.5 last:border-b-0 hover:bg-cream/40 sm:grid-cols-[1fr_7rem_7rem]"
+                  >
+                    <span className="font-heading text-lg font-semibold text-charcoal group-hover:text-sage">
+                      {monthLabel(s.period_start)}
+                    </span>
+                    <span className="hidden text-right text-sm text-muted-foreground sm:block">
+                      {money(s.gross_revenue)} gross
+                    </span>
+                    <span className="text-right font-medium tabular-nums text-charcoal">
+                      {money(s.owner_payout)}
+                    </span>
+                  </Link>
                 ))}
-              </ul>
-            </div>
-          ))
+              </div>
+            ))}
+          </div>
         )}
       </section>
 
       {/* Properties */}
       {props.length > 0 && (
-        <section className="mt-14">
-          <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+        <section className="mt-12">
+          <h2 className="font-heading text-2xl font-bold text-charcoal">
             Under management
-          </div>
-          <ul className="mt-2">
+          </h2>
+          <div className="mt-4 overflow-hidden rounded-xl border border-border">
             {props.map((p) => (
-              <li
+              <div
                 key={p.id}
-                className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5"
+                className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border px-5 py-3.5 last:border-b-0"
               >
                 <span className="font-heading text-lg font-semibold text-charcoal">
                   {p.name}
@@ -250,33 +249,33 @@ export default async function PortalDashboard() {
                     </span>
                   )}
                 </span>
-                <span className="text-sm capitalize text-muted-foreground">
+                <span className="rounded-full bg-sage/12 px-2.5 py-1 text-xs font-medium capitalize text-sage-dark">
                   {p.status}
                 </span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
       )}
 
       {/* Documents */}
-      <section className="mt-14">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+      <section className="mt-12">
+        <h2 className="font-heading text-2xl font-bold text-charcoal">
           Documents
-        </div>
+        </h2>
         {docs.length === 0 ? (
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
             Tax documents and signed paperwork will appear here. Nothing to
             download yet.
           </p>
         ) : (
-          <ul className="mt-2">
+          <div className="mt-4 overflow-hidden rounded-xl border border-border">
             {docs.map((d) => {
               const href = docLinks.get(d.storage_path);
               return (
-                <li
+                <div
                   key={d.id}
-                  className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5"
+                  className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border px-5 py-3.5 last:border-b-0"
                 >
                   <span>
                     <span className="font-heading text-lg font-semibold text-charcoal">
@@ -301,14 +300,14 @@ export default async function PortalDashboard() {
                       Unavailable
                     </span>
                   )}
-                </li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         )}
       </section>
 
-      <p className="mt-14 border-t border-border pt-4 text-sm text-muted-foreground">
+      <p className="mt-12 border-t border-border pt-4 text-sm text-muted-foreground">
         Questions about a number on any statement? Call or text Hunter at{" "}
         <a href="tel:580-207-7154" className="font-medium text-charcoal underline underline-offset-4">
           580-207-7154
