@@ -51,7 +51,7 @@ const exampleGrossRent = computeFees({ ...EXAMPLE_INPUTS, otherBase: "grossRent"
 const FAQ = [
   {
     question: "Is 20% of net cheaper than 20% of gross?",
-    answer: `Yes, when both managers charge the same rate, because the net base is smaller. On a cabin with ${usd(EXAMPLE_INPUTS.rent)} in nightly revenue, ${usd(EXAMPLE_INPUTS.guestFees)} in cleaning and pet fees, and a ${pctLabel(EXAMPLE_INPUTS.hostFeeRate, 0)} platform host fee, 20% of gross booking revenue is ${usd(example.otherFee)} a year and 20% of net rental revenue is ${usd(example.frontierFee)}, a difference of ${usd(example.difference)}.`,
+    answer: `Yes, when both managers charge the same rate, because the net base is smaller. On a cabin with ${usd(EXAMPLE_INPUTS.rent)} in nightly revenue, ${usd(EXAMPLE_INPUTS.guestFees)} in cleaning and pet fees, and a ${pctLabel(EXAMPLE_INPUTS.hostFeeRate)} platform host fee, 20% of gross booking revenue is ${usd(example.otherFee)} a year and 20% of net rental revenue is ${usd(example.frontierFee)}, a difference of ${usd(example.difference)}.`,
   },
   {
     question: "What does 'net rental revenue' mean?",
@@ -124,7 +124,7 @@ export default function ManagementFeeCalculatorPage() {
             A cabin books {usd(EXAMPLE_INPUTS.rent)} in nightly revenue in a
             year and collects {usd(EXAMPLE_INPUTS.guestFees)} in cleaning and
             pet fees. The platform withholds a{" "}
-            {pctLabel(EXAMPLE_INPUTS.hostFeeRate, 0)} host fee. Here is 20% on
+            {pctLabel(EXAMPLE_INPUTS.hostFeeRate)} host fee. Here is 20% on
             each common base:
           </p>
           <div className="mt-6 overflow-hidden rounded-2xl border border-charcoal/10">

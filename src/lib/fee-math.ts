@@ -90,7 +90,7 @@ export function computeFees(input: FeeInputs): FeeResult {
 export const EXAMPLE_INPUTS: FeeInputs = {
   rent: 50_000,
   guestFees: 8_000,
-  hostFeeRate: 0.15,
+  hostFeeRate: 0.155,
   otherRate: 0.2,
   otherBase: "grossWithFees",
   frontierRate: 0.2,

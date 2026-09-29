@@ -448,18 +448,19 @@ test.describe("seo plan content", () => {
 
   test("fee calculator shows the worked example and recalculates", async ({ page }) => {
     await page.goto("/management-fee-calculator");
-    // Server-rendered worked example: $50,000 rent, $8,000 guest fees, 15% host fee.
-    // 20% of gross incl. fees = $11,600; 20% of net rent = $8,500.
+    // Server-rendered worked example: $50,000 rent, $8,000 guest fees, 15.5% host fee.
+    // 20% of gross incl. fees = $11,600; 20% of net rent = 20% of $42,250 = $8,450.
     const body = page.locator("body");
     await expect(body).toContainText("$11,600");
-    await expect(body).toContainText("$8,500");
+    await expect(body).toContainText("$8,450");
+    await expect(body).toContainText("15.5%");
     // Interactive: switch the other manager to the net base, fees become equal.
     await page.getByLabel(/net rent, after platform host fees/i).check();
     await expect(page.getByText(/about the same on these numbers/i)).toBeVisible();
-    // Change the rent; Frontier's fee updates (20% of 100,000 x 0.85 = 17,000).
+    // Change the rent; Frontier's fee updates (20% of 100,000 x 0.845 = 16,900).
     const rent = page.getByLabel(/nightly-rate revenue for the year/i);
     await rent.fill("100000");
-    await expect(page.locator("[aria-live=polite]").first()).toContainText("$17,000");
+    await expect(page.locator("[aria-live=polite]").first()).toContainText("$16,900");
   });
 
   test("service quiz recommends by situation", async ({ page }) => {
@@ -570,5 +571,20 @@ test.describe("faq ux", () => {
     await sidebar.getByRole("link", { name: /fees and how the money works/i }).click();
     await expect(page.locator("#fees")).toBeInViewport();
     await expect(sidebar.locator('a[href="#fees"]')).toHaveAttribute("aria-current", "true");
+  });
+});
+
+test.describe("google profile", () => {
+  test("review link goes straight to the review dialog for our place", async ({ request }) => {
+    const res = await request.get("/review", { maxRedirects: 0 });
+    expect([301, 308]).toContain(res.status());
+    expect(res.headers()["location"]).toBe(
+      "https://search.google.com/local/writereview?placeid=ChIJaSjB93_5y40RsYNab_UxDF4",
+    );
+  });
+
+  test("the business entity links the canonical Maps place", async ({ request }) => {
+    const html = await (await request.get("/")).text();
+    expect(html).toContain("https://www.google.com/maps/place/?q=place_id:ChIJaSjB93_5y40RsYNab_UxDF4");
   });
 });

@@ -80,7 +80,7 @@ const passThrough = [
     detail: "Billed at vendor cost when restocked.",
   },
   {
-    label: "Platform host fees (Airbnb, VRBO)",
+    label: "Platform host fees (Airbnb 15.5%, VRBO)",
     detail:
       "Deducted by the platform before payout reaches us — separate from the management fee.",
   },
@@ -200,7 +200,7 @@ const pageFAQ = [
   {
     question: "Is the management fee taken out before or after platform fees?",
     answer:
-      "After. Platform host fees (whatever Airbnb or VRBO withholds, which depends on the fee model the listing uses) are deducted by the platform before any payout reaches us, and state and local occupancy taxes are remitted to the taxing authority rather than counted as income. Frontier's 20% is calculated on what remains, not on the headline booking total. Cleaning and pet fees pass through directly to vendors and never enter the calculation.",
+      "After. Platform host fees (Airbnb's host-only fee of 15.5%, or whatever VRBO withholds) are deducted by the platform before any payout reaches us, and state and local occupancy taxes are remitted to the taxing authority rather than counted as income. Frontier's 20% is calculated on what remains, not on the headline booking total. Cleaning and pet fees pass through directly to vendors and never enter the calculation.",
   },
   {
     question: "Are there hidden fees on top of the 20%?",

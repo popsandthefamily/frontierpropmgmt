@@ -29,11 +29,15 @@ export const siteConfig = {
   /**
    * Google Place ID for the Business Profile.
    *
-   * Unlocks two things once set: the canonical `sameAs` URL, and the
-   * one-tap review link behind /review. Left blank until someone pastes
-   * the real value in, and everything degrades to the shortlink.
+   * Unlocks two things: the canonical `sameAs` URL, and the one-tap review
+   * link behind /review. Found and verified 2026-09-28: it decodes to the
+   * Maps feature ID 0x8dcbf97ff7c12869:0x5e0c31f56f5a83b1 of the listing
+   * "Frontier Property Management" in Broken Bow, whose knowledge-graph ID
+   * (/g/11y2hjckvh) matches the share link above. Place IDs are public, so
+   * it lives here; NEXT_PUBLIC_GOOGLE_PLACE_ID still overrides it.
    */
-  googlePlaceId: process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID ?? "",
+  googlePlaceId:
+    process.env.NEXT_PUBLIC_GOOGLE_PLACE_ID || "ChIJaSjB93_5y40RsYNab_UxDF4",
   analytics: {
     ga: "GT-K4TS7SM2",
     ads: "AW-17777139722",
@@ -97,7 +101,7 @@ export const plans = {
     summary:
       "We run the whole property: pricing, listings, guest communication, cleaning turns, maintenance, taxes, and monthly reporting. You own the cabin, we operate it.",
     feeDefinition:
-      "20% of net rental revenue, meaning the booking revenue that remains after platform host fees (whatever Airbnb or VRBO withholds under the fee model the listing uses) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
+      "20% of net rental revenue, meaning the booking revenue that remains after platform host fees (Airbnb's host-only fee of 15.5%, or whatever VRBO withholds) and state and local occupancy taxes have come out. Not 20% of the headline booking total. Cleaning and pet fees pass through to vendors and are never part of the base. Maintenance and vendor invoices are billed to the owner at cost with no markup, and anything over $300 needs owner approval first. No setup fee, no monthly minimum, no annual contract.",
     /** Why this 20% is not the same price as somebody else's 20%. */
     feeComparisonNote:
       "Most national operators calculate their percentage on gross booking revenue, before platform fees and taxes come out. Frontier calculates on what is left after. Two managers quoting the same percentage against different bases are not quoting the same price, so it is worth asking any manager which one they mean.",

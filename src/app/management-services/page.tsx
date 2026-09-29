@@ -107,7 +107,7 @@ const passThroughItems = [
     detail: "Billed as needed at our vendor cost.",
   },
   {
-    label: "Platform host fees (Airbnb, VRBO)",
+    label: "Platform host fees (Airbnb 15.5%, VRBO)",
     detail: "Deducted by the platform before your payout reaches us.",
   },
 ];

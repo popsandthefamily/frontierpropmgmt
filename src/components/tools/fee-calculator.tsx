@@ -109,9 +109,9 @@ export function FeeCalculator() {
             onChange={(e) => setHostFee(e.target.value)}
           />
           <p className="text-xs text-muted-foreground">
-            What Airbnb or VRBO withholds from you. Under Airbnb&apos;s host-only
-            fee it is roughly 15%; under the older split fee it was about 3%.
-            Your payout report shows yours.
+            What Airbnb or VRBO withholds from you. Airbnb&apos;s host-only
+            fee is 15.5%; it replaced the older 3% split fee for every U.S.
+            host by September 2026. Your payout report shows yours.
           </p>
         </div>
 

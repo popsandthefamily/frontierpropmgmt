@@ -619,10 +619,10 @@ https://www.rentwithfrontier.com/blogs/how-frontier-property-management-smooths-
 <p>In late 2025, Airbnb announced a significant shift in how it charges fees on bookings. The platform is moving toward a host-only fee model in more markets, which means the service fee that was previously split between hosts and guests is increasingly being absorbed entirely by the host side. For many cabin owners in Broken Bow and Hochatown, this change has raised questions about its impact on their bottom line.</p>
 
 <h3>What Is Actually Changing?</h3>
-<p>Under the traditional split-fee model, Airbnb charged guests roughly 14% and hosts about 3% of the booking total. Under the new host-only model, hosts pay a flat commission of approximately 15%, while guests see a cleaner, lower total price. The idea is that more transparent guest pricing leads to more bookings, but the math only works if the volume increase offsets the higher host fee.</p>
+<p>Under the traditional split-fee model, Airbnb charged guests roughly 14% and hosts about 3% of the booking total. Under the new host-only model, hosts pay a flat 15.5% commission, while guests see a cleaner, lower total price. Airbnb moved hosts connected to property management software to it on October 27, 2025, and every remaining U.S. host by September 15, 2026. The idea is that more transparent guest pricing leads to more bookings, but the math only works if the volume increase offsets the higher host fee.</p>
 
 <h3>How This Affects Broken Bow Cabin Owners</h3>
-<p>For owners managing their own properties, the transition can feel like a sudden hit to margins. An extra 12% fee on every booking adds up quickly, especially during slower shoulder seasons when every dollar counts. Owners who are not adjusting their pricing to account for the new fee structure risk leaving money on the table, or worse, operating at a loss during low-occupancy months.</p>
+<p>For owners managing their own properties, the transition can feel like a sudden hit to margins. An extra 12.5 points of fee on every booking adds up quickly, especially during slower shoulder seasons when every dollar counts. Owners who are not adjusting their pricing to account for the new fee structure risk leaving money on the table, or worse, operating at a loss during low-occupancy months.</p>
 
 <h3>How Frontier Is Helping Owners Navigate This</h3>
 <p>At Frontier Property Management, we have been proactively adjusting our owners' pricing strategies to account for the fee shift. Here is what we are doing:</p>

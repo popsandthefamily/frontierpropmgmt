@@ -83,11 +83,11 @@ Small numbers are small numbers. Report them as such.
 
 ## Added by the SEO plan (2026-09-27)
 
-- [ ] **Airbnb host fee.** The fee definition no longer quotes "Airbnb 3%", because the site's own post on Airbnb's host-only fee says about 15%. Confirm which fee model your listings use; the definition can name the number again once it is confirmed.
+- [x] **Airbnb host fee.** Resolved 2026-09-28: 15.5%, confirmed by the owner and verified (Airbnb moved PMS-connected hosts to the host-only fee on October 27, 2025, and every remaining U.S. host by September 15, 2026). The fee definition, pricing labels, calculator, and the 2025 fee article now say 15.5%.
 - [ ] **"Best Rate Guaranteed"** on the booking page and the booking widget. Confirm it is a real guest policy, or remove it.
 - [ ] **Non-affiliation statement** on the About page (other companies named Frontier Property Management in other states). Confirm it is accurate.
 - [ ] **Shared phone number.** The sheet notes 580-207-7154 is also Frontier Consulting Group's number, which feeds the brand-name confusion in search. Decide whether that is acceptable.
-- [ ] **Google Place ID.** Set `NEXT_PUBLIC_GOOGLE_PLACE_ID` in Vercel so `/review` becomes a one-hop link to the review dialog.
+- [x] **Google Place ID.** Resolved 2026-09-28: `ChIJaSjB93_5y40RsYNab_UxDF4`, verified against the Maps listing and set as the default in `src/data/site.ts` (the env var still overrides). `/review` now goes straight to the review dialog, and the business schema links the canonical Maps place.
 - [ ] **AirROI snapshot.** The market figures are from April 2026. Refresh `src/data/hochatown-market.ts` (the AirROI key is not in `.env.local`).
 - [ ] **Search Console.** The sheet found Google still showing the old homepage title ("20% Flat"). Request indexing for `/`, and for the three new pages: `/hochatown-str-license-lodging-tax`, `/management-fee-calculator`, `/co-host-vs-property-manager-broken-bow`.
 - [ ] **Re-verify on a schedule.** The Hochatown guide and the published-fees table carry a "checked" date. Re-check the Town's documents each July (license renewal season) and competitor rates quarterly, and update the dates with the facts.
