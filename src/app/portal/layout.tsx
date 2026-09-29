@@ -20,7 +20,10 @@ export default async function PortalLayout({
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-5xl px-4 pt-28 pb-20">
-        <div className="flex items-center justify-between gap-4 border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+        <div
+          data-print="hide"
+          className="flex items-center justify-between gap-4 border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
+        >
           <Link href="/portal" className="hover:text-charcoal">
             Owner Portal
           </Link>

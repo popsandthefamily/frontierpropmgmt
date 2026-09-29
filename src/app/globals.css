@@ -98,3 +98,43 @@ html {
   text-transform: none;
   letter-spacing: normal;
 }
+
+/*
+ * Printing.
+ *
+ * Owner statements are printed and saved as PDFs for accountants, so paper is a
+ * real output for this site, not an afterthought. The marketing header, footer
+ * and the portal's own chrome carry no meaning once printed, and the fixed
+ * header leaves a blank band at the top of page one if it is left in flow.
+ */
+@media print {
+  /* Scoped to the site chrome, so a header or footer inside page content
+     still prints. Fixed elements (the scroll-to-top button) would otherwise
+     stamp themselves onto every page. */
+  body > header,
+  body > footer,
+  .fixed,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  /* The fixed site header is gone, so the space reserved for it is dead. */
+  main > div,
+  main > div > div {
+    padding-top: 0 !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  /* Keep a ledger row from splitting across a page break. */
+  dl > div,
+  li {
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+}

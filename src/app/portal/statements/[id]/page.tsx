@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { money, moneyExact, monthLabel, occupancy } from "@/lib/portal/format";
-import { plans } from "@/data/site";
+import { plans, siteConfig } from "@/data/site";
+import { PrintButton } from "@/components/portal/print-button";
 
 export const dynamic = "force-dynamic";
 
@@ -45,12 +46,20 @@ export default async function StatementPage({
   return (
     <>
       <div className="mt-10">
-        <Link
-          href="/portal"
-          className="text-sm font-medium text-charcoal underline-offset-4 hover:underline"
-        >
-          ← All statements
-        </Link>
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/portal"
+            className="text-sm font-medium text-charcoal underline-offset-4 hover:underline print:hidden"
+          >
+            ← All statements
+          </Link>
+          <PrintButton />
+        </div>
+        {/* On paper the portal chrome is gone, so the statement has to say for
+            itself who issued it. */}
+        <p className="hidden text-sm text-muted-foreground print:block">
+          {siteConfig.name} · Owner statement
+        </p>
         <h1 className="mt-5 text-[2.2rem] font-bold leading-[0.95] tracking-tight text-charcoal sm:text-5xl">
           {monthLabel(data.period_start)}
         </h1>
