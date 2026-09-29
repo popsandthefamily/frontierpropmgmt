@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getUsageStats } from "@/lib/audit/caps";
+import { isAdmin } from "@/lib/admin/auth";
+import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 
 interface Props {
   searchParams: Promise<{ token?: string }>;
@@ -12,24 +14,14 @@ export const metadata: Metadata = {
 
 export default async function AuditStatsPage({ searchParams }: Props) {
   const { token } = await searchParams;
-  const expected = process.env.ADMIN_AUTH_SECRET;
 
-  if (!expected) {
+  // isAdmin rather than a bare token comparison: these two pages used to accept
+  // only the shared secret, so an admin who had signed in properly with their
+  // email and password was told to go and find an environment variable.
+  if (!(await isAdmin(token))) {
     return (
       <Shell>
-        <p className="text-destructive">
-          ADMIN_AUTH_SECRET is not set. Add it to your env to access this page.
-        </p>
-      </Shell>
-    );
-  }
-  if (token !== expected) {
-    return (
-      <Shell>
-        <h1 className="text-2xl font-bold">Admin access</h1>
-        <p className="mt-2 text-muted-foreground">
-          Append <code>?token=YOUR_ADMIN_AUTH_SECRET</code> to this URL.
-        </p>
+        <AdminSignInPrompt />
       </Shell>
     );
   }
@@ -91,7 +83,7 @@ export default async function AuditStatsPage({ searchParams }: Props) {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16">{children}</div>
+    <div className="mx-auto max-w-4xl px-4 pt-10">{children}</div>
   );
 }
 
