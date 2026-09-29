@@ -83,7 +83,7 @@ export default async function AuditStatsPage({ searchParams }: Props) {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-4xl px-4 pt-10">{children}</div>
+    <div className="mx-auto max-w-5xl px-4 pt-10">{children}</div>
   );
 }
 

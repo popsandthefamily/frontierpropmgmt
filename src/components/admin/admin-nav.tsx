@@ -31,7 +31,7 @@ function Nav({ signedIn }: { signedIn: boolean }) {
 
   return (
     <nav className="border-b border-border">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-1 gap-y-2 px-4 py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-1 gap-y-2 px-4 py-3">
         <span className="mr-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-charcoal/50">
           Frontier Admin
         </span>
