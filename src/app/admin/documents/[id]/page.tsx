@@ -31,7 +31,7 @@ export default async function DocumentFieldsPage({
 
   if (!(await isAdmin(token))) {
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+      <div className="mx-auto max-w-5xl px-4 pt-10">
         <AdminSignInPrompt />
       </div>
     );
@@ -68,7 +68,7 @@ export default async function DocumentFieldsPage({
   const openRequest = (requests ?? []).find((r) => r.status !== "void");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-6xl px-4 pt-10">
       <Link
         href={`/admin/owners${token ? `?token=${encodeURIComponent(token)}` : ""}`}
         className="text-sm font-medium text-charcoal underline-offset-4 hover:underline"

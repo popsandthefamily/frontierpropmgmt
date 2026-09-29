@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getSupabase } from "@/lib/supabase/client";
 
-export function SignOutButton() {
+export function SignOutButton({ redirectTo = "/portal/login" }: { redirectTo?: string } = {}) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
 
@@ -15,7 +15,7 @@ export function SignOutButton() {
       onClick={async () => {
         setBusy(true);
         await getSupabase().auth.signOut();
-        router.push("/portal/login");
+        router.push(redirectTo);
         router.refresh();
       }}
       className="uppercase tracking-[0.22em] underline-offset-4 hover:text-charcoal hover:underline disabled:opacity-50"

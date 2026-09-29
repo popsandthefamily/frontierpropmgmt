@@ -24,7 +24,7 @@ export default async function AdminOwnersPage({
   const { token } = await searchParams;
   if (!(await isAdmin(token))) {
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+      <div className="mx-auto max-w-5xl px-4 pt-10">
         <AdminSignInPrompt />
       </div>
     );
@@ -58,7 +58,7 @@ export default async function AdminOwnersPage({
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-5xl px-4 pt-10">
       <h1 className="text-3xl font-bold text-charcoal">Owners</h1>
       <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
         {list.length === 0

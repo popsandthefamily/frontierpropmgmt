@@ -21,7 +21,7 @@ export default async function AdminSignPage({
   if (!data.ok || !data.fileUrl) {
     const r = REASONS[data.ok ? "not_found" : data.reason];
     return (
-      <div className="mx-auto max-w-xl px-4 pt-32 pb-24">
+      <div className="mx-auto max-w-xl px-4 pt-10">
         <h1 className="text-3xl font-bold text-charcoal">{r.title}</h1>
         <p className="mt-3 text-base leading-relaxed text-muted-foreground">{r.body}</p>
         <Link href={back} className="mt-6 inline-block font-medium text-charcoal underline underline-offset-4">
@@ -32,7 +32,7 @@ export default async function AdminSignPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-24 pb-10">
+    <div className="mx-auto max-w-6xl px-4 pt-10">
       <Link href={back} className="text-sm font-medium text-charcoal underline-offset-4 hover:underline">
         ← Back to the document
       </Link>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AdminLoginPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-5xl px-4 pt-10">
       <h1 className="text-3xl font-bold tracking-tight text-charcoal md:text-4xl">
         Admin sign in
       </h1>

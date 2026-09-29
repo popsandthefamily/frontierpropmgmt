@@ -39,7 +39,7 @@ export default async function OwnerWorkspacePage({
 
   if (!(await isAdmin(token))) {
     return (
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+      <div className="mx-auto max-w-5xl px-4 pt-10">
         <AdminSignInPrompt />
       </div>
     );
@@ -84,7 +84,7 @@ export default async function OwnerWorkspacePage({
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-28 pb-24">
+    <div className="mx-auto max-w-5xl px-4 pt-10">
       <Link href={`/admin/owners${qs}`} className="text-sm font-medium text-charcoal underline-offset-4 hover:underline">
         ← All owners
       </Link>
