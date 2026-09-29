@@ -147,8 +147,11 @@ Untouched on purpose: `/portal`, `/sign`, `/admin`, `/audit` logic, API routes, 
 ## SEO plan, 2026-09-27
 
 Source: the "SEO Ideas Board - Frontier sites" sheet (Ideas, Questions,
-Competitors, and Site audit tabs). Built on branch `feat/seo-plan` and
-deployed to a Vercel preview only. Facts were verified against primary
+Competitors, and Site audit tabs). Built on branch `feat/seo-plan`,
+reviewed on a Vercel preview, and merged to `main` for production on
+2026-09-28 at the owner's request. Follow-ups made on the preview before
+launch: owned photos only on every page and post (emoji covers where none
+fits), an FAQ layout cleanup, and bottom padding on the shared hero. Facts were verified against primary
 sources on 2026-09-27 before anything was written: the Town of
 Hochatown's ordinances, FAQ, and forms; the Broken Bow municipal code; the
 Oklahoma Tax Commission; the McCurtain County court docket; and each
