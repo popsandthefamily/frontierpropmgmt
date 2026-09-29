@@ -110,7 +110,7 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           className="mt-3"
         />
-        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+        {error && <p role="alert" className="mt-3 text-sm text-red-600">{error}</p>}
         <Button
           type="submit"
           size="lg"
@@ -148,7 +148,7 @@ export function LoginForm() {
         placeholder="you@example.com"
         className="mt-3"
       />
-      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+      {error && <p role="alert" className="mt-3 text-sm text-red-600">{error}</p>}
       <Button
         type="submit"
         size="lg"
