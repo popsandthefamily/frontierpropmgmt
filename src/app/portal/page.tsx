@@ -50,7 +50,8 @@ export default async function PortalDashboard() {
           "id, period_start, gross_revenue, owner_payout, nights_booked, nights_available, property_id",
         )
         .order("period_start", { ascending: false })
-        .limit(12),
+        // Five years: enough for any tax question an owner brings, still one query.
+        .limit(60),
       supabase
         .from("owner_documents")
         .select("id, title, kind, period_label, size_bytes, storage_path")
@@ -90,6 +91,21 @@ export default async function PortalDashboard() {
   const latest = stmts[0];
   const trailing = stmts.slice(0, 12);
   const trailingPayout = trailing.reduce((sum, s) => sum + Number(s.owner_payout), 0);
+
+  // Grouped by calendar year, because the question an owner brings to this list
+  // is almost always "what did this property pay me in 2025" — for a tax return
+  // or an accountant — and totalling twelve rows by hand is not an answer.
+  const byYear: { year: string; rows: Statement[]; payout: number }[] = [];
+  for (const s of stmts) {
+    const year = s.period_start.slice(0, 4);
+    let group = byYear.find((g) => g.year === year);
+    if (!group) {
+      group = { year, rows: [], payout: 0 };
+      byYear.push(group);
+    }
+    group.rows.push(s);
+    group.payout += Number(s.owner_payout);
+  }
 
   return (
     <>
@@ -178,26 +194,39 @@ export default async function PortalDashboard() {
             </p>
           </div>
         ) : (
-          <ul className="mt-2">
-            {stmts.map((s) => (
-              <li key={s.id}>
-                <Link
-                  href={`/portal/statements/${s.id}`}
-                  className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5 sm:grid-cols-[1fr_auto_auto]"
-                >
-                  <span className="font-heading text-lg font-semibold text-charcoal group-hover:text-sage">
-                    {monthLabel(s.period_start)}
-                  </span>
-                  <span className="hidden text-sm text-muted-foreground sm:block">
-                    {money(s.gross_revenue)} gross
-                  </span>
-                  <span className="text-right font-medium text-charcoal">
-                    {money(s.owner_payout)}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          byYear.map((group) => (
+            <div key={group.year} className="mt-6 first:mt-2">
+              <div className="flex items-baseline justify-between gap-4 border-b border-charcoal/25 pb-2">
+                <h2 className="font-heading text-xl font-semibold text-charcoal">
+                  {group.year}
+                </h2>
+                <span className="text-sm text-muted-foreground">
+                  {money(group.payout)} paid out across {group.rows.length}{" "}
+                  {group.rows.length === 1 ? "statement" : "statements"}
+                </span>
+              </div>
+              <ul>
+                {group.rows.map((s) => (
+                  <li key={s.id}>
+                    <Link
+                      href={`/portal/statements/${s.id}`}
+                      className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-5 sm:grid-cols-[1fr_auto_auto]"
+                    >
+                      <span className="font-heading text-lg font-semibold text-charcoal group-hover:text-sage">
+                        {monthLabel(s.period_start)}
+                      </span>
+                      <span className="hidden text-sm text-muted-foreground sm:block">
+                        {money(s.gross_revenue)} gross
+                      </span>
+                      <span className="text-right font-medium text-charcoal">
+                        {money(s.owner_payout)}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
         )}
       </section>
 
