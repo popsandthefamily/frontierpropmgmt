@@ -21,7 +21,7 @@ export const navigationItems: NavItem[] = [
       {
         label: "Sublime Retreat",
         href: "/sublime",
-        description: "A luxury cabin experience in Hochatown",
+        description: "A quiet Hochatown cabin with a hot tub and fire pit",
       },
       {
         label: "Old Broken Bow Highway",

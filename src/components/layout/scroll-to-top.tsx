@@ -24,6 +24,7 @@ export function ScrollToTop() {
           onClick={handleClick}
           className="fixed bottom-6 right-6 z-40 flex size-12 items-center justify-center rounded-full bg-sage text-white shadow-lg transition-colors hover:bg-sage-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
           aria-label="Scroll to top"
+          data-scroll-to-top
         >
           <ChevronUp className="size-5" />
         </motion.button>

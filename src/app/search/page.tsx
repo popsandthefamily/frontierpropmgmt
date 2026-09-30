@@ -18,13 +18,13 @@ import { siteConfig } from "@/data/site";
 const bookDirectBenefits = [
   {
     icon: DollarSign,
-    title: "No Platform Fees",
-    description: "Save money by booking directly with us instead of third-party platforms.",
+    title: "No Airbnb Guest Service Fees",
+    description: "Book direct with Frontier and skip Airbnb's guest service fees.",
   },
   {
     icon: ShieldCheck,
-    title: "Best Rate Guaranteed",
-    description: "Our direct rates match or beat any listing site price.",
+    title: "See the Full Total First",
+    description: "Enter your dates and the calendar shows the exact total, fees included, before you pay.",
   },
   {
     icon: MessageSquare,
@@ -41,12 +41,12 @@ const bookDirectBenefits = [
 export const metadata: Metadata = {
   title: { absolute: "Book a Hochatown Cabin Direct: Sublime Retreat | Frontier" },
   description:
-    "Book Sublime Retreat, a 3-bedroom Hochatown cabin with a hot tub, two zip lines, and an arcade, direct with Frontier. No platform service fee added.",
+    "Book Sublime Retreat, a 3-bedroom Hochatown cabin with a hot tub, a fire pit, and an arcade, direct with Frontier. No Airbnb guest service fee.",
   openGraph: {
     url: "https://www.rentwithfrontier.com/search",
     title: "Book Sublime Retreat Direct in Hochatown",
     description:
-      "A 3-bedroom Hochatown cabin with a hot tub, zip lines, and an arcade. Book direct with no platform service fee added.",
+      "A 3-bedroom Hochatown cabin with a hot tub, a fire pit, and an arcade. Book direct with no Airbnb guest service fee.",
     images: [
       {
         url: "/images/properties/sublime/sublime-2.jpg",
@@ -86,7 +86,7 @@ export default function SearchPage() {
       <HeroSection
         backgroundImage="/images/properties/sublime/sublime-2.jpg"
         title="Book a Hochatown Cabin Direct"
-        subtitle="Sublime Retreat, booked with us, with no platform service fee added"
+        subtitle="Sublime Retreat, booked with us, with no Airbnb guest service fee"
         size="medium"
         overlay="dark"
       />

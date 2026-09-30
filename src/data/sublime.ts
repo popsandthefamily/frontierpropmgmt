@@ -6,225 +6,472 @@ import { getPropertyBySlug } from "./properties";
  *
  * Guests increasingly arrive from ChatGPT, Perplexity, and AI Overviews
  * rather than from a search results page, and those systems answer a
- * *question* ("is there a cabin near Beavers Bend with a zip line that
+ * *question* ("is there a cabin near Beavers Bend with a hot tub that
  * sleeps 8 and takes dogs?") rather than matching a keyword. A listing page
  * written only as marketing prose gives them nothing to lift.
  *
  * So the facts a traveller actually asks for live here, phrased the way
  * they're asked, with answers that name the cabin and the market in the
  * first sentence so a retrieved chunk still makes sense on its own. The
- * page, /llms.txt, and /llms-full.txt all read from this file, so an answer
- * engine and a human get the identical set of facts.
+ * page, its JSON-LD, /llms.txt, and /llms-full.txt all read from this file,
+ * so an answer engine, a search engine and a human get the identical facts.
  *
- * Every number here traces to src/data/properties.ts or the house rules on
- * the page. Nothing is estimated. If a fact isn't known, it isn't claimed.
+ * The Airbnb listing is the source of truth (re-checked 2026-09-30). A fact
+ * that is on the old direct page but not on Airbnb, and that Hunter hasn't
+ * confirmed, is left out rather than hedged. Rates are never hard-coded:
+ * the booking calendar shows the real total for real dates.
  */
 
 const sublime = getPropertyBySlug("sublime");
 if (!sublime) throw new Error("sublime.ts: the sublime property is missing");
 
-/** The whole cabin in one quotable paragraph. */
-export const sublimeSummary =
-  `Sublime Retreat is a ${sublime.bedrooms}-bedroom, ${sublime.bathrooms}-bathroom boho-modern luxury cabin in Hochatown, Oklahoma, sleeping up to ${sublime.sleeps} guests. It has two private zip lines on the property, a hot tub with Bluetooth speakers, a full-size arcade machine, shuffleboard, two king suites with en-suite bathrooms, a full-over-full bunk room, 500 Mbps Wi-Fi, and a dual-sided indoor/outdoor fireplace. It is pet-friendly, has forest views and quiet hours from 10:00 PM to 8:00 AM, is minutes from Beavers Bend State Park, and is bookable direct from Frontier Property Management with no platform service fee.`;
+/* ------------------------------------------------------------------ */
+/*  Facts                                                              */
+/* ------------------------------------------------------------------ */
+
+export const sublimeFacts = {
+  airbnbUrl: "https://www.airbnb.com/rooms/1587068481059586891",
+  hospitablePropertyId: "2120170",
+  checkIn: "4:00 PM",
+  checkOut: "11:00 AM",
+  petFee: 75,
+  maxPets: 2,
+  kingSuites: 2,
+  twinXlBunks: 4,
+  /** "3.5 baths" on Airbnb, said the way a guest pictures it. */
+  bathsInWords: "3 bathrooms plus a half bath upstairs",
+  /**
+   * Hunter's line for the location (confirmed 2026-09-30). It is the one
+   * phrase every "tucked away but close" claim on the page hangs off, so it
+   * lives here once.
+   */
+  access: "about five minutes from Hwy 259",
+  neighborhood: "the Timber Creek Trails area of Hochatown",
+} as const;
+
+/**
+ * The Airbnb rating, copied by hand from the listing. Printed (and put in
+ * the JSON-LD) with its "as of" date and a link, because the number moves
+ * and a stale one is worse than none: refresh it at least monthly, and set
+ * `show` to false rather than leave it out of date.
+ */
+export const sublimeRating = {
+  show: true,
+  value: 4.92,
+  count: 24,
+  asOf: "September 30, 2026",
+  categories: [
+    { label: "Cleanliness", value: "4.9" },
+    { label: "Communication", value: "5.0" },
+    { label: "Check-in", value: "5.0" },
+  ],
+} as const;
+
+/** The whole cabin in one quotable paragraph, 40 to 60 words. */
+export const sublimeSummary = sublime.description;
+
+/** The kicker, headline and line under it. */
+export const sublimeHero = {
+  kicker: "A sublime experience",
+  title: "Sublime Retreat",
+  subtitle: "A pet-friendly Hochatown cabin with a hot tub, fire pit and games",
+  tagline: "Peaceful and tucked away, about five minutes from everything on Hwy 259.",
+  facts: [
+    `Sleeps ${sublime.sleeps}`,
+    `${sublime.bedrooms} bedrooms`,
+    `${sublime.bathrooms} baths`,
+    "2 king suites",
+    "4 Twin XL bunks",
+    "Hot tub",
+    "Fire pit",
+    "Dogs welcome",
+  ],
+};
 
 /** The spec sheet, in the order a guest asks for it. */
 export const sublimeAtAGlance: { label: string; value: string }[] = [
   {
     label: "Where",
-    value:
-      "Hochatown, Oklahoma, minutes from Beavers Bend State Park, restaurants, and Broken Bow Lake",
+    value: `A wooded lot in ${sublimeFacts.neighborhood}, Oklahoma, ${sublimeFacts.access}`,
   },
   {
     label: "Sleeps",
-    value: `Up to ${sublime.sleeps} guests, which is also the maximum occupancy`,
-  },
-  {
-    label: "Layout",
-    value: `${sublime.bedrooms} bedrooms, ${sublime.bathrooms} bathrooms`,
+    value: `Up to ${sublime.sleeps} guests in ${sublime.bedrooms} bedrooms, with ${sublimeFacts.bathsInWords}`,
   },
   {
     label: "Beds",
-    value:
-      "Two king suites, each with its own en-suite bathroom, plus a full-over-full bunk room",
+    value: "Two king suites and four built-in Twin XL bunks: six beds for eight guests",
   },
   {
-    label: "Family fit",
-    value:
-      "Two private king suites for adults plus a dedicated full-over-full bunk room for kids or additional guests",
+    label: "Pets",
+    value: `Dogs welcome, $${sublimeFacts.petFee} pet fee, up to ${sublimeFacts.maxPets} pets`,
   },
   {
-    label: "Standout",
-    value:
-      "Two private zip lines, a hot tub with Bluetooth speakers, and a full-size arcade machine",
-  },
-  { label: "Pets", value: "Pet-friendly, a pet fee may apply" },
-  {
-    label: "Wi-Fi and TV",
-    value: "500 Mbps high-speed Wi-Fi, smart TVs in every room",
-  },
-  {
-    label: "Kitchen and laundry",
-    value: "Full Calcutta quartz kitchen, washer and dryer in the cabin",
-  },
-  {
-    label: "Outdoors",
-    value:
-      "Covered deck with a dual-sided indoor/outdoor fireplace, cornhole boards, forest views",
-  },
-  {
-    label: "Peace and quiet",
-    value:
-      "Forest views with quiet hours from 10:00 PM to 8:00 AM; centrally located in Hochatown rather than represented as isolated or fully secluded",
-  },
-  { label: "Check-in / check-out", value: "4:00 PM / 10:00 AM" },
-  {
-    label: "Rates from",
-    value: `$${sublime.startingPrice} a night, varying by season, night of the week, and length of stay`,
-  },
-  {
-    label: "Getting there",
-    value:
-      "About a 3-hour drive from Dallas-Fort Worth, and a common drive from Oklahoma City, Tulsa, and Houston",
+    label: "Check-in / out",
+    value: `${sublimeFacts.checkIn} / ${sublimeFacts.checkOut}, self check-in with a keypad smart lock`,
   },
   {
     label: "Booking",
     value:
-      "Direct at rentwithfrontier.com/sublime, with no platform service fee added to the total",
-  },
-  {
-    label: "Managed by",
-    value:
-      "Frontier Property Management, an owner-operated company based in Broken Bow",
+      "Direct with Frontier, the people who run the cabin. No Airbnb guest service fee.",
   },
 ];
 
+/* ------------------------------------------------------------------ */
+/*  The story                                                          */
+/* ------------------------------------------------------------------ */
+
+export const sublimeStory = {
+  paragraphs: [
+    `We gave this cabin its name as a brief to ourselves: a sublime experience. Peaceful, quiet and tucked into the pines, but never a trek. Sublime Retreat sits on a wooded lot in ${sublimeFacts.neighborhood}, and Hwy 259 is about five minutes away, so dinner, coffee and Beavers Bend are close when you want them and out of sight when you don't.`,
+    "Inside, it's modern and bright: white shiplap, wood-plank ceilings, a fireplace wall in the great room and gold fixtures in the baths. Outside, it's all forest, with a covered deck and outdoor fireplace, a hot tub and a fire pit. We run Sublime ourselves, so the person who answers your message is the person looking after the cabin.",
+  ],
+  chapters: [
+    {
+      title: "Tucked away",
+      body: `A wooded lot in ${sublimeFacts.neighborhood}, with tall pines around the cabin and forest views from the deck and the hot tub. Each king suite opens onto its own covered patio.`,
+    },
+    {
+      title: "Five minutes from Hwy 259",
+      body: "Quiet and wooded, but not remote. Hochatown's shops and restaurants, Beavers Bend State Park and Broken Bow Lake are all a short drive, and Hwy 259 is about five minutes out.",
+    },
+    {
+      title: "Modern and woodsy",
+      body: "White shiplap under wood-plank ceilings, a fireplace wall in the great room, gold fixtures and marble-look tile in the baths, and a blue metal roof above the trees.",
+    },
+  ],
+  hostNote: {
+    quote:
+      "Whether it's a bachelor or bachelorette weekend, a getaway with your family or a romantic night in the woods, we want Sublime to feel like a real escape. Quiet enough to hear the woods from the deck, and close enough that dinner is never a production.",
+    name: "Hunter",
+    role: "Your host at Frontier Property Management",
+  },
+};
+
+/* ------------------------------------------------------------------ */
+/*  Rooms, outside, game night                                         */
+/* ------------------------------------------------------------------ */
+
+export const sublimeRooms: { name: string; detail: string }[] = [
+  {
+    name: "King suite one",
+    detail:
+      "A king bed and its own private covered patio, so the first coffee of the day happens outside.",
+  },
+  {
+    name: "King suite two",
+    detail:
+      "A second king bed with a second private covered patio. Two couples each get a suite, and nobody draws the short straw.",
+  },
+  {
+    name: "The bunk room",
+    detail:
+      "Two sets of built-in Twin XL bunks, four beds in all. Twin XL runs longer than a standard twin, so teenagers and grown-ups fit as well as kids.",
+  },
+  {
+    name: "The loft",
+    detail:
+      "A second living room upstairs with a long sofa and a TV, so the kids (or the night owls) have a space of their own.",
+  },
+  {
+    name: "Great room and kitchen",
+    detail:
+      "An open great room under a vaulted wood-plank ceiling, with an indoor fireplace and a full kitchen built around a long white island.",
+  },
+  {
+    name: "Bathrooms",
+    detail: `${sublimeFacts.bathsInWords.charAt(0).toUpperCase()}${sublimeFacts.bathsInWords.slice(1)}, with a double vanity and a marble-look walk-in shower with a built-in bench.`,
+  },
+];
+
+export const sublimeOutside: { name: string; detail: string }[] = [
+  {
+    name: "The covered deck",
+    detail:
+      "A lounge set around an outdoor fireplace with a TV, a gas grill and an outdoor dining spot, all under a timber roof and looking straight into the pines.",
+  },
+  {
+    name: "The hot tub",
+    detail:
+      "On the main deck with the forest behind it. It's sanitized after every stay.",
+  },
+  {
+    name: "Fire pit and yard",
+    detail:
+      "A fire pit with seating and string lights strung between the trees. Please observe any burn bans in effect during your stay.",
+  },
+  {
+    name: "Yard games",
+    detail:
+      "A gravel yard out back with room for yard games under the string lights.",
+  },
+];
+
+export const sublimeGameNight: string[] = [
+  "Shuffleboard in the loft",
+  "A tabletop arcade",
+  "A TV lounge in the loft",
+  "Yard games out back",
+];
+
+/* ------------------------------------------------------------------ */
+/*  Amenities (Airbnb-listed only)                                     */
+/* ------------------------------------------------------------------ */
+
+export const sublimeAmenityGroups: { title: string; items: string[] }[] = [
+  {
+    title: "Outdoors",
+    items: [
+      "Hot tub",
+      "Fire pit",
+      "Outdoor fireplace",
+      "Gas grill",
+      "Outdoor dining area",
+      "Outdoor furniture",
+    ],
+  },
+  {
+    title: "Game night",
+    items: ["Tabletop arcade", "Shuffleboard", "TVs"],
+  },
+  {
+    title: "Kitchen and dining",
+    items: [
+      "Full kitchen",
+      "Dishwasher",
+      "Oven and stove",
+      "Microwave",
+      "Refrigerator",
+      "Cooking basics",
+      "Dishes and silverware",
+    ],
+  },
+  {
+    title: "Comfort",
+    items: [
+      "Air conditioning",
+      "Heating",
+      "Indoor fireplace",
+      "Washer and dryer",
+      "Bed linens",
+      "Extra pillows and blankets",
+    ],
+  },
+  {
+    title: "Tech and access",
+    items: ["Wi-Fi", "Self check-in", "Keypad smart lock"],
+  },
+  {
+    title: "Parking and safety",
+    items: [
+      "Free parking on the property",
+      "Boat and overflow parking",
+      "Smoke alarm",
+      "Carbon monoxide alarm",
+      "Exterior security cameras",
+    ],
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Reviews                                                            */
+/* ------------------------------------------------------------------ */
+
+/** Airbnb's own one-line summary of the reviews, quoted as Airbnb's. */
+export const sublimeReviewSummary =
+  "Guests highlight how clean and beautiful the cabin is, and many praise Hunter for quick, helpful responses.";
+
+/**
+ * Verbatim Airbnb reviews, trimmed only with an ellipsis, never reworded.
+ * Only 5-star reviews are printed; the rating above covers all of them.
+ * Dates are the month the review was posted, not Airbnb's relative "3 weeks
+ * ago", which goes stale.
+ */
+export const sublimeReviews: {
+  name: string;
+  date: string;
+  trip: string;
+  quote: string;
+}[] = [
+  {
+    name: "Kali",
+    date: "July 2026",
+    trip: "Group trip",
+    quote:
+      "We had an amazing stay here for a bachelorette weekend. The house was spotless and beautiful!! Hunter was extremely responsive. We will be back!",
+  },
+  {
+    name: "Dawn",
+    date: "September 2026",
+    trip: "Group trip",
+    quote:
+      "We had the most wonderful stay with our family for Labor Day weekend! The house was exactly as it looked in the pictures. Everything was spotless and very comfortable. Hunter was an excellent host and always responsive to my questions, even in the weeks leading up to our stay. The location was great, close to everything. Everyone had a fantastic time and we would definitely stay here again.",
+  },
+  {
+    name: "Weston",
+    date: "March 2026",
+    trip: "Group trip",
+    quote:
+      "We had an amazing time! The house was perfect. The fire pit, games, hot tub, and scenery was amazing. Would recommend!!",
+  },
+  {
+    name: "Diana",
+    date: "February 2026",
+    trip: "Stayed a few nights",
+    quote:
+      "House was great location, felt secluded but close to all the attractions",
+  },
+  {
+    name: "Meaghan",
+    date: "March 2026",
+    trip: "Group trip",
+    quote:
+      "This place was amazing! Space was beautiful, lots of room and had a very cozy vibe to it. Will be staying here again! Very well decorated as well! Loved the space",
+  },
+  {
+    name: "Amy",
+    date: "August 2026",
+    trip: "Stayed with kids",
+    quote:
+      "Beautiful place! The deck and outdoor space was lovely. We stayed with our 3 grandchildren and there was plenty to keep them entertained both indoors and out! Hunter was a great host. He was responsive and checked on us throughout our stay.",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Pets, neighborhood, house rules                                    */
+/* ------------------------------------------------------------------ */
+
+export const sublimePets: string[] = [
+  "Dogs are welcome",
+  `$${sublimeFacts.petFee} pet fee, shown in your total before you pay`,
+  `Up to ${sublimeFacts.maxPets} pets`,
+  "Leashed outside or kept in gated areas, per Hochatown town code",
+];
+
+/**
+ * Only places that could be verified. No drive times until one is timed from
+ * the cabin; "a short drive" is as far as the page goes.
+ */
+export const sublimeNearby: { name: string; detail: string }[] = [
+  {
+    name: "Mountain Fork Brewery",
+    detail: "Hochatown's local brewery, in the Timber Creek Trails shops.",
+  },
+  {
+    name: "Okie Girls Coffee & Ice Cream",
+    detail: "Coffee in the morning, ice cream after dinner. Same cluster of shops.",
+  },
+  {
+    name: "Hochatown Escape Games",
+    detail: "A rainy-afternoon plan for the whole group, next to the brewery.",
+  },
+  {
+    name: "Beavers Bend State Park",
+    detail: "Trails, the Mountain Fork River and the reason most people come.",
+  },
+  {
+    name: "Broken Bow Lake",
+    detail: "Bring the boat: there's boat and overflow parking at the cabin.",
+  },
+];
+
+export const sublimeHouseRules: string[] = [
+  `Check-in after ${sublimeFacts.checkIn}, checkout by ${sublimeFacts.checkOut}`,
+  `${sublime.sleeps} guests maximum`,
+  "No smoking or vaping inside or on the deck",
+  "No parties or events",
+  "No fireworks, and observe any burn bans",
+  "No RVs or travel trailers (boat and overflow parking is available)",
+  "The kayaks and the owner's closet are off-limits to guests",
+];
+
+/* ------------------------------------------------------------------ */
+/*  Fit                                                                */
+/* ------------------------------------------------------------------ */
+
 /** Who this cabin is genuinely the right answer for. */
 export const sublimeGoodFit: string[] = [
-  "Two couples travelling together, since each king suite has its own en-suite bathroom and neither party gets the worse room",
-  "Families with kids, who get the bunk room, the arcade machine, the zip lines, and cornhole without leaving the property",
-  "Families who want two proper adult bedrooms plus dedicated beds for children rather than putting kids on a sleeper sofa",
-  "Guests who want a wooded Hochatown setting with forest views and enforced quiet hours while staying close to Beavers Bend and area attractions",
-  "Groups of up to 8 who want everyone under one roof rather than split across two cabins",
-  "Guests bringing a dog, since the cabin is pet-friendly",
-  "Anyone working part of the week remotely, on 500 Mbps Wi-Fi and smart TVs in every room",
-  "Trips built around Beavers Bend State Park, Broken Bow Lake, and the Hochatown restaurant scene, all of which are minutes away",
+  "Bachelor and bachelorette weekends for up to 8 (a group getaway, not a party: parties and events aren't allowed)",
+  "Two couples, since each couple gets a king suite with its own private covered patio",
+  "Families with kids, who get the Twin XL bunk room, the loft, shuffleboard and the arcade without leaving the property",
+  "Groups of up to 8 who want everyone under one roof",
+  "Guests bringing a dog, or two",
+  "A couple after a romantic night in the woods, with a hot tub, a fire pit and room to spread out",
+  "Anyone who wants a quiet, wooded cabin that is still close to Hochatown, Beavers Bend and Hwy 259",
 ];
 
 /** Where an honest answer is "look somewhere else." */
 export const sublimeNotAFit: string[] = [
-  "Groups larger than 8. Maximum occupancy is 8 guests and it is not flexible",
-  "Parties and events, which are not permitted, with quiet hours from 10:00 PM to 8:00 AM",
-  "Travellers whose primary requirement is complete isolation or guaranteed no-neighbor visibility. Sublime has forest views and quiet hours, but is centrally located in Hochatown",
-  "Anyone who specifically wants a private swimming pool. Sublime Retreat has a hot tub, not a pool",
-  "Guests who need to smoke indoors, which is not allowed anywhere inside the cabin",
-  "Travellers whose main filter is the lowest nightly rate in the market. This is a luxury build and it prices like one",
+  "Groups larger than 8. Maximum occupancy is 8 guests",
+  "Parties and events, which are not allowed",
+  "Anyone who specifically wants a private swimming pool. Sublime has a hot tub, not a pool",
+  "Guests who need complete isolation. Sublime is quiet and wooded, but it's about five minutes from Hwy 259, not miles down a dirt road",
+  "Guests who need to smoke, which isn't allowed inside the cabin or on the deck",
 ];
+
+/* ------------------------------------------------------------------ */
+/*  FAQ                                                                */
+/* ------------------------------------------------------------------ */
 
 /**
  * The questions guests actually ask, answered so that a single retrieved
- * chunk stands on its own: each answer names Sublime Retreat and its
- * market rather than relying on the surrounding page for context.
+ * chunk stands on its own: each answer names Sublime Retreat rather than
+ * relying on the surrounding page for context. Rendered visibly and as
+ * FAQPage JSON-LD from this one list, so the two can't drift.
  */
 export const sublimeGuestFAQ: FAQItem[] = [
   {
-    question: "Are there cabins in Broken Bow with a zip line?",
-    answer:
-      "Yes. Sublime Retreat in Hochatown, just north of Broken Bow, has two private zip lines on the property that guests can use during their stay, at no extra cost and with no booking required. They are part of the rental rather than a commercial zip line course, so they are available whenever you are at the cabin. Adult supervision is required for anyone under 18.",
+    question: "Is Sublime Retreat pet-friendly?",
+    answer: `Yes. Dogs are welcome at Sublime Retreat for a $${sublimeFacts.petFee} pet fee, with up to ${sublimeFacts.maxPets} pets per stay. Pets must be leashed outside or kept in gated areas, per Hochatown town code.`,
   },
   {
-    question: "Which cabin near Broken Bow has a hot tub and a game room?",
-    answer:
-      "Sublime Retreat has a hot tub with built-in Bluetooth speakers plus a full-size arcade machine, a shuffleboard table, and cornhole boards on the deck. It is a 3-bedroom, 3.5-bathroom cabin in Hochatown, Oklahoma, minutes from Beavers Bend State Park, and it sleeps up to 8 guests.",
+    question: "How many people does Sublime Retreat sleep, and where does everyone sleep?",
+    answer: `Sublime Retreat sleeps ${sublime.sleeps} across ${sublime.bedrooms} bedrooms: two king suites, each with a private covered patio, and a bunk room with four built-in Twin XL bunks. That's six beds for eight guests, with ${sublimeFacts.bathsInWords}.`,
   },
   {
-    question: "What cabin in Broken Bow or Hochatown sleeps 8 people?",
+    question: "Does Sublime Retreat still have zip lines?",
     answer:
-      "Sublime Retreat sleeps 8. The beds are split across two king suites, each with an en-suite bathroom, and a bunk room with a full-over-full bunk bed, which is 3 bedrooms and 3.5 bathrooms in total. Eight guests is the maximum occupancy for the cabin.",
+      "No. The zip lines have been removed from Sublime Retreat, so older reviews and listings that mention them are out of date. The cabin still has a hot tub and an outdoor fireplace on the covered deck, a fire pit, yard games, shuffleboard and a tabletop arcade.",
   },
   {
-    question: "What Hochatown cabin has two king beds plus a separate bed for kids and a hot tub?",
-    answer:
-      "Sublime Retreat is a strong family match for that layout. It has two private king suites for adults, each with an en-suite bathroom, plus a dedicated full-over-full bunk room for kids or additional guests and a private hot tub. The cabin sleeps up to 8 and is in Hochatown, minutes from Beavers Bend State Park.",
-  },
-  {
-    question: "Is Sublime Retreat quiet and secluded?",
-    answer:
-      "Sublime Retreat has a wooded Hochatown setting with forest views and quiet hours from 10:00 PM to 8:00 AM, so it suits guests looking for a peaceful cabin stay. It should not be represented as fully isolated or guaranteed to have no visible neighbors, because it is centrally located in Hochatown and close to Beavers Bend, restaurants, and other area attractions.",
-  },
-  {
-    question: "Is Sublime Retreat pet friendly?",
-    answer:
-      "Yes, Sublime Retreat is pet-friendly and dogs are welcome. A pet fee may apply, which is shown at booking. Pet-friendly cabins with a hot tub are relatively limited in the Hochatown and Broken Bow market, so it is worth booking ahead if you are travelling with a dog.",
+    question: "Is Sublime Retreat good for a bachelorette or bachelor weekend?",
+    answer: `Yes, for groups of up to ${sublime.sleeps}. Sublime Retreat has two king suites, a Twin XL bunk room, a hot tub, a fire pit, shuffleboard and a tabletop arcade, and guests have booked it for bachelorette weekends. Parties and events aren't allowed.`,
   },
   {
     question: "Is Sublime Retreat a good cabin for two couples?",
     answer:
-      "It is one of the better layouts in the Hochatown market for two couples, because it has two king suites and each one has its own en-suite bathroom. Neither couple ends up in the smaller room sharing a hall bath, which is the usual compromise in a 3-bedroom cabin. The bunk room is separate again, so a third pair or a set of kids does not disturb either suite.",
+      "Yes. Sublime Retreat has two separate king suites, and each one has its own private covered patio, so neither couple ends up in the lesser room. The Twin XL bunk room is separate again, for kids or a third pair.",
   },
   {
-    question: "Is Sublime Retreat good for families with kids?",
-    answer:
-      "Yes. Sublime Retreat has a bunk room with a full-over-full bunk bed, a full-size arcade machine, a shuffleboard table, cornhole boards, and two private zip lines on the property, so there is a lot for kids to do without getting in the car. Adult supervision is required on the zip lines for anyone under 18, and the cabin is pet-friendly if the dog is coming too.",
+    question: "How quiet is Sublime Retreat, and how far is it from Hwy 259?",
+    answer: `Sublime Retreat sits on a quiet, wooded lot in ${sublimeFacts.neighborhood}, ${sublimeFacts.access}. It's tucked away, but it isn't remote: Hochatown's shops, restaurants and Beavers Bend State Park are a short drive.`,
   },
   {
-    question: "Does Sublime Retreat have a swimming pool?",
+    question: "What is there to do at Sublime Retreat?",
     answer:
-      "No. Sublime Retreat has a hot tub with Bluetooth speakers rather than a swimming pool. If a private pool is the deciding feature for your trip, this is not the right cabin, and it is better to say so before you book than after you arrive.",
+      "At Sublime Retreat there's a hot tub and an outdoor fireplace on the covered deck, a fire pit, a gas grill and outdoor dining, yard games, shuffleboard, a tabletop arcade and a TV lounge in the upstairs loft.",
   },
   {
-    question: "How far is Sublime Retreat from Beavers Bend State Park?",
-    answer:
-      "Sublime Retreat is centrally located in Hochatown, minutes from Beavers Bend State Park and from the Hochatown restaurants, breweries, and shops. Hochatown sits at the gateway to the park, which is why cabins there are usually the shortest drive to the trailheads, the Mountain Fork River, and Broken Bow Lake.",
-  },
-  {
-    question: "How far is Hochatown from Dallas?",
-    answer:
-      "Broken Bow and Hochatown are roughly a 3-hour drive from Dallas-Fort Worth, which is what makes the area a weekend drive-to destination rather than a fly-in one. It is also a common drive from Oklahoma City, Tulsa, and Houston. Sublime Retreat is in Hochatown, Oklahoma.",
-  },
-  {
-    question: "Can I work remotely from a cabin in Broken Bow?",
-    answer:
-      "From Sublime Retreat, yes. The cabin has 500 Mbps high-speed Wi-Fi and smart TVs in every room, which is enough for video calls and screen sharing while the rest of the group is out at Beavers Bend. There is also a washer and dryer in the cabin, which matters on stays longer than a weekend.",
+    question: "What are check-in and checkout times at Sublime Retreat, and how does check-in work?",
+    answer: `Check-in at Sublime Retreat is after ${sublimeFacts.checkIn} and checkout is by ${sublimeFacts.checkOut}. Check-in is self check-in with a keypad smart lock, and your code is sent before you arrive.`,
   },
   {
     question: "How much does Sublime Retreat cost per night?",
     answer:
-      "Rates at Sublime Retreat start around $275 a night and move with the season, the night of the week, and the length of stay, so a midweek stay in the shoulder season prices very differently from a fall weekend. The booking calendar on rentwithfrontier.com/sublime shows the exact total for your dates, including fees, before you commit.",
+      "Rates at Sublime Retreat change with the season, the day of the week and the length of stay, so there isn't one nightly price. Enter your dates in the booking calendar on rentwithfrontier.com/sublime to see the exact total, including fees, before you pay.",
   },
   {
-    question:
-      "Is it cheaper to book Sublime Retreat direct instead of on Airbnb or Vrbo?",
+    question: "Why book Sublime Retreat direct instead of on Airbnb?",
     answer:
-      "Booking direct is the cheaper route. Airbnb and Vrbo add a guest service fee on top of the nightly rate, typically 10 to 15 percent of the total, and booking direct at rentwithfrontier.com/sublime skips that fee entirely. Frontier guarantees the best rate on direct bookings, so the direct price is never higher than the platform price.",
+      "Booking Sublime Retreat direct means no Airbnb guest service fee is added to your total, and you book with Frontier, the people who run the cabin. Enter your dates to see the total before you pay.",
   },
   {
-    question: "What are the check-in and check-out times at Sublime Retreat?",
-    answer:
-      "Check-in at Sublime Retreat is 4:00 PM and check-out is 10:00 AM. Quiet hours run from 10:00 PM to 8:00 AM, smoking is not permitted inside the cabin, and parties and events are not allowed.",
+    question: "What are the house rules at Sublime Retreat?",
+    answer: `At Sublime Retreat there's no smoking or vaping inside or on the deck, no parties or events, and no fireworks, and guests observe any burn bans. The maximum is ${sublime.sleeps} guests, and RVs and travel trailers aren't allowed, though boat and overflow parking is available. There are exterior security cameras on the property.`,
   },
   {
-    question: "Can more than 8 people stay at Sublime Retreat?",
+    question: "Is there a minimum stay at Sublime Retreat, and what is the cancellation policy?",
     answer:
-      "No. Maximum occupancy at Sublime Retreat is 8 guests and it is a firm limit, not a guideline. If your group is larger, contact Frontier Property Management before booking rather than after, and we will tell you honestly whether we have another option or point you elsewhere.",
-  },
-  {
-    question: "Are the zip lines at Sublime Retreat safe for kids?",
-    answer:
-      "The two zip lines are private and on the property, and adult supervision is required for any guest under 18. They are a cabin amenity rather than a commercial zip line course with staff and guides, so the responsibility for supervising children sits with the adults in your party.",
-  },
-  {
-    question: "What is the difference between Broken Bow and Hochatown?",
-    answer:
-      "Hochatown is the area at the gateway to Beavers Bend State Park, where most of the cabins, restaurants, and breweries are concentrated, and Broken Bow is the town further south. Guests usually say Broken Bow for the destination as a whole, but the cabin they picture is generally in Hochatown. Sublime Retreat is in Hochatown, close to the park and the restaurant strip.",
-  },
-  {
-    question: "Does Sublime Retreat have a full kitchen and laundry?",
-    answer:
-      "Yes. Sublime Retreat has a full kitchen with Calcutta quartz countertops and a washer and dryer in the cabin, along with central heating and air conditioning, bamboo hardwood floors, and an indoor fireplace. That combination makes it workable for stays longer than a weekend, not just a two-night trip.",
-  },
-  {
-    question: "Who owns and manages Sublime Retreat?",
-    answer:
-      "Sublime Retreat is operated by Frontier Property Management, a boutique, owner-operated short-term rental company based in Broken Bow, Oklahoma, and run by Hunter Collins. Frontier runs this cabin itself rather than listing it on behalf of a distant owner, and guests reach the same people who set the standards for it.",
+      "Minimum stays at Sublime Retreat vary by season, and peak season and spring break may require a 2-night minimum. The minimum for your dates and the cancellation policy are shown at checkout.",
   },
 ];

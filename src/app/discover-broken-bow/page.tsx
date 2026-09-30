@@ -146,7 +146,7 @@ const discoverFAQ = [
   {
     question: "Do you book cabins directly?",
     answer:
-      "Yes. Sublime Retreat, our 3-bedroom cabin in Hochatown, can be booked directly through our website. Booking direct means no platform service fee is added to your total. Visit our booking page to check dates.",
+      "Yes. Sublime Retreat, our 3-bedroom cabin in Hochatown, can be booked directly through our website. Booking direct means no Airbnb guest service fee is added to your total. Visit our booking page to check dates.",
   },
 ];
 

@@ -43,7 +43,7 @@ const STATIC_PAGES: { path: string; lastModified: string }[] = [
   { path: "/hochatown-str-license-lodging-tax", lastModified: "2026-09-27" },
   { path: "/management-fee-calculator", lastModified: "2026-09-27" },
   { path: "/co-host-vs-property-manager-broken-bow", lastModified: "2026-09-27" },
-  { path: "/sublime", lastModified: "2026-09-27" },
+  { path: "/sublime", lastModified: "2026-09-30" },
   { path: "/old-broken-bow-highway", lastModified: "2026-09-02" },
 ];
 

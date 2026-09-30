@@ -68,8 +68,8 @@ const TRUST_LEDGER = [
     label: "Based at 3156 Old Broken Bow Hwy, not a regional franchise",
   },
   {
-    stat: "Top-rated",
-    label: "Airbnb Top-Rated Host on the Hochatown cabin we run ourselves",
+    stat: "Hosts too",
+    label: "We host our own Hochatown cabin, Sublime Retreat, day to day",
   },
   {
     stat: "Month to month",
@@ -469,7 +469,7 @@ export default function HomePage() {
               Looking to book a stay instead?
             </h2>
             <p className="mt-3 text-base text-muted-foreground">
-              Book direct with us, no platform fees.
+              Book direct with us and skip Airbnb&apos;s guest service fees.
             </p>
           </div>
           <div className="mt-10 grid gap-8 md:grid-cols-2">

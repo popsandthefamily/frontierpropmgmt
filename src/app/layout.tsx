@@ -207,7 +207,7 @@ export default function RootLayout({
                     "@type": "Service",
                     name: "Direct cabin bookings",
                     description:
-                      "Book Frontier's own cabins directly, with no platform service fee added.",
+                      "Book Frontier's own cabins directly, with no Airbnb guest service fee.",
                   },
                 },
               ],

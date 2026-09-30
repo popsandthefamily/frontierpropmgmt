@@ -80,6 +80,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* A property page's booking bar owns the bottom of a phone screen, so the
+   scroll-to-top button lifts clear of it while the bar is showing. */
+@media (max-width: 1023.98px) {
+  body:has([data-booking-bar="visible"]) [data-scroll-to-top] {
+    bottom: 6rem;
+  }
+}
+
 /* Selection color */
 ::selection {
   background-color: #4a6e5d;

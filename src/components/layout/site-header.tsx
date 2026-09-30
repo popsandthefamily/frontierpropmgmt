@@ -71,7 +71,7 @@ const NAV_ITEMS: NavItem[] = [
       {
         label: "Sublime Retreat",
         href: "/sublime",
-        description: "Luxury 3BR with hot tub, 2 zip lines & arcade",
+        description: "Quiet 3BR in the pines: hot tub, fire pit, sleeps 8",
       },
       {
         label: "Old Broken Bow Highway",
@@ -131,7 +131,6 @@ const NAV_ITEMS: NavItem[] = [
 /* Paths (and their subtrees) that do NOT have a hero section, force solid header */
 const SOLID_HEADER_PATHS = [
   "/",
-  "/sublime",
   "/old-broken-bow-highway",
   "/portal",
   "/privacy-policy",
