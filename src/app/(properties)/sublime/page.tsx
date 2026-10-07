@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { CabinTour } from "@/components/property/cabin-tour";
 import { PhotoMosaic } from "@/components/property/photo-mosaic";
 import { HospitableBooking } from "@/components/property/hospitable-booking";
 import { MobileBookingBar } from "@/components/property/mobile-booking-bar";
@@ -483,6 +484,8 @@ export default function SublimePage() {
           </div>
         </div>
       </section>
+
+      <CabinTour />
 
       {/* ── 4. Where everyone sleeps ─────────────────────────────────── */}
       <section className="bg-white">
