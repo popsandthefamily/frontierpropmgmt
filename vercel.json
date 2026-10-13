@@ -3,6 +3,7 @@
   "fluid": false,
   "regions": ["iad1"],
   "crons": [
-    { "path": "/api/cron/daily-usage-alert", "schedule": "0 14 * * *" }
+    { "path": "/api/cron/daily-usage-alert", "schedule": "0 14 * * *" },
+    { "path": "/api/cron/supabase-keepalive", "schedule": "0 9 * * *" }
   ]
 }
