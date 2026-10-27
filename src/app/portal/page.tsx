@@ -66,13 +66,43 @@ export default async function PortalDashboard() {
         .from("signature_signers")
         .select("id, name, document_id, signed_at, request_id, owner_documents(title)")
         .eq("email", owner.email.toLowerCase())
+        // Frontier countersigns from admin; its email is only here for the copy.
+        .neq("kind", "manager")
         .is("signed_at", null)
         .not("request_id", "is", null)
     : { data: [] };
   const pending = pendingSigners ?? [];
 
+  // An agreement is filed under the cabin owner, so row level security hides it
+  // from anyone else who was a party to it, such as Frontier's manager. Owners
+  // and managers get the executed copy; a co-signer from an emailed link does
+  // not, because the agreement is between the owner and Frontier.
+  const { data: partyTo } = owner?.email
+    ? await getSupabaseAdmin()
+        .from("signature_signers")
+        .select("id, owner_documents(title), signature_requests(status, signed_storage_path)")
+        .eq("email", owner.email.toLowerCase())
+        .in("kind", ["owner", "manager"])
+        .not("request_id", "is", null)
+    : { data: [] };
+
   const props = (properties ?? []) as Property[];
   const docs = (documents ?? []) as OwnerDocument[];
+  const filed = new Set(docs.map((d) => d.storage_path));
+  for (const s of partyTo ?? []) {
+    const req = s.signature_requests as unknown as { status: string; signed_storage_path: string | null } | null;
+    const title = (s.owner_documents as unknown as { title: string } | null)?.title ?? "Agreement";
+    if (req?.status !== "executed" || !req.signed_storage_path || filed.has(req.signed_storage_path)) continue;
+    filed.add(req.signed_storage_path);
+    docs.push({
+      id: `signed-${s.id}`,
+      title: `${title} — executed`,
+      kind: "agreement",
+      period_label: null,
+      size_bytes: null,
+      storage_path: req.signed_storage_path,
+    });
+  }
 
   // The rows above came back through row level security as this owner, so
   // ownership is already proven. Signing is done with the service role because

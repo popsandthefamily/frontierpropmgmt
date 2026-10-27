@@ -226,9 +226,9 @@ export function FieldEditor({
               />
               <input
                 className={input}
-                placeholder={s.kind === "manager" ? "not needed" : "email for their signing link"}
+                placeholder={s.kind === "manager" ? "portal email for their copy (optional)" : "email for their signing link"}
                 value={s.email}
-                disabled={locked || s.kind === "manager"}
+                disabled={locked}
                 onChange={(e) =>
                   setSigners((prev) => prev.map((x, j) => (j === i ? { ...x, email: e.target.value } : x)))
                 }
