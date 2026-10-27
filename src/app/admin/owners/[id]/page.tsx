@@ -76,9 +76,21 @@ export default async function OwnerWorkspacePage({
         .in("document_id", docIds)
     : { data: [] };
 
+  // Requests decide what is locked: an original with a live request, and any
+  // executed copy, are records rather than drafts, so they lose Delete and the
+  // copy opens read-only instead of in the field editor.
+  const { data: requests } = await admin
+    .from("signature_requests")
+    .select("id, document_id, status, signed_storage_path")
+    .eq("owner_id", id);
+  const liveRequests = new Set((requests ?? []).filter((r) => r.status !== "void").map((r) => r.id));
+  const lockedDocs = new Set((requests ?? []).filter((r) => r.status !== "void").map((r) => r.document_id));
+  const signedCopies = new Set((requests ?? []).map((r) => r.signed_storage_path).filter(Boolean));
+
   const signing = new Map<string, { signed: number; total: number }>();
   for (const s of allSigners ?? []) {
-    if (!s.request_id) continue;
+    // A cancelled request's signers no longer count towards anything.
+    if (!s.request_id || !liveRequests.has(s.request_id)) continue;
     const cur = signing.get(s.document_id) ?? { signed: 0, total: 0 };
     signing.set(s.document_id, { signed: cur.signed + (s.signed_at ? 1 : 0), total: cur.total + 1 });
   }
@@ -169,7 +181,11 @@ export default async function OwnerWorkspacePage({
                       {d.published_at ? "Published" : "Draft"}
                     </span>
                     <Link href={`/admin/documents/${d.id}${qs}`} className="font-medium text-charcoal underline underline-offset-4">
-                      Fields &amp; signature
+                      {signedCopies.has(d.storage_path)
+                        ? "View & download"
+                        : lockedDocs.has(d.id)
+                          ? "Signatures"
+                          : "Fields & signature"}
                     </Link>
                     <form action={setDocumentPublished}>
                       <input type="hidden" name="token" value={token ?? ""} />
@@ -179,13 +195,15 @@ export default async function OwnerWorkspacePage({
                         {d.published_at ? "Unpublish" : "Publish"}
                       </SubmitButton>
                     </form>
-                    <form action={deleteDocument}>
-                      <input type="hidden" name="token" value={token ?? ""} />
-                      <input type="hidden" name="document_id" value={d.id} />
-                      <SubmitButton pendingLabel="…" className="font-medium text-destructive underline underline-offset-4">
-                        Delete
-                      </SubmitButton>
-                    </form>
+                    {!lockedDocs.has(d.id) && !signedCopies.has(d.storage_path) && (
+                      <form action={deleteDocument}>
+                        <input type="hidden" name="token" value={token ?? ""} />
+                        <input type="hidden" name="document_id" value={d.id} />
+                        <SubmitButton pendingLabel="…" className="font-medium text-destructive underline underline-offset-4">
+                          Delete
+                        </SubmitButton>
+                      </form>
+                    )}
                   </span>
                 </li>
               );

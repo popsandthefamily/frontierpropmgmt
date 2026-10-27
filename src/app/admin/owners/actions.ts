@@ -229,7 +229,18 @@ export async function deleteDocument(formData: FormData): Promise<void> {
     .eq("id", id)
     .maybeSingle();
 
+  // Signed paperwork is evidence. Deleting the original cascades away its
+  // signers and request, and deleting an executed copy removes the file the
+  // request points at, so neither can go while a request stands. Cancel the
+  // request first if a draft really needs to go.
   if (data?.storage_path) {
+    const [{ data: live }, { data: asCopy }] = await Promise.all([
+      admin.from("signature_requests").select("id").eq("document_id", id).neq("status", "void").limit(1),
+      admin.from("signature_requests").select("id").eq("signed_storage_path", data.storage_path).limit(1),
+    ]);
+    if ((live && live.length > 0) || (asCopy && asCopy.length > 0)) {
+      throw new Error("Signed or in-progress agreements can't be deleted.");
+    }
     await admin.storage.from("owner-documents").remove([data.storage_path]);
   }
   const { error } = await admin.from("owner_documents").delete().eq("id", id);

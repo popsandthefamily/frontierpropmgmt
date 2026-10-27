@@ -54,6 +54,12 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+    if (s.email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim())) {
+      return NextResponse.json(
+        { error: `${s.email.trim()} isn't a valid email address.` },
+        { status: 400 },
+      );
+    }
   }
 
   // Keep the ids that are staying so their placed fields survive the edit.

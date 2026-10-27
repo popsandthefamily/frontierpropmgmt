@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Plus, X } from "lucide-react";
 import { PdfView, type PageBox } from "@/components/sign/pdf-view";
 
 export interface EditorSigner {
@@ -54,6 +55,7 @@ export function FieldEditor({
   initialSigners,
   token,
   locked,
+  executed = false,
   ownerName,
   ownerEmail,
 }: {
@@ -67,6 +69,8 @@ export function FieldEditor({
   ownerEmail: string;
   /** True while a request is open: signers and fields are part of the record. */
   locked: boolean;
+  /** Every party has signed; nothing can unlock it. */
+  executed?: boolean;
 }) {
   const router = useRouter();
   const [signers, setSigners] = useState<EditorSigner[]>(
@@ -113,8 +117,12 @@ export function FieldEditor({
     [activeType, activeSigner, locked],
   );
 
-  function moveField(index: number, e: React.MouseEvent) {
+  // Pointer events rather than mouse events, so a field can be dragged on a
+  // tablet as well as with a mouse.
+  function moveField(index: number, e: React.PointerEvent) {
     if (locked) return;
+    // The remove button sits inside the field; pressing it is not a drag.
+    if ((e.target as HTMLElement).closest("button")) return;
     e.stopPropagation();
     draggingRef.current = true;
     const pageEl = (e.currentTarget as HTMLElement).parentElement;
@@ -124,7 +132,7 @@ export function FieldEditor({
     const grabX = e.clientX - (rect.left + field.x_pct * rect.width);
     const grabY = e.clientY - (rect.top + field.y_pct * rect.height);
 
-    function onMove(ev: MouseEvent) {
+    function onMove(ev: PointerEvent) {
       const nx = (ev.clientX - grabX - rect.left) / rect.width;
       const ny = (ev.clientY - grabY - rect.top) / rect.height;
       setFields((prev) =>
@@ -140,14 +148,16 @@ export function FieldEditor({
       );
     }
     function onUp() {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
       setTimeout(() => {
         draggingRef.current = false;
       }, 0);
     }
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
   }
 
   async function save() {
@@ -266,9 +276,9 @@ export function FieldEditor({
                     ? "signs in their portal"
                     : "gets a one-time link"}
               </span>
-              <button
+              {locked ? <span aria-hidden /> : <button
                 type="button"
-                disabled={locked || signers.length === 1}
+                disabled={signers.length === 1}
                 onClick={() => {
                   setSigners((prev) => prev.filter((_, j) => j !== i));
                   setFields((prev) =>
@@ -278,11 +288,12 @@ export function FieldEditor({
                   );
                   setActiveSigner(0);
                 }}
-                className="text-lg text-muted-foreground disabled:opacity-30"
+                className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-charcoal/5 hover:text-charcoal disabled:opacity-30"
                 title="Remove signer"
+                aria-label={`Remove ${s.name || `signer ${i + 1}`}`}
               >
-                ×
-              </button>
+                <X className="size-4" aria-hidden />
+              </button>}
             </div>
           ))}
         </div>
@@ -293,15 +304,16 @@ export function FieldEditor({
             onClick={() =>
               setSigners((prev) => [...prev, { name: "", email: "", role_label: "Co-owner", kind: "external" }])
             }
-            className="mt-4 text-sm font-medium text-charcoal underline underline-offset-4"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline underline-offset-4"
           >
-            + Add another signer
+            <Plus className="size-4" aria-hidden /> Add another signer
           </button>
         )}
         {locked && (
-          <p className="mt-4 text-sm text-amber-700">
-            A signature request is open, so signers and fields are locked. Cancel
-            the request above to change them.
+          <p className={`mt-4 text-sm ${executed ? "text-muted-foreground" : "text-amber-700"}`}>
+            {executed
+              ? "Every party has signed, so these signers and fields are part of the record and can't be changed."
+              : "A signature request is open, so signers and fields are locked. Cancel the request above to change them."}
           </p>
         )}
       </section>
@@ -357,7 +369,9 @@ export function FieldEditor({
               )}
               <button
                 type="button"
-                onClick={() => setFields([])}
+                onClick={() => {
+                  if (fields.length === 0 || window.confirm(`Remove all ${fields.length} placed fields?`)) setFields([]);
+                }}
                 className="text-sm text-muted-foreground underline underline-offset-4"
               >
                 Clear fields
@@ -394,8 +408,8 @@ export function FieldEditor({
               f.page_number !== page.pageNumber ? null : (
                 <div
                   key={i}
-                  onMouseDown={(e) => moveField(i, e)}
-                  className={`group absolute rounded border-2 ${locked ? "" : "cursor-move"} ${
+                  onPointerDown={(e) => moveField(i, e)}
+                  className={`group absolute rounded border-2 ${locked ? "" : "cursor-move touch-none"} ${
                     colour(f.signer_index).ring
                   } ${colour(f.signer_index).fill}`}
                   style={{
@@ -422,9 +436,10 @@ export function FieldEditor({
                         e.stopPropagation();
                         setFields((prev) => prev.filter((_, j) => j !== i));
                       }}
-                      className="absolute -right-2 -top-2 size-5 rounded-full bg-charcoal text-xs text-white opacity-0 group-hover:opacity-100"
+                      aria-label={`Remove ${f.label ?? "field"}`}
+                      className="absolute -right-2.5 -top-2.5 inline-flex size-6 items-center justify-center rounded-full bg-charcoal text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal [@media(hover:none)]:opacity-100"
                     >
-                      ×
+                      <X className="size-3.5" aria-hidden />
                     </button>
                   )}
                 </div>

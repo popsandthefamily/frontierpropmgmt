@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { SignDocument } from "@/components/sign/sign-document";
 import { loadSigningPage, REASONS } from "@/lib/sign/page-data";
 
@@ -33,8 +34,8 @@ export default async function AdminSignPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-10">
-      <Link href={back} className="text-sm font-medium text-charcoal underline-offset-4 hover:underline">
-        ← Back to the document
+      <Link href={back} className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline-offset-4 hover:underline">
+        <ArrowLeft className="size-4" aria-hidden /> Back to the document
       </Link>
       <h1 className="mt-4 text-3xl font-bold text-charcoal">{data.documentTitle}</h1>
       <p className="mt-2 text-sm text-muted-foreground">

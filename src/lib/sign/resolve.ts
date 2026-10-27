@@ -66,7 +66,9 @@ export async function resolveSigner(input: {
 
   const { data: req } = await admin
     .from("signature_requests")
-    .select("id, status, document_id, source_sha256, signed_storage_path, signed_sha256, owner_id")
+    .select(
+      "id, status, document_id, source_sha256, signed_storage_path, signed_sha256, owner_id, signers_total, signers_completed",
+    )
     .eq("id", signer.request_id as string)
     .maybeSingle();
   if (!req || req.status === "void") return { ok: false, reason: "void" };

@@ -18,19 +18,45 @@ export async function POST(request: NextRequest) {
 
   const admin = getSupabaseAdmin();
 
-  // Refuse to move the goalposts under a signature that already exists: once a
-  // document has been signed, its field layout is part of the evidence.
-  const { data: signed } = await admin
+  // Refuse to move the goalposts under a live request: once a document is out
+  // for signature, or signed, its field layout is part of the evidence. This
+  // matches the signer lock, rather than only catching the partly signed case
+  // and letting fields change under someone who has the document open.
+  const { data: live } = await admin
     .from("signature_requests")
     .select("id")
     .eq("document_id", documentId)
-    .eq("status", "signed")
+    .neq("status", "void")
     .limit(1);
-  if (signed && signed.length > 0) {
+  if (live && live.length > 0) {
     return NextResponse.json(
-      { error: "This document has already been signed. Its fields can't be changed." },
+      { error: "Cancel the open signature request before changing fields." },
       { status: 409 },
     );
+  }
+
+  // Every field has to belong to one of this document's signers and sit on the
+  // page, or it can never be filled in and the request can never complete.
+  const { data: signerRows } = await admin
+    .from("signature_signers")
+    .select("id")
+    .eq("document_id", documentId);
+  const signerIds = new Set((signerRows ?? []).map((s) => s.id));
+  const types = new Set(["signature", "initials", "date", "name", "text"]);
+  const inPage = (n: unknown) => typeof n === "number" && n >= 0 && n <= 1;
+  for (const f of fields) {
+    if (
+      !signerIds.has(f.signer_id as string) ||
+      !types.has(f.field_type as string) ||
+      !Number.isInteger(f.page_number) ||
+      (f.page_number as number) < 1 ||
+      ![f.x_pct, f.y_pct, f.w_pct, f.h_pct].every(inPage)
+    ) {
+      return NextResponse.json(
+        { error: "A field is missing its signer or sits off the page. Save again." },
+        { status: 400 },
+      );
+    }
   }
 
   await admin.from("signature_fields").delete().eq("document_id", documentId);

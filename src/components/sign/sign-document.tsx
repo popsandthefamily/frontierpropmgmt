@@ -1,8 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowDown } from "lucide-react";
 import { PdfView } from "@/components/sign/pdf-view";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export interface SignField {
   id: string;
@@ -109,40 +118,47 @@ export function SignDocument({
   }, []);
 
   async function submit() {
+    if (status === "saving") return;
     setStatus("saving");
     setError(null);
-    const res = await fetch("/api/sign/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token,
-        signerId,
-        adminToken,
-        values,
-        signerName: typedName.trim(),
-        consent: true,
-        consentText,
-      }),
-    });
-    if (res.ok) {
-      window.location.replace(redirectTo);
-    } else {
+    try {
+      const res = await fetch("/api/sign/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token,
+          signerId,
+          adminToken,
+          values,
+          signerName: typedName.trim(),
+          consent: true,
+        }),
+      });
+      if (res.ok) {
+        window.location.replace(redirectTo);
+        return;
+      }
       setError((await res.json().catch(() => ({}))).error ?? "Could not complete the signature.");
-      setStatus("error");
+    } catch {
+      // A dropped connection used to leave the button on "Completing…" forever.
+      setError("Couldn't reach Frontier. Check your connection and press Sign again.");
     }
+    setStatus("error");
   }
 
   return (
     <>
-      {drawingFor && (
-        <SignaturePad
-          onCancel={() => setDrawingFor(null)}
-          onDone={(dataUrl) => {
-            setValues((v) => ({ ...v, [drawingFor]: dataUrl }));
-            setDrawingFor(null);
-          }}
-        />
-      )}
+      <Dialog open={drawingFor !== null} onOpenChange={(open) => !open && setDrawingFor(null)}>
+        {drawingFor && (
+          <SignaturePad
+            onCancel={() => setDrawingFor(null)}
+            onDone={(dataUrl) => {
+              setValues((v) => ({ ...v, [drawingFor]: dataUrl }));
+              setDrawingFor(null);
+            }}
+          />
+        )}
+      </Dialog>
 
       <div className="mt-8">
         <PdfView
@@ -187,6 +203,7 @@ export function SignDocument({
                         }}
                         type="button"
                         onClick={() => setDrawingFor(f.id)}
+                        aria-label={value ? `${f.label ?? "Signature"}: signed. Draw again` : `Draw your ${(f.label ?? "signature").toLowerCase()}`}
                         style={style}
                         className={`absolute flex items-center justify-center rounded border-2 ${
                           value ? "border-sage bg-white" : "border-dashed border-sage bg-sage/10 hover:bg-sage/20"
@@ -194,7 +211,7 @@ export function SignDocument({
                       >
                         {value ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={value} alt="Your signature" className="max-h-full max-w-full" />
+                          <img src={value} alt="" className="max-h-full max-w-full" />
                         ) : (
                           <span className="text-[10px] font-medium uppercase tracking-wide text-sage-dark">
                             {f.label ?? "Sign"}
@@ -212,6 +229,9 @@ export function SignDocument({
                       value={value ?? ""}
                       onChange={(e) => setValues((v) => ({ ...v, [f.id]: e.target.value }))}
                       placeholder={f.label ?? ""}
+                      aria-label={f.label ?? "Field"}
+                      aria-required={f.required}
+                      maxLength={500}
                       style={style}
                       className={`absolute rounded border-2 border-dashed border-sage bg-sage/10 px-1 text-sm text-charcoal focus:border-solid focus:bg-white focus:outline-none ${
                         flash === f.id ? "z-10 ring-4 ring-amber-500 ring-offset-2 ring-offset-white shadow-lg" : ""
@@ -240,17 +260,22 @@ export function SignDocument({
             <button
               type="button"
               onClick={goToNext}
-              className="rounded-md border border-sage px-3 py-1.5 text-sm font-medium text-sage-dark hover:bg-sage/10"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-md border border-sage px-3 py-1.5 text-sm font-medium text-sage-dark hover:bg-sage/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
             >
               {missing.length > 1
-                ? `Next of ${missing.length} ↓`
+                ? `Next of ${missing.length}`
                 : missing.length === 1
-                  ? "Go to the field ↓"
-                  : "Review fields ↓"}
+                  ? "Go to the field"
+                  : "Review fields"}
+              <ArrowDown className="size-4" aria-hidden />
             </button>
           )}
 
-          {error && <span className="text-sm text-destructive">{error}</span>}
+          {error && !confirming && (
+            <span role="alert" className="text-sm text-destructive">
+              {error}
+            </span>
+          )}
 
           <span className="ml-auto flex items-center gap-3">
             <span className="hidden text-xs text-muted-foreground sm:inline">
@@ -260,7 +285,7 @@ export function SignDocument({
               type="button"
               disabled={missing.length > 0}
               onClick={() => setConfirming(true)}
-              className="rounded-md bg-sage px-5 py-2 text-sm font-semibold text-white hover:bg-sage-dark disabled:opacity-40"
+              className="min-h-10 rounded-md bg-sage px-5 py-2 text-sm font-semibold text-white hover:bg-sage-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage disabled:opacity-40"
             >
               {missing.length > 0 ? `${missing.length} left to complete` : "Review and sign"}
             </button>
@@ -268,65 +293,75 @@ export function SignDocument({
         </div>
       </div>
 
-      {confirming && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/60 p-4">
-          <div className="w-full max-w-lg rounded-lg bg-white p-6">
-            <h2 className="font-heading text-xl font-semibold text-charcoal">
+      <Dialog
+        open={confirming}
+        // Not while saving: closing mid-request would hide the outcome.
+        onOpenChange={(open) => status !== "saving" && setConfirming(open)}
+      >
+        <DialogContent className="bg-white sm:max-w-lg" showCloseButton={status !== "saving"}>
+          <DialogHeader className="text-left">
+            <DialogTitle className="font-heading text-xl font-semibold leading-snug text-charcoal">
               Sign {documentTitle}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">Signing as {roleLabel}.</p>
+            </DialogTitle>
+            <DialogDescription>Signing as {roleLabel}.</DialogDescription>
+          </DialogHeader>
 
-            <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed text-charcoal">
-              <input
-                type="checkbox"
-                checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
-                className="mt-1 size-4 shrink-0"
-              />
-              <span>{consentText}</span>
-            </label>
+          <label className="flex items-start gap-3 text-sm leading-relaxed text-charcoal">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-1 size-4 shrink-0 accent-sage"
+            />
+            <span>{consentText}</span>
+          </label>
 
-            <label
-              htmlFor="typed-name"
-              className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
-            >
-              Type your full legal name
+          <div>
+            <label htmlFor="typed-name" className="block text-sm font-medium text-charcoal">
+              Your full legal name
             </label>
             <input
               id="typed-name"
               value={typedName}
               onChange={(e) => setTypedName(e.target.value)}
-              className="mt-2 w-full rounded-md border border-border px-3 py-2 text-charcoal"
+              autoComplete="name"
+              maxLength={200}
+              className="mt-2 w-full rounded-md border border-border px-3 py-2 text-base text-charcoal focus-visible:border-sage focus-visible:outline-2 focus-visible:outline-sage/40"
             />
-
-            {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-
-            <div className="mt-6 flex items-center justify-between gap-3">
-              <button
-                type="button"
-                onClick={() => setConfirming(false)}
-                className="text-sm font-medium text-charcoal"
-              >
-                Back to the document
-              </button>
-              <Button
-                type="button"
-                size="lg"
-                disabled={!canSign || status === "saving"}
-                onClick={submit}
-                className="bg-sage text-white hover:bg-sage-dark disabled:opacity-40"
-              >
-                {status === "saving" ? "Completing…" : "Sign"}
-              </Button>
-            </div>
-            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              Signing records the date and time, your IP address and browser, and
-              a fingerprint of this exact document.
-            </p>
           </div>
-        </div>
-      )}
 
+          {error && (
+            <p role="alert" className="text-sm text-destructive">
+              {error}
+            </p>
+          )}
+
+          <DialogFooter className="items-center sm:justify-between">
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={status === "saving"}
+              onClick={() => setConfirming(false)}
+              className="text-charcoal"
+            >
+              Back to the document
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              disabled={!canSign || status === "saving"}
+              onClick={submit}
+              className="bg-sage text-white hover:bg-sage-dark disabled:opacity-40"
+            >
+              {status === "saving" ? "Completing…" : "Sign"}
+            </Button>
+          </DialogFooter>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Signing records the date and time, your IP address and browser, and
+            a fingerprint of this exact document.
+          </p>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
@@ -342,58 +377,83 @@ function SignaturePad({ onDone, onCancel }: { onDone: (d: string) => void; onCan
     return { x: (e.clientX - r.left) * (c.width / r.width), y: (e.clientY - r.top) * (c.height / r.height) };
   }
 
+  // Captured, so a stroke that strays past the edge keeps drawing instead of
+  // ending, and a cancelled touch (a scroll gesture, an incoming call) cannot
+  // leave the pen stuck down.
+  const stop = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    drawing.current = false;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/60 p-4">
-      <div className="w-full max-w-lg rounded-lg bg-white p-6">
-        <h2 className="font-heading text-xl font-semibold text-charcoal">Draw your signature</h2>
-        <canvas
-          ref={canvasRef}
-          width={800}
-          height={260}
-          onPointerDown={(e) => {
-            drawing.current = true;
-            const ctx = canvasRef.current!.getContext("2d")!;
-            ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.strokeStyle = "#1f2421";
-            const { x, y } = pos(e);
-            ctx.beginPath(); ctx.moveTo(x, y);
-            setDirty(true);
+    <DialogContent className="bg-white sm:max-w-lg">
+      <DialogHeader className="text-left">
+        <DialogTitle className="font-heading text-xl font-semibold text-charcoal">
+          Draw your signature
+        </DialogTitle>
+        <DialogDescription>Use your finger, a stylus, or the mouse.</DialogDescription>
+      </DialogHeader>
+      <canvas
+        ref={canvasRef}
+        width={800}
+        height={260}
+        aria-label="Signature drawing area"
+        onPointerDown={(e) => {
+          e.currentTarget.setPointerCapture(e.pointerId);
+          drawing.current = true;
+          const ctx = canvasRef.current!.getContext("2d")!;
+          ctx.lineWidth = 3;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.strokeStyle = "#1f2421";
+          const { x, y } = pos(e);
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          // A tap leaves a dot rather than nothing.
+          ctx.lineTo(x + 0.1, y + 0.1);
+          ctx.stroke();
+          setDirty(true);
+        }}
+        onPointerMove={(e) => {
+          if (!drawing.current) return;
+          const ctx = canvasRef.current!.getContext("2d")!;
+          const { x, y } = pos(e);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }}
+        onPointerUp={stop}
+        onPointerCancel={stop}
+        className="w-full cursor-crosshair touch-none rounded-md border-2 border-dashed border-border bg-cream"
+        style={{ aspectRatio: "800 / 260" }}
+      />
+      <DialogFooter className="items-center sm:justify-between">
+        <Button
+          type="button"
+          variant="ghost"
+          disabled={!dirty}
+          onClick={() => {
+            const c = canvasRef.current!;
+            c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
+            setDirty(false);
           }}
-          onPointerMove={(e) => {
-            if (!drawing.current) return;
-            const ctx = canvasRef.current!.getContext("2d")!;
-            const { x, y } = pos(e);
-            ctx.lineTo(x, y); ctx.stroke();
-          }}
-          onPointerUp={() => (drawing.current = false)}
-          onPointerLeave={() => (drawing.current = false)}
-          className="mt-4 w-full touch-none rounded-md border-2 border-dashed border-border bg-cream"
-          style={{ aspectRatio: "800 / 260" }}
-        />
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <button
+          className="text-muted-foreground"
+        >
+          Clear
+        </Button>
+        <span className="flex flex-col-reverse gap-2 sm:flex-row">
+          <Button type="button" variant="ghost" onClick={onCancel} className="text-charcoal">
+            Cancel
+          </Button>
+          <Button
             type="button"
-            onClick={() => {
-              const c = canvasRef.current!;
-              c.getContext("2d")!.clearRect(0, 0, c.width, c.height);
-              setDirty(false);
-            }}
-            className="text-sm text-muted-foreground underline underline-offset-4"
+            disabled={!dirty}
+            onClick={() => onDone(canvasRef.current!.toDataURL("image/png"))}
+            className="bg-sage text-white hover:bg-sage-dark disabled:opacity-40"
           >
-            Clear
-          </button>
-          <span className="flex gap-3">
-            <button type="button" onClick={onCancel} className="text-sm font-medium text-charcoal">Cancel</button>
-            <button
-              type="button"
-              disabled={!dirty}
-              onClick={() => onDone(canvasRef.current!.toDataURL("image/png"))}
-              className="rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
-            >
-              Use this signature
-            </button>
-          </span>
-        </div>
-      </div>
-    </div>
+            Use this signature
+          </Button>
+        </span>
+      </DialogFooter>
+    </DialogContent>
   );
 }

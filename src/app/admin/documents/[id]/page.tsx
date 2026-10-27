@@ -11,6 +11,8 @@ import {
 import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { centralTime } from "@/lib/portal/format";
 import { SubmitButton } from "@/components/sign/submit-button";
+import { ActionForm } from "@/components/admin/action-form";
+import { ArrowLeft, Download } from "lucide-react";
 import { requestSignature, resendSignerLink, voidRequest } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -45,6 +47,53 @@ export default async function DocumentFieldsPage({
     .maybeSingle();
   if (!doc) return notFound();
 
+  const backToOwner = `/admin/owners/${doc.owner_id}${token ? `?token=${encodeURIComponent(token)}` : ""}`;
+  const owner = doc.owner_profiles as unknown as { email: string; full_name: string | null } | null;
+
+  // An executed copy is filed as its own document. Opening it in the editor
+  // offered to send a finished agreement out for signature again, so it gets a
+  // read-only view that points back at the request it came from.
+  const { data: sourceRequest } = await admin
+    .from("signature_requests")
+    .select("document_id, status, owner_documents(title)")
+    .eq("signed_storage_path", doc.storage_path)
+    .maybeSingle();
+  if (sourceRequest) {
+    const { data: download } = await admin.storage
+      .from("owner-documents")
+      .createSignedUrl(doc.storage_path, 3600, { download: `${doc.title}.pdf` });
+    const original = (sourceRequest.owner_documents as unknown as { title: string } | null)?.title;
+    return (
+      <div className="mx-auto max-w-3xl px-4 pt-10">
+        <Link href={backToOwner} className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline-offset-4 hover:underline">
+          <ArrowLeft className="size-4" aria-hidden /> {owner?.full_name || owner?.email || "Owner"}
+        </Link>
+        <h1 className="mt-4 text-3xl font-bold text-charcoal">{doc.title}</h1>
+        <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground">
+          The signed copy of {original ? `“${original}”` : "an agreement"}, with
+          every party&rsquo;s signature and the certificate of completion. It is
+          part of the record, so it can&rsquo;t be edited or sent for signature.
+        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          {download?.signedUrl && (
+            <a
+              href={download.signedUrl}
+              className="inline-flex items-center gap-2 rounded-md bg-sage px-4 py-2.5 text-sm font-semibold text-white hover:bg-sage-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
+            >
+              <Download className="size-4" aria-hidden /> Download signed PDF
+            </a>
+          )}
+          <Link
+            href={`/admin/documents/${sourceRequest.document_id}${token ? `?token=${encodeURIComponent(token)}` : ""}`}
+            className="text-sm font-medium text-charcoal underline underline-offset-4"
+          >
+            See who signed and when
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const [{ data: fields }, { data: requests }, { data: signedUrl }, { data: signers }] = await Promise.all([
     admin.from("signature_fields").select("*").eq("document_id", id).order("sort_order"),
     admin
@@ -64,7 +113,6 @@ export default async function DocumentFieldsPage({
   // Fields carry a signer id; the editor works in list positions.
   const indexOf = new Map(signerList.map((s, i) => [s.id, i]));
 
-  const owner = doc.owner_profiles as unknown as { email: string; full_name: string | null } | null;
   const openRequest = (requests ?? []).find((r) => r.status !== "void");
 
   // The editor below always shows the original upload, so the signed copy
@@ -81,10 +129,10 @@ export default async function DocumentFieldsPage({
   return (
     <div className="mx-auto max-w-6xl px-4 pt-10">
       <Link
-        href={`/admin/owners${token ? `?token=${encodeURIComponent(token)}` : ""}`}
-        className="text-sm font-medium text-charcoal underline-offset-4 hover:underline"
+        href={backToOwner}
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline-offset-4 hover:underline"
       >
-        ← Owners
+        <ArrowLeft className="size-4" aria-hidden /> {owner?.full_name || owner?.email || "Owner"}
       </Link>
       <h1 className="mt-4 text-3xl font-bold text-charcoal">{doc.title}</h1>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -105,22 +153,30 @@ export default async function DocumentFieldsPage({
                   href={signedCopy.signedUrl}
                   className={
                     openRequest.status === "executed"
-                      ? "rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white"
-                      : "text-sm font-medium text-charcoal underline underline-offset-4"
+                      ? "inline-flex items-center gap-2 rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
+                      : "inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline underline-offset-4"
                   }
                 >
+                  <Download className="size-4" aria-hidden />
                   {openRequest.status === "executed" ? "Download signed PDF" : "Download partly signed copy"}
                 </a>
               )}
               {openRequest.status !== "executed" && (
-                <form action={voidRequest}>
+                <ActionForm
+                  action={voidRequest}
+                  confirm="Cancel this signature request? Outstanding signing links stop working, and sending it again emails every signer."
+                  className="flex flex-wrap items-center gap-2"
+                >
                   <input type="hidden" name="token" value={token ?? ""} />
                   <input type="hidden" name="request_id" value={openRequest.id} />
                   <input type="hidden" name="document_id" value={doc.id} />
-                  <button type="submit" className="text-sm font-medium text-destructive underline underline-offset-4">
+                  <SubmitButton
+                    pendingLabel="Cancelling…"
+                    className="text-sm font-medium text-destructive underline underline-offset-4"
+                  >
                     Cancel request
-                  </button>
-                </form>
+                  </SubmitButton>
+                </ActionForm>
               )}
             </div>
             <ul className="mt-3 space-y-2 text-sm">
@@ -151,7 +207,11 @@ export default async function DocumentFieldsPage({
                     </Link>
                   )}
                   {!s.signed_at && s.kind !== "manager" && s.email && (
-                    <form action={resendSignerLink}>
+                    <ActionForm
+                      action={resendSignerLink}
+                      confirm={`Email ${s.name} a new signing link? Their previous link stops working.`}
+                      className="flex flex-wrap items-center gap-2"
+                    >
                       <input type="hidden" name="token" value={token ?? ""} />
                       <input type="hidden" name="signer_id" value={s.id} />
                       <input type="hidden" name="document_id" value={doc.id} />
@@ -161,14 +221,18 @@ export default async function DocumentFieldsPage({
                       >
                         Send link again
                       </SubmitButton>
-                    </form>
+                    </ActionForm>
                   )}
                 </li>
               ))}
             </ul>
           </>
         ) : (
-          <form action={requestSignature} className="flex flex-wrap items-center gap-4">
+          <ActionForm
+            action={requestSignature}
+            confirm={`Send "${doc.title}" for signature? This emails everyone on the signer list who isn't Frontier.`}
+            className="flex flex-wrap items-center gap-4"
+          >
             <input type="hidden" name="token" value={token ?? ""} />
             <input type="hidden" name="document_id" value={doc.id} />
             <input type="hidden" name="owner_id" value={doc.owner_id} />
@@ -184,7 +248,7 @@ export default async function DocumentFieldsPage({
             >
               Send for signature
             </SubmitButton>
-          </form>
+          </ActionForm>
         )}
       </section>
 
@@ -195,6 +259,7 @@ export default async function DocumentFieldsPage({
             fileUrl={signedUrl.signedUrl}
             token={token ?? ""}
             locked={Boolean(openRequest)}
+            executed={openRequest?.status === "executed"}
             ownerName={owner?.full_name ?? ""}
             ownerEmail={owner?.email ?? ""}
             initialSigners={signerList.map((s) => ({
