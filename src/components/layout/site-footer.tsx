@@ -45,6 +45,7 @@ const LOCAL_LINKS = [
 
 const PROPERTIES = [
   { label: "Sublime Retreat", href: "/sublime" },
+  { label: "Livin' the Dream", href: "/livin-the-dream" },
   { label: "Old Broken Bow Highway", href: "/old-broken-bow-highway" },
   { label: "Search Properties", href: "/search" },
 ];

@@ -74,6 +74,11 @@ const NAV_ITEMS: NavItem[] = [
         description: "Quiet 3BR in the pines: hot tub, fire pit, sleeps 8",
       },
       {
+        label: "Livin' the Dream",
+        href: "/livin-the-dream",
+        description: "3BR log cabin with hot tub, opens December 1",
+      },
+      {
         label: "Old Broken Bow Highway",
         href: "/old-broken-bow-highway",
         description: "The house we started the company on, now retired",
@@ -132,6 +137,7 @@ const NAV_ITEMS: NavItem[] = [
 const SOLID_HEADER_PATHS = [
   "/",
   "/old-broken-bow-highway",
+  "/livin-the-dream",
   "/portal",
   "/privacy-policy",
   "/rental-agreement",

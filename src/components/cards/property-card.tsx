@@ -16,6 +16,8 @@ interface PropertyCardProps {
   startingPrice?: number;
   /** Retired from the rental program: no price, links to its story instead. */
   former?: boolean;
+  /** Not bookable yet: the day booking opens. */
+  opensOn?: string;
   className?: string;
 }
 
@@ -29,6 +31,7 @@ export function PropertyCard({
   featuredImage,
   startingPrice,
   former,
+  opensOn,
   className,
 }: PropertyCardProps) {
   return (
@@ -51,6 +54,10 @@ export function PropertyCard({
           {former ? (
             <div className="absolute bottom-3 left-3 rounded-md bg-charcoal/85 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm">
               Former property
+            </div>
+          ) : opensOn ? (
+            <div className="absolute bottom-3 left-3 rounded-md bg-sage px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white">
+              Coming {opensOn}
             </div>
           ) : (
             startingPrice && (
@@ -94,7 +101,7 @@ export function PropertyCard({
           href={`/${slug}`}
           className="inline-flex items-center text-sm font-medium text-sage transition-colors hover:text-sage-dark"
         >
-          {former ? "Read its story" : "View Property"}
+          {former ? "Read its story" : opensOn ? "Preview the cabin" : "View Property"}
           <svg
             className="ml-1 size-4 transition-transform group-hover:translate-x-1"
             fill="none"

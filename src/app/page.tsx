@@ -485,6 +485,7 @@ export default function HomePage() {
                 featuredImage={property.images[0].src}
                 startingPrice={property.startingPrice}
                 former={property.former}
+                opensOn={property.opensOn}
               />
             ))}
           </div>

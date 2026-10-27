@@ -44,6 +44,7 @@ const STATIC_PAGES: { path: string; lastModified: string }[] = [
   { path: "/management-fee-calculator", lastModified: "2026-09-27" },
   { path: "/co-host-vs-property-manager-broken-bow", lastModified: "2026-09-27" },
   { path: "/sublime", lastModified: "2026-09-30" },
+  { path: "/livin-the-dream", lastModified: "2026-10-27" },
   { path: "/old-broken-bow-highway", lastModified: "2026-09-02" },
 ];
 

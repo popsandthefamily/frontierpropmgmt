@@ -115,6 +115,7 @@ export default function SearchPage() {
               sleeps={property.sleeps}
               featuredImage={property.images[0].src}
               former={property.former}
+              opensOn={property.opensOn}
             />
           ))}
         </div>
