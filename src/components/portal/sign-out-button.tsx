@@ -18,9 +18,9 @@ export function SignOutButton({ redirectTo = "/portal/login" }: { redirectTo?: s
         router.push(redirectTo);
         router.refresh();
       }}
-      className="uppercase tracking-[0.22em] underline-offset-4 hover:text-charcoal hover:underline disabled:opacity-50"
+      className="inline-flex min-h-9 items-center text-sm font-medium text-charcoal/80 underline-offset-4 hover:text-charcoal hover:underline disabled:opacity-50"
     >
-      {busy ? "Signing out" : "Sign out"}
+      {busy ? "Signing out…" : "Sign out"}
     </button>
   );
 }

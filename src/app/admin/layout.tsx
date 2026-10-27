@@ -21,7 +21,7 @@ export default async function AdminLayout({
   const signedIn = await isAdmin();
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div data-app className="min-h-screen bg-white pt-20">
       <AdminNav signedIn={signedIn} />
       <div className="pb-24">{children}</div>
     </div>

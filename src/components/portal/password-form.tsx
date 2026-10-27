@@ -58,7 +58,7 @@ export function PasswordForm({
     <div className="mt-6 max-w-md">
       <label
         htmlFor="new-password"
-        className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
+        className="block text-sm font-medium text-charcoal"
       >
         {hasPassword ? "New password" : "Choose a password"}
       </label>

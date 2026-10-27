@@ -29,9 +29,7 @@ export default async function PortalSecurityPage() {
       </div>
 
       <section className="mt-10 max-w-xl">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          Emailed sign-in link
-        </div>
+        <h2 className="scroll-mt-28 border-t border-border pt-6 font-heading text-2xl font-bold leading-tight text-charcoal">Emailed sign-in link</h2>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           Enter your email at the sign-in page and we send you a one-time link.
           Nothing to remember, and nothing to steal. This works whether or not
@@ -40,9 +38,7 @@ export default async function PortalSecurityPage() {
       </section>
 
       <section className="mt-12 max-w-xl">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          Password
-        </div>
+        <h2 className="scroll-mt-28 border-t border-border pt-6 font-heading text-2xl font-bold leading-tight text-charcoal">Password</h2>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           {hasPassword
             ? "You have a password set. You can change it below."

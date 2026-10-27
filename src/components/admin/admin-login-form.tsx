@@ -48,7 +48,7 @@ export function AdminLoginForm() {
     <form onSubmit={onSubmit} className="mt-8 max-w-sm">
       <label
         htmlFor="admin-email"
-        className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
+        className="block text-sm font-medium text-charcoal"
       >
         Email
       </label>
@@ -64,7 +64,7 @@ export function AdminLoginForm() {
 
       <label
         htmlFor="admin-password"
-        className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
+        className="mt-5 block text-sm font-medium text-charcoal"
       >
         Password
       </label>

@@ -4,12 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronDown, LockKeyhole } from "lucide-react";
+import { Menu, ChevronDown, LockKeyhole, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { CTA } from "@/data/home-care";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
+import { isAppRoute } from "@/components/app/app-routes";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -151,6 +152,40 @@ export function SiteHeader() {
   const scrollY = useScrollPosition();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Signed-in screens get the brand and a way back, nothing to sell. The page's
+  // own navigation (admin sections, portal) sits directly underneath.
+  if (isAppRoute(pathname)) {
+    return (
+      <header
+        data-print="hide"
+        className="fixed inset-x-0 top-0 z-50 border-b border-border bg-white print:hidden"
+      >
+        <div className="mx-auto flex h-20 max-w-5xl items-center justify-between gap-4 px-4">
+          <Link
+            href="/"
+            className="shrink-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sage"
+          >
+            <Image
+              src="/images/logos/Asset-1-2.png"
+              alt="Frontier Property Management, home"
+              width={160}
+              height={48}
+              className="h-11 w-auto"
+              priority
+            />
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-charcoal"
+          >
+            rentwithfrontier.com
+            <ArrowUpRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      </header>
+    );
+  }
 
   const forceSolid = SOLID_HEADER_PATHS.some(
     (p) => pathname === p || pathname.startsWith(p + "/"),

@@ -21,7 +21,7 @@ export default async function TokenSignPage({
   if (!data.ok || !data.fileUrl) {
     const r = REASONS[data.ok ? "not_found" : data.reason];
     return (
-      <div className="mx-auto max-w-xl px-4 pt-32 pb-24">
+      <div data-app className="mx-auto max-w-xl px-4 pt-32 pb-24">
         <h1 className="text-3xl font-bold text-charcoal">{r.title}</h1>
         <p className="mt-3 text-base leading-relaxed text-muted-foreground">{r.body}</p>
         <p className="mt-6 text-sm text-muted-foreground">
@@ -32,7 +32,7 @@ export default async function TokenSignPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-24 pb-10">
+    <div data-app className="mx-auto max-w-6xl px-4 pt-28 pb-10">
       <h1 className="text-[2rem] font-bold leading-tight tracking-tight text-charcoal sm:text-4xl">
         {data.documentTitle}
       </h1>

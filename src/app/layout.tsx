@@ -3,6 +3,7 @@ import { Yanone_Kaffeesatz, Work_Sans } from "next/font/google";
 import Script from "next/script";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { FooterSwitch } from "@/components/app/app-footer";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { JsonLd } from "@/components/seo/json-ld";
 import { googleProfileUrl, plans, siteConfig } from "@/data/site";
@@ -231,7 +232,9 @@ export default function RootLayout({
         />
         <SiteHeader />
         <main className="min-h-screen overflow-x-clip">{children}</main>
-        <SiteFooter />
+        <FooterSwitch>
+          <SiteFooter />
+        </FooterSwitch>
         <ScrollToTop />
 
         {/* Google Analytics */}

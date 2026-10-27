@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { money, moneyExact, monthLabel, occupancy } from "@/lib/portal/format";
@@ -49,9 +50,9 @@ export default async function StatementPage({
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/portal"
-            className="text-sm font-medium text-charcoal underline-offset-4 hover:underline print:hidden"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-charcoal underline-offset-4 hover:underline print:hidden"
           >
-            ← All statements
+            <ArrowLeft className="size-4" aria-hidden /> All statements
           </Link>
           <PrintButton />
         </div>
@@ -72,9 +73,7 @@ export default async function StatementPage({
       </div>
 
       <section className="mt-10 max-w-2xl">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          How the payout was calculated
-        </div>
+        <h2 className="scroll-mt-28 border-t border-border pt-6 font-heading text-2xl font-bold leading-tight text-charcoal">How the payout was calculated</h2>
         <dl className="mt-2">
           {ledger.map((row) => (
             <div
@@ -114,9 +113,7 @@ export default async function StatementPage({
       </section>
 
       <section className="mt-12 max-w-2xl">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          The month
-        </div>
+        <h2 className="scroll-mt-28 border-t border-border pt-6 font-heading text-2xl font-bold leading-tight text-charcoal">The month</h2>
         <div className="mt-4 grid grid-cols-3 gap-6">
           {[
             { stat: data.nights_booked ?? "—", label: "Nights booked" },
@@ -140,9 +137,7 @@ export default async function StatementPage({
 
       {data.notes && (
         <section className="mt-12 max-w-2xl">
-          <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-            Notes from Hunter
-          </div>
+          <h2 className="scroll-mt-28 border-t border-border pt-6 font-heading text-2xl font-bold leading-tight text-charcoal">Notes from Hunter</h2>
           <p className="mt-4 whitespace-pre-line text-base leading-relaxed text-muted-foreground">
             {data.notes}
           </p>

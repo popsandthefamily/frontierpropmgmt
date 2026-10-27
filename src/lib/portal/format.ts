@@ -63,6 +63,19 @@ export function centralTime(value: string | Date | null | undefined): string {
   });
 }
 
+/** Just the day, in Central: "Oct 27, 2026". For lists, where the time is noise. */
+export function centralDate(value: string | Date | null | undefined): string {
+  if (!value) return "—";
+  const d = typeof value === "string" ? new Date(value) : value;
+  if (Number.isNaN(d.getTime())) return "—";
+  return d.toLocaleDateString("en-US", {
+    timeZone: TIME_ZONE,
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 /** Central time with the UTC instant alongside, for the signing record. */
 export function centralWithUtc(value: string | Date | null | undefined): string {
   if (!value) return "—";

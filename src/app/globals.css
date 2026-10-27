@@ -146,3 +146,22 @@ html {
     content: "";
   }
 }
+
+/* Working screens (admin, owner portal, signing): theme what the browser draws
+   rather than shipping its defaults. Scoped by data-app so the marketing site
+   keeps its own behaviour. */
+[data-app] {
+  accent-color: var(--color-sage);
+  caret-color: var(--color-sage);
+}
+[data-app] ::selection {
+  background: color-mix(in srgb, var(--color-sage) 22%, transparent);
+  color: var(--color-charcoal);
+}
+[data-app] :where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-sage);
+  outline-offset: 2px;
+}
+[data-app] :where(td, dd, .tabular) {
+  font-variant-numeric: tabular-nums;
+}

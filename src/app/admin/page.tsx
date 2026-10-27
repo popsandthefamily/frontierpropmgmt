@@ -4,7 +4,8 @@ import Link from "next/link";
 import { isAdmin } from "@/lib/admin/auth";
 import { AdminSignInPrompt } from "@/components/admin/sign-in-prompt";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
-import { money, monthLabel } from "@/lib/portal/format";
+import { centralDate, money, monthLabel } from "@/lib/portal/format";
+import { sectionHeading } from "@/components/app/styles";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -50,7 +51,7 @@ export default async function AdminHomePage({
       admin
         .from("owner_statements")
         .select("id, owner_id, period_start, owner_payout, published_at"),
-      admin.from("owner_documents").select("id, owner_id, published_at"),
+      admin.from("owner_documents").select("id, owner_id, title, published_at, created_at"),
       admin
         .from("signature_signers")
         .select("id, name, email, document_id, owner_documents(title)")
@@ -60,7 +61,13 @@ export default async function AdminHomePage({
 
   const ownerList = owners ?? [];
   const stmts = (statements ?? []) as Statement[];
-  const docs = (documents ?? []) as { id: string; owner_id: string; published_at: string | null }[];
+  const docs = (documents ?? []) as {
+    id: string;
+    owner_id: string;
+    title: string;
+    published_at: string | null;
+    created_at: string;
+  }[];
   const awaiting = signers ?? [];
 
   const draftStatements = stmts.filter((s) => !s.published_at);
@@ -74,146 +81,144 @@ export default async function AdminHomePage({
   const latest = published[0];
   const ownerName = new Map(ownerList.map((o) => [o.id, o.full_name || o.email]));
 
+  // Each count links to the list that explains it. A number you cannot click
+  // through to is a number you then go hunting for.
   const queue = [
     {
       n: awaiting.length,
       label: awaiting.length === 1 ? "signature outstanding" : "signatures outstanding",
       tone: awaiting.length > 0,
+      href: "#awaiting",
     },
     {
       n: draftStatements.length,
       label: draftStatements.length === 1 ? "unpublished statement" : "unpublished statements",
       tone: draftStatements.length > 0,
+      href: "#draft-statements",
     },
     {
       n: draftDocuments.length,
       label: draftDocuments.length === 1 ? "unpublished document" : "unpublished documents",
       tone: draftDocuments.length > 0,
+      href: "#draft-documents",
     },
-    { n: ownerList.length, label: ownerList.length === 1 ? "owner" : "owners", tone: false },
+    {
+      n: ownerList.length,
+      label: ownerList.length === 1 ? "owner" : "owners",
+      tone: false,
+      href: `/admin/owners${qs}`,
+    },
   ];
 
   const nothingWaiting =
     awaiting.length === 0 && draftStatements.length === 0 && draftDocuments.length === 0;
 
+  const row =
+    "group grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-4 transition-colors";
+
   return (
     <div className="mx-auto max-w-5xl px-4 pt-10">
       <h1 className="text-3xl font-bold text-charcoal">Overview</h1>
-      <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+      <p className="mt-2 max-w-2xl text-base text-muted-foreground">
         {latest
           ? `Books are current through ${monthLabel(latest.period_start)}.`
           : "No statement has been published yet."}
       </p>
 
-      <section className="mt-8 grid grid-cols-2 border-y border-border lg:grid-cols-4">
+      <ul className="mt-8 grid grid-cols-2 border-y border-border lg:grid-cols-4">
         {queue.map((q) => (
-          <div
+          <li
             key={q.label}
-            className="border-border px-5 py-7 lg:border-l lg:px-7 [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:[&:first-child]:border-l-0 lg:[&:nth-child(n+3)]:border-t-0"
+            className="border-border [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:border-l lg:[&:first-child]:border-l-0 lg:[&:nth-child(n+3)]:border-t-0"
           >
-            <div
-              className={`font-heading text-3xl font-bold leading-none ${
-                q.tone ? "text-amber-700" : "text-charcoal"
+            <Link
+              href={q.href}
+              aria-disabled={q.n === 0 && q.href.startsWith("#") ? true : undefined}
+              className={`block h-full px-5 py-6 transition-colors hover:bg-cream/60 lg:px-7 ${
+                q.n === 0 && q.href.startsWith("#") ? "pointer-events-none" : ""
               }`}
             >
-              {q.n}
-            </div>
-            <div className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              {q.label}
-            </div>
-          </div>
+              <span
+                className={`block font-heading text-4xl font-bold leading-none tabular-nums ${
+                  q.tone ? "text-amber-800" : "text-charcoal"
+                }`}
+              >
+                {q.n}
+              </span>
+              <span className="mt-2 block text-sm leading-snug text-muted-foreground">{q.label}</span>
+            </Link>
+          </li>
         ))}
-      </section>
+      </ul>
 
-      {nothingWaiting ? (
-        <p className="mt-8 border-b border-border pb-8 text-base leading-relaxed text-muted-foreground">
+      {nothingWaiting && (
+        <p className="mt-8 text-base leading-relaxed text-muted-foreground">
           Nothing is waiting. Every statement and document is published and no
           signature is outstanding.
         </p>
-      ) : (
-        <>
-          {awaiting.length > 0 && (
-            <section className="mt-12">
-              <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-                Awaiting signature
-              </div>
-              <ul className="mt-2">
-                {awaiting.map((s) => {
-                  const title =
-                    (s.owner_documents as unknown as { title: string } | null)?.title ??
-                    "Document";
-                  return (
-                    <li key={s.id}>
-                      <Link
-                        href={`/admin/documents/${s.document_id}${qs}`}
-                        className="group grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border py-4"
-                      >
-                        <span className="font-heading text-base font-semibold text-charcoal group-hover:text-sage">
-                          {title}
-                        </span>
-                        <span className="text-right text-sm text-muted-foreground">
-                          {s.name || s.email}
-                        </span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          )}
-
-          {draftStatements.length > 0 && (
-            <section className="mt-12">
-              <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-                Unpublished statements
-              </div>
-              <ul className="mt-2">
-                {draftStatements
-                  .sort((a, b) => b.period_start.localeCompare(a.period_start))
-                  .map((s) => (
-                    <li key={s.id}>
-                      <Link
-                        href={`/admin/owners/${s.owner_id}${qs}`}
-                        className="group grid grid-cols-[1fr_auto_auto] items-baseline gap-4 border-b border-border py-4"
-                      >
-                        <span className="font-heading text-base font-semibold text-charcoal group-hover:text-sage">
-                          {ownerName.get(s.owner_id) ?? "Owner"}
-                        </span>
-                        <span className="hidden text-sm text-muted-foreground sm:block">
-                          {monthLabel(s.period_start)}
-                        </span>
-                        <span className="text-right text-sm text-charcoal">
-                          {money(s.owner_payout)}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </section>
-          )}
-        </>
       )}
 
-      <section className="mt-12">
-        <div className="border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          Go to
-        </div>
-        <div className="mt-4 flex flex-wrap gap-3">
-          {[
-            { label: "Owners", href: "/admin/owners" },
-            { label: "Audit stats", href: "/admin/audit-stats" },
-            { label: "Social posts", href: "/admin/social" },
-          ].map((l) => (
-            <Link
-              key={l.href}
-              href={`${l.href}${qs}`}
-              className="rounded-md border border-border px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-charcoal"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      </section>
+      {awaiting.length > 0 && (
+        <section id="awaiting" aria-labelledby="awaiting-h" className="mt-12 scroll-mt-28">
+          <h2 id="awaiting-h" className={sectionHeading}>Awaiting signature</h2>
+          <ul className="mt-3 divide-y divide-border border-y border-border">
+            {awaiting.map((s) => {
+              const title =
+                (s.owner_documents as unknown as { title: string } | null)?.title ?? "Document";
+              return (
+                <li key={s.id}>
+                  <Link href={`/admin/documents/${s.document_id}${qs}`} className={row}>
+                    <span className="truncate font-medium text-charcoal group-hover:text-sage-dark">{title}</span>
+                    <span className="text-right text-sm text-muted-foreground">{s.name || s.email}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+
+      {draftStatements.length > 0 && (
+        <section id="draft-statements" aria-labelledby="draft-statements-h" className="mt-12 scroll-mt-28">
+          <h2 id="draft-statements-h" className={sectionHeading}>Unpublished statements</h2>
+          <ul className="mt-3 divide-y divide-border border-y border-border">
+            {draftStatements
+              .sort((a, b) => b.period_start.localeCompare(a.period_start))
+              .map((s) => (
+                <li key={s.id}>
+                  <Link href={`/admin/owners/${s.owner_id}${qs}#statements`} className={row}>
+                    <span className="truncate font-medium text-charcoal group-hover:text-sage-dark">
+                      {ownerName.get(s.owner_id) ?? "Owner"}
+                      <span className="font-normal text-muted-foreground"> · {monthLabel(s.period_start)}</span>
+                    </span>
+                    <span className="text-right text-sm tabular-nums text-charcoal">{money(s.owner_payout)}</span>
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </section>
+      )}
+
+      {draftDocuments.length > 0 && (
+        <section id="draft-documents" aria-labelledby="draft-documents-h" className="mt-12 scroll-mt-28">
+          <h2 id="draft-documents-h" className={sectionHeading}>Unpublished documents</h2>
+          <p className="mt-1 text-sm text-muted-foreground">Owners can&rsquo;t see these until they&rsquo;re published.</p>
+          <ul className="mt-3 divide-y divide-border border-y border-border">
+            {draftDocuments
+              .sort((a, b) => b.created_at.localeCompare(a.created_at))
+              .map((d) => (
+                <li key={d.id}>
+                  <Link href={`/admin/owners/${d.owner_id}${qs}#documents`} className={row}>
+                    <span className="truncate font-medium text-charcoal group-hover:text-sage-dark">{d.title}</span>
+                    <span className="text-right text-sm text-muted-foreground">
+                      {ownerName.get(d.owner_id) ?? "Owner"} · added {centralDate(d.created_at)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }

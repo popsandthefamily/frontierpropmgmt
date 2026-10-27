@@ -322,7 +322,7 @@ export function FieldEditor({
       {!locked && (
         <div className="sticky top-20 z-10 mb-6 border-y border-border bg-white/95 py-3 backdrop-blur">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-charcoal/60">
+            <span className="text-sm font-medium text-muted-foreground">
               Placing for
             </span>
             {signers.map((s, i) => (
@@ -344,7 +344,7 @@ export function FieldEditor({
             ))}
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-3">
-            <span className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-charcoal/60">
+            <span className="text-sm font-medium text-muted-foreground">
               Field
             </span>
             {TYPES.map((t) => (

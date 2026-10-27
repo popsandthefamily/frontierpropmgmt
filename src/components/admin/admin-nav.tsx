@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { SignOutButton } from "@/components/portal/sign-out-button";
@@ -30,11 +31,9 @@ function Nav({ signedIn }: { signedIn: boolean }) {
   const qs = token ? `?token=${encodeURIComponent(token)}` : "";
 
   return (
-    <nav className="border-b border-border">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-1 gap-y-2 px-4 py-3">
-        <span className="mr-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-charcoal/50">
-          Frontier Admin
-        </span>
+    <nav aria-label="Admin" className="border-b border-border bg-cream/60">
+      <div className="mx-auto flex max-w-5xl items-center gap-x-1 overflow-x-auto px-4 py-2.5 [scrollbar-width:none]">
+        <span className="mr-3 hidden shrink-0 text-sm font-semibold text-charcoal sm:inline">Admin</span>
 
         {SECTIONS.map((s) => {
           // /admin must match exactly, or it would light up on every page.
@@ -49,10 +48,10 @@ function Nav({ signedIn }: { signedIn: boolean }) {
               href={`${s.href}${qs}`}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                "inline-flex min-h-9 shrink-0 items-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors",
                 active
                   ? "bg-charcoal text-white"
-                  : "text-charcoal/70 hover:bg-charcoal/5 hover:text-charcoal",
+                  : "text-charcoal/80 hover:bg-charcoal/5 hover:text-charcoal",
               )}
             >
               {s.label}
@@ -60,9 +59,13 @@ function Nav({ signedIn }: { signedIn: boolean }) {
           );
         })}
 
-        <span className="ml-auto flex items-center gap-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
-          <Link href="/portal" className="hover:text-charcoal">
-            Owner view
+        <span className="ml-auto flex shrink-0 items-center gap-4 pl-3 text-sm">
+          <Link
+            href="/portal"
+            className="inline-flex items-center gap-1 whitespace-nowrap font-medium text-charcoal/80 hover:text-charcoal"
+          >
+            Owner portal
+            <ArrowUpRight className="size-4" aria-hidden />
           </Link>
           {signedIn && <SignOutButton redirectTo="/admin/login" />}
         </span>

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getCurrentOwner } from "@/lib/supabase/server";
-import { SignOutButton } from "@/components/portal/sign-out-button";
+import { PortalNav } from "@/components/portal/portal-nav";
 
 export const metadata: Metadata = {
   title: "Owner Portal",
@@ -18,31 +17,9 @@ export default async function PortalLayout({
   const owner = await getCurrentOwner();
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-5xl px-4 pt-28 pb-20">
-        <div
-          data-print="hide"
-          className="flex items-center justify-between gap-4 border-t border-charcoal/20 pt-4 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
-        >
-          <Link href="/portal" className="hover:text-charcoal">
-            Owner Portal
-          </Link>
-          {owner ? (
-            <span className="flex items-center gap-4">
-              <span className="hidden normal-case tracking-normal sm:inline">
-                {owner.email}
-              </span>
-              <Link href="/portal/security" className="hover:text-charcoal">
-                Security
-              </Link>
-              <SignOutButton />
-            </span>
-          ) : (
-            <span>Frontier Property Management</span>
-          )}
-        </div>
-        {children}
-      </div>
+    <div data-app className="min-h-screen bg-white pt-20 print:pt-0">
+      <PortalNav email={owner?.email ?? null} />
+      <div className="mx-auto max-w-5xl px-4 pb-20">{children}</div>
     </div>
   );
 }

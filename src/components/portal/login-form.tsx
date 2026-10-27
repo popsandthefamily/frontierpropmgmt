@@ -86,7 +86,7 @@ export function LoginForm() {
   if (mode === "password") {
     return (
       <form onSubmit={signInWithPassword} className="mt-8">
-        <label htmlFor="portal-email" className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+        <label htmlFor="portal-email" className="block text-sm font-medium text-charcoal">
           Email address
         </label>
         <Input
@@ -96,9 +96,9 @@ export function LoginForm() {
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-3"
+          className="mt-1.5"
         />
-        <label htmlFor="portal-password" className="mt-5 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60">
+        <label htmlFor="portal-password" className="mt-5 block text-sm font-medium text-charcoal">
           Password
         </label>
         <Input
@@ -108,7 +108,7 @@ export function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="mt-3"
+          className="mt-1.5"
         />
         {error && <p role="alert" className="mt-3 text-sm text-red-600">{error}</p>}
         <Button
@@ -134,7 +134,7 @@ export function LoginForm() {
     <form onSubmit={onSubmit} className="mt-8">
       <label
         htmlFor="portal-email"
-        className="text-[0.72rem] font-medium uppercase tracking-[0.22em] text-charcoal/60"
+        className="block text-sm font-medium text-charcoal"
       >
         Email address
       </label>
@@ -146,7 +146,7 @@ export function LoginForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
-        className="mt-3"
+        className="mt-1.5"
       />
       {error && <p role="alert" className="mt-3 text-sm text-red-600">{error}</p>}
       <Button

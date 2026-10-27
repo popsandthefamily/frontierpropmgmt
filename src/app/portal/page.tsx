@@ -2,7 +2,9 @@ import Link from "next/link";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { getSupabaseAdmin } from "@/lib/supabase/client";
 import { getCurrentOwner } from "@/lib/supabase/server";
-import { money, monthLabel, occupancy } from "@/lib/portal/format";
+import { centralDate, money, monthLabel, occupancy } from "@/lib/portal/format";
+import { Download } from "lucide-react";
+import { documentKind, primaryButton, sectionHeading, textAction } from "@/components/app/styles";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +32,10 @@ interface OwnerDocument {
   period_label: string | null;
   size_bytes: number | null;
   storage_path: string;
+  published_at: string | null;
+  created_at: string;
+  /** Whose agreement this is, when it is not filed under this owner. */
+  context?: string;
 }
 
 export default async function PortalDashboard() {
@@ -54,7 +60,7 @@ export default async function PortalDashboard() {
         .limit(60),
       supabase
         .from("owner_documents")
-        .select("id, title, kind, period_label, size_bytes, storage_path")
+        .select("id, title, kind, period_label, size_bytes, storage_path, published_at, created_at")
         .order("created_at", { ascending: false }),
     ]);
 
@@ -80,7 +86,9 @@ export default async function PortalDashboard() {
   const { data: partyTo } = owner?.email
     ? await getSupabaseAdmin()
         .from("signature_signers")
-        .select("id, owner_documents(title), signature_requests(status, signed_storage_path)")
+        .select(
+          "id, owner_documents(title, owner_id, owner_profiles(full_name, email)), signature_requests(status, signed_storage_path, updated_at)",
+        )
         .eq("email", owner.email.toLowerCase())
         .in("kind", ["owner", "manager"])
         .not("request_id", "is", null)
@@ -90,8 +98,17 @@ export default async function PortalDashboard() {
   const docs = (documents ?? []) as OwnerDocument[];
   const filed = new Set(docs.map((d) => d.storage_path));
   for (const s of partyTo ?? []) {
-    const req = s.signature_requests as unknown as { status: string; signed_storage_path: string | null } | null;
-    const title = (s.owner_documents as unknown as { title: string } | null)?.title ?? "Agreement";
+    const req = s.signature_requests as unknown as {
+      status: string;
+      signed_storage_path: string | null;
+      updated_at: string;
+    } | null;
+    const source = s.owner_documents as unknown as {
+      title: string;
+      owner_id: string;
+      owner_profiles: { full_name: string | null; email: string } | null;
+    } | null;
+    const title = source?.title ?? "Agreement";
     if (req?.status !== "executed" || !req.signed_storage_path || filed.has(req.signed_storage_path)) continue;
     filed.add(req.signed_storage_path);
     docs.push({
@@ -101,8 +118,18 @@ export default async function PortalDashboard() {
       period_label: null,
       size_bytes: null,
       storage_path: req.signed_storage_path,
+      published_at: req.updated_at,
+      created_at: req.updated_at,
+      // Two agreements can share a title; naming the other party is what tells
+      // them apart.
+      context:
+        source && source.owner_id !== owner?.id
+          ? `With ${source.owner_profiles?.full_name || source.owner_profiles?.email || "another owner"}`
+          : undefined,
     });
   }
+  const docDate = (d: OwnerDocument) => d.published_at ?? d.created_at;
+  docs.sort((a, b) => docDate(b).localeCompare(docDate(a)));
 
   // The rows above came back through row level security as this owner, so
   // ownership is already proven. Signing is done with the service role because
@@ -140,22 +167,22 @@ export default async function PortalDashboard() {
   return (
     <>
       {pending.length > 0 && (
-        <section className="mt-10 border-l-4 border-sage bg-sage/8 p-6">
+        <section className="mt-8 rounded-xl border border-sage/30 bg-sage/8 p-6">
           <h2 className="font-heading text-xl font-semibold text-charcoal">
             {pending.length === 1
               ? "One document needs your signature"
               : `${pending.length} documents need your signature`}
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            Read it through and sign online. It takes a couple of minutes and
-            you get a signed copy straight away.
+            Read it through and sign online; it takes a couple of minutes. Once
+            every party has signed, the completed copy appears under Documents.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             {pending.map((s) => (
               <Link
                 key={s.id}
                 href={`/portal/sign/${s.id}`}
-                className="rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-dark"
+                className={primaryButton}
               >
                 Review and sign
                 {(s.owner_documents as unknown as { title: string } | null)?.title
@@ -169,7 +196,7 @@ export default async function PortalDashboard() {
 
       <div className="mt-10">
         <h1 className="text-[2.2rem] font-bold leading-[0.95] tracking-tight text-charcoal sm:text-5xl">
-          {props.length === 1 ? props[0].name : "Your properties"}
+          {props.length === 1 ? props[0].name : props.length > 1 ? "Your properties" : "Your portal"}
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
           {latest
@@ -207,20 +234,18 @@ export default async function PortalDashboard() {
 
       {/* Statements */}
       <section className="mt-12">
-        <h2 className="font-heading text-2xl font-bold text-charcoal">
-          Monthly statements
-        </h2>
+        <h2 className={sectionHeading}>Monthly statements</h2>
 
         {stmts.length === 0 ? (
           <div className="mt-6 border-b border-border pb-8">
-            <h2 className="font-heading text-xl font-semibold text-charcoal">
+            <h3 className="font-heading text-xl font-semibold text-charcoal">
               Nothing published yet
-            </h2>
+            </h3>
             <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground">
               Statements are published after each month closes and the platform
-              payouts have settled. When yours is ready it will show up here, and
-              you&apos;ll get an email. If you expected one already, reply to any
-              message from Hunter and we&apos;ll sort it out.
+              payouts have settled. When yours is ready it will show up here. If
+              you expected one already, reply to any message from Hunter and
+              we&apos;ll sort it out.
             </p>
           </div>
         ) : (
@@ -228,7 +253,7 @@ export default async function PortalDashboard() {
             {byYear.map((group) => (
               <div key={group.year}>
                 <div className="flex items-baseline justify-between gap-4 border-b border-border bg-cream/60 px-5 py-2.5">
-                  <span className="text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-charcoal/70">
+                  <span className="text-sm font-semibold text-charcoal">
                     {group.year}
                   </span>
                   <span className="text-[0.78rem] text-muted-foreground">
@@ -262,9 +287,7 @@ export default async function PortalDashboard() {
       {/* Properties */}
       {props.length > 0 && (
         <section className="mt-12">
-          <h2 className="font-heading text-2xl font-bold text-charcoal">
-            Under management
-          </h2>
+          <h2 className={sectionHeading}>Under management</h2>
           <div className="mt-4 overflow-hidden rounded-xl border border-border">
             {props.map((p) => (
               <div
@@ -290,9 +313,7 @@ export default async function PortalDashboard() {
 
       {/* Documents */}
       <section className="mt-12">
-        <h2 className="font-heading text-2xl font-bold text-charcoal">
-          Documents
-        </h2>
+        <h2 className={sectionHeading}>Documents</h2>
         {docs.length === 0 ? (
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
             Tax documents and signed paperwork will appear here. Nothing to
@@ -305,30 +326,34 @@ export default async function PortalDashboard() {
               return (
                 <div
                   key={d.id}
-                  className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-border px-5 py-3.5 last:border-b-0"
+                  className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border px-5 py-4 last:border-b-0"
                 >
-                  <span>
-                    <span className="font-heading text-lg font-semibold text-charcoal">
-                      {d.title}
-                    </span>
-                    <span className="ml-2 text-sm text-muted-foreground">
-                      {d.period_label ? `${d.period_label} · ` : ""}
-                      {d.kind}
-                    </span>
-                  </span>
+                  <div className="min-w-0">
+                    <p className="font-medium text-charcoal">{d.title}</p>
+                    <p className="mt-0.5 text-sm text-muted-foreground">
+                      {[
+                        d.context,
+                        documentKind(d.kind),
+                        d.period_label,
+                        centralDate(d.published_at ?? d.created_at),
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                  </div>
                   {href ? (
                     <a
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-charcoal underline underline-offset-4"
+                      className={textAction}
+                      aria-label={`Download ${d.title}${d.context ? `, ${d.context.toLowerCase()}` : ""}`}
                     >
+                      <Download className="size-4" aria-hidden />
                       Download
                     </a>
                   ) : (
-                    <span className="text-sm text-muted-foreground">
-                      Unavailable
-                    </span>
+                    <span className="text-sm text-muted-foreground">Unavailable</span>
                   )}
                 </div>
               );
