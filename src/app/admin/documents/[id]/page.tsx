@@ -67,6 +67,17 @@ export default async function DocumentFieldsPage({
   const owner = doc.owner_profiles as unknown as { email: string; full_name: string | null } | null;
   const openRequest = (requests ?? []).find((r) => r.status !== "void");
 
+  // The editor below always shows the original upload, so the signed copy
+  // needs its own way out. Partly signed copies are offered too, for checking
+  // progress, but labelled so nobody mistakes one for the finished agreement.
+  const { data: signedCopy } = openRequest?.signed_storage_path
+    ? await admin.storage
+        .from("owner-documents")
+        .createSignedUrl(openRequest.signed_storage_path, 3600, {
+          download: `${doc.title}${openRequest.status === "executed" ? " (executed)" : " (partly signed)"}.pdf`,
+        })
+    : { data: null };
+
   return (
     <div className="mx-auto max-w-6xl px-4 pt-10">
       <Link
@@ -89,6 +100,18 @@ export default async function DocumentFieldsPage({
                   ? "Executed — every party has signed"
                   : `Out for signature — ${signerList.filter((s) => s.signed_at).length} of ${signerList.length} signed`}
               </p>
+              {signedCopy?.signedUrl && (
+                <a
+                  href={signedCopy.signedUrl}
+                  className={
+                    openRequest.status === "executed"
+                      ? "rounded-md bg-sage px-4 py-2 text-sm font-semibold text-white"
+                      : "text-sm font-medium text-charcoal underline underline-offset-4"
+                  }
+                >
+                  {openRequest.status === "executed" ? "Download signed PDF" : "Download partly signed copy"}
+                </a>
+              )}
               {openRequest.status !== "executed" && (
                 <form action={voidRequest}>
                   <input type="hidden" name="token" value={token ?? ""} />
